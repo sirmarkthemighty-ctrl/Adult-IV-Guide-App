@@ -49,6 +49,7 @@ window.__uiAuditRun = async () => {
     await type($('[data-water-na]'), '162'); await type($('[data-water-weight]'), '58'); await wait(200);
     if (modal()) audit(lang + ' water deficit', modal()); await esc();
     $('[data-guide="drip"]').click(); await wait(400); if (modal()) audit(lang + ' drip rate', modal()); await esc();
+    $('[data-guide="gir"]').click(); await wait(400); if (modal()) audit(lang + ' gir calculator', modal()); await esc();
     $('[data-guide="choose"]').click(); await wait(400);
     for (const tab of ['resus', 'maint', 'replace', 'reassess']) { const b = $('[data-tab="' + tab + '"]'); if (b) { b.click(); await wait(250); audit(lang + ' fluid choice ' + tab, modal()); } }
     await esc();

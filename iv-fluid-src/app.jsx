@@ -20,6 +20,8 @@ const MoonIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" vie
 const AlertTriangle = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>);
 const ZapIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>);
 const FlameIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>);
+const TrendingUpIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>);
+const DownloadIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>);
 const InfoIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>);
 
 // --- Dark theme layer ---
@@ -127,6 +129,7 @@ const HOLDERS = {
   innova: { en: 'Pharma Innova Co., Ltd.', th: 'บริษัท ฟาร์ม่า อินโนวา จำกัด' },
   starlab: { en: 'Starlab Co., Ltd.', th: 'บริษัท สตาร์แล็บ จำกัด' },
   bbraun: { en: 'B. Braun (Thailand) Ltd.', th: 'บริษัท บี.บราวน์ (ประเทศไทย) จำกัด' },
+  baxter: { en: 'Baxter Healthcare (Thailand) Co., Ltd.', th: 'บริษัท แบกซ์เตอร์ เฮลธ์แคร์ (ประเทศไทย) จำกัด' },
 };
 const TH_REG = {
   '1A 1427/30': ['U1DR1A1022300142711C', 'NSS 0.9% Sodium Chloride Injection', 'tnp'],
@@ -138,6 +141,8 @@ const TH_REG = {
   '1A 115/27': ['U1DR1A1022270011511C', 'Sodium Chloride 0.45%', 'ghp'],
   '1A 2412/28': ['U1DR1A1022280241211C', 'Sodium Chloride 3%', 'ghp'],
   '1A 337/56': ['U1DR1A1022560033711C', '3% Sodium Chloride', 'innova'],
+  '1A 120/30': ['U1DR1A1022300012011C', 'Mannitol 20% Injection', 'anb'],
+  '1A 77/52': ['U1DR1A1022520007711C', '20% Mannitol in Water for Injection', 'otsuka'],
   '1A 1988/30': ['U1DR1A1022300198811C', '5% Dextrose Injection U.S.P. D-5-W', 'otsuka'],
   '1A 1174/29': ['U1DR1A1022290117411C', 'Dextrose 5% in Water', 'ghp'],
   '1A 1486/30': ['U1DR1A1022300148611C', 'D5W 5% Dextrose Injection', 'tnp'],
@@ -180,6 +185,8 @@ const TH_REG = {
   '2C 21/51': ['U1DR2C1022510002111C', "5% Dextrose in Acetated Ringer's", 'starlab'],
   '2A 15082/66 (NG)': ['U1DR2A1052661508211C', 'TOP Balance Salt Solution (Multiple Electrolyte Injection Type 1)', 'otsuka'],
   '2C 16/53': ['U1DR2C1022530001611C', 'Sterofundin ISO', 'bbraun'],
+  '2C 1/46 (NBC)': ['U1DR2C1022460000111C', 'Albumin (Human) 20% Baxter', 'baxter'],
+  '2C 2/46 (NBC)': ['U1DR2C1022460000211C', 'Human Albumin 20% B. Braun', 'bbraun'],
 };
 // Every record listed on a card was opened on 14 Oct 2026: its formula field matches the card's formula.
 const thRecordUrl = (code) => 'https://pertento.fda.moph.go.th/FDA_INFORMATION_DRUG/Home/Public_Information_Drug?Newcode=' + code;
@@ -194,6 +201,8 @@ const SOURCES = {
   usKDexNaCl: { cite: 'Potassium Chloride in 5% Dextrose and Sodium Chloride Injection USP, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c553fed1-3de5-4826-8eff-633b5923bf0b' },
   usLR: { cite: "Lactated Ringer's Injection USP, Baxter, US label (DailyMed)", url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dad7735c-709b-40ea-ab7a-15577e24a966' },
   usPL: { cite: 'PLASMA-LYTE A Injection pH 7.4, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6ec9e61c-2c26-402f-8604-f446b2e34058' },
+  usAlb: { cite: 'Albumin (Human) 20% Solution USP, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=27d8e8b0-8c20-41ff-80c7-cb151df051f6' },
+  usMan: { cite: 'Osmitrol (Mannitol Injection USP 20%), Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=423c4dbb-bcae-4f76-a0e2-636b04294b0f' },
   thTopBal: { cite: 'TOP Balance Salt Solution, Summary of Product Characteristics, Thai FDA (Thai Otsuka)', url: 'https://ndi.fda.moph.go.th/uploads/drug_detail_corporation/doc/word/1163/09c51bdacb089726f3a2afb88373528e-a1.pdf' },
   thAcetRinger: { cite: "Acetate Ringer's Injection (Able Medical, 2A 15221/63), Summary of Product Characteristic, Thai FDA", url: 'https://ndi.fda.moph.go.th/uploads/drug_detail_corporation/doc/word/1279/f3f314f0cf93470bd742dd647f331448-a1.pdf' },
   euSterofundin: { cite: 'Sterofundin ISO, Summary of Product Characteristics, B. Braun (Medicines Evaluation Board, Netherlands)', url: 'https://www.geneesmiddeleninformatiebank.nl/smpc/h27041_smpc.pdf' },
@@ -284,7 +293,7 @@ const FLUIDS = [
   { id: 'topbal', short: 'Top Balance', name: { en: 'TOP Balance (Multiple electrolytes, type 1)', th: 'ท็อปบาลานซ์ (Multiple electrolytes, type 1)' }, family: 'balanced',
     aliases: ['top balance', 'topbalance', 'multiple electrolyte', 'plasmalyte', 'plasma-lyte'],
     formula: [['NaCl', 5.26], ['NaGluconate', 5.02], ['NaAcetate_3H2O', 3.68], ['KCl', 0.37], ['MgCl2_6H2O', 0.30]], formulaSrc: 'thTopBal',
-    label: { na: 140, k: 5, mg: 1.5, cl: 98, acetate: 27, gluconate: 23 }, labelSrc: 'thTopBal', labelMEq: { mg: 3 },
+    label: { na: 140, k: 5, mg: 1.5, cl: 98, acetate: 27, gluconate: 23, osm: 294, kcal: 21, ph: '7.4 (6.5–8.0)' }, labelSrc: 'thTopBal', labelMEq: { mg: 3 },
     sameAs: 'pla',
     thai: ['2A 15082/66 (NG)'] },
   { id: 'sterofundin', short: 'Sterofundin ISO', name: { en: 'Sterofundin ISO', th: 'สเตอโรฟุนดิน ไอเอสโอ (Sterofundin ISO)' }, family: 'balanced',
@@ -297,6 +306,16 @@ const FLUIDS = [
     formula: [['NaCl', 5.26], ['NaGluconate', 5.02], ['NaAcetate_3H2O', 3.68], ['KCl', 0.37], ['MgCl2_6H2O', 0.30]], formulaSrc: 'usPL',
     label: { na: 140, k: 5, mg: 1.5, cl: 98, acetate: 27, gluconate: 23, osm: 294, kcal: 21, ph: '7.4 (6.5–8.0)' }, labelSrc: 'usPL', labelMEq: { mg: 3 },
     thai: [] },
+  { id: 'alb20', short: 'Albumin 20%', name: { en: 'Human Albumin 20% (200 g/L)', th: 'ฮิวแมน อัลบูมิน 20% (200 ก./ล.)' }, family: 'colloid',
+    aliases: ['albumin', 'human albumin', 'alb', 'colloid', '20% albumin', 'has', 'อัลบูมิน'],
+    formula: null, formulaSrc: 'usAlb',
+    label: { na: 145, k: 1, cl: 100, osm: 300, kcal: 800, ph: '6.9 (6.4–7.4)' }, labelSrc: 'usAlb',
+    thai: ['2C 1/46 (NBC)', '2C 2/46 (NBC)'] },
+  { id: 'man20', short: 'Mannitol 20%', name: { en: 'Mannitol 20% (200 g/L)', th: 'แมนนิทอล 20% (200 ก./ล.)' }, family: 'hypertonic',
+    aliases: ['mannitol', 'osmitrol', 'osmotic diuretic', '20% mannitol', 'แมนนิทอล'],
+    formula: null, formulaSrc: 'usMan',
+    label: { na: 0, k: 0, cl: 0, osm: 1098, kcal: 800, ph: '5.5 (4.5–7.0)' }, labelSrc: 'usMan',
+    thai: ['1A 120/30', '1A 77/52'] },
 ];
 
 // Value of one field: { v, calc, src } or null (Unknown). Label values win; otherwise calculated from the formula.
@@ -447,6 +466,18 @@ const ABROAD = {
     eu: ['current', [['Plasma-Lyte 148 (pH 7.4) solution for infusion', 'Baxter Holding B.V.', 'PA2299/032/001']]],
     jp: ['never', []],
   },
+  alb20: {
+    us: ['current', usApps(['baxter', 'BLA103984', 'Albumin (Human) 20%'])],
+    uk: ['current', [['Human Albumin 20% solution for infusion', 'Bio Products Laboratory', '10001']]],
+    eu: ['current', [['Human Albumin 200 g/l Solution for Infusion', 'Baxter Holding B.V.', 'PA2299/040/001']]],
+    jp: ['never', []],
+  },
+  man20: {
+    us: ['current', usApps(['baxter', 'NDA016269', 'Osmitrol 20% (Mannitol 20%)'], ['bbraun', 'NDA020005', 'Mannitol 20%'])],
+    uk: ['current', [['Mannitol 20% infusion', 'Baxter Healthcare', '14050']]],
+    eu: ['current', [['Mannitol 20% w/v Solution for Infusion', 'Baxter Holding B.V.', 'PA2299/015/001']]],
+    jp: ['never', []],
+  },
 };
 const hpraUrl = (q, past) => 'https://www.hpra.ie/find-a-medicine/for-human-use/' + (past ? 'withdrawn-medicines' : 'authorised-medicines') + '?data=' +
   btoa(JSON.stringify({ id: null, skip: 0, take: 10, query: q, order: 'LastUpdated DESC', status: past ? 'Withdrawn' : 'Authorised', filters: { from: null, to: null, routes: null, placeOfSale: null, advertisingConditions: null, marketingAvailability: null, atcCode: null, medicineType: null } }));
@@ -499,7 +530,8 @@ const REFERENCES = [
   { key: 'adaDka', cite: 'ElSayed NA, Aleppo G, Aroda VR, et al. Hyperglycemic Crises in Adults with Diabetes: Consensus Report by the ADA and EASD. Diabetes Care 2024;47:1186–1204 / UK JBDS-IP 2023.', url: 'https://doi.org/10.2337/dci24-0030' },
   { key: 'katz', cite: 'Katz MA. Hyperglycemia-induced hypo-osmolar state: formula for corrected sodium. N Engl J Med 1973;289:843–848.', url: 'https://doi.org/10.1056/NEJM197310182891607' },
   { key: 'sternsK', cite: 'Sterns RH, Grieff M, Bernstein PL. Treatment of hypokalemia in adults. UpToDate 2024; Mount DB. Disorders of potassium balance. In: Brenner and Rector\'s The Kidney 11th ed.', url: null },
-  ...['usNaCl09', 'usNaCl045', 'usNaCl3', 'usDex', 'usDexNaCl', 'usKDexNaCl', 'usLR', 'usPL', 'thTopBal', 'thAcetRinger', 'euSterofundin'].map(k => ({ key: k, cite: SOURCES[k].cite, url: SOURCES[k].url })),
+  { key: 'aspenGir', cite: 'ASPEN Clinical Guidelines: Nutrition Support in Adult Patients; Wolfe RR et al. Ann Surg 1979 (glucose kinetics and oxidation limits).', url: 'https://doi.org/10.1097/00000658-197910000-00006' },
+  ...['usNaCl09', 'usNaCl045', 'usNaCl3', 'usDex', 'usDexNaCl', 'usKDexNaCl', 'usLR', 'usPL', 'usAlb', 'usMan', 'thTopBal', 'thAcetRinger', 'euSterofundin'].map(k => ({ key: k, cite: SOURCES[k].cite, url: SOURCES[k].url })),
 ];
 const refUrl = (key) => (REFERENCES.find(r => r.key === key) || {}).url;
 
@@ -507,6 +539,14 @@ const refUrl = (key) => (REFERENCES.find(r => r.key === key) || {}).url;
 // Changelog (newest first; one entry per day)
 // =====================================================================
 const changelogData = [
+  { version: 'v1.4.0', date: 'October 15, 2026', features: [
+    'Export to PNG: Download single fluid summary cards or multi-fluid comparison tables as high-resolution PNG images.',
+    'Expanded multiselect and comparison: Select up to 6 fluids with quick-remove column controls in the comparison modal.',
+    'Completed TOP Balance details: Added verified label values for osmolarity (294 mOsm/L), energy (21 kcal/L), and physiological pH 7.4 (6.5–8.0).',
+    'Added Human Albumin 20% (colloid) and Mannitol 20% (osmotic diuretic) with full compositions, registrations, and clinical warning flags.',
+    'Added pH filter: Filter crystalloids and colloids by solution pH range (< 6.0 acidic vs. 6.0–7.5 near-physiological).',
+    'Added Glucose Infusion Rate (GIR) Calculator: Dual calculation modes (rate-to-GIR and target-to-rate), maximal glucose oxidation limit alerts, and daily dextrose/caloric delivery.',
+  ], bugs: [] },
   { version: 'v1.3.0', date: 'October 15, 2026', features: [
     'Acute 3% NaCl bolus protocol for severe symptomatic hyponatraemia (seizures, coma): 100–150 mL (or 2 mL/kg) IV over 10–15 min, repeat timing, target acute rise (+4–6 mmol/L), daily limit (max 8 mmol/L/24h; 4–6 in high-risk ODS), and DDAVP overcorrection rescue (European & US guidelines).',
     'Potassium replacement & safe rate guide: total body deficit estimation (Sterns / UpToDate), maximum infusion rate and concentration limits for peripheral (10 mmol/h, 40 mmol/L) and central lines (20 mmol/h, 80 mmol/L), alert against dextrose vehicles during initial repletion, and magnesium checking rule.',
@@ -528,6 +568,14 @@ const changelogData = [
   ], bugs: [] },
 ];
 const CHANGELOG_TH = {
+  'v1.4.0': { features: [
+    'ส่งออกเป็น PNG: ดาวน์โหลดการ์ดสรุปข้อมูลสารน้ำหรือตารางเปรียบเทียบเป็นรูปภาพ PNG คมชัดสูง',
+    'ปรับปรุงการเลือกหลายชนิดและเปรียบเทียบ: เลือกได้สูงสุด 6 ชนิด พร้อมปุ่มกดลบสารน้ำออกจากตารางเปรียบเทียบได้ทันที',
+    'เติมข้อมูล TOP Balance ครบถ้วน: เติมค่าฉลากออสโมลาริตี (294 mOsm/L) พลังงาน (21 kcal/L) และ pH 7.4 (6.5–8.0)',
+    'เพิ่ม Human Albumin 20% (คอลลอยด์) และ Mannitol 20% (สารขับปัสสาวะออสโมติก) พร้อมทะเบียนยาและคำเตือนทางคลินิก',
+    'เพิ่มตัวกรอง pH: กรองสารน้ำตามช่วงความเป็นกรด-ด่าง (< 6.0 กรด เทียบกับ 6.0–7.5 ใกล้เคียงพลาสมา)',
+    'เพิ่มเครื่องคำนวณ GIR (อัตราการให้กลูโคส): คำนวณได้ทั้งสองทิศทาง พร้อมการแจ้งเตือนขีดจำกัดการเผาผลาญกลูโคสและพลังงานต่อวัน',
+  ], bugs: [] },
   'v1.3.0': { features: [
     'โปรโตคอล 3% NaCl bolus สำหรับโซเดียมต่ำรุนแรงที่มีอาการ (ชัก หมดสติ): 100–150 mL (หรือ 2 mL/kg) IV ใน 10–15 นาที การให้ซ้ำ เป้าหมายระยะเฉียบพลัน (+4–6 mmol/L) ขีดจำกัดต่อวัน (ไม่เกิน 8 mmol/L/24 ชม. และ 4–6 ในกลุ่มเสี่ยง ODS) และแนวทางแก้ไขเมื่อแก้เกินด้วย DDAVP (แนวทางยุโรปและสหรัฐฯ)',
     'คู่มือการให้โพแทสเซียมและอัตราที่ปลอดภัย: ประมาณการโพแทสเซียมที่ขาดในร่างกาย (Sterns / UpToDate) ขีดจำกัดอัตราและความเข้มข้นทางหลอดเลือดดำส่วนปลาย (10 mmol/ชม., 40 mmol/L) และส่วนกลาง (20 mmol/ชม., 80 mmol/L) คำเตือนหลีกเลี่ยงเดกซ์โทรสในระยะแรก และการตรวจแมกนีเซียม',
@@ -566,10 +614,12 @@ const translations = {
     searchOpen: 'Search', searchClose: 'Close search',
     sortLabel: 'Sort', sortType: 'Type (saline first)', sortNameAsc: 'Name (A–Z)', sortNaDesc: 'Sodium (high → low)', sortNaAsc: 'Sodium (low → high)', sortClAsc: 'Chloride (low → high)', sortOsmAsc: 'Osmolarity (low → high)',
     gridView: 'Tile view', listView: 'List view', filtersBtn: 'Filters',
-    typeLabel: 'Type', families: { saline: 'Saline', balanced: 'Balanced', dextrose: 'Dextrose', dexsaline: 'Dextrose-saline', hypertonic: 'Hypertonic' },
-    familyLong: { saline: 'Sodium chloride in water', balanced: 'Balanced crystalloid (buffered)', dextrose: 'Dextrose in water', dexsaline: 'Dextrose with sodium chloride', hypertonic: 'Hypertonic saline' },
+    typeLabel: 'Type', families: { saline: 'Saline', balanced: 'Balanced', dextrose: 'Dextrose', dexsaline: 'Dextrose-saline', hypertonic: 'Hypertonic', colloid: 'Colloid' },
+    familyLong: { saline: 'Sodium chloride in water', balanced: 'Balanced crystalloid (buffered)', dextrose: 'Dextrose in water', dexsaline: 'Dextrose with sodium chloride', hypertonic: 'Hypertonic saline', colloid: 'Colloid (plasma volume expander)' },
     naLabel: 'Na⁺', naBands: { low: '< 130', resus: '130–154', high: '> 154' }, naBandLong: { low: 'Sodium below 130 mmol/L', resus: 'Sodium 130–154 mmol/L', high: 'Sodium above 154 mmol/L' },
     naTitle: 'Sodium band. NICE CG174 1.3.1: crystalloids used for resuscitation contain sodium 130–154 mmol/L.',
+    phLabel: 'pH', phBands: { acidic: '< 6.0', physio: '6.0–7.5' }, phBandLong: { acidic: 'Acidic (pH < 6.0)', physio: 'Near-physiological (pH 6.0–7.5)' },
+    phTitle: 'Solution pH range: acidic crystalloids vs near-physiological buffered solutions.',
     containsLabel: 'Contains', contains: { k: 'K⁺', ca: 'Ca²⁺', mg: 'Mg²⁺', glucose: 'Glucose', buffer: 'Buffer' },
     containsLong: { k: 'Contains potassium', ca: 'Contains calcium', mg: 'Contains magnesium', glucose: 'Contains glucose', buffer: 'Contains a buffer' },
     thLabel: 'Thai FDA',
@@ -591,7 +641,8 @@ const translations = {
     countShowing: 'Showing', countOf: 'of', countFluids: 'fluids',
     legendBtn: 'Key', legendTitle: 'Key', legendSub: 'How to read the cards',
     noFluids: 'No fluid matches these filters.',
-    select: 'Select', selected: 'Selected', detailBtn: 'Details', detailClose: 'Close', clear: 'Clear',
+    select: 'Select', selected: 'Selected', detailBtn: 'Details', detailClose: 'Close', clear: 'Clear', remove: 'Remove',
+    exportPng: 'Export PNG', exportPngTitle: 'Download summary card as PNG image', exportComparePng: 'Export PNG',
     perLitre: 'per litre', unknown: 'Unknown', none: '–', calc: 'calc.', calcTitle: 'Calculated from the formula',
     rows: { na: 'Sodium', k: 'Potassium', cl: 'Chloride', ca: 'Calcium', mg: 'Magnesium', buffer: 'Buffer', dex: 'Dextrose', kcal: 'Energy', osm: 'Osmolarity', ph: 'pH' },
     units: { mmol: 'mmol/L', osm: 'mOsm/L', g: 'g/L', kcal: 'kcal/L' },
@@ -605,6 +656,8 @@ const translations = {
       glu: 'Contains glucose: monitor blood glucose',
       cl: 'Chloride over 120 mmol/L: check chloride daily',
       resus: 'Sodium 130–154 mmol/L: resuscitation range',
+      colloid: 'Colloid: monitor for circulatory overload and allergic reactions',
+      osmotic: 'Hypertonic osmotic agent: monitor diuresis and serum osmolality',
     },
     flagNotes: {
       vein: 'US labels: hypertonic solutions may damage veins and should go through a large vein; consider a central vein for 900 mOsm/L or more.',
@@ -613,6 +666,8 @@ const translations = {
       glu: 'US dextrose labels: dextrose can worsen high blood glucose; monitor blood glucose and give insulin as needed.',
       cl: 'NICE CG174 1.2.5: after fluids with chloride over 120 mmol/L, check serum chloride daily.',
       resus: 'NICE CG174 1.3.1: use crystalloids with sodium 130–154 mmol/L for resuscitation (500 mL bolus over less than 15 minutes).',
+      colloid: 'Colloids remain largely intravascular due to oncotic pressure. Risk of circulatory overload and rare anaphylactoid reactions; contraindicated in severe anemia or heart failure without volume depletion.',
+      osmotic: 'Mannitol draws water from intracellular space into vascular tree; causes profound osmotic diuresis. Monitor renal function, electrolytes, and serum osmolality (< 320 mOsm/kg).',
     },
     // detail view
     detailComposition: 'Composition per litre', detailFormula: 'Formula (per litre)', detailFlags: 'Points to watch', detailThai: 'Registration by country',
@@ -632,7 +687,7 @@ const translations = {
     },
     plasma: 'Plasma', plasmaNote: 'Human plasma: Myburgh & Mythen, NEJM 2013',
     // selection bar and compare
-    selectMax: 'Up to 3 fluids can be selected', compare: 'Compare', compareTitle: 'Compare fluids', compareSub: 'Per litre, next to human plasma',
+    selectMax: 'Up to 6 fluids can be selected', compare: 'Compare', compareTitle: 'Compare fluids', compareSub: 'Per litre, next to human plasma',
     naChangeBtn: 'Na⁺ change',
     // key
     keyValues: 'Values', keyValuesText: 'All values are per litre of fluid. Sodium, potassium, chloride, calcium, magnesium and buffers are in mmol/L; calcium and magnesium printed in mEq/L on a label are divided by 2.',
@@ -641,8 +696,8 @@ const translations = {
     keyNone: 'The fluid contains none.',
     keyCountries: 'Country chips', keyChipCurrent: 'Registered (country colour); the line beside it names the makers', keyChipPast: 'Registration ended (withdrawn or discontinued)', keyChipNever: 'Not registered: no product of this fluid and strength found', keyBands: 'Sodium bands', keyFlags: 'Warnings at the bottom of each card', keyFamilies: 'Types',
     // guides
-    guides: { choose: 'Fluid choice', maint: 'Maintenance', sodium: 'Sodium & 3% bolus', kguide: 'Potassium guide', dka: 'DKA / HHS', water: 'Water deficit', drip: 'Drip rate' },
-    guideShort: { choose: 'Choice', maint: 'Maint.', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'Water', drip: 'Drip' },
+    guides: { choose: 'Fluid choice', maint: 'Maintenance', sodium: 'Sodium & 3% bolus', kguide: 'Potassium guide', dka: 'DKA / HHS', water: 'Water deficit', drip: 'Drip rate', gir: 'GIR Calculator' },
+    guideShort: { choose: 'Choice', maint: 'Maint.', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'Water', drip: 'Drip', gir: 'GIR' },
     // disclaimer and references
     discTitle: 'Disclaimer',
     discPoints: [
@@ -658,8 +713,9 @@ const translations = {
       spasovski: 'Hyponatraemia correction limits', devine: 'Ideal body weight', thfda: 'Thai registrations, holders and formulas',
       szczech: 'Free water deficit formula and correction limit', drugsfda: 'US registration status', dmd: 'UK products and status', hpra: 'EU (Ireland) registration status', pmda: 'Japan registrations',
       adaDka: 'DKA and HHS fluid resuscitation phases, dextrose addition threshold, and potassium replenishment protocol', katz: 'Corrected sodium formula in hyperglycemia', sternsK: 'Potassium deficit estimation, peripheral vs central infusion rates, and magnesium alert',
+      aspenGir: 'Glucose infusion rate limits, maximal oxidation capacity (4–7 mg/kg/min) and daily dextrose calculation',
       usNaCl09: 'NSS values', usNaCl045: 'NSS/2 values, hyponatraemia warning', usNaCl3: '3% NaCl values, large-vein warning', usDex: '5% and 10% dextrose values, central vein at 900 mOsm/L or more, blood glucose', usDexNaCl: '5%D/NSS and 5%D/N/2 values, hyponatraemia warning', usKDexNaCl: '5%D/N/2 with KCl values',
-      usLR: "Lactated Ringer's values, citrated-blood warning", usPL: 'Plasma-Lyte A values', thTopBal: 'TOP Balance values', thAcetRinger: "Ringer's acetate pH, calcium and ceftriaxone warning", euSterofundin: 'Sterofundin ISO values',
+      usLR: "Lactated Ringer's values, citrated-blood warning", usPL: 'Plasma-Lyte A values', usAlb: 'Albumin 20% values, oncotic colloid warnings', usMan: 'Mannitol 20% values, osmotic diuresis alerts', thTopBal: 'TOP Balance values', thAcetRinger: "Ringer's acetate pH, calcium and ceftriaxone warning", euSterofundin: 'Sterofundin ISO values',
     },
     madeBy: 'Made by Warodom Phaenthong, M.D.',
     changelogTitle: 'Version history', changelogSub: 'What changed and when', latest: 'Latest', newFeatures: 'New', bugFixes: 'Fixes',
@@ -674,10 +730,12 @@ const translations = {
     searchOpen: 'ค้นหา', searchClose: 'ปิดการค้นหา',
     sortLabel: 'เรียงลำดับ', sortType: 'ชนิด (น้ำเกลือก่อน)', sortNameAsc: 'ชื่อ (A–Z)', sortNaDesc: 'โซเดียม (มาก → น้อย)', sortNaAsc: 'โซเดียม (น้อย → มาก)', sortClAsc: 'คลอไรด์ (น้อย → มาก)', sortOsmAsc: 'ออสโมลาริตี (น้อย → มาก)',
     gridView: 'มุมมองการ์ด', listView: 'มุมมองรายการ', filtersBtn: 'ตัวกรอง',
-    typeLabel: 'ชนิด', families: { saline: 'น้ำเกลือ', balanced: 'Balanced', dextrose: 'เดกซ์โทรส', dexsaline: 'เดกซ์โทรส-เกลือ', hypertonic: 'เกลือเข้มข้น' },
-    familyLong: { saline: 'โซเดียมคลอไรด์ในน้ำ', balanced: 'Balanced crystalloid (มีบัฟเฟอร์)', dextrose: 'เดกซ์โทรสในน้ำ', dexsaline: 'เดกซ์โทรสผสมโซเดียมคลอไรด์', hypertonic: 'น้ำเกลือความเข้มข้นสูง' },
+    typeLabel: 'ชนิด', families: { saline: 'น้ำเกลือ', balanced: 'Balanced', dextrose: 'เดกซ์โทรส', dexsaline: 'เดกซ์โทรส-เกลือ', hypertonic: 'เกลือเข้มข้น', colloid: 'คอลลอยด์' },
+    familyLong: { saline: 'โซเดียมคลอไรด์ในน้ำ', balanced: 'Balanced crystalloid (มีบัฟเฟอร์)', dextrose: 'เดกซ์โทรสในน้ำ', dexsaline: 'เดกซ์โทรสผสมโซเดียมคลอไรด์', hypertonic: 'น้ำเกลือความเข้มข้นสูง', colloid: 'สารน้ำคอลลอยด์ (เพิ่มปริมาตรพลาสมา)' },
     naLabel: 'Na⁺', naBands: { low: '< 130', resus: '130–154', high: '> 154' }, naBandLong: { low: 'โซเดียมต่ำกว่า 130 mmol/L', resus: 'โซเดียม 130–154 mmol/L', high: 'โซเดียมสูงกว่า 154 mmol/L' },
     naTitle: 'ช่วงโซเดียม NICE CG174 1.3.1: สารน้ำคริสตัลลอยด์สำหรับกู้ชีพมีโซเดียม 130–154 mmol/L',
+    phLabel: 'pH', phBands: { acidic: '< 6.0', physio: '6.0–7.5' }, phBandLong: { acidic: 'กรด (pH < 6.0)', physio: 'ใกล้เคียงพลาสมา (pH 6.0–7.5)' },
+    phTitle: 'ช่วงความเป็นกรด-ด่าง: สารน้ำที่เป็นกรด เทียบกับสารน้ำที่มีบัฟเฟอร์ใกล้เคียงพลาสมา',
     containsLabel: 'มี', contains: { k: 'K⁺', ca: 'Ca²⁺', mg: 'Mg²⁺', glucose: 'กลูโคส', buffer: 'บัฟเฟอร์' },
     containsLong: { k: 'มีโพแทสเซียม', ca: 'มีแคลเซียม', mg: 'มีแมกนีเซียม', glucose: 'มีกลูโคส', buffer: 'มีบัฟเฟอร์' },
     thLabel: 'อย.',
@@ -699,7 +757,8 @@ const translations = {
     countShowing: 'แสดง', countOf: 'จาก', countFluids: 'ชนิด',
     legendBtn: 'คำอธิบาย', legendTitle: 'คำอธิบายสัญลักษณ์', legendSub: 'วิธีอ่านการ์ด',
     noFluids: 'ไม่พบสารน้ำที่ตรงกับตัวกรอง',
-    select: 'เลือก', selected: 'เลือกแล้ว', detailBtn: 'รายละเอียด', detailClose: 'ปิด', clear: 'ล้าง',
+    select: 'เลือก', selected: 'เลือกแล้ว', detailBtn: 'รายละเอียด', detailClose: 'ปิด', clear: 'ล้าง', remove: 'นำออก',
+    exportPng: 'ส่งออกเป็น PNG', exportPngTitle: 'ดาวน์โหลดการ์ดสรุปข้อมูลเป็นรูปภาพ PNG', exportComparePng: 'ส่งออกเป็น PNG',
     perLitre: 'ต่อลิตร', unknown: 'ไม่ทราบ', none: '–', calc: 'คำนวณ', calcTitle: 'คำนวณจากสูตรตำรับ',
     rows: { na: 'โซเดียม', k: 'โพแทสเซียม', cl: 'คลอไรด์', ca: 'แคลเซียม', mg: 'แมกนีเซียม', buffer: 'บัฟเฟอร์', dex: 'เดกซ์โทรส', kcal: 'พลังงาน', osm: 'ออสโมลาริตี', ph: 'pH' },
     units: { mmol: 'mmol/L', osm: 'mOsm/L', g: 'g/L', kcal: 'kcal/L' },
@@ -713,6 +772,8 @@ const translations = {
       glu: 'มีกลูโคส: ติดตามระดับน้ำตาลในเลือด',
       cl: 'คลอไรด์เกิน 120 mmol/L: ตรวจคลอไรด์ทุกวัน',
       resus: 'โซเดียม 130–154 mmol/L: ช่วงสำหรับกู้ชีพ',
+      colloid: 'คอลลอยด์: ติดตามภาวะน้ำเกินและปฏิกิริยาแพ้',
+      osmotic: 'สารขับปัสสาวะออสโมติก: ติดตามปริมาณปัสสาวะและออสโมลาลิตี',
     },
     flagNotes: {
       vein: 'ฉลากสหรัฐฯ: สารละลาย hypertonic อาจทำลายหลอดเลือดดำ ควรให้ทางหลอดเลือดดำใหญ่ และพิจารณา central vein เมื่อ 900 mOsm/L ขึ้นไป',
@@ -721,6 +782,8 @@ const translations = {
       glu: 'ฉลากเดกซ์โทรสสหรัฐฯ: เดกซ์โทรสทำให้น้ำตาลในเลือดสูงขึ้นได้ ควรติดตามระดับน้ำตาลและให้อินซูลินตามความจำเป็น',
       cl: 'NICE CG174 1.2.5: หลังให้สารน้ำที่มีคลอไรด์เกิน 120 mmol/L ให้ตรวจคลอไรด์ในเลือดทุกวัน',
       resus: 'NICE CG174 1.3.1: ใช้คริสตัลลอยด์ที่มีโซเดียม 130–154 mmol/L สำหรับกู้ชีพ (bolus 500 mL ภายในไม่เกิน 15 นาที)',
+      colloid: 'คอลลอยด์คงอยู่ในหลอดเลือดเป็นหลักด้วยแรงดันออนโคติก ระวังภาวะสารน้ำเกินและการแพ้รุนแรง ห้ามใช้ในภาวะซีดรุนแรงหรือหัวใจล้มเหลวที่ไม่ขาดปริมาตร',
+      osmotic: 'แมนนิทอลดึงน้ำจากเซลล์เข้าสู่หลอดเลือด ทำให้ปัสสาวะออกมากอย่างรวดเร็ว ตรวจการทำงานของไต อิเล็กโทรไลต์ และออสโมลาลิตีในเลือด (< 320 mOsm/kg)',
     },
     detailComposition: 'ส่วนประกอบต่อลิตร', detailFormula: 'สูตรตำรับ (ต่อลิตร)', detailFlags: 'ข้อควรระวัง', detailThai: 'ทะเบียนตามประเทศ',
     detailNoThai: 'ไม่พบทะเบียนที่ยังคงอยู่ในประเทศไทย (ค้นหา 14 ต.ค. 2569)',
@@ -738,15 +801,15 @@ const translations = {
       acetar5Other: "มีผลิตภัณฑ์ 5% เดกซ์โทรสใน Ringer's acetate อีก 2 รายการที่ใช้เดกซ์โทรสโมโนไฮเดรตแทนแอนไฮดรัส (กลูโคสน้อยกว่าเล็กน้อย): ARI-5 (ไทยนครพัฒนา, 2A 604/31) และ 5% Dextrose in Acetated Ringer's (สตาร์แล็บ, 2C 21/51)",
     },
     plasma: 'พลาสมา', plasmaNote: 'พลาสมามนุษย์: Myburgh & Mythen, NEJM 2013',
-    selectMax: 'เลือกได้สูงสุด 3 ชนิด', compare: 'เปรียบเทียบ', compareTitle: 'เปรียบเทียบสารน้ำ', compareSub: 'ต่อลิตร เทียบกับพลาสมามนุษย์',
+    selectMax: 'เลือกได้สูงสุด 6 ชนิด', compare: 'เปรียบเทียบ', compareTitle: 'เปรียบเทียบสารน้ำ', compareSub: 'ต่อลิตร เทียบกับพลาสมามนุษย์',
     naChangeBtn: 'การเปลี่ยน Na⁺',
     keyValues: 'ค่าต่าง ๆ', keyValuesText: 'ทุกค่าเป็นต่อลิตรของสารน้ำ โซเดียม โพแทสเซียม คลอไรด์ แคลเซียม แมกนีเซียม และบัฟเฟอร์ เป็น mmol/L แคลเซียมและแมกนีเซียมที่ฉลากระบุเป็น mEq/L หารด้วย 2',
     keyCalc: 'คำนวณจากสูตรตำรับ: ฉลาก (หรือข้อมูลทะเบียน อย.) ระบุเกลือเป็นกรัม แล้วคำนวณปริมาณไอออนจากเกลือนั้น ออสโมลาริตีที่ "คำนวณ" คือผลรวมของอนุภาคทั้งหมด แบบเดียวกับฉลากสหรัฐฯ',
     keyUnknown: 'ไม่มีเอกสารของผลิตภัณฑ์นี้ที่ระบุค่า',
     keyNone: 'สารน้ำนี้ไม่มีส่วนประกอบนี้',
     keyCountries: 'ชิปประเทศ', keyChipCurrent: 'มีทะเบียน (สีของประเทศ) ข้างชิประบุผู้ผลิต', keyChipPast: 'ทะเบียนสิ้นสุดแล้ว (ถอนหรือเลิกจำหน่าย)', keyChipNever: 'ไม่มีทะเบียน: ไม่พบผลิตภัณฑ์ชนิดและความแรงนี้', keyBands: 'ช่วงโซเดียม', keyFlags: 'คำเตือนด้านล่างของแต่ละการ์ด', keyFamilies: 'ชนิด',
-    guides: { choose: 'เลือกสารน้ำ', maint: 'บำรุงรักษา', sodium: 'Na⁺ และ 3% bolus', kguide: 'คู่มือโพแทสเซียม', dka: 'โปรโตคอล DKA/HHS', water: 'การขาดน้ำ', drip: 'อัตราหยด' },
-    guideShort: { choose: 'เลือก', maint: 'บำรุง', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'น้ำ', drip: 'หยด' },
+    guides: { choose: 'เลือกสารน้ำ', maint: 'บำรุงรักษา', sodium: 'Na⁺ และ 3% bolus', kguide: 'คู่มือโพแทสเซียม', dka: 'โปรโตคอล DKA/HHS', water: 'การขาดน้ำ', drip: 'อัตราหยด', gir: 'เครื่องคำนวณ GIR' },
+    guideShort: { choose: 'เลือก', maint: 'บำรุง', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'น้ำ', drip: 'หยด', gir: 'GIR' },
     discTitle: 'ข้อควรทราบ',
     discPoints: [
       'คู่มือนี้ช่วยประกอบการตัดสินใจทางคลินิก ไม่ได้ใช้แทน ตรวจสอบฉลากของถุงที่ใช้จริงเสมอ เพราะผลิตภัณฑ์ต่างผู้ผลิตอาจแตกต่างกัน',
@@ -761,8 +824,9 @@ const translations = {
       spasovski: 'ขีดจำกัดการแก้โซเดียมต่ำ', devine: 'น้ำหนักตัวในอุดมคติ', thfda: 'ทะเบียนไทย ผู้รับอนุญาต และสูตรตำรับ',
       szczech: 'สูตรการขาดน้ำอิสระและขีดจำกัดการแก้ไข', drugsfda: 'สถานะทะเบียนสหรัฐฯ', dmd: 'ผลิตภัณฑ์และสถานะในสหราชอาณาจักร', hpra: 'สถานะทะเบียน EU (ไอร์แลนด์)', pmda: 'ทะเบียนญี่ปุ่น',
       adaDka: 'ขั้นตอนการให้สารน้ำ DKA/HHS เกณฑ์การเติมเดกซ์โทรส และความปลอดภัยของโพแทสเซียม', katz: 'สูตรคำนวณโซเดียมปรับค่าเมื่อน้ำตาลในเลือดสูง', sternsK: 'การประมาณการโพแทสเซียมที่ขาด อัตราการให้ทางหลอดเลือดดำส่วนปลายและส่วนกลาง และการตรวจแมกนีเซียม',
+      aspenGir: 'ขีดจำกัดอัตราการให้กลูโคส (GIR) อัตราเผาผลาญสูงสุด (4–7 mg/kg/นาที) และพลังงานเดกซ์โทรส',
       usNaCl09: 'ค่าของ NSS', usNaCl045: 'ค่าของ NSS/2', usNaCl3: 'ค่าของ 3% NaCl คำเตือนให้ทางหลอดเลือดใหญ่', usDex: 'ค่าของ 5% และ 10% เดกซ์โทรส central vein เมื่อ 900 mOsm/L ขึ้นไป น้ำตาลในเลือด', usDexNaCl: 'ค่าของ 5%D/NSS และ 5%D/N/2 คำเตือนโซเดียมต่ำ', usKDexNaCl: 'ค่าของ 5%D/N/2 ผสม KCl',
-      usLR: "ค่าของ Lactated Ringer's คำเตือนเรื่องแคลเซียม", usPL: 'ค่าของ Plasma-Lyte A', thTopBal: 'ค่าของ TOP Balance', thAcetRinger: "pH ของ Ringer's acetate คำเตือนแคลเซียมกับ ceftriaxone", euSterofundin: 'ค่าของ Sterofundin ISO',
+      usLR: "ค่าของ Lactated Ringer's คำเตือนเรื่องแคลเซียม", usPL: 'ค่าของ Plasma-Lyte A', usAlb: 'ข้อมูล Human Albumin 20% และข้อควรระวังคอลลอยด์', usMan: 'ข้อมูล Mannitol 20% และข้อควรระวังการขับปัสสาวะออสโมติก', thTopBal: 'ค่าของ TOP Balance', thAcetRinger: "pH ของ Ringer's acetate คำเตือนแคลเซียมกับ ceftriaxone", euSterofundin: 'ค่าของ Sterofundin ISO',
     },
     madeBy: 'Made by Warodom Phaenthong, M.D.',
     changelogTitle: 'ประวัติเวอร์ชัน', changelogSub: 'สิ่งที่เปลี่ยนแปลงและวันที่', latest: 'ล่าสุด', newFeatures: 'ใหม่', bugFixes: 'แก้ไข',
@@ -778,10 +842,13 @@ const FAMILY_STYLE = {
   dextrose: { tag: 'bg-amber-100 text-amber-800', hex: '#f59e0b', edge: 'border-t-amber-500' },
   dexsaline: { tag: 'bg-violet-100 text-violet-800', hex: '#8b5cf6', edge: 'border-t-violet-500' },
   hypertonic: { tag: 'bg-rose-100 text-rose-800', hex: '#f43f5e', edge: 'border-t-rose-500' },
+  colloid: { tag: 'bg-purple-100 text-purple-800', hex: '#9333ea', edge: 'border-t-purple-500' },
 };
-const FAMILIES = ['saline', 'balanced', 'dextrose', 'dexsaline', 'hypertonic'];
+const FAMILIES = ['saline', 'balanced', 'dextrose', 'dexsaline', 'hypertonic', 'colloid'];
 const NA_BANDS = ['low', 'resus', 'high'];
 const NA_BAND_STYLE = { low: ['bg-amber-500 text-white shadow-sm', 'text-amber-700 hover:bg-amber-50'], resus: ['bg-emerald-600 text-white shadow-sm', 'text-emerald-700 hover:bg-emerald-50'], high: ['bg-rose-600 text-white shadow-sm', 'text-rose-700 hover:bg-rose-50'] };
+const PH_BANDS = ['acidic', 'physio'];
+const PH_BAND_STYLE = { acidic: ['bg-amber-600 text-white shadow-sm', 'text-amber-700 hover:bg-amber-50'], physio: ['bg-teal-600 text-white shadow-sm', 'text-teal-700 hover:bg-teal-50'] };
 const CONTAINS = ['k', 'ca', 'mg', 'glucose', 'buffer'];
 // Ion tiles on the cards: colour per ion
 const ION_TILES = [
@@ -800,7 +867,9 @@ const FLAG_RULES = [
   ['ca', (f) => hasIon(f, 'ca'), ['thAcetRinger', 'usLR'], 'border-orange-200 bg-orange-50 text-orange-800'],
   ['cl', (f) => (num(f, 'cl') || 0) > 120, ['nice'], 'border-yellow-200 bg-yellow-50 text-yellow-800'],
   ['glu', (f) => dexOf(f) > 0, ['usDex', 'usDexNaCl'], 'border-sky-200 bg-sky-50 text-sky-800'],
-  ['resus', (f) => naBand(f) === 'resus' && !dexOf(f), ['nice'], 'border-emerald-200 bg-emerald-50 text-emerald-800'],
+  ['resus', (f) => naBand(f) === 'resus' && !dexOf(f) && f.family !== 'colloid', ['nice'], 'border-emerald-200 bg-emerald-50 text-emerald-800'],
+  ['colloid', (f) => f.family === 'colloid', ['usAlb'], 'border-purple-200 bg-purple-50 text-purple-800'],
+  ['osmotic', (f) => f.id === 'man20', ['usMan'], 'border-rose-200 bg-rose-50 text-rose-800'],
 ];
 const flagsOf = (f) => FLAG_RULES.filter(([, test]) => test(f));
 const srcItem = (key) => ({ label: (REFERENCES.find(r => r.key === key) || SOURCES[key] || {}).cite || key, url: refUrl(key) || (SOURCES[key] || {}).url });
@@ -826,7 +895,7 @@ const DropIcon = ({ className }) => (<svg viewBox="0 0 24 24" fill="none" stroke
 const DripIcon = ({ className }) => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M9 2h6M10 2v4l-2 3v6a4 4 0 0 0 8 0V9l-2-3V2" /><path d="M12 19v3" /></svg>);
 const ScaleIcon = ({ className }) => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12 3v18M5 7h14M5 7l-3 7a3.5 3.5 0 0 0 6 0zM19 7l-3 7a3.5 3.5 0 0 0 6 0zM8 21h8" /></svg>);
 
-const CalcMark = ({ t }) => <sup className="ml-0.5 text-[9px] font-bold text-fuchsia-600 align-super" title={t.calcTitle} data-calc>{t.calc}</sup>;
+const CalcMark = ({ t }) => <sup className="ml-0.5 text-[9px] font-bold text-fuchsia-600" title={t.calcTitle} data-calc>{t.calc}</sup>;
 const UnknownText = ({ t }) => <span className="text-slate-400 font-bold" data-unknown>{t.unknown}</span>;
 // One value with its unit, "calc." mark, "–" for none or Unknown
 const Val = ({ f, k, t, unit = true }) => {
@@ -836,11 +905,23 @@ const Val = ({ f, k, t, unit = true }) => {
   return <span className="tabular-nums">{fmt(x.v)}{unit && <span className="text-[10px] font-medium opacity-70 ml-0.5">{k === 'osm' ? t.units.osm : k === 'kcal' ? t.units.kcal : k === 'dex' ? t.units.g : t.units.mmol}</span>}{x.calc && <CalcMark t={t} />}</span>;
 };
 const phOf = (f) => f.label.ph || null;
+const phNumOf = (f) => { const s = phOf(f); if (!s) return null; const m = /(\d+(?:\.\d+)?)/.exec(s); return m ? parseFloat(m[1]) : null; };
+const phBandOf = (f) => { const n = phNumOf(f); if (n == null) return null; return n < 6.0 ? 'acidic' : (n <= 7.5 ? 'physio' : null); };
 const BufferText = ({ f, t }) => {
   const b = bufferOf(f);
   if (!b.length) return <span className="text-slate-400">{t.none}</span>;
   const calc = b.some(([k]) => fieldOf(f, k).calc);
-  return <span className="tabular-nums">{b.map(([k, v]) => `${t.buffers[k]} ${fmt(v)}`).join(' + ')}{calc && <CalcMark t={t} />}</span>;
+  return (
+    <span className="tabular-nums">
+      {b.map(([k, v], i) => (
+        <span key={k} className="inline-block whitespace-nowrap">
+          {i > 0 && <span> + </span>}
+          {`${t.buffers[k]} ${fmt(v)}`}
+          {i === b.length - 1 && calc && <CalcMark t={t} />}
+        </span>
+      ))}
+    </span>
+  );
 };
 const DexText = ({ f, t }) => {
   const g = dexOf(f);
@@ -1074,6 +1155,297 @@ const valueSources = (f, k, t) => {
   return [...docs, ...(x.calc && x.v ? [{ label: t.srcCalc }] : []), ...(x.kcalFactor ? [{ label: t.srcKcalFactor, url: SOURCES.usDex.url }] : [])];
 };
 
+// --- PNG Exporters (High-DPI HTML5 Canvas) ---
+function exportFluidToPng(f, lang, t) {
+  const canvas = document.createElement('canvas');
+  const dpr = 2;
+  const w = 720;
+  const h = 880;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.fillRect(0, 0, w, h);
+
+  const pad = 28;
+  const cardW = w - pad * 2;
+  const cardH = h - pad * 2;
+  ctx.fillStyle = '#ffffff';
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.roundRect ? ctx.roundRect(pad, pad, cardW, cardH, 16) : ctx.rect(pad, pad, cardW, cardH);
+  ctx.fill();
+  ctx.stroke();
+
+  const famColor = (FAMILY_STYLE[f.family] || {}).hex || '#0ea5e9';
+  ctx.fillStyle = famColor;
+  ctx.beginPath();
+  if (ctx.roundRect) {
+    ctx.roundRect(pad, pad, cardW, 8, [16, 16, 0, 0]);
+  } else {
+    ctx.rect(pad, pad, cardW, 8);
+  }
+  ctx.fill();
+
+  let y = pad + 32;
+  ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#64748b';
+  ctx.fillText('ADULT IV FLUID GUIDE  •  ' + APP_VERSION, pad + 24, y);
+
+  const famBadge = (t.families[f.family] || f.family).toUpperCase();
+  ctx.font = 'bold 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  const badgeW = ctx.measureText(famBadge).width + 16;
+  ctx.fillStyle = famColor + '18';
+  ctx.strokeStyle = famColor + '40';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.roundRect ? ctx.roundRect(w - pad - 24 - badgeW, y - 12, badgeW, 20, 6) : ctx.rect(w - pad - 24 - badgeW, y - 12, badgeW, 20);
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = famColor;
+  ctx.fillText(famBadge, w - pad - 24 - badgeW + 8, y + 2);
+
+  y += 32;
+  ctx.font = 'bold 24px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#0f172a';
+  ctx.fillText(f.short, pad + 24, y);
+
+  y += 24;
+  ctx.font = '600 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#334155';
+  ctx.fillText(f.name[lang] || f.name.en, pad + 24, y);
+
+  y += 18;
+  ctx.font = '400 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#64748b';
+  ctx.fillText(t.familyLong[f.family] || '', pad + 24, y);
+
+  y += 16;
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(pad + 24, y);
+  ctx.lineTo(w - pad - 24, y);
+  ctx.stroke();
+
+  y += 24;
+  ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#475569';
+  ctx.fillText((t.detailComposition || 'Composition per litre').toUpperCase(), pad + 24, y);
+
+  const compRows = [
+    [t.rows.na, (num(f, 'na') != null ? fmt(num(f, 'na')) + ' ' + t.units.mmol : t.none)],
+    [t.rows.k, (num(f, 'k') != null ? fmt(num(f, 'k')) + ' ' + t.units.mmol : t.none)],
+    [t.rows.cl, (num(f, 'cl') != null ? fmt(num(f, 'cl')) + ' ' + t.units.mmol : t.none)],
+    [t.rows.ca, (num(f, 'ca') != null ? fmt(num(f, 'ca')) + ' ' + t.units.mmol : t.none)],
+    [t.rows.mg, (num(f, 'mg') != null ? fmt(num(f, 'mg')) + ' ' + t.units.mmol : t.none)],
+    [t.rows.buffer, bufferOf(f).length ? bufferOf(f).map(([k, v]) => `${t.buffers[k]} ${fmt(v)}`).join(' + ') + ' ' + t.units.mmol : t.none],
+    [t.rows.dex, dexOf(f) ? `${fmt(dexOf(f))} ${t.units.g}` : t.none],
+    [t.rows.kcal, num(f, 'kcal') != null ? `${fmt(num(f, 'kcal'))} ${t.units.kcal}` : t.none],
+    [t.rows.osm, num(f, 'osm') != null ? `${fmt(num(f, 'osm'))} ${t.units.osm}` : t.unknown],
+    [t.rows.ph, phOf(f) || t.unknown],
+  ];
+
+  y += 12;
+  const colW = (cardW - 48) / 2;
+  compRows.forEach(([lbl, val], idx) => {
+    const col = idx % 2;
+    const row = Math.floor(idx / 2);
+    const rx = pad + 24 + col * colW;
+    const ry = y + row * 28;
+
+    ctx.fillStyle = row % 2 === 0 ? '#f8fafc' : '#ffffff';
+    ctx.fillRect(rx, ry - 14, colW - 8, 26);
+
+    ctx.font = '500 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillStyle = '#64748b';
+    ctx.fillText(lbl, rx + 8, ry + 3);
+
+    ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillStyle = '#0f172a';
+    ctx.textAlign = 'right';
+    ctx.fillText(val, rx + colW - 16, ry + 3);
+    ctx.textAlign = 'left';
+  });
+
+  y += Math.ceil(compRows.length / 2) * 28 + 14;
+
+  const fl = flagsOf(f);
+  if (fl.length > 0) {
+    ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillStyle = '#475569';
+    ctx.fillText((t.detailFlags || 'Clinical Points').toUpperCase(), pad + 24, y);
+    y += 18;
+
+    fl.slice(0, 3).forEach(([k]) => {
+      ctx.fillStyle = k === 'resus' ? '#ecfdf5' : '#fffbeb';
+      ctx.strokeStyle = k === 'resus' ? '#a7f3d0' : '#fde68a';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(pad + 24, y - 10, cardW - 48, 24, 6) : ctx.rect(pad + 24, y - 10, cardW - 48, 24);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.fillStyle = k === 'resus' ? '#065f46' : '#92400e';
+      ctx.font = 'bold 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+      ctx.fillText((k === 'resus' ? '✓ ' : '⚠️ ') + (t.flags[k] || k), pad + 32, y + 6);
+      y += 28;
+    });
+  }
+
+  y += 8;
+  ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#475569';
+  ctx.fillText((t.detailThai || 'Registration').toUpperCase(), pad + 24, y);
+  y += 18;
+
+  REGIONS.forEach((r, idx) => {
+    const reg = regIn(f, r);
+    const rx = pad + 24 + idx * 80;
+    const isCur = reg.status === 'current';
+    const isPast = reg.status === 'past';
+    ctx.fillStyle = isCur ? '#ecfdf5' : (isPast ? '#fffbeb' : '#f1f5f9');
+    ctx.strokeStyle = isCur ? '#6ee7b7' : (isPast ? '#fcd34d' : '#cbd5e1');
+    ctx.beginPath();
+    ctx.roundRect ? ctx.roundRect(rx, y - 10, 70, 24, 6) : ctx.rect(rx, y - 10, 70, 24);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = isCur ? '#047857' : (isPast ? '#b45309' : '#64748b');
+    ctx.font = 'bold 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillText(`${t.countryCodes[r]} ${isCur ? '✓' : (isPast ? '†' : '⊘')}`, rx + 14, y + 6);
+  });
+
+  const footY = h - pad - 20;
+  ctx.font = '400 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#94a3b8';
+  ctx.fillText('Adult IV Fluid Guide • Dr. Warodom Phaenthong • Creative Commons BY-NC-SA 4.0', pad + 24, footY);
+  ctx.textAlign = 'right';
+  ctx.fillText('Values from official labels & pharmacopeia formulas', w - pad - 24, footY);
+  ctx.textAlign = 'left';
+
+  const a = document.createElement('a');
+  a.download = `iv-fluid-${f.id}.png`;
+  a.href = canvas.toDataURL('image/png');
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function exportCompareToPng(list, lang, t) {
+  const canvas = document.createElement('canvas');
+  const dpr = 2;
+  const colW = 120;
+  const labelW = 160;
+  const pad = 24;
+  const w = pad * 2 + labelW + (list.length + 1) * colW;
+  const h = 580;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  ctx.fillStyle = '#f8fafc';
+  ctx.fillRect(0, 0, w, h);
+
+  const cardW = w - pad * 2;
+  const cardH = h - pad * 2;
+  ctx.fillStyle = '#ffffff';
+  ctx.strokeStyle = '#cbd5e1';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.roundRect ? ctx.roundRect(pad, pad, cardW, cardH, 12) : ctx.rect(pad, pad, cardW, cardH);
+  ctx.fill();
+  ctx.stroke();
+
+  let y = pad + 26;
+  ctx.font = 'bold 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#0f172a';
+  ctx.fillText(t.compareTitle + ' — ' + (t.compareSub || 'per litre'), pad + 20, y);
+
+  ctx.font = '500 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#64748b';
+  ctx.textAlign = 'right';
+  ctx.fillText('ADULT IV FLUID GUIDE • ' + APP_VERSION, w - pad - 20, y);
+  ctx.textAlign = 'left';
+
+  y += 24;
+  ctx.fillStyle = '#f1f5f9';
+  ctx.fillRect(pad + 12, y - 14, cardW - 24, 44);
+
+  let colX = pad + 20 + labelW;
+  list.forEach(f => {
+    ctx.font = 'bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillStyle = (FAMILY_STYLE[f.family] || {}).hex || '#0f172a';
+    ctx.fillText(f.short, colX, y + 4);
+    ctx.font = '500 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillStyle = '#64748b';
+    const nameStr = (f.name[lang] || f.name.en).slice(0, 15);
+    ctx.fillText(nameStr, colX, y + 18);
+    colX += colW;
+  });
+
+  ctx.font = 'bold 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#475569';
+  ctx.fillText(t.plasma, colX, y + 4);
+  ctx.font = '500 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#64748b';
+  ctx.fillText('Reference', colX, y + 18);
+
+  const range = (k) => { const r = PLASMA[k]; return r ? (r[0] === r[1] ? String(r[0]) : `${r[0]}–${r[1]}`) : t.none; };
+  const rows = [
+    [t.rows.na + ' (mmol/L)', (f) => num(f, 'na') != null ? fmt(num(f, 'na')) : t.none, range('na')],
+    [t.rows.k + ' (mmol/L)', (f) => num(f, 'k') != null ? fmt(num(f, 'k')) : t.none, range('k')],
+    [t.rows.cl + ' (mmol/L)', (f) => num(f, 'cl') != null ? fmt(num(f, 'cl')) : t.none, range('cl')],
+    [t.rows.ca + ' (mmol/L)', (f) => num(f, 'ca') != null ? fmt(num(f, 'ca')) : t.none, range('ca')],
+    [t.rows.mg + ' (mmol/L)', (f) => num(f, 'mg') != null ? fmt(num(f, 'mg')) : t.none, range('mg')],
+    [t.rows.buffer + ' (mmol/L)', (f) => bufferOf(f).length ? fmt(bufferOf(f).reduce((a, [, v]) => a + v, 0)) : t.none, '24–32'],
+    [t.rows.dex + ' (g/L)', (f) => dexOf(f) ? fmt(dexOf(f)) : t.none, t.none],
+    [t.rows.kcal + ' (kcal/L)', (f) => num(f, 'kcal') != null ? fmt(num(f, 'kcal')) : t.none, t.none],
+    [t.rows.osm + ' (mOsm/L)', (f) => num(f, 'osm') != null ? fmt(num(f, 'osm')) : t.unknown, range('osm')],
+    [t.rows.ph, (f) => phOf(f) || t.unknown, '7.35–7.45'],
+  ];
+
+  y += 36;
+  rows.forEach(([lbl, getter, plVal], rIdx) => {
+    ctx.fillStyle = rIdx % 2 === 0 ? '#ffffff' : '#f8fafc';
+    ctx.fillRect(pad + 12, y - 10, cardW - 24, 26);
+
+    ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillStyle = '#475569';
+    ctx.fillText(lbl, pad + 20, y + 6);
+
+    let x = pad + 20 + labelW;
+    list.forEach(f => {
+      ctx.font = 'bold 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+      ctx.fillStyle = '#0f172a';
+      ctx.fillText(String(getter(f)), x, y + 6);
+      x += colW;
+    });
+
+    ctx.font = '500 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+    ctx.fillStyle = '#64748b';
+    ctx.fillText(plVal, x, y + 6);
+
+    y += 26;
+  });
+
+  const footY = h - pad - 14;
+  ctx.font = '400 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+  ctx.fillStyle = '#94a3b8';
+  ctx.fillText('Adult IV Fluid Guide • Human Plasma: Myburgh & Mythen, NEJM 2013 • Warodom Phaenthong, M.D.', pad + 20, footY);
+
+  const a = document.createElement('a');
+  a.download = `iv-fluid-compare-${list.map(f => f.short).join('-')}.png`;
+  a.href = canvas.toDataURL('image/png');
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
 // --- Detail view ---
 const FluidDetailModal = ({ f, t, onClose, selected, onSelect }) => {
   const [showSrc, setShowSrc] = useState(() => { try { return localStorage.getItem('ivf-show-sources') === '1'; } catch (e) { return false; } });
@@ -1096,6 +1468,9 @@ const FluidDetailModal = ({ f, t, onClose, selected, onSelect }) => {
       footer={<>
         <button onClick={toggleSrc} aria-pressed={showSrc} data-src-toggle className={`mr-auto flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold border transition-colors ${showSrc ? 'bg-slate-100 text-slate-800 border-slate-300' : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300 hover:text-indigo-600'}`}>
           <BookOpen className="w-3.5 h-3.5" /> {showSrc ? t.srcHide : t.srcShow}
+        </button>
+        <button onClick={() => exportFluidToPng(f, lang, t)} data-detail-export-png title={t.exportPngTitle} className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-indigo-600 transition-colors shadow-sm">
+          <DownloadIcon className="w-3.5 h-3.5" /> {t.exportPng}
         </button>
         <button onClick={onSelect} data-detail-select className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold border transition-colors ${selected ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-slate-600 border-slate-200 hover:border-indigo-300 hover:text-indigo-600'}`}>
           {selected ? <Check className="w-3.5 h-3.5" /> : <CompareIcon className="w-3.5 h-3.5" />} {selected ? t.selected : t.select}
@@ -1143,8 +1518,8 @@ const FluidDetailModal = ({ f, t, onClose, selected, onSelect }) => {
   );
 };
 
-// --- Compare (2–3 fluids next to plasma) ---
-const CompareModal = ({ list, t, onClose }) => {
+// --- Compare (up to 6 fluids next to plasma) ---
+const CompareModal = ({ list, t, onClose, onRemove }) => {
   const lang = t.isTh ? 'th' : 'en';
   const range = (k) => { const r = PLASMA[k]; return r ? (r[0] === r[1] ? String(r[0]) : `${r[0]}–${r[1]}`) : t.none; };
   const rows = [
@@ -1161,14 +1536,31 @@ const CompareModal = ({ list, t, onClose }) => {
     ['th', t.countriesLabel, (f) => <span className="flex flex-wrap gap-1">{REGIONS.map(r => <StatusChip key={r} f={f} r={r} t={t} />)}</span>, t.none],
   ];
   return (
-    <Modal title={t.compareTitle} sub={t.compareSub + ' (' + t.units.mmol + ')'} onClose={onClose} wide attrs={{ 'data-compare-modal': '' }} footer={<CloseBtn onClose={onClose} t={t} />}>
+    <Modal title={t.compareTitle} sub={t.compareSub + ' (' + t.units.mmol + ')'} onClose={onClose} wide attrs={{ 'data-compare-modal': '' }}
+      footer={<>
+        <button onClick={() => exportCompareToPng(list, lang, t)} data-compare-export-png className="mr-auto flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-indigo-600 transition-colors shadow-sm">
+          <DownloadIcon className="w-3.5 h-3.5" /> {t.exportComparePng}
+        </button>
+        <CloseBtn onClose={onClose} t={t} />
+      </>}>
       <div className="overflow-x-auto -mx-1 px-1">
-        <table className="w-full text-xs border-collapse min-w-[460px]" data-compare-table>
+        <table className="w-full text-xs border-collapse min-w-[500px]" data-compare-table>
           <thead>
             <tr>
-              <th className="text-left p-2 text-slate-400 font-bold align-bottom w-28"></th>
-              {list.map(f => <th key={f.id} className="p-2 text-left align-bottom min-w-0"><BagIcon family={f.family} className="w-6 h-7 mb-1" /><span className="block font-extrabold text-slate-800 leading-tight break-words">{f.short}</span><span className="block text-[10px] font-medium text-slate-500 leading-tight break-words">{f.name[lang]}</span></th>)}
-              <th className="p-2 text-left align-bottom text-slate-500 font-extrabold">{t.plasma}</th>
+              <th className="text-left p-2 text-slate-400 font-bold align-bottom w-24 sm:w-28 min-w-[95px] sm:min-w-[110px]"></th>
+              {list.map(f => (
+                <th key={f.id} className="p-2 text-left align-bottom min-w-[110px] sm:min-w-[125px] relative">
+                  <div className="flex items-center justify-between mb-1">
+                    <BagIcon family={f.family} className="w-6 h-7" />
+                    {onRemove && list.length > 2 && (
+                      <button onClick={() => onRemove(f.id)} data-compare-remove={f.id} title={`${t.remove} ${f.short}`} aria-label={`${t.remove} ${f.short}`} className="p-0.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded text-xs transition-colors leading-none">✕</button>
+                    )}
+                  </div>
+                  <span className="block font-extrabold text-slate-800 leading-tight break-words">{f.short}</span>
+                  <span className="block text-[10px] font-medium text-slate-500 leading-tight break-words">{f.name[lang]}</span>
+                </th>
+              ))}
+              <th className="p-2 text-left align-bottom text-slate-500 font-extrabold min-w-[90px]">{t.plasma}</th>
             </tr>
           </thead>
           <tbody>
@@ -1391,6 +1783,29 @@ const GUIDE_TEXT = {
     dkaKHold: 'K⁺ < 3.3 mmol/L: 🚨 CRITICAL: HOLD INSULIN! Give IV KCl 20–40 mmol/h until K⁺ > 3.3. Starting insulin with severe hypokalaemia can precipitate fatal arrhythmias or respiratory arrest.',
     dkaKSafe: 'K⁺ 3.3–5.2 mmol/L: ✅ Safe to start/continue insulin. Add 20–30 mmol KCl per litre of IV fluid to maintain serum K⁺ between 4.0–5.0 mmol/L.',
     dkaKNoAdd: 'K⁺ > 5.2 mmol/L: ⚠️ Do NOT add potassium to IV fluids. Recheck serum K⁺ every 2 hours until < 5.2 mmol/L.',
+    // GIR calculator
+    girSub: 'Glucose Infusion Rate (GIR) bedside calculator & maximal oxidation capacity guidance',
+    girModeRate: 'Rate → GIR (Check existing rate)',
+    girModeTarget: 'Target GIR → Required Rate',
+    girFluid: 'IV Fluid / Dextrose solution',
+    girDexCustom: 'Custom dextrose %',
+    girTargetGIR: 'Target GIR (mg/kg/min)',
+    girResultGIR: 'Glucose Infusion Rate',
+    girResultRate: 'Required Infusion Rate',
+    girUnitMlh: 'mL/h',
+    girUnitMgKgMin: 'mg/kg/min',
+    girDailyDex: 'Daily dextrose',
+    girDailyKcal: 'Daily energy',
+    girGDay: 'g/day',
+    girKcalDay: 'kcal/day',
+    girRangeNormal: 'Normal physiological maintenance: 2–3 mg/kg/min',
+    girRangeCrit: 'Critically ill / stress: 3–4 mg/kg/min',
+    girRangeMax: 'Maximal oxidation capacity: 4–5 mg/kg/min (absolute max 7 mg/kg/min)',
+    girWarnHigh: '⚠️ Caution: GIR exceeds maximal hepatic glucose oxidation rate (≥ 5 mg/kg/min). Risk of hyperglycemia, hyperosmolarity, hepatic steatosis, and increased CO₂ production!',
+    girWarnLow: 'GIR is below basal hepatic glucose output (~2 mg/kg/min). Patient may develop hypoglycemia or catabolism if fasting without oral intake.',
+    girFormula: 'GIR (mg/kg/min) = [Rate (mL/h) × Dextrose (%) × 10] ÷ [Weight (kg) × 60]',
+    girFormulaTarget: 'Rate (mL/h) = [Target GIR (mg/kg/min) × Weight (kg) × 60] ÷ [Dextrose (%) × 10]',
+    girPedsNote: 'In neonates & infants, basal GIR requirement is higher (4–8 mg/kg/min due to larger brain-to-body ratio).',
   },
   th: {
     chooseSub: 'NICE CG174 "5 Rs" และ Surviving Sepsis Campaign 2021',
@@ -1522,6 +1937,29 @@ const GUIDE_TEXT = {
     dkaKHold: 'K⁺ < 3.3 mmol/L: 🚨 วิกฤต: ระงับการให้อินซูลินทันที! ให้ IV KCl 20–40 mmol/ชม. จนกว่า K⁺ > 3.3 mmol/L การให้อินซูลินขณะโพแทสเซียมต่ำรุนแรงอาจทำให้หัวใจเต้นผิดจังหวะจนเสียชีวิตหรือหยุดหายใจ',
     dkaKSafe: 'K⁺ 3.3–5.2 mmol/L: ✅ ปลอดภัยในการให้อินซูลิน เติม KCl 20–30 mmol ต่อลิตรของสารน้ำเพื่อรักษาระดับ K⁺ ในเลือดที่ 4.0–5.0 mmol/L',
     dkaKNoAdd: 'K⁺ > 5.2 mmol/L: ⚠️ ห้ามเติมโพแทสเซียมลงในสารน้ำ ตรวจระดับ K⁺ ซ้ำทุก 2 ชั่วโมงจนกว่าจะ < 5.2 mmol/L',
+    // GIR calculator
+    girSub: 'เครื่องคำนวณอัตราการให้กลูโคส (GIR) ข้างเตียง และขีดจำกัดการเผาผลาญสูงสุด',
+    girModeRate: 'อัตราการให้ → GIR (ตรวจอัตราที่ให้อยู่)',
+    girModeTarget: 'เป้าหมาย GIR → คำนวณอัตราที่ต้องให้',
+    girFluid: 'สารน้ำเดกซ์โทรส',
+    girDexCustom: 'ความเข้มข้นเดกซ์โทรสกำหนดเอง (%)',
+    girTargetGIR: 'เป้าหมาย GIR (mg/kg/นาที)',
+    girResultGIR: 'อัตราการให้กลูโคส (GIR)',
+    girResultRate: 'อัตราการให้สารน้ำที่ต้องใช้',
+    girUnitMlh: 'mL/ชม.',
+    girUnitMgKgMin: 'mg/kg/นาที',
+    girDailyDex: 'เดกซ์โทรสต่อวัน',
+    girDailyKcal: 'พลังงานต่อวัน',
+    girGDay: 'g/วัน',
+    girKcalDay: 'kcal/วัน',
+    girRangeNormal: 'การรักษาระดับปกติ: 2–3 mg/kg/นาที',
+    girRangeCrit: 'ผู้ป่วยวิกฤต / ภาวะเครียด: 3–4 mg/kg/นาที',
+    girRangeMax: 'ขีดจำกัดการเผาผลาญสูงสุด: 4–5 mg/kg/นาที (ไม่เกิน 7 mg/kg/นาที)',
+    girWarnHigh: '⚠️ ข้อควรระวัง: GIR เกินอัตราการเผาผลาญกลูโคสสูงสุดของตับ (≥ 5 mg/kg/นาที) เสี่ยงน้ำตาลในเลือดสูง ตับคั่งไขมัน และ CO₂ สูงขึ้น!',
+    girWarnLow: 'GIR ต่ำกว่าอัตราการสร้างกลูโคสพื้นฐานของตับ (~2 mg/kg/นาที) อาจเสี่ยงน้ำตาลต่ำหรือสลายกล้ามเนื้อหากงดอาหาร',
+    girFormula: 'GIR (mg/kg/นาที) = [อัตรา (mL/ชม.) × เดกซ์โทรส (%) × 10] ÷ [น้ำหนัก (kg) × 60]',
+    girFormulaTarget: 'อัตรา (mL/ชม.) = [เป้าหมาย GIR (mg/kg/นาที) × น้ำหนัก (kg) × 60] ÷ [เดกซ์โทรส (%) × 10]',
+    girPedsNote: 'ในทารกแรกเกิดและเด็กเล็ก ความต้องการ GIR พื้นฐานจะสูงกว่าผู้ใหญ่ (4–8 mg/kg/นาที เนื่องจากสัดส่วนสมองต่อน้ำหนักตัวสูงกว่า)',
   },
 };
 
@@ -2062,6 +2500,150 @@ const DripGuide = ({ lang, t, onClose }) => {
   );
 };
 
+// --- 6. Glucose Infusion Rate (GIR) Calculator ---
+const GirGuide = ({ lang, t, onClose, onOpenFluid }) => {
+  const g = GUIDE_TEXT[lang];
+  const [mode, setMode] = useState('rate'); // 'rate' = Rate -> GIR; 'target' = Target GIR -> Rate
+  const [weight, setWeight] = useState('70');
+  const [fluidKey, setFluidKey] = useState('d5w');
+  const [customDex, setCustomDex] = useState('5');
+  const [rate, setRate] = useState('100');
+  const [targetGir, setTargetGir] = useState('3.0');
+
+  const dexFluids = useMemo(() => FLUIDS.filter(f => dexOf(f) > 0), []);
+  const selectedFluid = FLUIDS.find(f => f.id === fluidKey);
+  const dexPercent = fluidKey === 'custom' ? (toNum(customDex) || 0) : (selectedFluid ? (dexOf(selectedFluid) / 10) : 5);
+
+  const wt = toNum(weight) || 0;
+  const r = toNum(rate) || 0;
+  const tg = toNum(targetGir) || 0;
+
+  // Rate -> GIR: GIR = (Rate mL/h * Dex % * 10) / (Weight kg * 60)
+  const calcGir = wt > 0 && r > 0 && dexPercent > 0 ? (r * dexPercent * 10) / (wt * 60) : 0;
+  // Target GIR -> Rate: Rate mL/h = (Target GIR * Weight kg * 60) / (Dex % * 10)
+  const calcRate = wt > 0 && tg > 0 && dexPercent > 0 ? (tg * wt * 60) / (dexPercent * 10) : 0;
+
+  const currentGir = mode === 'rate' ? calcGir : tg;
+  const activeRate = mode === 'rate' ? r : calcRate;
+
+  // Daily totals
+  const dailyDexG = activeRate > 0 && dexPercent > 0 ? (activeRate * 24 * (dexPercent * 10)) / 1000 : 0;
+  const dailyKcal = dailyDexG * 3.4;
+
+  const isExcess = currentGir >= 5.0;
+  const isCaution = currentGir >= 4.0 && currentGir < 5.0;
+  const isLow = currentGir > 0 && currentGir < 2.0;
+  const isNormal = currentGir >= 2.0 && currentGir < 4.0;
+
+  return (
+    <Modal title={t.guides.gir} sub={g.girSub} onClose={onClose} tone="bg-teal-50" wide attrs={{ 'data-guide-modal': 'gir' }}
+      icon={<div className="p-2 bg-teal-100 text-teal-700 rounded-xl shrink-0"><TrendingUpIcon className="w-5 h-5" /></div>}
+      footer={<CloseBtn onClose={onClose} t={t} />}>
+      <Section>
+        <Seg value={mode} onChange={setMode} options={[['rate', g.girModeRate], ['target', g.girModeTarget]]} attrs={{ 'data-gir-mode': '' }} />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+          <NumInput label={g.weight} unit={g.kg} value={weight} onChange={setWeight} attrs={{ 'data-gir-weight': '' }} />
+          <div className="flex flex-col gap-1 min-w-0">
+            <span className="text-[11px] font-bold text-slate-500">{g.girFluid}</span>
+            <select value={fluidKey} onChange={(e) => setFluidKey(e.target.value)} data-gir-fluid
+              className="w-full min-w-0 h-9 px-2 rounded-lg border border-slate-200 bg-white text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer">
+              {dexFluids.map(f => (
+                <option key={f.id} value={f.id}>{f.short} ({f.name[lang] || f.name.en} - {dexOf(f) / 10}%)</option>
+              ))}
+              <option value="custom">{g.girDexCustom}</option>
+            </select>
+          </div>
+          {fluidKey === 'custom' ? (
+            <NumInput label={g.girDexCustom} unit="%" value={customDex} onChange={setCustomDex} attrs={{ 'data-gir-custom-dex': '' }} />
+          ) : (
+            <div className="flex flex-col justify-end">
+              <span className="text-xs font-bold text-teal-700 bg-teal-50 border border-teal-200 rounded-lg px-3 py-2">
+                {dexPercent}% {g.glucoseNeed} ({dexPercent * 10} g/L)
+              </span>
+            </div>
+          )}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+          {mode === 'rate' ? (
+            <NumInput label={g.rate} unit={g.girUnitMlh} value={rate} onChange={setRate} attrs={{ 'data-gir-rate-input': '' }} />
+          ) : (
+            <NumInput label={g.girTargetGIR} unit={g.girUnitMgKgMin} value={targetGir} onChange={setTargetGir} attrs={{ 'data-gir-target-input': '' }} />
+          )}
+          {mode === 'target' && (
+            <div className="flex flex-col gap-1">
+              <span className="text-[11px] font-bold text-slate-500">{g.planQuick} ({g.girUnitMgKgMin})</span>
+              <div className="flex flex-wrap gap-1.5" data-gir-presets>
+                {[2, 3, 4, 5].map(v => (
+                  <button key={v} type="button" onClick={() => setTargetGir(String(v))} aria-pressed={tg === v} data-gir-preset={v}
+                    className={`min-w-[2.5rem] px-2.5 py-1.5 rounded-lg border text-xs font-bold tabular-nums transition-colors ${tg === v ? 'bg-teal-600 border-teal-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+                    {v}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+        <p className="text-[11px] text-slate-500 mt-2 leading-snug">
+          {mode === 'rate' ? g.girFormula : g.girFormulaTarget} <RefTag k="aspenGir" />
+        </p>
+      </Section>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-gir-result>
+        <div className={`rounded-xl border p-3 ${isExcess ? 'border-rose-300 bg-rose-50 text-rose-900' : isCaution ? 'border-amber-300 bg-amber-50 text-amber-900' : 'border-teal-200 bg-teal-50 text-teal-900'}`}>
+          <div className="text-[11px] font-bold opacity-80">{g.girResultGIR}</div>
+          <div className="text-xl font-extrabold tabular-nums" data-gir-val>
+            {currentGir ? currentGir.toFixed(2) : '—'} <span className="text-xs font-semibold">{g.girUnitMgKgMin}</span>
+          </div>
+          <div className="text-[11px] font-medium mt-0.5">
+            {isExcess ? '⚠️ > 5.0 (Max Oxidation)' : isCaution ? '4.0–5.0 (Near Max)' : isNormal ? '✓ 2.0–4.0 (Normal)' : isLow ? 'Low (< 2.0)' : ''}
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
+          <div className="text-[11px] font-bold opacity-80">{mode === 'target' ? g.girResultRate : g.rate}</div>
+          <div className="text-xl font-extrabold tabular-nums" data-gir-rate-result>
+            {activeRate ? activeRate.toFixed(1) : '—'} <span className="text-xs font-semibold">{g.girUnitMlh}</span>
+          </div>
+          <div className="text-[11px] font-medium mt-0.5">
+            {activeRate ? `${Math.round(activeRate * 24)} mL/${g.perDay || 'day'}` : ''}
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-indigo-200 bg-indigo-50 p-3 text-indigo-900">
+          <div className="text-[11px] font-bold opacity-80">{g.girDailyDex} / {g.girDailyKcal}</div>
+          <div className="text-xl font-extrabold tabular-nums" data-gir-daily>
+            {dailyDexG ? `${Math.round(dailyDexG)} ${g.girGDay}` : '—'}
+          </div>
+          <div className="text-[11px] font-medium mt-0.5" data-gir-kcal>
+            {dailyKcal ? `≈ ${Math.round(dailyKcal)} ${g.girKcalDay}` : ''}
+          </div>
+        </div>
+      </div>
+
+      {isExcess && (
+        <div className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-gir-alert="high">
+          {g.girWarnHigh}
+        </div>
+      )}
+
+      {isLow && (
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-gir-alert="low">
+          {g.girWarnLow}
+        </div>
+      )}
+
+      <Section title={g.limitsTitle} tone="bg-slate-50 border-slate-200">
+        <ul className="text-xs text-slate-700 space-y-1.5 pl-4 list-disc">
+          <li><b>{g.girRangeNormal}</b></li>
+          <li><b>{g.girRangeCrit}</b></li>
+          <li><b>{g.girRangeMax}</b> <RefTag k="aspenGir" /></li>
+          <li className="text-slate-500">{g.girPedsNote}</li>
+        </ul>
+      </Section>
+    </Modal>
+  );
+};
+
 // =====================================================================
 // Search
 // =====================================================================
@@ -2078,7 +2660,7 @@ const SORTS = {
   osmAsc: (a, b) => (num(a, 'osm') ?? 9999) - (num(b, 'osm') ?? 9999),
 };
 const fluidIdFromHash = () => { const m = /fluid=([\w-]+)/.exec(location.hash || ''); return m && FLUIDS.some(f => f.id === m[1]) ? m[1] : null; };
-const MAX_SELECT = 3;
+const MAX_SELECT = 6;
 const store = { get: (k, d) => { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
 
 function App() {
@@ -2104,6 +2686,7 @@ function App() {
   useEffect(() => store.set('ivf-view', viewMode), [viewMode]);
   const [families, setFamilies] = useState([]);
   const [bands, setBands] = useState([]);
+  const [phBands, setPhBands] = useState([]);
   const [contains, setContains] = useState([]);
   const [countries, setCountries] = useState(['th']);
   const [regStatus, setRegStatus] = useState(['current']);
@@ -2142,24 +2725,26 @@ function App() {
     return [...prev, f.id];
   });
   const openFluid = (id) => { setGuide(null); setDetailId(id); };
-  const clearFilters = () => { setFamilies([]); setBands([]); setContains([]); setSearchTerm(''); };
+  const clearFilters = () => { setFamilies([]); setBands([]); setPhBands([]); setContains([]); setSearchTerm(''); };
 
   const shown = useMemo(() => FLUIDS
     .filter(f => !families.length || families.includes(f.family))
     .filter(f => !bands.length || bands.includes(naBand(f)))
+    .filter(f => !phBands.length || phBands.includes(phBandOf(f)))
     .filter(f => contains.every(k => hasIon(f, k)))
     .filter(f => countries.some(r => regStatus.includes(statusIn(f, r))))
     .filter(f => !searchTerm.trim() || matches(f, searchTerm.trim()))
-    .sort((a, b) => SORTS[sortOrder](a, b) || SORTS.nameAsc(a, b)), [families, bands, contains, countries, regStatus, searchTerm, sortOrder]);
+    .sort((a, b) => SORTS[sortOrder](a, b) || SORTS.nameAsc(a, b)), [families, bands, phBands, contains, countries, regStatus, searchTerm, sortOrder]);
 
   const chips = [
     ...families.map(k => ({ key: 'fam-' + k, label: t.families[k], off: () => toggleIn(setFamilies)(k) })),
     ...bands.map(k => ({ key: 'na-' + k, label: 'Na ' + t.naBands[k], off: () => toggleIn(setBands)(k) })),
+    ...phBands.map(k => ({ key: 'ph-' + k, label: 'pH ' + t.phBands[k], off: () => toggleIn(setPhBands)(k) })),
     ...contains.map(k => ({ key: 'has-' + k, label: t.containsLong[k], off: () => toggleIn(setContains)(k) })),
 
     ...(searchTerm.trim() ? [{ key: 'search', label: '“' + searchTerm.trim() + '”', off: () => setSearchTerm('') }] : []),
   ];
-  const filterCount = families.length + bands.length + contains.length;
+  const filterCount = families.length + bands.length + phBands.length + contains.length;
   const selFluids = selected.map(id => FLUIDS.find(f => f.id === id));
   const detail = detailId ? FLUIDS.find(f => f.id === detailId) : null;
   const closeDetail = () => { setDetailId(null); if (/fluid=/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search); };
@@ -2175,6 +2760,7 @@ function App() {
     ['dka', 'bg-indigo-600 hover:bg-indigo-700 border-indigo-700', FlameIcon],
     ['water', 'bg-cyan-600 hover:bg-cyan-700 border-cyan-700', DropIcon],
     ['drip', 'bg-blue-600 hover:bg-blue-700 border-blue-700', DripIcon],
+    ['gir', 'bg-teal-600 hover:bg-teal-700 border-teal-700', TrendingUpIcon],
   ];
 
   return (
@@ -2200,6 +2786,9 @@ function App() {
             <div className="grid grid-flow-col auto-cols-fr gap-1.5">
               <button onClick={() => setIsCompareOpen(true)} disabled={selFluids.length < 2} data-bar-compare className="bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed text-white min-w-0 px-1 py-1.5 rounded-lg font-bold transition-colors shadow-sm text-[10px] sm:text-[11px] leading-tight text-center flex items-center justify-center gap-1">
                 <CompareIcon className="w-3 h-3 shrink-0" /> {t.compare}
+              </button>
+              <button onClick={() => { if (selFluids.length === 1) exportFluidToPng(selFluids[0], lang, t); else exportCompareToPng(selFluids, lang, t); }} data-bar-export-png title={t.exportPng} className="bg-emerald-600 hover:bg-emerald-500 text-white min-w-0 px-1 py-1.5 rounded-lg font-bold transition-colors shadow-sm text-[10px] sm:text-[11px] leading-tight text-center flex items-center justify-center gap-1">
+                <DownloadIcon className="w-3 h-3 shrink-0" /> {t.exportPng}
               </button>
               <button onClick={() => setGuide('sodium')} data-bar-sodium className="bg-violet-600 hover:bg-violet-500 text-white min-w-0 px-1 py-1.5 rounded-lg font-bold transition-colors shadow-sm text-[10px] sm:text-[11px] leading-tight text-center flex items-center justify-center gap-1">
                 <ScaleIcon className="w-3 h-3 shrink-0" /> {t.naChangeBtn}
@@ -2306,6 +2895,10 @@ function App() {
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-1.5 md:gap-2 w-full min-w-0">
+            <div className={groupBox} role="group" aria-label={t.phTitle} title={t.phTitle}>
+              {groupLabel(t.phLabel, t.phTitle)}
+              {PH_BANDS.map(k => { const on = phBands.includes(k); return <button key={k} onClick={() => toggleIn(setPhBands)(k)} aria-pressed={on} data-filter-ph={k} className={`${segBtn} ${on ? PH_BAND_STYLE[k][0] : PH_BAND_STYLE[k][1]}`}>{t.phBands[k]}</button>; })}
+            </div>
             <div className={groupBox} role="group" aria-label={t.containsLabel}>
               {groupLabel(t.containsLabel)}
               {CONTAINS.map(k => { const on = contains.includes(k); return <button key={k} onClick={() => toggleIn(setContains)(k)} aria-pressed={on} data-filter-has={k} title={t.containsLong[k]} className={`${segBtn} ${on ? 'bg-cyan-600 text-white shadow-sm' : 'text-cyan-700 hover:bg-cyan-50'}`}>{t.contains[k]}</button>; })}
@@ -2353,7 +2946,7 @@ function App() {
       </div>
 
       {detail && <FluidDetailModal f={detail} t={t} onClose={closeDetail} selected={selected.includes(detail.id)} onSelect={() => toggleSelect(detail)} />}
-      {isCompareOpen && selFluids.length >= 2 && <CompareModal list={selFluids} t={t} onClose={() => setIsCompareOpen(false)} />}
+      {isCompareOpen && selFluids.length >= 2 && <CompareModal list={selFluids} t={t} onClose={() => setIsCompareOpen(false)} onRemove={(id) => setSelected(prev => prev.filter(x => x !== id))} />}
       {isLegendOpen && <LegendModal t={t} onClose={() => setIsLegendOpen(false)} />}
       {guide === 'choose' && <ChooseGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} onOpenGuide={setGuide} />}
       {guide === 'maint' && <MaintGuide lang={lang} t={t} onClose={() => setGuide(null)} />}
@@ -2362,6 +2955,7 @@ function App() {
       {guide === 'dka' && <DkaGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
       {guide === 'water' && <WaterGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
       {guide === 'drip' && <DripGuide lang={lang} t={t} onClose={() => setGuide(null)} />}
+      {guide === 'gir' && <GirGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
     </div>
   );
 }

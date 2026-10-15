@@ -14,22 +14,23 @@ window.__ivfE2E = async function () {
   const fact = (id, k) => (card(id).querySelector('[data-fact="' + k + '"]') || {}).textContent || '';
 
   // start in English (the language choice is remembered on the device)
+  // start in English (the language choice is remembered on the device)
   if ($('[data-lang]').textContent.trim() === 'EN') { $('[data-lang]').click(); await wait(300); }
   if ($('[data-view="grid"][aria-pressed="false"]')) { $('[data-view="grid"]').click(); await wait(300); }
-  log('default view (Thailand, current): 17 fluids, NSS first, Plasma-Lyte A hidden', $$('#fluid-list [data-fluid]').length === 17 && $('#fluid-list [data-fluid]').dataset.fluid === 'nss' && !card('pla'), $$('#fluid-list [data-fluid]').length);
+  log('default view (Thailand, current): 19 fluids, NSS first, Plasma-Lyte A hidden', $$('#fluid-list [data-fluid]').length === 19 && $('#fluid-list [data-fluid]').dataset.fluid === 'nss' && !card('pla'), $$('#fluid-list [data-fluid]').length);
   $('[data-country-all]').click(); await wait(250);
-  log('All countries: 18 fluids', $$('#fluid-list [data-fluid]').length === 18, $$('#fluid-list [data-fluid]').length);
+  log('All countries: 20 fluids', $$('#fluid-list [data-fluid]').length === 20, $$('#fluid-list [data-fluid]').length);
 
   // Label values
   log('NSS: Na 154, Cl 154, 308 mOsm/L, pH 5.0 (4.5–7.0)', /154/.test(tile('nss', 'na')) && /154/.test(tile('nss', 'cl')) && /308/.test(fact('nss', 'osm')) && /5\.0 \(4\.5–7\.0\)/.test(fact('nss', 'ph')), [tile('nss', 'na'), fact('nss', 'osm')]);
   log("Lactated Ringer's: Na 130, K 4, Ca 1.35 mmol/L, Cl 109, lactate 28, 273 mOsm/L", /130/.test(tile('lrs', 'na')) && /^K⁺4$/.test(tile('lrs', 'k')) && /1\.35/.test(tile('lrs', 'ca')) && /109/.test(tile('lrs', 'cl')) && /Lactate 28/.test(fact('lrs', 'buffer')) && /273/.test(fact('lrs', 'osm')), [tile('lrs', 'ca'), fact('lrs', 'buffer')]);
   log('5%D/N/2: Na 77, dextrose 50 g/L, 170 kcal/L, 406 mOsm/L', /77/.test(tile('d5s2', 'na')) && /50/.test(fact('d5s2', 'dex')) && /170/.test(fact('d5s2', 'kcal')) && /406/.test(fact('d5s2', 'osm')), fact('d5s2', 'osm'));
-  log('TOP Balance: label Na 140, K 5, Mg 1.5, Cl 98; osmolarity calculated 294; pH Unknown', /140/.test(tile('topbal', 'na')) && /1\.5/.test(tile('topbal', 'mg')) && /98/.test(tile('topbal', 'cl')) && /294/.test(fact('topbal', 'osm')) && !!card('topbal').querySelector('[data-fact="osm"] [data-calc]') && /Unknown/.test(fact('topbal', 'ph')), [fact('topbal', 'osm'), fact('topbal', 'ph')]);
+  log('TOP Balance: label Na 140, K 5, Mg 1.5, Cl 98; osmolarity 294; pH 7.4 (6.5–8.0)', /140/.test(tile('topbal', 'na')) && /1\.5/.test(tile('topbal', 'mg')) && /98/.test(tile('topbal', 'cl')) && /294/.test(fact('topbal', 'osm')) && /7\.4 \(6\.5–8\.0\)/.test(fact('topbal', 'ph')), [fact('topbal', 'osm'), fact('topbal', 'ph')]);
   log('Sterofundin ISO: Na 145, Ca 2.5, Mg 1, Cl 127, acetate 24 + malate 5, 309 mOsm/L', /145/.test(tile('sterofundin', 'na')) && /2\.5/.test(tile('sterofundin', 'ca')) && /127/.test(tile('sterofundin', 'cl')) && /Acetate 24 \+ Malate 5/.test(fact('sterofundin', 'buffer')) && /309/.test(fact('sterofundin', 'osm')), fact('sterofundin', 'buffer'));
   // Calculated values (from the Thai register formula)
   log('Acetar: calculated from the Thai register formula (Na 131, K 4.02, Ca 1.36, Cl 109, acetate 28, 273 mOsm/L) and marked calc.', /131/.test(tile('acetar', 'na')) && /4\.02/.test(tile('acetar', 'k')) && /1\.36/.test(tile('acetar', 'ca')) && /109/.test(tile('acetar', 'cl')) && /Acetate 28/.test(fact('acetar', 'buffer')) && /273/.test(fact('acetar', 'osm')) && card('acetar').querySelectorAll('[data-calc]').length >= 5, [tile('acetar', 'na'), tile('acetar', 'k'), fact('acetar', 'osm')]);
   log('5%D/N/5 (0.18%): Na 31 calc., 314 mOsm/L calc., 170 kcal/L calc., pH Unknown', /31/.test(tile('d5s5', 'na')) && /314/.test(fact('d5s5', 'osm')) && /170/.test(fact('d5s5', 'kcal')) && /Unknown/.test(fact('d5s5', 'ph')), [tile('d5s5', 'na'), fact('d5s5', 'osm')]);
-  log('energy Unknown without a label value: Acetar-5 (anhydrous dextrose), Acetar and TOP Balance (buffer calories); NSS none', /Unknown/.test(fact('acetar', 'kcal')) && /Unknown/.test(fact('topbal', 'kcal')) && /–/.test(fact('nss', 'kcal')) && /Unknown/.test(fact('acetar5', 'kcal')) && /anhydrous/.test(fact('acetar5', 'dex')), fact('acetar5', 'kcal'));
+  log('energy Unknown without a label value: Acetar-5 (anhydrous dextrose) and Acetar (buffer calories); TOP Balance 21 kcal; NSS none', /Unknown/.test(fact('acetar', 'kcal')) && /21/.test(fact('topbal', 'kcal')) && /–/.test(fact('nss', 'kcal')) && /Unknown/.test(fact('acetar5', 'kcal')) && /anhydrous/.test(fact('acetar5', 'dex')), [fact('topbal', 'kcal'), fact('acetar5', 'kcal')]);
   // Formula calculation agrees with labels where both exist
   { const bad = FLUIDS.filter(f => f.formula && f.labelSrc).flatMap(f => { const c = ionsFromFormula(f.formula); return ['na', 'k', 'cl', 'osm'].filter(k => f.label[k] != null && Math.abs(c[k] - f.label[k]) > Math.max(1.5, f.label[k] * 0.01)).map(k => `${f.id}.${k}: label ${f.label[k]} vs calc ${c[k].toFixed(1)}`); });
     log('calculated composition matches the printed label values (within 1%)', bad.length === 0, bad); }
@@ -58,7 +59,13 @@ window.__ivfE2E = async function () {
   log('Balanced + contains calcium: LRS, Acetar, Acetar-5, Sterofundin', $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).sort().join() === 'acetar,acetar5,lrs,sterofundin', $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).join());
   $('[data-clear-filters]').click(); await wait(200);
   $('[data-filter-band="resus"]').click(); await wait(200);
-  log('Na 130–154 band: 8 fluids', $$('#fluid-list [data-fluid]').every(x => { const f = FLUIDS.find(y => y.id === x.dataset.fluid); return num(f, 'na') >= 130 && num(f, 'na') <= 154; }) && $$('#fluid-list [data-fluid]').length === 8, $$('#fluid-list [data-fluid]').length);
+  log('Na 130–154 band: 9 fluids', $$('#fluid-list [data-fluid]').every(x => { const f = FLUIDS.find(y => y.id === x.dataset.fluid); return num(f, 'na') >= 130 && num(f, 'na') <= 154; }) && $$('#fluid-list [data-fluid]').length === 9, $$('#fluid-list [data-fluid]').length);
+  $('[data-clear-filters]').click(); await wait(200);
+  $('[data-filter-ph="acidic"]').click(); await wait(200);
+  log('filter pH < 6.0 (acidic): fluids with pH < 6.0 and chip shown', $$('#fluid-list [data-fluid]').length >= 6 && !!$('[data-chip="ph-acidic"]'), $$('#fluid-list [data-fluid]').length);
+  $('[data-filter-ph="acidic"]').click(); await wait(200);
+  $('[data-filter-ph="physio"]').click(); await wait(200);
+  log('filter pH 6.0–7.5 (near-physio): LRS, TOP Balance, PLA, Albumin', ['lrs', 'topbal', 'pla', 'alb20'].every(id => $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).includes(id)), $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).join());
   $('[data-clear-filters]').click(); await wait(200);
   // Countries and registration status (All countries are on from the start of the test)
   const ids = () => $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).sort().join();
@@ -72,18 +79,19 @@ window.__ivfE2E = async function () {
   $('[data-filter-reg="never"]').click(); await wait(200); $('[data-filter-reg="past"]').click(); await wait(200);
   log('status Never only: fluids missing from at least one country (5%D/N/5, TOP Balance; not NSS)', ids().includes('d5s5') && ids().includes('topbal') && !ids().split(',').includes('nss'), ids());
   $('[data-filter-reg="current"]').click(); await wait(200); $('[data-filter-reg="never"]').click(); await wait(200);
-  log('back to current in all countries: 18 fluids', $$('#fluid-list [data-fluid]').length === 18, $$('#fluid-list [data-fluid]').length);
+  log('back to current in all countries: 20 fluids', $$('#fluid-list [data-fluid]').length === 20, $$('#fluid-list [data-fluid]').length);
 
   // Sort
   const sort = $('[data-sort]'); const setSort = async (v) => { const set = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value').set; set.call(sort, v); sort.dispatchEvent(new Event('change', { bubbles: true })); await wait(200); };
   await setSort('naDesc');
-  log('sort by sodium: 3% NaCl first, dextrose in water last', $('#fluid-list [data-fluid]').dataset.fluid === 'nacl3' && ['d5w', 'd10w'].includes($$('#fluid-list [data-fluid]').pop().dataset.fluid), '');
+  log('sort by sodium: 3% NaCl first, dextrose in water/mannitol last', $('#fluid-list [data-fluid]').dataset.fluid === 'nacl3' && ['d5w', 'd10w', 'man20'].includes($$('#fluid-list [data-fluid]').pop().dataset.fluid), '');
   await setSort('type');
 
   // Detail view
   card('acetar').querySelector('[data-details]').click(); await wait(350);
   const dm = $('[data-detail-modal="acetar"]');
   log('Acetar details: formula, 4 Thai records with register links, pH note from the same-formula SmPC', !!dm && !!dm.querySelector('[data-detail-formula]') && dm.querySelectorAll('[data-reg-item="th"]').length === 4 && dm.querySelectorAll('[data-reg-link="th"]')[0].href.includes('Newcode=U1DR2A1022280035211C') && dm.querySelector('[data-detail-country="jp"]').dataset.status === 'current' && dm.querySelector('[data-detail-country="us"]').dataset.status === 'never' && dm.querySelectorAll('[data-detail-country]').length === 5 && /6\.0–7\.5/.test(dm.querySelector('[data-detail-row="ph"]').textContent), dm && dm.textContent.slice(0, 120));
+  log('Export PNG button exists on fluid detail modal', !!$('[data-detail-export-png]'), '');
   if (dm.querySelector('[data-src-toggle][aria-pressed="false"]')) { dm.querySelector('[data-src-toggle]').click(); await wait(200); }
   log('Show sources: every composition row has a source line; calculated rows name the register record', $$('[data-detail-comp] [data-detail-row]', dm).every(r => r.querySelector('[data-src]')) && /2A 352\/28/.test(dm.querySelector('[data-detail-row="na"] [data-src]').textContent) && /Calculated/.test(dm.querySelector('[data-detail-row="na"] [data-src]').textContent), '');
   dm.querySelector('[data-src-toggle]').click(); await wait(100);
@@ -96,10 +104,16 @@ window.__ivfE2E = async function () {
   card('nss').querySelector('[data-select]').click(); await wait(150);
   card('lrs').querySelector('[data-select]').click(); await wait(150);
   card('topbal').querySelector('[data-select]').click(); await wait(150);
-  card('d5w').querySelector('[data-select]').click(); await wait(200);
-  log('selection bar: 3 fluids at most (4th refused with a message)', $('[data-select-bar]') && /3/.test($('[data-select-bar] h3').textContent) && !!$('[data-toast]'), $('[data-select-bar]') && $('[data-select-bar]').textContent);
+  card('d5w').querySelector('[data-select]').click(); await wait(150);
+  card('alb20').querySelector('[data-select]').click(); await wait(150);
+  card('man20').querySelector('[data-select]').click(); await wait(150);
+  card('half').querySelector('[data-select]').click(); await wait(200);
+  log('selection bar: 6 fluids at most (7th refused with a message)', $('[data-select-bar]') && /6/.test($('[data-select-bar] h3').textContent) && !!$('[data-toast]'), $('[data-select-bar]') && $('[data-select-bar]').textContent);
+  log('Export PNG button exists on selection bar', !!$('[data-bar-export-png]'), '');
   $('[data-bar-compare]').click(); await wait(350);
-  log('compare: 3 fluids + plasma column, plasma Na 135–145', $$('[data-compare-table] thead th').length === 5 && /135–145/.test($('[data-compare-row="na"]').textContent), $('[data-compare-modal]') && $('[data-compare-modal]').textContent.slice(0, 100));
+  log('compare: 6 fluids + plasma column, plasma Na 135–145, export compare PNG button', $$('[data-compare-table] thead th').length === 8 && /135–145/.test($('[data-compare-row="na"]').textContent) && !!$('[data-compare-export-png]'), $('[data-compare-modal]') && $('[data-compare-modal]').textContent.slice(0, 100));
+  $('[data-compare-remove="man20"]').click(); await wait(200);
+  log('compare: quick remove button removes fluid column from table', $$('[data-compare-table] thead th').length === 7, $$('[data-compare-table] thead th').length);
   await esc();
 
   // Sodium change: serum Na 120, 70 kg man -> TBW 42; NSS (154-120)/43 = +0.8; selected listed first
@@ -189,9 +203,22 @@ window.__ivfE2E = async function () {
   log('DKA K < 3.3 mmol/L triggers insulin hold warning', /insulin/i.test(($('[data-dka-k-alert]') || {}).textContent || '') || /HOLD/i.test(($('[data-dka-k-alert]') || {}).textContent || ''), ($('[data-dka-k-alert]') || {}).textContent);
   await esc();
 
+  // Glucose Infusion Rate (GIR) guide
+  $('[data-guide="gir"]').click(); await wait(350);
+  log('GIR guide opened', !!$('[data-guide-modal="gir"]'), '');
+  await type($('[data-gir-weight]'), '60');
+  await type($('[data-gir-rate-input]'), '100');
+  // D5W is default (5% = 50 g/L). wt 60 kg, rate 100 mL/h -> GIR = (100 * 5 * 10) / (60 * 60) = 5000 / 3600 = 1.39 mg/kg/min
+  log('GIR rate calculation: 100 mL/h D5W in 60 kg gives 1.39 mg/kg/min', /1\.39/.test(($('[data-gir-val]') || {}).textContent || ''), ($('[data-gir-val]') || {}).textContent);
+  $('[data-gir-mode] button:nth-child(2)').click(); await wait(200);
+  $('[data-gir-presets] [data-gir-preset="4"]').click(); await wait(200);
+  // Target 4 mg/kg/min in 60 kg with D5W -> Rate = (4 * 60 * 60) / 50 = 288 mL/h
+  log('GIR target-to-rate calculation: target 4 mg/kg/min in 60 kg gives 288 mL/h', /288/.test(($('[data-gir-rate-result]') || {}).textContent || ''), ($('[data-gir-rate-result]') || {}).textContent);
+  await esc();
+
   // Language and theme
   $('[data-lang]').click(); await wait(300);
-  log('Thai: title, card labels and Unknown in Thai', /คู่มือสารน้ำ/.test($('h1').textContent) && /ไม่ทราบ/.test(fact('topbal', 'ph')) && /ไทยนครพัฒนา|เอ\.เอ็น\.บี/.test(card('nss').querySelector('[data-holder-line="th"]').textContent) && /ปัจจุบัน/.test($('[data-filter-reg="current"]').textContent), $('h1').textContent);
+  log('Thai: title, card labels and Unknown in Thai', /คู่มือสารน้ำ/.test($('h1').textContent) && /ไม่ทราบ/.test(fact('d5s5', 'ph')) && /ไทยนครพัฒนา|เอ\.เอ็น\.บี/.test(card('nss').querySelector('[data-holder-line="th"]').textContent) && /ปัจจุบัน/.test($('[data-filter-reg="current"]').textContent), $('h1').textContent);
   $('[data-lang]').click(); await wait(300);
   const wasDark = document.documentElement.classList.contains('dark');
   $('[data-theme-toggle]').click(); await wait(150);
@@ -199,7 +226,7 @@ window.__ivfE2E = async function () {
   $('[data-theme-toggle]').click(); await wait(150);
   // List view
   $('[data-view="list"]').click(); await wait(250);
-  log('list view shows every fluid with values', $('#fluid-list').dataset.viewMode === 'list' && $$('#fluid-list [data-row-values]').length === 18, '');
+  log('list view shows every fluid with values', $('#fluid-list').dataset.viewMode === 'list' && $$('#fluid-list [data-row-values]').length === 20, '');
   $('[data-view="grid"]').click(); await wait(250);
   // Changelog
   $('[data-version]').click(); await wait(300);
