@@ -118,6 +118,14 @@ window.__ivfE2E = async function () {
   log('Raise + 12 gives +12', $('[data-na-plan]').value === '12', $('[data-na-plan]').value);
   $('[data-na-presets] [data-preset="8"]').click(); await wait(200);
   log('planned change 8 mmol/L with 3% NaCl: about 0.7 L', /0\.7 L/.test($('[data-na-row="nacl3"] [data-na-litres]').textContent), ($('[data-na-row="nacl3"] [data-na-litres]') || {}).textContent);
+  // Acute 3% NaCl Bolus protocol tab
+  $('[data-sodium-tab="bolus"]').click(); await wait(250);
+  log('acute 3% bolus view opened with indications and regimen', !!$('[data-sodium-bolus-view]') && !!$('[data-bolus-indications]') && !!$('[data-bolus-regimen]'), '');
+  await type($('[data-bolus-na]'), '115'); await type($('[data-bolus-weight]'), '60'); await wait(150);
+  log('acute bolus 100 mL rise: +1.3 mmol/L acute rise calculated', /\+1\.3/.test(($('[data-bolus-rise-text]') || {}).textContent || ''), ($('[data-bolus-rise-text]') || {}).textContent);
+  $('[data-bolus-btn="2ml"]').click(); await wait(150);
+  log('acute bolus 2 mL/kg (120 mL) rise: +1.6 mmol/L acute rise calculated', /\+1\.6/.test(($('[data-bolus-rise-text]') || {}).textContent || ''), ($('[data-bolus-rise-text]') || {}).textContent);
+  $('[data-sodium-tab="continuous"]').click(); await wait(200);
   await esc();
   $('[data-bar-clear]').click(); await wait(200);
   log('Clear empties the selection bar', !$('[data-select-bar]'), '');
@@ -160,6 +168,26 @@ window.__ivfE2E = async function () {
   log('fluid choice, maintenance: potassium-containing dextrose-saline first', ms[0] === 'd5s2k40' && ms[1] === 'd5s2k20', ms.join());
   $$('[data-guide-modal="choose"] [data-guide-fluid]')[0].click(); await wait(300);
   log('a fluid in a guide opens its details', !!$('[data-detail-modal="d5s2k40"]'), ''); await esc();
+
+  // Potassium replacement & safe rate guide
+  $('[data-guide="kguide"]').click(); await wait(350);
+  log('potassium guide opened', !!$('[data-guide-modal="kguide"]'), '');
+  await type($('[data-k-serum]'), '2.8'); await type($('[data-k-weight]'), '60'); await wait(150);
+  log('potassium deficit for K 2.8, 60 kg: Sterns deficit estimation shown', /mmol/.test(($('[data-k-deficit-val]') || {}).textContent || ''), ($('[data-k-deficit-val]') || {}).textContent);
+  log('potassium safe rate limits: peripheral max 10 mmol/h, central max 20 mmol/h', /10 mmol\/h/.test(($('[data-k-rate-periph]') || {}).textContent || '') && /20 mmol\/h/.test(($('[data-k-rate-central]') || {}).textContent || ''), '');
+  log('potassium vehicle & magnesium safety warnings present', !!$('[data-k-vehicle-alert]') && !!$('[data-k-mg-alert]'), '');
+  await esc();
+
+  // DKA / HHS fluid protocol guide
+  $('[data-guide="dka"]').click(); await wait(350);
+  log('dka guide opened', !!$('[data-guide-modal="dka"]'), '');
+  await type($('[data-dka-na]'), '132'); await type($('[data-dka-glucose]'), '450'); await type($('[data-dka-k]'), '4.2'); await wait(150);
+  log('DKA Katz corrected sodium: 137.6 mmol/L calculated', /137\.6/.test(($('[data-dka-corrna-val]') || {}).textContent || '') && /≥ 135/.test(($('[data-dka-corrna-badge]') || {}).textContent || ''), ($('[data-dka-corrna-val]') || {}).textContent);
+  await type($('[data-dka-glucose]'), '220'); await wait(150);
+  log('DKA glucose <= 250 mg/dL triggers phase 3 dextrose addition alert', /DEXTROSE|5%D/i.test(($('[data-dka-dex-alert]') || {}).textContent || ''), ($('[data-dka-dex-alert]') || {}).textContent);
+  await type($('[data-dka-k]'), '3.0'); await wait(150);
+  log('DKA K < 3.3 mmol/L triggers insulin hold warning', /insulin/i.test(($('[data-dka-k-alert]') || {}).textContent || '') || /HOLD/i.test(($('[data-dka-k-alert]') || {}).textContent || ''), ($('[data-dka-k-alert]') || {}).textContent);
+  await esc();
 
   // Language and theme
   $('[data-lang]').click(); await wait(300);

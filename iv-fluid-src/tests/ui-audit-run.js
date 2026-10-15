@@ -33,8 +33,15 @@ window.__uiAuditRun = async () => {
     $('[data-bar-compare]').click(); await wait(400); if (modal()) audit(lang + ' compare', modal()); await esc();
     $('[data-bar-sodium]').click(); await wait(400);
     await type($('[data-na-serum]'), '120'); await type($('[data-na-weight]'), '60'); await type($('[data-na-plan]'), '8'); await wait(200);
-    if (modal()) audit(lang + ' sodium change', modal()); await esc();
+    if (modal()) audit(lang + ' sodium change', modal());
+    $('[data-sodium-tab="bolus"]').click(); await wait(250);
+    if (modal()) audit(lang + ' sodium acute 3% bolus', modal());
+    await esc();
     $('[data-bar-clear]').click(); await wait(250);
+    $('[data-guide="kguide"]').click(); await wait(400);
+    if (modal()) audit(lang + ' potassium guide', modal()); await esc();
+    $('[data-guide="dka"]').click(); await wait(400);
+    if (modal()) audit(lang + ' dka protocol', modal()); await esc();
     $('[data-guide="maint"]').click(); await wait(400);
     await type($('[data-maint-weight]'), '110'); $('[data-maint-obese]').click(); await wait(150); await type($('[data-maint-height]'), '165'); await wait(200);
     if (modal()) audit(lang + ' maintenance', modal()); await esc();

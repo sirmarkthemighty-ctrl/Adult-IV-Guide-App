@@ -18,6 +18,8 @@ const BookOpen = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" vie
 const SunIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>);
 const MoonIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>);
 const AlertTriangle = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg>);
+const ZapIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>);
+const FlameIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>);
 const InfoIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>);
 
 // --- Dark theme layer ---
@@ -494,6 +496,9 @@ const REFERENCES = [
   { key: 'dmd', cite: 'NHS Business Services Authority. Dictionary of Medicines and Devices (dm+d) browser: products supplied in the UK. Searched 14 October 2026.', url: 'https://dmd-browser.nhsbsa.nhs.uk/' },
   { key: 'hpra', cite: 'Health Products Regulatory Authority (Ireland). Human medicines lists (authorised and withdrawn), XML of 14 October 2026.', url: 'https://www.hpra.ie/find-a-medicine/for-human-use' },
   { key: 'pmda', cite: 'Pharmaceuticals and Medical Devices Agency (Japan). Package insert search for prescription drugs. Searched 14 October 2026.', url: 'https://www.pmda.go.jp/PmdaSearch/iyakuSearch/' },
+  { key: 'adaDka', cite: 'ElSayed NA, Aleppo G, Aroda VR, et al. Hyperglycemic Crises in Adults with Diabetes: Consensus Report by the ADA and EASD. Diabetes Care 2024;47:1186–1204 / UK JBDS-IP 2023.', url: 'https://doi.org/10.2337/dci24-0030' },
+  { key: 'katz', cite: 'Katz MA. Hyperglycemia-induced hypo-osmolar state: formula for corrected sodium. N Engl J Med 1973;289:843–848.', url: 'https://doi.org/10.1056/NEJM197310182891607' },
+  { key: 'sternsK', cite: 'Sterns RH, Grieff M, Bernstein PL. Treatment of hypokalemia in adults. UpToDate 2024; Mount DB. Disorders of potassium balance. In: Brenner and Rector\'s The Kidney 11th ed.', url: null },
   ...['usNaCl09', 'usNaCl045', 'usNaCl3', 'usDex', 'usDexNaCl', 'usKDexNaCl', 'usLR', 'usPL', 'thTopBal', 'thAcetRinger', 'euSterofundin'].map(k => ({ key: k, cite: SOURCES[k].cite, url: SOURCES[k].url })),
 ];
 const refUrl = (key) => (REFERENCES.find(r => r.key === key) || {}).url;
@@ -502,6 +507,11 @@ const refUrl = (key) => (REFERENCES.find(r => r.key === key) || {}).url;
 // Changelog (newest first; one entry per day)
 // =====================================================================
 const changelogData = [
+  { version: 'v1.3.0', date: 'October 15, 2026', features: [
+    'Acute 3% NaCl bolus protocol for severe symptomatic hyponatraemia (seizures, coma): 100–150 mL (or 2 mL/kg) IV over 10–15 min, repeat timing, target acute rise (+4–6 mmol/L), daily limit (max 8 mmol/L/24h; 4–6 in high-risk ODS), and DDAVP overcorrection rescue (European & US guidelines).',
+    'Potassium replacement & safe rate guide: total body deficit estimation (Sterns / UpToDate), maximum infusion rate and concentration limits for peripheral (10 mmol/h, 40 mmol/L) and central lines (20 mmol/h, 80 mmol/L), alert against dextrose vehicles during initial repletion, and magnesium checking rule.',
+    'DKA / HHS fluid & electrolyte protocol: Katz corrected sodium calculator, phase 1 resuscitation (Hour 1 NSS 1000 mL/h), phase 2 fluid selection based on corrected Na (0.45% vs 0.9% NaCl), phase 3 dextrose addition thresholds (≤ 200–250 mg/dL in DKA, ≤ 300 in HHS), and potassium safety algorithm (hold insulin if K < 3.3 mmol/L; add 20–30 mmol/L if 3.3–5.2).',
+  ], bugs: [] },
   { version: 'v1.2.1', date: 'October 15, 2026', features: [
     'The page description now covers all five countries (Thailand, US, UK, EU and Japan), not Thailand only.',
     'Sodium change and water deficit guides: one-tap planned changes of 6, 8, 10 or 12 mmol/L; the sodium change guide also has Raise and Lower buttons.',
@@ -518,6 +528,11 @@ const changelogData = [
   ], bugs: [] },
 ];
 const CHANGELOG_TH = {
+  'v1.3.0': { features: [
+    'โปรโตคอล 3% NaCl bolus สำหรับโซเดียมต่ำรุนแรงที่มีอาการ (ชัก หมดสติ): 100–150 mL (หรือ 2 mL/kg) IV ใน 10–15 นาที การให้ซ้ำ เป้าหมายระยะเฉียบพลัน (+4–6 mmol/L) ขีดจำกัดต่อวัน (ไม่เกิน 8 mmol/L/24 ชม. และ 4–6 ในกลุ่มเสี่ยง ODS) และแนวทางแก้ไขเมื่อแก้เกินด้วย DDAVP (แนวทางยุโรปและสหรัฐฯ)',
+    'คู่มือการให้โพแทสเซียมและอัตราที่ปลอดภัย: ประมาณการโพแทสเซียมที่ขาดในร่างกาย (Sterns / UpToDate) ขีดจำกัดอัตราและความเข้มข้นทางหลอดเลือดดำส่วนปลาย (10 mmol/ชม., 40 mmol/L) และส่วนกลาง (20 mmol/ชม., 80 mmol/L) คำเตือนหลีกเลี่ยงเดกซ์โทรสในระยะแรก และการตรวจแมกนีเซียม',
+    'โปรโตคอลสารน้ำและอิเล็กโทรไลต์สำหรับ DKA / HHS: คำนวณโซเดียมปรับค่า (Katz) กู้ชีพชั่วโมงแรกด้วย NSS 1000 mL/ชม. การเลือกสารน้ำตาม Na ปรับค่า (0.45% เทียบกับ 0.9% NaCl) เกณฑ์การเติมเดกซ์โทรส (≤ 200–250 mg/dL ใน DKA, ≤ 300 ใน HHS) และอัลกอริทึมความปลอดภัยของโพแทสเซียม (ระงับอินซูลินถ้า K < 3.3 mmol/L และเติม 20–30 mmol/L ถ้า 3.3–5.2)',
+  ], bugs: [] },
   'v1.2.1': { features: [
     'คำอธิบายหน้าแอปครอบคลุมทั้งห้าประเทศ (ไทย สหรัฐฯ สหราชอาณาจักร สหภาพยุโรป และญี่ปุ่น) ไม่ใช่เฉพาะไทย',
     'คู่มือการเปลี่ยนแปลงโซเดียมและการขาดน้ำ: ปุ่มเลือกการเปลี่ยนแปลงที่วางแผน 6, 8, 10 หรือ 12 mmol/L และคู่มือการเปลี่ยนแปลงโซเดียมมีปุ่มเพิ่มและลด',
@@ -626,8 +641,8 @@ const translations = {
     keyNone: 'The fluid contains none.',
     keyCountries: 'Country chips', keyChipCurrent: 'Registered (country colour); the line beside it names the makers', keyChipPast: 'Registration ended (withdrawn or discontinued)', keyChipNever: 'Not registered: no product of this fluid and strength found', keyBands: 'Sodium bands', keyFlags: 'Warnings at the bottom of each card', keyFamilies: 'Types',
     // guides
-    guides: { choose: 'Fluid choice', maint: 'Maintenance', sodium: 'Sodium change', water: 'Water deficit', drip: 'Drip rate' },
-    guideShort: { choose: 'Choice', maint: 'Maint.', sodium: 'Na⁺', water: 'Water', drip: 'Drip' },
+    guides: { choose: 'Fluid choice', maint: 'Maintenance', sodium: 'Sodium & 3% bolus', kguide: 'Potassium guide', dka: 'DKA / HHS', water: 'Water deficit', drip: 'Drip rate' },
+    guideShort: { choose: 'Choice', maint: 'Maint.', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'Water', drip: 'Drip' },
     // disclaimer and references
     discTitle: 'Disclaimer',
     discPoints: [
@@ -642,6 +657,7 @@ const translations = {
       nice: 'Resuscitation sodium range, maintenance amounts, chloride monitoring, 5 Rs', ssc: 'Fluid choice in sepsis', myburgh: 'Human plasma values', adrogueHypo: 'Sodium change per litre formula and total body water', adrogueHyper: 'Hypernatraemia correction rate',
       spasovski: 'Hyponatraemia correction limits', devine: 'Ideal body weight', thfda: 'Thai registrations, holders and formulas',
       szczech: 'Free water deficit formula and correction limit', drugsfda: 'US registration status', dmd: 'UK products and status', hpra: 'EU (Ireland) registration status', pmda: 'Japan registrations',
+      adaDka: 'DKA and HHS fluid resuscitation phases, dextrose addition threshold, and potassium replenishment protocol', katz: 'Corrected sodium formula in hyperglycemia', sternsK: 'Potassium deficit estimation, peripheral vs central infusion rates, and magnesium alert',
       usNaCl09: 'NSS values', usNaCl045: 'NSS/2 values, hyponatraemia warning', usNaCl3: '3% NaCl values, large-vein warning', usDex: '5% and 10% dextrose values, central vein at 900 mOsm/L or more, blood glucose', usDexNaCl: '5%D/NSS and 5%D/N/2 values, hyponatraemia warning', usKDexNaCl: '5%D/N/2 with KCl values',
       usLR: "Lactated Ringer's values, citrated-blood warning", usPL: 'Plasma-Lyte A values', thTopBal: 'TOP Balance values', thAcetRinger: "Ringer's acetate pH, calcium and ceftriaxone warning", euSterofundin: 'Sterofundin ISO values',
     },
@@ -729,8 +745,8 @@ const translations = {
     keyUnknown: 'ไม่มีเอกสารของผลิตภัณฑ์นี้ที่ระบุค่า',
     keyNone: 'สารน้ำนี้ไม่มีส่วนประกอบนี้',
     keyCountries: 'ชิปประเทศ', keyChipCurrent: 'มีทะเบียน (สีของประเทศ) ข้างชิประบุผู้ผลิต', keyChipPast: 'ทะเบียนสิ้นสุดแล้ว (ถอนหรือเลิกจำหน่าย)', keyChipNever: 'ไม่มีทะเบียน: ไม่พบผลิตภัณฑ์ชนิดและความแรงนี้', keyBands: 'ช่วงโซเดียม', keyFlags: 'คำเตือนด้านล่างของแต่ละการ์ด', keyFamilies: 'ชนิด',
-    guides: { choose: 'เลือกสารน้ำ', maint: 'บำรุงรักษา', sodium: 'การเปลี่ยน Na⁺', water: 'การขาดน้ำ', drip: 'อัตราหยด' },
-    guideShort: { choose: 'เลือก', maint: 'บำรุง', sodium: 'Na⁺', water: 'น้ำ', drip: 'หยด' },
+    guides: { choose: 'เลือกสารน้ำ', maint: 'บำรุงรักษา', sodium: 'Na⁺ และ 3% bolus', kguide: 'คู่มือโพแทสเซียม', dka: 'โปรโตคอล DKA/HHS', water: 'การขาดน้ำ', drip: 'อัตราหยด' },
+    guideShort: { choose: 'เลือก', maint: 'บำรุง', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'น้ำ', drip: 'หยด' },
     discTitle: 'ข้อควรทราบ',
     discPoints: [
       'คู่มือนี้ช่วยประกอบการตัดสินใจทางคลินิก ไม่ได้ใช้แทน ตรวจสอบฉลากของถุงที่ใช้จริงเสมอ เพราะผลิตภัณฑ์ต่างผู้ผลิตอาจแตกต่างกัน',
@@ -744,6 +760,7 @@ const translations = {
       nice: 'ช่วงโซเดียมสำหรับกู้ชีพ ปริมาณสารน้ำบำรุงรักษา การติดตามคลอไรด์ 5 Rs', ssc: 'การเลือกสารน้ำในภาวะติดเชื้อในกระแสเลือด', myburgh: 'ค่าพลาสมามนุษย์', adrogueHypo: 'สูตรการเปลี่ยนแปลงโซเดียมต่อลิตรและน้ำในร่างกาย', adrogueHyper: 'อัตราการแก้โซเดียมสูง',
       spasovski: 'ขีดจำกัดการแก้โซเดียมต่ำ', devine: 'น้ำหนักตัวในอุดมคติ', thfda: 'ทะเบียนไทย ผู้รับอนุญาต และสูตรตำรับ',
       szczech: 'สูตรการขาดน้ำอิสระและขีดจำกัดการแก้ไข', drugsfda: 'สถานะทะเบียนสหรัฐฯ', dmd: 'ผลิตภัณฑ์และสถานะในสหราชอาณาจักร', hpra: 'สถานะทะเบียน EU (ไอร์แลนด์)', pmda: 'ทะเบียนญี่ปุ่น',
+      adaDka: 'ขั้นตอนการให้สารน้ำ DKA/HHS เกณฑ์การเติมเดกซ์โทรส และความปลอดภัยของโพแทสเซียม', katz: 'สูตรคำนวณโซเดียมปรับค่าเมื่อน้ำตาลในเลือดสูง', sternsK: 'การประมาณการโพแทสเซียมที่ขาด อัตราการให้ทางหลอดเลือดดำส่วนปลายและส่วนกลาง และการตรวจแมกนีเซียม',
       usNaCl09: 'ค่าของ NSS', usNaCl045: 'ค่าของ NSS/2', usNaCl3: 'ค่าของ 3% NaCl คำเตือนให้ทางหลอดเลือดใหญ่', usDex: 'ค่าของ 5% และ 10% เดกซ์โทรส central vein เมื่อ 900 mOsm/L ขึ้นไป น้ำตาลในเลือด', usDexNaCl: 'ค่าของ 5%D/NSS และ 5%D/N/2 คำเตือนโซเดียมต่ำ', usKDexNaCl: 'ค่าของ 5%D/N/2 ผสม KCl',
       usLR: "ค่าของ Lactated Ringer's คำเตือนเรื่องแคลเซียม", usPL: 'ค่าของ Plasma-Lyte A', thTopBal: 'ค่าของ TOP Balance', thAcetRinger: "pH ของ Ringer's acetate คำเตือนแคลเซียมกับ ceftriaxone", euSterofundin: 'ค่าของ Sterofundin ISO',
     },
@@ -1310,6 +1327,70 @@ const GUIDE_TEXT = {
     fluidPlan: (x) => `Litres of each fluid to lower sodium by ${x} mmol/L (Adrogué–Madias)`, fluidPlanNote: 'Change in serum sodium per litre for each fluid with sodium below 130 mmol/L; the litres and mL/h are for the next 24 hours, before ongoing losses.',
     waterNotHigh: 'Serum sodium is not above the target: there is no free water deficit to replace.',
     waterCautions: [['If the patient is volume depleted, correct that first with an isotonic fluid.', 'szczech'], ['Lower sodium by no more than 10 mmol/L in the first 24 hours; about 10 mmol/L per day in chronic hypernatraemia, unless it developed over hours.', 'adrogueHyper'], ['The deficit leaves out ongoing urine, gut and skin losses: add them, and recheck sodium often.', 'szczech'], ['Weight-based totals are less reliable after a large recent gain or loss of weight.', 'szczech']],
+    // sodium change tabs and acute bolus
+    modeContinuous: 'Continuous (Adrogué–Madias)',
+    modeBolus: 'Acute 3% bolus (Emergency)',
+    bolusSub: '3% NaCl 100–150 mL IV bolus protocol for acute severe symptomatic hyponatraemia',
+    bolusIndicationsTitle: 'Indications for 3% NaCl Bolus',
+    bolusIndications: 'Severe symptoms: seizures, coma, respiratory arrest, acute brain herniation. Moderately severe: confusion, nausea, severe headache with acute fall.',
+    bolusRegimenTitle: 'Emergency Bolus Regimen (Spasovski 2014, Verbalis 2013)',
+    bolusDose: 'Bolus dose',
+    bolus100: '100 mL',
+    bolus150: '150 mL',
+    bolus2ml: '2 mL/kg',
+    bolusAcuteRise: (r) => `Estimated acute rise from this bolus: ≈ +${r} mmol/L`,
+    bolusStep1: 'Infuse 3% NaCl 100–150 mL (or 2 mL/kg) IV over 10–15 minutes.',
+    bolusStep2: 'Recheck serum Na⁺ and symptoms after 20 minutes. If severe symptoms persist: repeat 2nd bolus of 100–150 mL.',
+    bolusStep3: 'Can repeat a 3rd bolus if needed (maximum 3 boluses within 1–2 hours).',
+    bolusTargetStop: 'Stop 3% NaCl boluses immediately once symptoms resolve or target rise (+4 to +6 mmol/L) is reached.',
+    bolusODSTitle: 'Daily Limits & ODS Prevention',
+    bolusODSLimit: 'Max rise in 24 h: 8 mmol/L in standard patients; 4–6 mmol/L in patients with high risk of osmotic demyelination (cirrhosis, alcoholism, malnutrition, hypokalaemia).',
+    bolusRescueTitle: 'Overcorrection Rescue (Desmopressin / D5W)',
+    bolusRescue: 'If serum Na⁺ rises > 8 mmol/L in 24 h (or > 6 in high risk): immediately stop active fluids, give D5W (3 mL/kg/h) and consider Desmopressin (DDAVP 1–2 mcg IV/SC q6–8h) to re-lower or freeze sodium.',
+    // potassium guide
+    potassiumSub: 'Safe IV potassium repletion, total deficit estimation and administration rules',
+    serumK: 'Serum potassium',
+    kAccess: 'IV Access',
+    accessPeriph: 'Peripheral IV',
+    accessCentral: 'Central line (CVC)',
+    kDeficitTitle: 'Total Body Potassium Deficit',
+    kDeficitEst: (low, high) => `Estimated deficit: ≈ ${low}–${high} mmol`,
+    kDeficitNote: 'Serum K⁺ represents only ~2% of total body potassium (98% is intracellular). Each 0.3 mmol/L decrease below 4.0 ≈ 100 mmol deficit (Sterns / UpToDate).',
+    kNormalNote: 'Serum potassium is in normal or high range (≥ 3.5 mmol/L). Routine hypokalaemic loading is not indicated.',
+    kRateTitle: 'Safe Infusion Rate & Concentration Limits',
+    kRatePeriph: 'Peripheral IV: Maximum rate 10 mmol/h, maximum concentration 40 mmol/L (e.g. 20 mmol in 500 mL) to prevent severe chemical phlebitis and pain.',
+    kRateCent: 'Central line (CVC): Up to 20 mmol/h with continuous cardiac ECG monitoring in an ICU or monitored bed; maximum concentration 80 mmol/L.',
+    kVehicleTitle: 'Vehicle Solution Alert',
+    kVehicleAlert: 'Avoid Dextrose vehicle during initial repletion: Dextrose stimulates endogenous insulin release, driving K⁺ into cells and temporarily worsening hypokalaemia. Prefer 0.9% NaCl or 0.45% NaCl.',
+    kMgTitle: 'Serum Magnesium Check (Crucial)',
+    kMgAlert: 'Target serum Mg²⁺ ≥ 0.8 mmol/L (2.0 mg/dL). Hypomagnesaemia causes renal K⁺ wasting through open ROMK channels and makes hypokalaemia refractory to replacement.',
+    kPreMixTitle: 'Premixed fluids in the guide with potassium',
+    // DKA / HHS protocol
+    dkaSub: 'ADA 2024 & JBDS-IP guidelines: Corrected sodium, fluid transition, glucose rescue and potassium replenishment',
+    dkaType: 'Condition',
+    dkaTypeDka: 'DKA (Ketoacidosis)',
+    dkaTypeHhs: 'HHS (Hyperosmolar)',
+    measuredNa: 'Measured Na⁺',
+    bloodGlucose: 'Blood glucose',
+    gluUnit: 'Unit',
+    gluMgdl: 'mg/dL',
+    gluMmol: 'mmol/L',
+    correctedNaTitle: 'Katz Corrected Sodium',
+    correctedNaFormula: 'Corrected Na⁺ = Measured Na⁺ + 0.016 × (Glucose mg/dL − 100)',
+    corrNaStatus: (v, isHigh) => `Corrected Na⁺: ${v.toFixed(1)} mmol/L (${isHigh ? 'Normal / High ≥ 135' : 'Low < 135'})`,
+    dkaStep1Title: 'Phase 1: Initial Resuscitation (Hour 1)',
+    dkaStep1Desc: 'Infuse 0.9% NaCl 1000 mL/h (or 15–20 mL/kg/h) in the first hour to restore intravascular volume.',
+    dkaStep2Title: 'Phase 2: Hydration Fluid Selection',
+    dkaStep2High: 'Corrected Na⁺ ≥ 135 mmol/L: Switch to 0.45% NaCl (NSS/2) at 250–500 mL/h to address intracellular dehydration.',
+    dkaStep2Low: 'Corrected Na⁺ < 135 mmol/L: Continue 0.9% NaCl (NSS) at 250–500 mL/h.',
+    dkaStep3Title: 'Phase 3: Dextrose Addition Threshold',
+    dkaStep3Threshold: (t, th) => `${t}: When glucose reaches ≤ ${th} mg/dL, add 5% Dextrose (e.g. 5%D/N/2 or 5%D/NSS at 150–250 mL/h) to maintain glucose at 150–200 mg/dL (DKA) or 200–300 mg/dL (HHS) while insulin continues until acidosis resolves.`,
+    dkaStep3AddNow: (th) => `🚨 Current glucose is ≤ ${th} mg/dL: ADD 5% DEXTROSE NOW (e.g. 5%D/N/2 at 150–250 mL/h) to prevent hypoglycemia while insulin continues!`,
+    dkaStep3Wait: (th) => `Current glucose > ${th} mg/dL: Continue dextrose-free fluid. Add 5% dextrose once glucose drops below ${th} mg/dL.`,
+    dkaStep4Title: 'Phase 4: Potassium Management Algorithm',
+    dkaKHold: 'K⁺ < 3.3 mmol/L: 🚨 CRITICAL: HOLD INSULIN! Give IV KCl 20–40 mmol/h until K⁺ > 3.3. Starting insulin with severe hypokalaemia can precipitate fatal arrhythmias or respiratory arrest.',
+    dkaKSafe: 'K⁺ 3.3–5.2 mmol/L: ✅ Safe to start/continue insulin. Add 20–30 mmol KCl per litre of IV fluid to maintain serum K⁺ between 4.0–5.0 mmol/L.',
+    dkaKNoAdd: 'K⁺ > 5.2 mmol/L: ⚠️ Do NOT add potassium to IV fluids. Recheck serum K⁺ every 2 hours until < 5.2 mmol/L.',
   },
   th: {
     chooseSub: 'NICE CG174 "5 Rs" และ Surviving Sepsis Campaign 2021',
@@ -1377,6 +1458,70 @@ const GUIDE_TEXT = {
     fluidPlan: (x) => `ปริมาณสารน้ำแต่ละชนิดเพื่อลดโซเดียม ${x} mmol/L (Adrogué–Madias)`, fluidPlanNote: 'การเปลี่ยนแปลงโซเดียมต่อลิตรของสารน้ำที่มีโซเดียมต่ำกว่า 130 mmol/L แต่ละชนิด ปริมาณและ mL/ชม. เป็นของ 24 ชั่วโมงข้างหน้า ยังไม่รวมการสูญเสียต่อเนื่อง',
     waterNotHigh: 'โซเดียมในเลือดไม่สูงกว่าเป้าหมาย จึงไม่มีน้ำอิสระที่ขาด',
     waterCautions: [['ถ้าผู้ป่วยขาดสารน้ำในหลอดเลือด ให้แก้ด้วยสารน้ำ isotonic ก่อน', 'szczech'], ['ลดโซเดียมไม่เกิน 10 mmol/L ใน 24 ชั่วโมงแรก และประมาณ 10 mmol/L ต่อวันในโซเดียมสูงเรื้อรัง ยกเว้นเกิดขึ้นภายในไม่กี่ชั่วโมง', 'adrogueHyper'], ['ค่าที่คำนวณไม่รวมการสูญเสียทางปัสสาวะ ทางเดินอาหาร และผิวหนังที่ยังเกิดอยู่ ให้บวกเพิ่มและตรวจโซเดียมซ้ำบ่อย ๆ', 'szczech'], ['ค่าที่คำนวณจากน้ำหนักเชื่อถือได้น้อยลงเมื่อน้ำหนักเปลี่ยนมากเมื่อเร็ว ๆ นี้', 'szczech']],
+    // sodium change tabs and acute bolus
+    modeContinuous: 'การให้แบบต่อเนื่อง (Adrogué–Madias)',
+    modeBolus: 'Bolus 3% NaCl ฉุกเฉิน',
+    bolusSub: 'แนวทางยุโรปและสหรัฐฯ: โปรโตคอล 3% NaCl bolus 100–150 mL สำหรับโซเดียมต่ำรุนแรงที่มีอาการ',
+    bolusIndicationsTitle: 'ข้อบ่งชี้สำหรับการให้ 3% NaCl Bolus',
+    bolusIndications: 'อาการรุนแรง: ชัก หมดสติ ซึม หยุดหายใจ อาการสมองเคลื่อนเฉียบพลัน อาการปานกลาง: สับสน คลื่นไส้ ปวดศีรษะรุนแรงร่วมกับ Na ลดลงเร็ว',
+    bolusRegimenTitle: 'วิธีให้แบบฉุกเฉิน (Spasovski 2014, Verbalis 2013)',
+    bolusDose: 'ขนาด Bolus',
+    bolus100: '100 mL',
+    bolus150: '150 mL',
+    bolus2ml: '2 mL/kg',
+    bolusAcuteRise: (r) => `ประมาณการ Na⁺ ที่เพิ่มขึ้นจาก bolus นี้: ≈ +${r} mmol/L`,
+    bolusStep1: 'ให้ 3% NaCl 100–150 mL (หรือ 2 mL/kg) IV bolus ในเวลา 10–15 นาที',
+    bolusStep2: 'ตรวจ Na⁺ ในเลือดและอาการซ้ำหลัง 20 นาที หากยังมีอาการรุนแรง ให้ bolus ซ้ำครั้งที่ 2 ขนาด 100–150 mL',
+    bolusStep3: 'สามารถให้ bolus ซ้ำครั้งที่ 3 ได้หากจำเป็น (สูงสุดไม่เกิน 3 ครั้งภายใน 1–2 ชั่วโมง)',
+    bolusTargetStop: 'หยุดให้ 3% NaCl bolus ทันทีเมื่ออาการรุนแรงดีขึ้น หรือระดับ Na⁺ เพิ่มขึ้นถึงเป้าหมาย (+4 ถึง +6 mmol/L)',
+    bolusODSTitle: 'ขีดจำกัดต่อวันและการป้องกัน Osmotic Demyelination (ODS)',
+    bolusODSLimit: 'เพิ่มขึ้นสูงสุดใน 24 ชม.: 8 mmol/L ในผู้ป่วยทั่วไป; 4–6 mmol/L ในผู้ป่วยที่มีความเสี่ยง ODS สูง (ตับแข็ง ติดสุรา ทุพโภชนาการ โพแทสเซียมต่ำ)',
+    bolusRescueTitle: 'การแก้ไขเมื่อแก้ไขเกิน (Desmopressin / D5W)',
+    bolusRescue: 'หาก Na⁺ ในเลือดเพิ่มขึ้น > 8 mmol/L ใน 24 ชม. (หรือ > 6 ในกลุ่มเสี่ยงสูง): หยุดสารน้ำเดิมทันที ให้ D5W (3 mL/kg/ชม.) และพิจารณาให้ Desmopressin (DDAVP 1–2 mcg IV/SC ทุก 6–8 ชม.) เพื่อลดระดับ Na หรือชะลอการเพิ่ม',
+    // potassium guide
+    potassiumSub: 'การให้โพแทสเซียมทางหลอดเลือดดำอย่างปลอดภัย ประมาณการภาวะขาด และข้อกำหนดการบริหารยา',
+    serumK: 'โพแทสเซียมในเลือด',
+    kAccess: 'ช่องทางให้สารน้ำ',
+    accessPeriph: 'หลอดเลือดดำส่วนปลาย (Peripheral)',
+    accessCentral: 'หลอดเลือดดำส่วนกลาง (Central line)',
+    kDeficitTitle: 'ประมาณการโพแทสเซียมที่ขาดในร่างกาย',
+    kDeficitEst: (low, high) => `ประมาณการที่ขาด: ≈ ${low}–${high} mmol`,
+    kDeficitNote: 'โพแทสเซียมในเลือดคิดเป็นเพียง ~2% ของโพแทสเซียมทั้งหมดในร่างกาย (98% อยู่ในเซลล์) K ลดลงทุก 0.3 mmol/L ต่ำกว่า 4.0 ≈ ขาดประมาณ 100 mmol (Sterns / UpToDate)',
+    kNormalNote: 'ระดับโพแทสเซียมในเลือดอยู่ในเกณฑ์ปกติหรือสูง (≥ 3.5 mmol/L) ไม่จำเป็นต้องให้แบบโหลดเสริมภาวะขาด',
+    kRateTitle: 'ขีดจำกัดอัตราและความเข้มข้นที่ปลอดภัย',
+    kRatePeriph: 'หลอดเลือดดำส่วนปลาย: อัตราสูงสุด 10 mmol/ชม. ความเข้มข้นสูงสุด 40 mmol/L (เช่น 20 mmol ใน 500 mL) เพื่อป้องกันหลอดเลือดดำอักเสบและปวดแสบ',
+    kRateCent: 'หลอดเลือดดำส่วนกลาง: สูงสุด 20 mmol/ชม. พร้อมติดตามคลื่นไฟฟ้าหัวใจ (ECG) ต่อเนื่องในหอผู้ป่วยวิกฤต ความเข้มข้นสูงสุด 80 mmol/L',
+    kVehicleTitle: 'ข้อควรระวังเรื่องสารน้ำพาหะ',
+    kVehicleAlert: 'หลีกเลี่ยงสารน้ำผสมเดกซ์โทรสในการแก้ไขระยะแรก: เดกซ์โทรสกระตุ้นการหลั่งอินซูลิน ดึง K⁺ เข้าเซลล์ ทำให้โพแทสเซียมในเลือดต่ำลงชั่วคราว ควรใช้ 0.9% NaCl หรือ 0.45% NaCl',
+    kMgTitle: 'ตรวจแมกนีเซียมในเลือด (สำคัญอย่างยิ่ง)',
+    kMgAlert: 'ตั้งเป้าหมาย Mg²⁺ ในเลือด ≥ 0.8 mmol/L (2.0 mg/dL) ภาวะแมกนีเซียมต่ำทำให้ไตขับ K⁺ ทิ้งทางช่อง ROMK และทำให้โพแทสเซียมต่ำไม่ตอบสนองต่อการรักษา',
+    kPreMixTitle: 'สารน้ำสำเร็จรูปในคู่มือที่มีโพแทสเซียม',
+    // DKA / HHS protocol
+    dkaSub: 'แนวทาง ADA 2024 และ JBDS: โซเดียมปรับค่า การเลือกสารน้ำ การเติมน้ำตาล และการจัดการโพแทสเซียม',
+    dkaType: 'กลุ่มอาการ',
+    dkaTypeDka: 'DKA (ภาวะกรดคีโตนคั่ง)',
+    dkaTypeHhs: 'HHS (ภาวะน้ำตาลในเลือดสูงออสโมลาริตีสูง)',
+    measuredNa: 'Na⁺ ที่วัดได้',
+    bloodGlucose: 'ระดับน้ำตาลในเลือด',
+    gluUnit: 'หน่วย',
+    gluMgdl: 'mg/dL',
+    gluMmol: 'mmol/L',
+    correctedNaTitle: 'โซเดียมปรับค่า (Katz Corrected Sodium)',
+    correctedNaFormula: 'Na⁺ ปรับค่า = Na⁺ ที่วัดได้ + 0.016 × (กลูโคส mg/dL − 100)',
+    corrNaStatus: (v, isHigh) => `Na⁺ ปรับค่า: ${v.toFixed(1)} mmol/L (${isHigh ? 'ปกติ/สูง ≥ 135' : 'ต่ำ < 135'})`,
+    dkaStep1Title: 'ระยะที่ 1: กู้ชีพชั่วโมงแรก (Initial Resuscitation)',
+    dkaStep1Desc: 'ให้ 0.9% NaCl 1000 mL/ชม. (หรือ 15–20 mL/kg/ชม.) ในชั่วโมงแรกเพื่อขยายปริมาตรในหลอดเลือด',
+    dkaStep2Title: 'ระยะที่ 2: การเลือกสารน้ำรักษาสมดุล (Hydration Fluid)',
+    dkaStep2High: 'Na⁺ ปรับค่า ≥ 135 mmol/L: เปลี่ยนเป็น 0.45% NaCl (NSS/2) ที่ 250–500 mL/ชม. เพื่อแก้ภาวะขาดน้ำในเซลล์',
+    dkaStep2Low: 'Na⁺ ปรับค่า < 135 mmol/L: ให้ 0.9% NaCl (NSS) ต่อเนื่องที่ 250–500 mL/ชม.',
+    dkaStep3Title: 'ระยะที่ 3: เกณฑ์การเติมเดกซ์โทรส (Dextrose Threshold)',
+    dkaStep3Threshold: (t, th) => `${t}: เมื่อน้ำตาลลดลงถึง ≤ ${th} mg/dL ให้เริ่มเติม 5% เดกซ์โทรส (เช่น 5%D/N/2 หรือ 5%D/NSS ที่ 150–250 mL/ชม.) เพื่อรักษาน้ำตาลที่ 150–200 mg/dL (DKA) หรือ 200–300 mg/dL (HHS) ขณะให้อินซูลินต่อเนื่องจนกระทั่งภาวะกรดคีโตนหาย`,
+    dkaStep3AddNow: (th) => `🚨 น้ำตาลปัจจุบัน ≤ ${th} mg/dL: ให้เริ่มเติม 5% เดกซ์โทรสทันที (เช่น 5%D/N/2 ที่ 150–250 mL/ชม.) เพื่อป้องกันน้ำตาลต่ำขณะให้อินซูลินต่อเนื่อง!`,
+    dkaStep3Wait: (th) => `น้ำตาลปัจจุบัน > ${th} mg/dL: ให้สารน้ำที่ไม่มีเดกซ์โทรสต่อไป เมื่อน้ำตาลลดลงต่ำกว่า ${th} mg/dL จึงเริ่มเติม 5% เดกซ์โทรส`,
+    dkaStep4Title: 'ระยะที่ 4: อัลกอริทึมจัดการโพแทสเซียมและความปลอดภัยอินซูลิน',
+    dkaKHold: 'K⁺ < 3.3 mmol/L: 🚨 วิกฤต: ระงับการให้อินซูลินทันที! ให้ IV KCl 20–40 mmol/ชม. จนกว่า K⁺ > 3.3 mmol/L การให้อินซูลินขณะโพแทสเซียมต่ำรุนแรงอาจทำให้หัวใจเต้นผิดจังหวะจนเสียชีวิตหรือหยุดหายใจ',
+    dkaKSafe: 'K⁺ 3.3–5.2 mmol/L: ✅ ปลอดภัยในการให้อินซูลิน เติม KCl 20–30 mmol ต่อลิตรของสารน้ำเพื่อรักษาระดับ K⁺ ในเลือดที่ 4.0–5.0 mmol/L',
+    dkaKNoAdd: 'K⁺ > 5.2 mmol/L: ⚠️ ห้ามเติมโพแทสเซียมลงในสารน้ำ ตรวจระดับ K⁺ ซ้ำทุก 2 ชั่วโมงจนกว่าจะ < 5.2 mmol/L',
   },
 };
 
@@ -1524,66 +1669,296 @@ const MaintGuide = ({ lang, t, onClose }) => {
   );
 };
 
-// --- 3. Sodium change per litre (Adrogué–Madias 2000) ---
+// --- 3. Sodium change per litre (Adrogué–Madias 2000) & Acute 3% Bolus ---
 const TBW_FRACTION = { m: { young: 0.6, old: 0.5 }, f: { young: 0.5, old: 0.45 } };
 const SodiumGuide = ({ lang, t, onClose, selectedIds = [], onOpenFluid }) => {
   const g = GUIDE_TEXT[lang];
+  const [mode, setMode] = useState('continuous'); // 'continuous' | 'bolus'
   const [na, setNa] = useState('');
   const [wt, setWt] = useState('');
   const [sex, setSex] = useState('m');
   const [old, setOld] = useState(false);
   const [plan, setPlan] = useState('');
   const [dir, setDir] = useState(1); // 1 = raise (hyponatraemia), -1 = lower (hypernatraemia)
+  const [bolusPick, setBolusPick] = useState('100'); // '100' | '150' | '2ml'
+
   const sNa = toNum(na), w = toNum(wt), planned = parseFloat(plan);
   const frac = TBW_FRACTION[sex][old ? 'old' : 'young'];
   const tbw = w ? w * frac : null;
   const rows = sNa && tbw ? FLUIDS.map(f => ({ f, d: (naK(f) - sNa) / (tbw + 1) }))
     .sort((a, b) => (selectedIds.includes(b.f.id) - selectedIds.includes(a.f.id)) || b.d - a.d) : [];
+
+  const bolusVol = bolusPick === '2ml' ? (w ? Math.round(w * 2) : 100) : parseInt(bolusPick, 10);
+  const bolusRise = tbw && sNa ? ((513 - sNa) * (bolusVol / 1000)) / (tbw + (bolusVol / 1000)) : null;
+
   return (
-    <Modal title={t.guides.sodium} sub={g.sodiumSub} onClose={onClose} tone="bg-violet-50" wide attrs={{ 'data-guide-modal': 'sodium' }} icon={<div className="p-2 bg-violet-100 text-violet-700 rounded-xl shrink-0"><ScaleIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
-      <Section>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <NumInput label={g.serumNa} unit="mmol/L" value={na} onChange={setNa} attrs={{ 'data-na-serum': '' }} />
-          <NumInput label={g.weight} unit={g.kg} value={wt} onChange={setWt} attrs={{ 'data-na-weight': '' }} />
-          <div className="flex flex-col gap-1"><span className="text-[11px] font-bold text-slate-500">{g.sex}</span><Seg value={sex} onChange={setSex} options={[['m', g.male], ['f', g.female]]} attrs={{ 'data-na-sex': '' }} /></div>
-          <div className="flex flex-col gap-1 justify-end"><Toggle on={old} onClick={() => setOld(v => !v)} attrs={{ 'data-na-elderly': '' }}>{g.elderly}</Toggle></div>
-        </div>
-        <div className="flex flex-wrap items-end gap-3 mt-3">
-          <div className="w-full sm:w-56"><NumInput label={g.targetChange} unit={g.target24} value={plan} onChange={(v) => { setPlan(v); const n = parseFloat(v); if (n) setDir(Math.sign(n)); }} min={-30} attrs={{ 'data-na-plan': '' }} /></div>
-          <div className="flex flex-col gap-1">
-            <span className="text-[11px] font-bold text-slate-500">{g.planQuick}</span>
-            <div className="flex flex-wrap items-center gap-2">
-              <Seg value={dir} onChange={(d) => { setDir(d); const n = Math.abs(parseFloat(plan)); if (n) setPlan(String(d * n)); }} options={[[1, g.raise], [-1, g.lower]]} attrs={{ 'data-na-dir': '' }} />
-              <PresetChips value={isFinite(planned) && Math.sign(planned) === dir ? Math.abs(planned) : null} onPick={(v) => setPlan(String(dir * v))} attrs={{ 'data-na-presets': '' }} />
+    <Modal title={t.guides.sodium} sub={mode === 'bolus' ? g.bolusSub : g.sodiumSub} onClose={onClose} tone={mode === 'bolus' ? 'bg-rose-50' : 'bg-violet-50'} wide attrs={{ 'data-guide-modal': 'sodium' }} icon={<div className={`p-2 ${mode === 'bolus' ? 'bg-rose-100 text-rose-700' : 'bg-violet-100 text-violet-700'} rounded-xl shrink-0`}><ScaleIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
+      <div className="flex flex-wrap gap-1.5 mb-3" role="tablist" data-sodium-tabs>
+        <button type="button" role="tab" aria-selected={mode === 'continuous'} onClick={() => setMode('continuous')} data-sodium-tab="continuous" className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${mode === 'continuous' ? 'bg-violet-600 border-violet-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>{g.modeContinuous}</button>
+        <button type="button" role="tab" aria-selected={mode === 'bolus'} onClick={() => setMode('bolus')} data-sodium-tab="bolus" className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${mode === 'bolus' ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>{g.modeBolus}</button>
+      </div>
+
+      {mode === 'bolus' ? (
+        <div className="flex flex-col gap-3" data-sodium-bolus-view>
+          <Section tone="bg-rose-50 border-rose-200" title={g.bolusIndicationsTitle} attrs={{ 'data-bolus-indications': '' }}>
+            <p className="text-xs text-rose-900 leading-snug font-medium">{g.bolusIndications} <RefTag k="spasovski" /></p>
+          </Section>
+
+          <Section title={g.bolusRegimenTitle} attrs={{ 'data-bolus-regimen': '' }}>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
+              <NumInput label={g.serumNa} unit="mmol/L" value={na} onChange={setNa} attrs={{ 'data-bolus-na': '' }} />
+              <NumInput label={g.weight} unit={g.kg} value={wt} onChange={setWt} attrs={{ 'data-bolus-weight': '' }} />
+              <div className="flex flex-col gap-1"><span className="text-[11px] font-bold text-slate-500">{g.sex}</span><Seg value={sex} onChange={setSex} options={[['m', g.male], ['f', g.female]]} /></div>
+              <div className="flex flex-col gap-1 justify-end"><Toggle on={old} onClick={() => setOld(v => !v)}>{g.elderly}</Toggle></div>
             </div>
+
+            <div className="flex flex-col gap-1.5 mb-3">
+              <span className="text-[11px] font-bold text-slate-500">{g.bolusDose}</span>
+              <div className="flex flex-wrap items-center gap-2" data-bolus-pick>
+                {[['100', g.bolus100], ['150', g.bolus150], ['2ml', `${g.bolus2ml}${w ? ` (${Math.round(w * 2)} mL)` : ''}`]].map(([k, label]) => (
+                  <button key={k} type="button" onClick={() => setBolusPick(k)} data-bolus-btn={k} aria-pressed={bolusPick === k} className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${bolusPick === k ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'}`}>{label}</button>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-violet-200 bg-violet-50 p-3 text-violet-900 mb-3" data-bolus-calc-box>
+              <div className="text-xs font-bold mb-1">3% NaCl · {bolusVol} mL IV over 10–15 min</div>
+              {bolusRise ? (
+                <div className="text-sm font-extrabold text-violet-950 tabular-nums" data-bolus-rise-text>{g.bolusAcuteRise(bolusRise.toFixed(1))}</div>
+              ) : (
+                <div className="text-xs text-violet-700">{g.enterNa}</div>
+              )}
+            </div>
+
+            <ol className="flex flex-col gap-2 list-decimal list-inside text-xs text-slate-700">
+              <li className="leading-snug"><b className="text-slate-900">Bolus 1:</b> {g.bolusStep1}</li>
+              <li className="leading-snug"><b className="text-slate-900">20 min check:</b> {g.bolusStep2}</li>
+              <li className="leading-snug"><b className="text-slate-900">Bolus 3:</b> {g.bolusStep3}</li>
+              <li className="leading-snug font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 rounded p-1.5 mt-1">{g.bolusTargetStop}</li>
+            </ol>
+            <div className="mt-3">
+              <button type="button" onClick={() => onOpenFluid('nacl3')} className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700 hover:underline">
+                <BagIcon family="hypertonic" className="w-3.5 h-4" /> Open 3% NaCl details & warnings →
+              </button>
+            </div>
+          </Section>
+
+          <Section title={g.bolusODSTitle} tone="bg-amber-50 border-amber-200">
+            <p className="text-xs text-amber-900 leading-snug font-medium mb-2">{g.bolusODSLimit} <RefTag k="spasovski" /></p>
+            <div className="border-t border-amber-200 pt-2">
+              <div className="text-xs font-bold text-amber-950 mb-0.5">{g.bolusRescueTitle}</div>
+              <p className="text-xs text-amber-900 leading-snug">{g.bolusRescue}</p>
+            </div>
+          </Section>
+        </div>
+      ) : (
+        <>
+          <Section>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <NumInput label={g.serumNa} unit="mmol/L" value={na} onChange={setNa} attrs={{ 'data-na-serum': '' }} />
+              <NumInput label={g.weight} unit={g.kg} value={wt} onChange={setWt} attrs={{ 'data-na-weight': '' }} />
+              <div className="flex flex-col gap-1"><span className="text-[11px] font-bold text-slate-500">{g.sex}</span><Seg value={sex} onChange={setSex} options={[['m', g.male], ['f', g.female]]} attrs={{ 'data-na-sex': '' }} /></div>
+              <div className="flex flex-col gap-1 justify-end"><Toggle on={old} onClick={() => setOld(v => !v)} attrs={{ 'data-na-elderly': '' }}>{g.elderly}</Toggle></div>
+            </div>
+            <div className="flex flex-wrap items-end gap-3 mt-3">
+              <div className="w-full sm:w-56"><NumInput label={g.targetChange} unit={g.target24} value={plan} onChange={(v) => { setPlan(v); const n = parseFloat(v); if (n) setDir(Math.sign(n)); }} min={-30} attrs={{ 'data-na-plan': '' }} /></div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[11px] font-bold text-slate-500">{g.planQuick}</span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <Seg value={dir} onChange={(d) => { setDir(d); const n = Math.abs(parseFloat(plan)); if (n) setPlan(String(d * n)); }} options={[[1, g.raise], [-1, g.lower]]} attrs={{ 'data-na-dir': '' }} />
+                  <PresetChips value={isFinite(planned) && Math.sign(planned) === dir ? Math.abs(planned) : null} onPick={(v) => setPlan(String(dir * v))} attrs={{ 'data-na-presets': '' }} />
+                </div>
+              </div>
+            </div>
+            <p className="text-[11px] text-slate-500 mt-2 leading-snug">{g.formula} <RefTag k="adrogueHypo" /></p>
+            <p className="text-[11px] text-slate-500 leading-snug">{g.tbwNote}</p>
+            {tbw && <p className="text-xs font-bold text-violet-800 mt-1" data-na-tbw>{g.tbw(frac, +tbw.toFixed(1))}</p>}
+          </Section>
+          {!rows.length ? <p className="text-sm text-slate-500" data-na-empty>{g.enterNa}</p> : (
+            <Section title={g.colChange} attrs={{ 'data-na-table': '' }}>
+              {selectedIds.length > 0 && <p className="text-[11px] text-slate-500 mb-1">{g.selectedFirst}</p>}
+              <ul className="flex flex-col">
+                {rows.map(({ f, d }) => {
+                  const lit = isFinite(planned) && planned !== 0 && d !== 0 && Math.sign(planned) === Math.sign(d) ? planned / d : null;
+                  return (
+                    <li key={f.id} className={`flex items-center gap-2 py-1.5 border-b border-slate-200 last:border-b-0 min-w-0 ${selectedIds.includes(f.id) ? 'bg-indigo-50 -mx-1 px-1 rounded' : ''}`} data-na-row={f.id}>
+                      <button type="button" onClick={() => onOpenFluid(f.id)} className="flex items-center gap-1.5 min-w-0 flex-1 text-left hover:underline"><BagIcon family={f.family} className="w-4 h-5 shrink-0" /><span className="text-xs font-bold text-slate-700 break-words min-w-0">{f.short}</span><span className="text-[10px] text-slate-400 shrink-0">Na+K {fmt(naK(f))}</span></button>
+                      <span className="text-right shrink-0">
+                        <span className={`block text-sm font-extrabold tabular-nums ${d > 0.05 ? 'text-rose-700' : d < -0.05 ? 'text-sky-700' : 'text-slate-600'}`} data-na-delta>{d > 0 ? '+' : ''}{d.toFixed(1)} <span className="text-[10px] font-medium">mmol/L</span></span>
+                        {lit && <span className="block text-[10px] text-slate-500 tabular-nums" data-na-litres>{g.litresFor(lit.toFixed(1))}</span>}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </Section>
+          )}
+          <Section title={g.limitsTitle} tone="bg-amber-50 border-amber-200">
+            <ul className="flex flex-col gap-1.5">{g.limits.map(([text, k], i) => <li key={i} className="text-xs text-amber-900 leading-snug">{text}<RefTag k={k} /></li>)}</ul>
+            <p className="text-xs text-amber-900 font-bold leading-snug mt-2">{g.caveat}</p>
+          </Section>
+        </>
+      )}
+    </Modal>
+  );
+};
+
+// --- 4. Potassium replacement & safe rate guide ---
+const PotassiumGuide = ({ lang, t, onClose, onOpenFluid }) => {
+  const g = GUIDE_TEXT[lang];
+  const [kVal, setKVal] = useState('2.8');
+  const [wt, setWt] = useState('60');
+  const [access, setAccess] = useState('periph'); // 'periph' | 'central'
+  const k = toNum(kVal), w = toNum(wt);
+
+  const deficit = k && k < 4.0 && w ? Math.round((4.0 - k) * (w / 70) * 333) : 0;
+  const defLow = Math.max(20, Math.round(deficit * 0.75));
+  const defHigh = Math.round(deficit * 1.25);
+
+  return (
+    <Modal title={t.guides.kguide} sub={g.potassiumSub} onClose={onClose} tone="bg-amber-50" wide attrs={{ 'data-guide-modal': 'kguide' }} icon={<div className="p-2 bg-amber-100 text-amber-700 rounded-xl shrink-0"><ZapIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
+      <Section>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <NumInput label={g.serumK} unit="mmol/L" value={kVal} onChange={setKVal} step="0.1" attrs={{ 'data-k-serum': '' }} />
+          <NumInput label={g.weight} unit={g.kg} value={wt} onChange={setWt} attrs={{ 'data-k-weight': '' }} />
+          <div className="flex flex-col gap-1">
+            <span className="text-[11px] font-bold text-slate-500">{g.kAccess}</span>
+            <Seg value={access} onChange={setAccess} options={[['periph', g.accessPeriph], ['central', g.accessCentral]]} attrs={{ 'data-k-access': '' }} />
           </div>
         </div>
-        <p className="text-[11px] text-slate-500 mt-2 leading-snug">{g.formula} <RefTag k="adrogueHypo" /></p>
-        <p className="text-[11px] text-slate-500 leading-snug">{g.tbwNote}</p>
-        {tbw && <p className="text-xs font-bold text-violet-800 mt-1" data-na-tbw>{g.tbw(frac, +tbw.toFixed(1))}</p>}
       </Section>
-      {!rows.length ? <p className="text-sm text-slate-500" data-na-empty>{g.enterNa}</p> : (
-        <Section title={g.colChange} attrs={{ 'data-na-table': '' }}>
-          {selectedIds.length > 0 && <p className="text-[11px] text-slate-500 mb-1">{g.selectedFirst}</p>}
-          <ul className="flex flex-col">
-            {rows.map(({ f, d }) => {
-              const lit = isFinite(planned) && planned !== 0 && d !== 0 && Math.sign(planned) === Math.sign(d) ? planned / d : null;
-              return (
-                <li key={f.id} className={`flex items-center gap-2 py-1.5 border-b border-slate-200 last:border-b-0 min-w-0 ${selectedIds.includes(f.id) ? 'bg-indigo-50 -mx-1 px-1 rounded' : ''}`} data-na-row={f.id}>
-                  <button type="button" onClick={() => onOpenFluid(f.id)} className="flex items-center gap-1.5 min-w-0 flex-1 text-left hover:underline"><BagIcon family={f.family} className="w-4 h-5 shrink-0" /><span className="text-xs font-bold text-slate-700 break-words min-w-0">{f.short}</span><span className="text-[10px] text-slate-400 shrink-0">Na+K {fmt(naK(f))}</span></button>
-                  <span className="text-right shrink-0">
-                    <span className={`block text-sm font-extrabold tabular-nums ${d > 0.05 ? 'text-rose-700' : d < -0.05 ? 'text-sky-700' : 'text-slate-600'}`} data-na-delta>{d > 0 ? '+' : ''}{d.toFixed(1)} <span className="text-[10px] font-medium">mmol/L</span></span>
-                    {lit && <span className="block text-[10px] text-slate-500 tabular-nums" data-na-litres>{g.litresFor(lit.toFixed(1))}</span>}
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
+
+      <Section title={g.kDeficitTitle} attrs={{ 'data-k-deficit-section': '' }}>
+        {k && k < 3.5 && w ? (
+          <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-amber-950 mb-2">
+            <div className="text-lg font-extrabold tabular-nums" data-k-deficit-val>{g.kDeficitEst(defLow, defHigh)}</div>
+            <p className="text-xs text-amber-900 mt-1 leading-snug">{g.kDeficitNote} <RefTag k="sternsK" /></p>
+          </div>
+        ) : (
+          <p className="text-xs text-slate-600 mb-2 leading-snug">{g.kNormalNote}</p>
+        )}
+      </Section>
+
+      <Section title={g.kRateTitle} tone="bg-blue-50 border-blue-200" attrs={{ 'data-k-rates-section': '' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
+          <div className={`p-3 rounded-xl border ${access === 'periph' ? 'bg-white border-blue-400 shadow-sm' : 'bg-blue-50/50 border-blue-200 opacity-75'}`}>
+            <div className="text-xs font-bold text-blue-900 mb-1">{g.accessPeriph}</div>
+            <div className="text-xl font-extrabold text-blue-950 tabular-nums mb-1" data-k-rate-periph>Max 10 mmol/h</div>
+            <p className="text-xs text-slate-600 leading-snug">{g.kRatePeriph}</p>
+          </div>
+          <div className={`p-3 rounded-xl border ${access === 'central' ? 'bg-white border-blue-400 shadow-sm' : 'bg-blue-50/50 border-blue-200 opacity-75'}`}>
+            <div className="text-xs font-bold text-blue-900 mb-1">{g.accessCentral}</div>
+            <div className="text-xl font-extrabold text-blue-950 tabular-nums mb-1" data-k-rate-central>Up to 20 mmol/h</div>
+            <p className="text-xs text-slate-600 leading-snug">{g.kRateCent}</p>
+          </div>
+        </div>
+      </Section>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <Section title={g.kVehicleTitle} tone="bg-rose-50 border-rose-200" attrs={{ 'data-k-vehicle-alert': '' }}>
+          <p className="text-xs text-rose-900 leading-snug">{g.kVehicleAlert} <RefTag k="sternsK" /></p>
+        </Section>
+        <Section title={g.kMgTitle} tone="bg-emerald-50 border-emerald-200" attrs={{ 'data-k-mg-alert': '' }}>
+          <p className="text-xs text-emerald-900 leading-snug">{g.kMgAlert} <RefTag k="sternsK" /></p>
+        </Section>
+      </div>
+
+      <Section title={g.kPreMixTitle}>
+        <div className="flex flex-wrap gap-2">
+          {['d5s2k20', 'd5s2k40'].map(id => {
+            const f = FLUIDS.find(x => x.id === id);
+            return f ? <FluidChip key={f.id} f={f} t={t} onOpen={onOpenFluid} /> : null;
+          })}
+        </div>
+      </Section>
+    </Modal>
+  );
+};
+
+// --- 5. DKA / HHS Fluid & Electrolyte Protocol ---
+const DkaGuide = ({ lang, t, onClose, onOpenFluid }) => {
+  const g = GUIDE_TEXT[lang];
+  const [sNa, setSNa] = useState('132');
+  const [glu, setGlu] = useState('450');
+  const [unit, setUnit] = useState('mgdl'); // 'mgdl' | 'mmol'
+  const [sK, setSK] = useState('4.2');
+  const [type, setType] = useState('dka'); // 'dka' | 'hhs'
+
+  const na = toNum(sNa), rawGlu = toNum(glu), k = toNum(sK);
+  const gluMg = unit === 'mgdl' ? rawGlu : (rawGlu ? rawGlu * 18.016 : null);
+  const corrNa = na && gluMg && gluMg > 100 ? na + 0.016 * (gluMg - 100) : na;
+  const isNaHigh = corrNa && corrNa >= 135;
+
+  const dexThreshold = type === 'dka' ? 250 : 300;
+  const needsDex = gluMg && gluMg <= dexThreshold;
+
+  return (
+    <Modal title={t.guides.dka} sub={g.dkaSub} onClose={onClose} tone="bg-indigo-50" wide attrs={{ 'data-guide-modal': 'dka' }} icon={<div className="p-2 bg-indigo-100 text-indigo-700 rounded-xl shrink-0"><FlameIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
+      <Section>
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-2">
+          <div className="col-span-2 sm:col-span-1 flex flex-col gap-1">
+            <span className="text-[11px] font-bold text-slate-500">{g.dkaType}</span>
+            <Seg value={type} onChange={setType} options={[['dka', 'DKA'], ['hhs', 'HHS']]} attrs={{ 'data-dka-type': '' }} />
+          </div>
+          <NumInput label={g.measuredNa} unit="mmol/L" value={sNa} onChange={setSNa} attrs={{ 'data-dka-na': '' }} />
+          <div className="flex flex-col gap-1">
+            <span className="text-[11px] font-bold text-slate-500">{g.gluUnit}</span>
+            <Seg value={unit} onChange={setUnit} options={[['mgdl', g.gluMgdl], ['mmol', g.gluMmol]]} attrs={{ 'data-dka-glu-unit': '' }} />
+          </div>
+          <NumInput label={g.bloodGlucose} unit={unit === 'mgdl' ? 'mg/dL' : 'mmol/L'} value={glu} onChange={setGlu} attrs={{ 'data-dka-glucose': '' }} />
+          <NumInput label="K⁺" unit="mmol/L" value={sK} onChange={setSK} step="0.1" attrs={{ 'data-dka-k': '' }} />
+        </div>
+      </Section>
+
+      {corrNa && (
+        <Section title={g.correctedNaTitle} tone="bg-slate-100/70 border-slate-200" attrs={{ 'data-dka-corrna-card': '' }}>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div>
+              <span className="text-xl font-extrabold text-indigo-950 tabular-nums" data-dka-corrna-val>{corrNa.toFixed(1)} mmol/L</span>
+              <span className={`ml-2 px-2 py-0.5 rounded text-xs font-bold ${isNaHigh ? 'bg-amber-100 text-amber-800' : 'bg-sky-100 text-sky-800'}`} data-dka-corrna-badge>
+                {isNaHigh ? '≥ 135 mmol/L' : '< 135 mmol/L'}
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-500">{g.correctedNaFormula} <RefTag k="katz" /></p>
+          </div>
         </Section>
       )}
-      <Section title={g.limitsTitle} tone="bg-amber-50 border-amber-200">
-        <ul className="flex flex-col gap-1.5">{g.limits.map(([text, k], i) => <li key={i} className="text-xs text-amber-900 leading-snug">{text}<RefTag k={k} /></li>)}</ul>
-        <p className="text-xs text-amber-900 font-bold leading-snug mt-2">{g.caveat}</p>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <Section title={g.dkaStep1Title} attrs={{ 'data-dka-step1': '' }}>
+          <p className="text-xs text-slate-700 leading-snug mb-2">{g.dkaStep1Desc} <RefTag k="adaDka" /></p>
+          <div className="inline-block">
+            {(() => { const f = FLUIDS.find(x => x.id === 'nss'); return f ? <FluidChip key={f.id} f={f} t={t} onOpen={onOpenFluid} /> : null; })()}
+          </div>
+        </Section>
+
+        <Section title={g.dkaStep2Title} attrs={{ 'data-dka-step2': '' }}>
+          <p className="text-xs text-slate-700 leading-snug mb-2">
+            {isNaHigh ? g.dkaStep2High : g.dkaStep2Low} <RefTag k="adaDka" />
+          </p>
+          <div className="inline-block">
+            {(() => { const f = FLUIDS.find(x => x.id === (isNaHigh ? 'half' : 'nss')); return f ? <FluidChip key={f.id} f={f} t={t} onOpen={onOpenFluid} /> : null; })()}
+          </div>
+        </Section>
+      </div>
+
+      <Section title={g.dkaStep3Title} tone={needsDex ? 'bg-emerald-50 border-emerald-300' : 'bg-slate-50 border-slate-200'} attrs={{ 'data-dka-step3': '' }}>
+        <div className="text-xs leading-snug font-bold mb-1.5" data-dka-dex-alert>
+          {needsDex ? g.dkaStep3AddNow(dexThreshold) : g.dkaStep3Wait(dexThreshold)}
+        </div>
+        <p className="text-[11px] text-slate-600 mb-2">{g.dkaStep3Threshold(type === 'dka' ? 'DKA' : 'HHS', dexThreshold)} <RefTag k="adaDka" /></p>
+        <div className="flex flex-wrap gap-2">
+          {['d5s2', 'd5s', 'd5s2k20'].map(id => {
+            const f = FLUIDS.find(x => x.id === id);
+            return f ? <FluidChip key={f.id} f={f} t={t} onOpen={onOpenFluid} /> : null;
+          })}
+        </div>
+      </Section>
+
+      <Section title={g.dkaStep4Title} tone={k && k < 3.3 ? 'bg-rose-50 border-rose-300' : k && k > 5.2 ? 'bg-amber-50 border-amber-300' : 'bg-emerald-50 border-emerald-300'} attrs={{ 'data-dka-step4': '' }}>
+        <div className="text-xs leading-snug font-bold" data-dka-k-alert>
+          {k && k < 3.3 ? g.dkaKHold : k && k > 5.2 ? g.dkaKNoAdd : g.dkaKSafe}
+        </div>
       </Section>
     </Modal>
   );
@@ -1796,6 +2171,8 @@ function App() {
     ['choose', 'bg-rose-600 hover:bg-rose-700 border-rose-700', ActivityIcon],
     ['maint', 'bg-emerald-600 hover:bg-emerald-700 border-emerald-700', Stethoscope],
     ['sodium', 'bg-violet-600 hover:bg-violet-700 border-violet-700', ScaleIcon],
+    ['kguide', 'bg-amber-600 hover:bg-amber-700 border-amber-700', ZapIcon],
+    ['dka', 'bg-indigo-600 hover:bg-indigo-700 border-indigo-700', FlameIcon],
     ['water', 'bg-cyan-600 hover:bg-cyan-700 border-cyan-700', DropIcon],
     ['drip', 'bg-blue-600 hover:bg-blue-700 border-blue-700', DripIcon],
   ];
@@ -1869,7 +2246,7 @@ function App() {
         </header>
 
         <div ref={barRef} className="sticky top-0 z-30 pt-2 pb-2 md:pt-3 md:pb-2.5 -mt-2 md:-mt-3 bg-slate-100/95 backdrop-blur-md" data-search-bar>
-          <div className="grid grid-cols-5 gap-1 sm:flex sm:flex-row sm:flex-wrap sm:items-center sm:gap-2 w-full mb-2" data-guide-buttons>
+          <div className="grid grid-cols-4 gap-1 sm:flex sm:flex-row sm:flex-wrap sm:items-center sm:gap-2 w-full mb-2" data-guide-buttons>
             {GUIDE_BTNS.map(([k, tone, Icon]) => (
               <button key={k} onClick={() => setGuide(k)} data-guide={k} aria-label={t.guides[k]} title={t.guides[k]} className={`flex flex-col sm:flex-row min-w-0 items-center justify-center gap-0.5 sm:gap-1.5 md:gap-2 ${tone} border text-white px-0.5 py-1.5 sm:px-3 sm:py-2 md:px-4 rounded-lg font-bold shadow-sm transition-all active:scale-95 text-xs md:text-sm`}>
                 <Icon className="w-4 h-4 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 shrink-0" /> <span className="text-[10px] leading-[1.15] text-center sm:text-[length:inherit] sm:leading-normal sm:whitespace-nowrap min-w-0 max-w-full break-words">{narrow ? t.guideShort[k] : t.guides[k]}</span>
@@ -1981,6 +2358,8 @@ function App() {
       {guide === 'choose' && <ChooseGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} onOpenGuide={setGuide} />}
       {guide === 'maint' && <MaintGuide lang={lang} t={t} onClose={() => setGuide(null)} />}
       {guide === 'sodium' && <SodiumGuide lang={lang} t={t} onClose={() => setGuide(null)} selectedIds={selected} onOpenFluid={openFluid} />}
+      {guide === 'kguide' && <PotassiumGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
+      {guide === 'dka' && <DkaGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
       {guide === 'water' && <WaterGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
       {guide === 'drip' && <DripGuide lang={lang} t={t} onClose={() => setGuide(null)} />}
     </div>
