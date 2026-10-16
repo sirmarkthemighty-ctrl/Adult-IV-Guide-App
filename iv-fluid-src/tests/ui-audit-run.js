@@ -50,6 +50,15 @@ window.__uiAuditRun = async () => {
     if (modal()) audit(lang + ' water deficit', modal()); await esc();
     $('[data-guide="drip"]').click(); await wait(400); if (modal()) audit(lang + ' drip rate', modal()); await esc();
     $('[data-guide="gir"]').click(); await wait(400); if (modal()) audit(lang + ' gir calculator', modal()); await esc();
+    $('[data-guide="icp"]').click(); await wait(400);
+    if (modal()) audit(lang + ' icp guide mannitol', modal());
+    $('[data-icp-tab="nacl3"]').click(); await wait(250);
+    if (modal()) audit(lang + ' icp guide nacl3', modal());
+    $('[data-icp-tab="decision"]').click(); await wait(250);
+    if (modal()) audit(lang + ' icp guide decision', modal());
+    $('[data-icp-tab="cpp"]').click(); await wait(250);
+    if (modal()) audit(lang + ' icp guide cpp', modal());
+    await esc();
     $('[data-guide="choose"]').click(); await wait(400);
     for (const tab of ['resus', 'maint', 'replace', 'reassess']) { const b = $('[data-tab="' + tab + '"]'); if (b) { b.click(); await wait(250); audit(lang + ' fluid choice ' + tab, modal()); } }
     await esc();

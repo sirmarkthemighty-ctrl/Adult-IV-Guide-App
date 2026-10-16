@@ -23,6 +23,17 @@ const FlameIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" vi
 const TrendingUpIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>);
 const DownloadIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>);
 const InfoIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>);
+const BrainIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+    <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+    <path d="M12 5v13"/>
+    <path d="M15.7 8c.7 0 1.3.4 1.6 1"/>
+    <path d="M8.3 8c-.7 0-1.3.4-1.6 1"/>
+    <path d="M17.5 14c.3-.4.5-.9.5-1.5"/>
+    <path d="M6.5 14c-.3-.4-.5-.9-.5-1.5"/>
+  </svg>
+);
 
 // --- Dark theme layer ---
 // The UI is written in light-mode Tailwind classes. Rather than add a dark:
@@ -531,6 +542,7 @@ const REFERENCES = [
   { key: 'katz', cite: 'Katz MA. Hyperglycemia-induced hypo-osmolar state: formula for corrected sodium. N Engl J Med 1973;289:843–848.', url: 'https://doi.org/10.1056/NEJM197310182891607' },
   { key: 'sternsK', cite: 'Sterns RH, Grieff M, Bernstein PL. Treatment of hypokalemia in adults. UpToDate 2024; Mount DB. Disorders of potassium balance. In: Brenner and Rector\'s The Kidney 11th ed.', url: null },
   { key: 'aspenGir', cite: 'ASPEN Clinical Guidelines: Nutrition Support in Adult Patients; Wolfe RR et al. Ann Surg 1979 (glucose kinetics and oxidation limits).', url: 'https://doi.org/10.1097/00000658-197910000-00006' },
+  { key: 'btfIcp', cite: 'Carney N et al. Guidelines for the Management of Severe Traumatic Brain Injury, 4th Edition. Neurosurgery 2017;80(1):6–15; Neurocritical Care Society (NCS) Emergency Neurological Life Support (ENLS): Intracranial Hypertension and Herniation.', url: 'https://doi.org/10.1093/neuros/nyw321' },
   ...['usNaCl09', 'usNaCl045', 'usNaCl3', 'usDex', 'usDexNaCl', 'usKDexNaCl', 'usLR', 'usPL', 'usAlb', 'usMan', 'thTopBal', 'thAcetRinger', 'euSterofundin'].map(k => ({ key: k, cite: SOURCES[k].cite, url: SOURCES[k].url })),
 ];
 const refUrl = (key) => (REFERENCES.find(r => r.key === key) || {}).url;
@@ -539,6 +551,13 @@ const refUrl = (key) => (REFERENCES.find(r => r.key === key) || {}).url;
 // Changelog (newest first; one entry per day)
 // =====================================================================
 const changelogData = [
+  { version: 'v1.5.0', date: 'October 16, 2026', features: [
+    'ICP & Osmotherapy Clinical Protocol: Bedside guide for acute intracranial hypertension management with Mannitol 20% vs. 3% Hypertonic Saline.',
+    'Mannitol 20% Dosing & Safety Guard: Gram and volume calculator (0.25–1.0 g/kg), 15–20 min infusion guidance with filter needle alerts, serum osmolality cutoff (< 320 mOsm/kg alert to prevent AKI), and osmolar gap accumulation calculator.',
+    '3% Hypertonic Saline Bolus & Sodium Target: 250–500 mL or 2–5 mL/kg dosing, acute sodium rise calculation (Adrogué–Madias), target sodium range (145–155 mmol/L), and hypernatremia safety cutoff alert (> 155 mmol/L).',
+    'Head-to-head Clinical Decision Matrix: Evidence-based guide comparing Mannitol vs 3% NaCl in shock/hypotension, CHF/volume overload, oliguria/renal failure, and baseline sodium abnormalities.',
+    'Cerebral Perfusion Pressure (CPP) Calculator: Calculates MAP and CPP (MAP − ICP) with target ranges (CPP 60–70 mmHg, ICP < 20–22 mmHg) and cerebral ischemia / hyperperfusion alerts (BTF & Neurocritical Care ENLS guidelines).',
+  ], bugs: [] },
   { version: 'v1.4.0', date: 'October 15, 2026', features: [
     'Export to PNG: Download single fluid summary cards or multi-fluid comparison tables as high-resolution PNG images.',
     'Expanded multiselect and comparison: Select up to 6 fluids with quick-remove column controls in the comparison modal.',
@@ -568,6 +587,13 @@ const changelogData = [
   ], bugs: [] },
 ];
 const CHANGELOG_TH = {
+  'v1.5.0': { features: [
+    'แนวทางการใช้สารน้ำลดความดันในกะโหลกศีรษะ (ICP & Osmotherapy): คำนวณขนาดยาและการให้ Mannitol 20% เทียบกับ 3% Hypertonic Saline สำหรับภาวะความดันในกะโหลกศีรษะสูงวิกฤต',
+    'เครื่องคำนวณและข้อควรระวัง Mannitol 20%: คำนวณขนาดยา (กรัมและมิลลิลิตร) ตามน้ำหนักตัว (0.25–1.0 g/kg), แจ้งเตือนเวลาการให้ (15–20 นาที) และการใช้สายกรอง (in-line filter), ระบบตรวจสอบระดับ Serum Osmolality (< 320 mOsm/kg ป้องกันไตวายเฉียบพลัน) พร้อมการคำนวณ Osmolar Gap',
+    'คำนวณ 3% Hypertonic Saline Bolus: ขนาดยา 250–500 mL หรือ 2–5 mL/kg, คำนวณการเพิ่มขึ้นของโซเดียมในเลือดเฉียบพลัน (สูตร Adrogué–Madias), ควบคุมเป้าหมายโซเดียม (145–155 mmol/L) พร้อมการแจ้งเตือนเมื่อโซเดียมเกิน 155 mmol/L',
+    'ตารางเปรียบเทียบการเลือกใช้สารน้ำ (Decision Matrix): เปรียบเทียบข้อดีข้อเสียระหว่าง Mannitol vs 3% NaCl ในภาวะช็อก/ความดันโลหิตต่ำ, หัวใจวาย/น้ำเกิน, ไตวาย และระดับโซเดียมผิดปกติ',
+    'เครื่องคำนวณ Cerebral Perfusion Pressure (CPP): คำนวณ MAP และ CPP (MAP − ICP) พร้อมเป้าหมายตามเกณฑ์มาตรฐาน (CPP 60–70 mmHg, ICP < 20–22 mmHg) และแจ้งเตือนภาวะสมองขาดเลือดหรือเลือดไปเลี้ยงสมองมากเกินไป (Brain Trauma Foundation / ENLS)',
+  ], bugs: [] },
   'v1.4.0': { features: [
     'ส่งออกเป็น PNG: ดาวน์โหลดการ์ดสรุปข้อมูลสารน้ำหรือตารางเปรียบเทียบเป็นรูปภาพ PNG คมชัดสูง',
     'ปรับปรุงการเลือกหลายชนิดและเปรียบเทียบ: เลือกได้สูงสุด 6 ชนิด พร้อมปุ่มกดลบสารน้ำออกจากตารางเปรียบเทียบได้ทันที',
@@ -696,8 +722,8 @@ const translations = {
     keyNone: 'The fluid contains none.',
     keyCountries: 'Country chips', keyChipCurrent: 'Registered (country colour); the line beside it names the makers', keyChipPast: 'Registration ended (withdrawn or discontinued)', keyChipNever: 'Not registered: no product of this fluid and strength found', keyBands: 'Sodium bands', keyFlags: 'Warnings at the bottom of each card', keyFamilies: 'Types',
     // guides
-    guides: { choose: 'Fluid choice', maint: 'Maintenance', sodium: 'Sodium & 3% bolus', kguide: 'Potassium guide', dka: 'DKA / HHS', water: 'Water deficit', drip: 'Drip rate', gir: 'GIR Calculator' },
-    guideShort: { choose: 'Choice', maint: 'Maint.', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'Water', drip: 'Drip', gir: 'GIR' },
+    guides: { choose: 'Fluid choice', maint: 'Maintenance', sodium: 'Sodium & 3% bolus', kguide: 'Potassium guide', dka: 'DKA / HHS', water: 'Water deficit', drip: 'Drip rate', gir: 'GIR Calculator', icp: 'ICP & Osmotherapy' },
+    guideShort: { choose: 'Choice', maint: 'Maint.', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'Water', drip: 'Drip', gir: 'GIR', icp: 'ICP' },
     // disclaimer and references
     discTitle: 'Disclaimer',
     discPoints: [
@@ -714,6 +740,7 @@ const translations = {
       szczech: 'Free water deficit formula and correction limit', drugsfda: 'US registration status', dmd: 'UK products and status', hpra: 'EU (Ireland) registration status', pmda: 'Japan registrations',
       adaDka: 'DKA and HHS fluid resuscitation phases, dextrose addition threshold, and potassium replenishment protocol', katz: 'Corrected sodium formula in hyperglycemia', sternsK: 'Potassium deficit estimation, peripheral vs central infusion rates, and magnesium alert',
       aspenGir: 'Glucose infusion rate limits, maximal oxidation capacity (4–7 mg/kg/min) and daily dextrose calculation',
+      btfIcp: 'ICP osmotherapy targets (serum Na 145–155, Osm < 320), Mannitol vs 3% NaCl dosing, and CPP targets (60–70 mmHg)',
       usNaCl09: 'NSS values', usNaCl045: 'NSS/2 values, hyponatraemia warning', usNaCl3: '3% NaCl values, large-vein warning', usDex: '5% and 10% dextrose values, central vein at 900 mOsm/L or more, blood glucose', usDexNaCl: '5%D/NSS and 5%D/N/2 values, hyponatraemia warning', usKDexNaCl: '5%D/N/2 with KCl values',
       usLR: "Lactated Ringer's values, citrated-blood warning", usPL: 'Plasma-Lyte A values', usAlb: 'Albumin 20% values, oncotic colloid warnings', usMan: 'Mannitol 20% values, osmotic diuresis alerts', thTopBal: 'TOP Balance values', thAcetRinger: "Ringer's acetate pH, calcium and ceftriaxone warning", euSterofundin: 'Sterofundin ISO values',
     },
@@ -808,8 +835,8 @@ const translations = {
     keyUnknown: 'ไม่มีเอกสารของผลิตภัณฑ์นี้ที่ระบุค่า',
     keyNone: 'สารน้ำนี้ไม่มีส่วนประกอบนี้',
     keyCountries: 'ชิปประเทศ', keyChipCurrent: 'มีทะเบียน (สีของประเทศ) ข้างชิประบุผู้ผลิต', keyChipPast: 'ทะเบียนสิ้นสุดแล้ว (ถอนหรือเลิกจำหน่าย)', keyChipNever: 'ไม่มีทะเบียน: ไม่พบผลิตภัณฑ์ชนิดและความแรงนี้', keyBands: 'ช่วงโซเดียม', keyFlags: 'คำเตือนด้านล่างของแต่ละการ์ด', keyFamilies: 'ชนิด',
-    guides: { choose: 'เลือกสารน้ำ', maint: 'บำรุงรักษา', sodium: 'Na⁺ และ 3% bolus', kguide: 'คู่มือโพแทสเซียม', dka: 'โปรโตคอล DKA/HHS', water: 'การขาดน้ำ', drip: 'อัตราหยด', gir: 'เครื่องคำนวณ GIR' },
-    guideShort: { choose: 'เลือก', maint: 'บำรุง', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'น้ำ', drip: 'หยด', gir: 'GIR' },
+    guides: { choose: 'เลือกสารน้ำ', maint: 'บำรุงรักษา', sodium: 'Na⁺ และ 3% bolus', kguide: 'คู่มือโพแทสเซียม', dka: 'โปรโตคอล DKA/HHS', water: 'การขาดน้ำ', drip: 'อัตราหยด', gir: 'เครื่องคำนวณ GIR', icp: 'ICP และ Osmotherapy' },
+    guideShort: { choose: 'เลือก', maint: 'บำรุง', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'น้ำ', drip: 'หยด', gir: 'GIR', icp: 'ICP' },
     discTitle: 'ข้อควรทราบ',
     discPoints: [
       'คู่มือนี้ช่วยประกอบการตัดสินใจทางคลินิก ไม่ได้ใช้แทน ตรวจสอบฉลากของถุงที่ใช้จริงเสมอ เพราะผลิตภัณฑ์ต่างผู้ผลิตอาจแตกต่างกัน',
@@ -825,6 +852,7 @@ const translations = {
       szczech: 'สูตรการขาดน้ำอิสระและขีดจำกัดการแก้ไข', drugsfda: 'สถานะทะเบียนสหรัฐฯ', dmd: 'ผลิตภัณฑ์และสถานะในสหราชอาณาจักร', hpra: 'สถานะทะเบียน EU (ไอร์แลนด์)', pmda: 'ทะเบียนญี่ปุ่น',
       adaDka: 'ขั้นตอนการให้สารน้ำ DKA/HHS เกณฑ์การเติมเดกซ์โทรส และความปลอดภัยของโพแทสเซียม', katz: 'สูตรคำนวณโซเดียมปรับค่าเมื่อน้ำตาลในเลือดสูง', sternsK: 'การประมาณการโพแทสเซียมที่ขาด อัตราการให้ทางหลอดเลือดดำส่วนปลายและส่วนกลาง และการตรวจแมกนีเซียม',
       aspenGir: 'ขีดจำกัดอัตราการให้กลูโคส (GIR) อัตราเผาผลาญสูงสุด (4–7 mg/kg/นาที) และพลังงานเดกซ์โทรส',
+      btfIcp: 'เกณฑ์การใช้ Osmotherapy ลด ICP (โซเดียม 145–155, Osm < 320), ขนาดยา Mannitol เทียบกับ 3% NaCl และเป้าหมาย CPP (60–70 mmHg)',
       usNaCl09: 'ค่าของ NSS', usNaCl045: 'ค่าของ NSS/2', usNaCl3: 'ค่าของ 3% NaCl คำเตือนให้ทางหลอดเลือดใหญ่', usDex: 'ค่าของ 5% และ 10% เดกซ์โทรส central vein เมื่อ 900 mOsm/L ขึ้นไป น้ำตาลในเลือด', usDexNaCl: 'ค่าของ 5%D/NSS และ 5%D/N/2 คำเตือนโซเดียมต่ำ', usKDexNaCl: 'ค่าของ 5%D/N/2 ผสม KCl',
       usLR: "ค่าของ Lactated Ringer's คำเตือนเรื่องแคลเซียม", usPL: 'ค่าของ Plasma-Lyte A', usAlb: 'ข้อมูล Human Albumin 20% และข้อควรระวังคอลลอยด์', usMan: 'ข้อมูล Mannitol 20% และข้อควรระวังการขับปัสสาวะออสโมติก', thTopBal: 'ค่าของ TOP Balance', thAcetRinger: "pH ของ Ringer's acetate คำเตือนแคลเซียมกับ ceftriaxone", euSterofundin: 'ค่าของ Sterofundin ISO',
     },
@@ -873,7 +901,7 @@ const FLAG_RULES = [
 ];
 const flagsOf = (f) => FLAG_RULES.filter(([, test]) => test(f));
 const srcItem = (key) => ({ label: (REFERENCES.find(r => r.key === key) || SOURCES[key] || {}).cite || key, url: refUrl(key) || (SOURCES[key] || {}).url });
-const SHORT_SRC = { szczech: 'Szczech 2025', nice: 'NICE CG174', ssc: 'SSC 2021', myburgh: 'Myburgh 2013', adrogueHypo: 'Adrogué 2000', adrogueHyper: 'Adrogué 2000', spasovski: 'Spasovski 2014', devine: 'Devine 1974' };
+const SHORT_SRC = { szczech: 'Szczech 2025', nice: 'NICE CG174', ssc: 'SSC 2021', myburgh: 'Myburgh 2013', adrogueHypo: 'Adrogué 2000', adrogueHyper: 'Adrogué 2000', spasovski: 'Spasovski 2014', devine: 'Devine 1974', btfIcp: 'BTF / ENLS' };
 
 // --- IV bag picture: bag tinted by type, liquid level, port ---
 const BagIcon = ({ family, className }) => {
@@ -1806,6 +1834,73 @@ const GUIDE_TEXT = {
     girFormula: 'GIR (mg/kg/min) = [Rate (mL/h) × Dextrose (%) × 10] ÷ [Weight (kg) × 60]',
     girFormulaTarget: 'Rate (mL/h) = [Target GIR (mg/kg/min) × Weight (kg) × 60] ÷ [Dextrose (%) × 10]',
     girPedsNote: 'In neonates & infants, basal GIR requirement is higher (4–8 mg/kg/min due to larger brain-to-body ratio).',
+    // ICP & Osmotherapy guide
+    icpSub: 'Acute intracranial hypertension & cerebral edema: Mannitol 20% vs. 3% Hypertonic Saline, osmolality limits & CPP monitoring',
+    icpTabs: { mannitol: 'Mannitol 20%', nacl3: '3% Hypertonic Saline', decision: 'Decision Matrix', cpp: 'CPP & MAP' },
+    icpWeight: 'Weight',
+    icpManDoseLabel: 'Mannitol Dose (g/kg)',
+    icpManCalcGrams: 'Dose in Grams',
+    icpManCalcVol: '20% Volume to Infuse',
+    icpManAdminTime: 'Infuse IV bolus over 15–20 minutes using an in-line filter set (0.22–5 μm).',
+    icpManKinetics: 'Onset: 10–15 min | Peak: 20–60 min | Duration: 4–6 h',
+    icpManOsmLabel: 'Measured Serum Osmolality',
+    icpManOsmSafe: '✓ Measured Serum Osmolality is below 320 mOsm/kg cutoff.',
+    icpManOsmCaution: '⚠️ Serum Osmolality near threshold (310–320 mOsm/kg). Check renal function & recheck prior to further dosing.',
+    icpManOsmDanger: '🚨 HOLD MANNITOL! Measured Serum Osmolality ≥ 320 mOsm/kg. Extreme risk of acute kidney injury (acute tubular necrosis) and hyperosmolality syndrome. Switch to 3% NaCl or alternative measures.',
+    icpGapToggle: 'Osmolar Gap Calculator',
+    icpGapNa: 'Serum Na⁺',
+    icpGapGlu: 'Glucose',
+    icpGapBun: 'BUN',
+    icpGapCalcOsm: 'Calculated Osm',
+    icpGapVal: 'Osmolar Gap',
+    icpGapNormal: '✓ Osmolar gap ≤ 10 mOsm/kg: no evidence of significant mannitol accumulation.',
+    icpGapHigh: '⚠️ Osmolar gap > 10–20 mOsm/kg: Indicates unexcreted mannitol accumulation. Hold further doses until gap clears!',
+    icpManNotes: [
+      'Profound osmotic diuresis: Mannitol drives massive free water and electrolyte loss. Resultant hypovolemia and systemic hypotension critically reduce Cerebral Perfusion Pressure (CPP = MAP − ICP). Maintain euvolemia with isotonic crystalloids (NSS / balanced).',
+      'Rebound ICP increase: With repeated dosing or prolonged therapy, mannitol gradually crosses a disrupted blood-brain barrier (BBB), accumulating in brain parenchyma and reversing the osmotic gradient.',
+      'Crystallization: Mannitol may crystallize at cool temperatures. Inspect the bag/vial before use; warm and shake if crystals are visible; always use an in-line filter.',
+    ],
+    icpOpenMan: 'Open Mannitol 20% Card',
+    icpNacl3BolusLabel: '3% NaCl Bolus Dose',
+    icpNacl3Vol: 'Volume to Infuse',
+    icpNacl3Admin: 'Infuse IV bolus over 10–20 minutes. Emergency peripheral access (large-bore) acceptable for acute bolus; central line preferred for continuous infusions.',
+    icpNacl3NaCurrent: 'Current Serum Na⁺',
+    icpNacl3Rise: 'Anticipated Acute Na⁺ Rise',
+    icpNacl3PredictedNa: 'Predicted Post-Bolus Na⁺',
+    icpNacl3TargetNote: 'Target Serum Na⁺: 145–155 mmol/L (BTF / ENLS)',
+    icpNacl3HighAlert: '🚨 HOLD 3% NaCl! Current serum Na⁺ ≥ 155 mmol/L (or post-bolus > 155–160 mmol/L). Severe hypernatremia risks renal vasoconstriction, seizures, and hyperchloremic acidosis.',
+    icpNacl3Safe: '✓ Serum Na⁺ is within or approaching therapeutic target range (145–155 mmol/L).',
+    icpNacl3Notes: [
+      'Volume expansion: Unlike mannitol, 3% NaCl expands intravascular volume and elevates MAP, which actively supports Cerebral Perfusion Pressure (CPP). It is preferred in trauma patients with concomitant hypotension or hypovolemic shock.',
+      'Acid-base monitoring: Infusate chloride is 513 mmol/L. High volumes or continuous infusions cause hyperchloremic non-anion gap metabolic acidosis and renal vasoconstriction. Monitor serum chloride and blood gas.',
+      'Osmolality ceiling: Serum osmolality up to 360 mOsm/kg is generally tolerated with hypertonic saline (higher than mannitol cutoff of 320 mOsm/kg).',
+      'Chronic hyponatremia: If herniation occurs on chronic hyponatremia, aim for acute initial +4–6 mmol/L rise to stop herniation, then adhere strictly to the 8–10 mmol/L/24h ceiling to prevent Osmotic Demyelination Syndrome (ODS).',
+    ],
+    icpOpenNacl3: 'Open 3% NaCl Card',
+    icpDecisionTitle: 'Osmotherapy Agent Selection: Head-to-Head Comparison',
+    icpColCond: 'Clinical Presentation',
+    icpColAgent: 'Preferred Osmotherapy',
+    icpColReason: 'Mechanism & Evidence Rationale',
+    icpScenarios: [
+      { cond: 'Hypotension / Shock (MAP < 65 or SBP < 90 mmHg)', agent: '3% Hypertonic Saline', tone: 'emerald', text: '3% NaCl expands intravascular volume and raises MAP/CPP. Mannitol causes osmotic diuresis and worsens hypovolemic hypotension (drops CPP).' },
+      { cond: 'Heart Failure / Pulmonary Edema / Hypervolemia', agent: 'Mannitol 20%', tone: 'blue', text: 'Mannitol acts as an osmotic diuretic, promoting net fluid excretion. 3% NaCl increases intravascular volume and can precipitate pulmonary edema.' },
+      { cond: 'Renal Insufficiency / Oliguria (Osm > 320 mOsm/kg)', agent: '3% Hypertonic Saline', tone: 'emerald', text: 'Mannitol is nephrotoxic when serum Osm ≥ 320 mOsm/kg or in anuria. 3% NaCl can be titrated safely up to serum Osm 360 mOsm/kg and Na 155 mmol/L.' },
+      { cond: 'Baseline Hyponatremia (Na < 135 mmol/L)', agent: '3% Hypertonic Saline', tone: 'emerald', text: '3% NaCl corrects hyponatremia while reducing cerebral edema. Mannitol lowers serum sodium via free water mobilization and diuresis.' },
+      { cond: 'Baseline Hypernatremia (Na > 150 mmol/L)', agent: 'Mannitol 20%', tone: 'blue', text: 'Mannitol is preferred if serum Osm < 320 mOsm/kg. 3% NaCl is contraindicated if serum Na exceeds 155 mmol/L.' },
+    ],
+    icpCppTitle: 'Cerebral Perfusion Pressure (CPP) & MAP Calculator',
+    icpSbp: 'Systolic BP (SBP)',
+    icpDbp: 'Diastolic BP (DBP)',
+    icpMap: 'Mean Arterial Pressure (MAP)',
+    icpIcpVal: 'Intracranial Pressure (ICP)',
+    icpCppVal: 'Cerebral Perfusion Pressure (CPP)',
+    icpTargetCpp: 'Target CPP: 60–70 mmHg',
+    icpTargetIcp: 'Target ICP: < 20–22 mmHg (BTF Guidelines)',
+    icpCppLowAlert: '🚨 CPP < 60 mmHg: High risk of cerebral ischemia! Augment MAP (fluid resuscitation, vasopressors) and reduce ICP (elevate head 30°, osmotherapy, CSF drainage, sedation).',
+    icpCppHighAlert: '⚠️ CPP > 70 mmHg: Excessive cerebral perfusion pressure. Avoid inducing hypertension; risk of cerebral hyperperfusion injury and ARDS.',
+    icpIcpHighAlert: '🚨 ICP > 22 mmHg: Pathological intracranial hypertension! Escalate neurocritical care interventions immediately.',
+    icpCppNormal: '✓ CPP is within optimal target range (60–70 mmHg).',
+    icpCppFormula: 'MAP = DBP + (SBP − DBP) / 3 | CPP = MAP − ICP',
   },
   th: {
     chooseSub: 'NICE CG174 "5 Rs" และ Surviving Sepsis Campaign 2021',
@@ -1960,6 +2055,73 @@ const GUIDE_TEXT = {
     girFormula: 'GIR (mg/kg/นาที) = [อัตรา (mL/ชม.) × เดกซ์โทรส (%) × 10] ÷ [น้ำหนัก (kg) × 60]',
     girFormulaTarget: 'อัตรา (mL/ชม.) = [เป้าหมาย GIR (mg/kg/นาที) × น้ำหนัก (kg) × 60] ÷ [เดกซ์โทรส (%) × 10]',
     girPedsNote: 'ในทารกแรกเกิดและเด็กเล็ก ความต้องการ GIR พื้นฐานจะสูงกว่าผู้ใหญ่ (4–8 mg/kg/นาที เนื่องจากสัดส่วนสมองต่อน้ำหนักตัวสูงกว่า)',
+    // ICP & Osmotherapy guide
+    icpSub: 'แนวทางการรักษาภาวะความดันในกะโหลกศีรษะสูงและสมองบวม: Mannitol 20% เทียบกับ 3% Hypertonic Saline, ขีดจำกัด Osmolality และการติดตาม CPP',
+    icpTabs: { mannitol: 'Mannitol 20%', nacl3: '3% Hypertonic Saline', decision: 'ตารางตัดสินใจ', cpp: 'คำนวณ CPP & MAP' },
+    icpWeight: 'น้ำหนักตัว',
+    icpManDoseLabel: 'ขนาดยา Mannitol (g/kg)',
+    icpManCalcGrams: 'ขนาดยาที่ต้องให้ (กรัม)',
+    icpManCalcVol: 'ปริมาตร 20% ที่ต้องให้ (mL)',
+    icpManAdminTime: 'หยดเข้าหลอดเลือดดำ (IV bolus) ในเวลา 15–20 นาที โดยใช้ชุดให้ยาที่มีตัวกรอง (in-line filter 0.22–5 μm)',
+    icpManKinetics: 'เริ่มออกฤทธิ์: 10–15 นาที | ออกฤทธิ์สูงสุด: 20–60 นาที | ระยะเวลาออกฤทธิ์: 4–6 ชม.',
+    icpManOsmLabel: 'ระดับ Serum Osmolality ที่ตรวจได้',
+    icpManOsmSafe: '✓ Serum Osmolality อยู่ต่ำกว่าเกณฑ์ความปลอดภัย 320 mOsm/kg',
+    icpManOsmCaution: '⚠️ ระดับ Osmolality ใกล้ขีดจำกัด (310–320 mOsm/kg) ควรตรวจการทำงานของไตและตรวจซ้ำก่อนให้ยาครั้งต่อไป',
+    icpManOsmDanger: '🚨 ระงับการให้ MANNITOL! ค่า Serum Osmolality ≥ 320 mOsm/kg เสี่ยงสูงมากต่อภาวะไตวายเฉียบพลัน (Acute Tubular Necrosis) พิจารณาเปลี่ยนเป็น 3% NaCl หรือวิธีอื่น',
+    icpGapToggle: 'เครื่องคำนวณ Osmolar Gap (ทางเลือก)',
+    icpGapNa: 'Serum Na⁺',
+    icpGapGlu: 'น้ำตาลในเลือด (Glucose)',
+    icpGapBun: 'BUN',
+    icpGapCalcOsm: 'Osmolality ที่คำนวณได้',
+    icpGapVal: 'Osmolar Gap',
+    icpGapNormal: '✓ Osmolar gap ≤ 10 mOsm/kg: ไม่พบการคั่งสะสมของ Mannitol ในร่างกายอย่างมีนัยสำคัญ',
+    icpGapHigh: '⚠️ Osmolar gap > 10–20 mOsm/kg: บ่งชี้ว่ามีการคั่งสะสมของ Mannitol ที่ยังไม่ถูกขับออก ระงับการให้ยาเพิ่มจนกว่าค่าจะลดลง',
+    icpManNotes: [
+      'การขับปัสสาวะออสโมติกอย่างรุนแรง: Mannitol ทำให้สูญเสียน้ำและเกลือแร่อย่างมาก ภาวะขาดน้ำและความดันโลหิตต่ำจะลด Cerebral Perfusion Pressure (CPP = MAP − ICP) อย่างรุนแรง ควรรักษาสมดุลน้ำในร่างกาย (euvolemia) ด้วยสารน้ำไอโซโทนิก (NSS / balanced)',
+      'ภาวะ Rebound ICP: การให้ยาซ้ำหลายครั้งหรือต่อเนื่อง Mannitol อาจซึมผ่าน blood-brain barrier ที่เสียหายเข้าไปในเนื้อสมอง ทำให้เกิดแรงดึงน้ำย้อนกลับและสมองบวมมากขึ้น',
+      'การตกผลึก: Mannitol อาจตกผลึกได้ในอุณหภูมิเย็น ตรวจดูขวด/ถุงก่อนใช้ อุ่นและเขย่าหากพบผลึก และต้องใช้ชุดให้ยาที่มีตัวกรองเสมอ',
+    ],
+    icpOpenMan: 'เปิดการ์ด Mannitol 20%',
+    icpNacl3BolusLabel: 'ขนาดยา 3% NaCl Bolus',
+    icpNacl3Vol: 'ปริมาตรที่ต้องให้',
+    icpNacl3Admin: 'หยดเข้าหลอดเลือดดำ (IV bolus) ในเวลา 10–20 นาที กรณีฉุกเฉินสามารถให้ทางหลอดเลือดดำส่วนปลายขนาดใหญ่ได้ แต่หากให้ต่อเนื่องควรให้ทาง central line',
+    icpNacl3NaCurrent: 'ระดับ Serum Na⁺ ปัจจุบัน',
+    icpNacl3Rise: 'การเพิ่มขึ้นของ Na⁺ ที่คาดการณ์',
+    icpNacl3PredictedNa: 'ระดับ Na⁺ หลังให้ยาที่คาดการณ์',
+    icpNacl3TargetNote: 'เป้าหมาย Serum Na⁺: 145–155 mmol/L (BTF / ENLS)',
+    icpNacl3HighAlert: '🚨 ระงับการให้ 3% NaCl! ระดับ Serum Na⁺ ≥ 155 mmol/L (หรือหลังให้จะเกิน 155–160 mmol/L) ภาวะโซเดียมสูงเกินเสี่ยงต่อหลอดเลือดไตหดเกร็ง อาการชัก และภาวะกรดจากคลอไรด์สูง',
+    icpNacl3Safe: '✓ ระดับ Serum Na⁺ อยู่ในหรือกำลังเข้าสู่ช่วงเป้าหมายการรักษา (145–155 mmol/L)',
+    icpNacl3Notes: [
+      'การขยายปริมาตรในหลอดเลือด: แตกต่างจาก Mannitol เพราะ 3% NaCl ช่วยเพิ่มปริมาตรในหลอดเลือดและเพิ่ม MAP ซึ่งช่วยพยุง Cerebral Perfusion Pressure (CPP) เหมาะอย่างยิ่งในผู้บาดเจ็บที่มีภาวะความดันโลหิตต่ำหรือช็อกร่วมด้วย',
+      'การติดตามสมดุลกรด-ด่าง: สารน้ำมีคลอไรด์สูงถึง 513 mmol/L การให้ปริมาณมากอาจทำให้เกิด Hyperchloremic non-anion gap metabolic acidosis และไตขาดเลือด ติดตามคลอไรด์และก๊าซในเลือดสม่ำเสมอ',
+      'เพดาน Osmolality: โดยทั่วไป 3% NaCl ยอมรับระดับ Serum Osmolality ได้สูงถึง 360 mOsm/kg (สูงกว่าเกณฑ์ของ Mannitol ที่ 320 mOsm/kg)',
+      'ข้อควรระวังในผู้ป่วยโซเดียมต่ำเรื้อรัง: หากเกิดภาวะสมองเลื่อนในผู้ป่วยที่มีโซเดียมต่ำเรื้อรัง ให้ตั้งเป้าเพิ่ม Na⁺ ระยะแรก +4–6 mmol/L เพื่อยับยั้งการเลื่อนของสมอง แล้วควบคุมการเพิ่มไม่ให้เกิน 8–10 mmol/L/24 ชม. เพื่อป้องกัน Osmotic Demyelination Syndrome (ODS)',
+    ],
+    icpOpenNacl3: 'เปิดการ์ด 3% NaCl',
+    icpDecisionTitle: 'การเลือกสารน้ำลดความดันในกะโหลกศีรษะ: ตารางเปรียบเทียบ',
+    icpColCond: 'สถานการณ์ทางคลินิก',
+    icpColAgent: 'สารน้ำที่แนะนำ',
+    icpColReason: 'เหตุผลและกลไกทางคลินิก',
+    icpScenarios: [
+      { cond: 'ความดันโลหิตต่ำ / ภาวะช็อก (MAP < 65 หรือ SBP < 90 mmHg)', agent: '3% Hypertonic Saline', tone: 'emerald', text: '3% NaCl เพิ่มปริมาตรสารน้ำในหลอดเลือดและเพิ่ม MAP/CPP ส่วน Mannitol ทำให้ปัสสาวะออกมากและทำให้ความดันตกแย่ลง (CPP ลด)' },
+      { cond: 'หัวใจวาย / น้ำท่วมปอด / สารน้ำเกิน (Hypervolemia)', agent: 'Mannitol 20%', tone: 'blue', text: 'Mannitol มีฤทธิ์ขับปัสสาวะออสโมติก ช่วยดึงน้ำส่วนเกินออกจากร่างกาย ส่วน 3% NaCl เพิ่มปริมาตรในหลอดเลือด อาจทำให้น้ำท่วมปอดกำเริบ' },
+      { cond: 'ไตทำงานบกพร่อง / ปัสสาวะออกน้อย (Osm > 320 mOsm/kg)', agent: '3% Hypertonic Saline', tone: 'emerald', text: 'Mannitol เป็นพิษต่อไตเมื่อ Serum Osm ≥ 320 mOsm/kg หรือไม่มีปัสสาวะ ส่วน 3% NaCl สามารถให้ได้อย่างปลอดภัยจนถึง Osm 360 mOsm/kg และ Na 155 mmol/L' },
+      { cond: 'โซเดียมในเลือดต่ำตั้งแต่แรก (Na < 135 mmol/L)', agent: '3% Hypertonic Saline', tone: 'emerald', text: '3% NaCl ช่วยแก้ไขภาวะโซเดียมต่ำไปพร้อมกับการลดสมองบวม ส่วน Mannitol ทำให้โซเดียมในเลือดลดลงจากการดึงน้ำเข้าหลอดเลือดและการขับปัสสาวะ' },
+      { cond: 'โซเดียมในเลือดสูงตั้งแต่แรก (Na > 150 mmol/L)', agent: 'Mannitol 20%', tone: 'blue', text: 'ควรเลือก Mannitol หาก Serum Osm < 320 mOsm/kg และห้ามให้ 3% NaCl หากระดับโซเดียมเกิน 155 mmol/L' },
+    ],
+    icpCppTitle: 'เครื่องคำนวณ Cerebral Perfusion Pressure (CPP) และ MAP',
+    icpSbp: 'ความดันซิสโตลิก (SBP)',
+    icpDbp: 'ความดันไดแอสโตลิก (DBP)',
+    icpMap: 'ความดันหลอดเลือดแดงเฉลี่ย (MAP)',
+    icpIcpVal: 'ความดันในกะโหลกศีรษะ (ICP)',
+    icpCppVal: 'แรงดันเลือดไปเลี้ยงสมอง (CPP)',
+    icpTargetCpp: 'เป้าหมาย CPP: 60–70 mmHg',
+    icpTargetIcp: 'เป้าหมาย ICP: < 20–22 mmHg (เกณฑ์มาตรฐาน BTF)',
+    icpCppLowAlert: '🚨 CPP < 60 mmHg: เสี่ยงสูงต่อภาวะสมองขาดเลือด (Cerebral Ischemia)! เพิ่ม MAP (ให้สารน้ำ/ยากระตุ้นความดัน) และลด ICP (ยกศีรษะ 30°, ให้ Osmotherapy, ระบายน้ำไขสันหลัง, ให้ยาระงับประสาท)',
+    icpCppHighAlert: '⚠️ CPP > 70 mmHg: แรงดันเลือดไปเลี้ยงสมองสูงเกินไป หลีกเลี่ยงความดันโลหิตสูงเกิน เสี่ยงต่อสมองบวมจากการไหลเวียนเกิน (Hyperperfusion) และปอดบาดเจ็บ (ARDS)',
+    icpIcpHighAlert: '🚨 ICP > 22 mmHg: ความดันในกะโหลกศีรษะสูงผิดปกติ! ให้การรักษาทางระบบประสาทวิกฤตทันที',
+    icpCppNormal: '✓ ค่า CPP อยู่ในช่วงเป้าหมายที่เหมาะสม (60–70 mmHg)',
+    icpCppFormula: 'MAP = DBP + (SBP − DBP) / 3 | CPP = MAP − ICP',
   },
 };
 
@@ -2644,6 +2806,431 @@ const GirGuide = ({ lang, t, onClose, onOpenFluid }) => {
   );
 };
 
+const IcpGuide = ({ lang, t, onClose, onOpenFluid }) => {
+  const g = GUIDE_TEXT[lang];
+  const [tab, setTab] = useState('mannitol'); // 'mannitol' | 'nacl3' | 'decision' | 'cpp'
+  const [weight, setWeight] = useState('70');
+
+  // Mannitol state
+  const [manDose, setManDose] = useState('0.5'); // g/kg
+  const [serumOsm, setSerumOsm] = useState('295'); // mOsm/kg
+  const [showGap, setShowGap] = useState(false);
+  const [gapNa, setGapNa] = useState('140');
+  const [gapGlu, setGapGlu] = useState('110');
+  const [gapBun, setGapBun] = useState('14');
+
+  // 3% NaCl state
+  const [naclRegimen, setNaclRegimen] = useState('250'); // '250' | '500' | '2' | '3' | '5' | 'custom'
+  const [customVol, setCustomVol] = useState('250');
+  const [serumNa, setSerumNa] = useState('138');
+
+  // CPP state
+  const [sbp, setSbp] = useState('130');
+  const [dbp, setDbp] = useState('80');
+  const [icp, setIcp] = useState('18');
+
+  const wt = toNum(weight) || 0;
+  const mDose = toNum(manDose) || 0;
+  const sOsm = toNum(serumOsm) || 0;
+  const sNa = toNum(serumNa) || 0;
+
+  // Mannitol calculations: 20% solution = 20 g / 100 mL = 0.20 g/mL (5 mL per gram)
+  const manGrams = wt > 0 && mDose > 0 ? wt * mDose : 0;
+  const manVolMl = manGrams > 0 ? manGrams * 5 : 0;
+
+  // Osmolar gap calculation: Calc Osm = 2*Na + Glu/18 + BUN/2.8
+  const gNa = toNum(gapNa) || 0;
+  const gGlu = toNum(gapGlu) || 0;
+  const gBun = toNum(gapBun) || 0;
+  const calcOsm = (2 * gNa) + (gGlu / 18) + (gBun / 2.8);
+  const osmGap = sOsm > 0 && calcOsm > 0 ? sOsm - calcOsm : null;
+
+  const isOsmDanger = sOsm >= 320;
+  const isOsmCaution = sOsm >= 310 && sOsm < 320;
+  const isOsmSafe = sOsm > 0 && sOsm < 310;
+  const isGapHigh = osmGap !== null && osmGap > 12;
+
+  // 3% NaCl calculations: 513 mmol/L Na and Cl
+  let naclVol = 0;
+  if (naclRegimen === '250') naclVol = 250;
+  else if (naclRegimen === '500') naclVol = 500;
+  else if (['2', '3', '5'].includes(naclRegimen)) naclVol = wt * toNum(naclRegimen);
+  else naclVol = toNum(customVol) || 0;
+
+  // Adrogué-Madias: acute change per L = (513 - sNa) / (TBW + 1)
+  const tbw = wt > 0 ? wt * 0.6 : 42;
+  const dNaPerLitre = (513 - sNa) / (tbw + 1);
+  const acuteRise = naclVol > 0 ? dNaPerLitre * (naclVol / 1000) : 0;
+  const predictedNa = sNa + acuteRise;
+
+  const isNaHighAlert = sNa >= 155 || predictedNa > 160;
+  const isNaCaution = predictedNa > 155 && !isNaHighAlert;
+  const isNaTherapeutic = predictedNa >= 145 && predictedNa <= 155;
+
+  // CPP calculations:
+  const nSbp = toNum(sbp) || 0;
+  const nDbp = toNum(dbp) || 0;
+  const nIcp = toNum(icp) || 0;
+  const calcMap = nDbp + (nSbp - nDbp) / 3;
+  const calcCpp = calcMap - nIcp;
+
+  const isCppLow = calcCpp > 0 && calcCpp < 60;
+  const isCppHigh = calcCpp > 70;
+  const isCppNormal = calcCpp >= 60 && calcCpp <= 70;
+  const isIcpHigh = nIcp > 22;
+
+  return (
+    <Modal title={t.guides.icp} sub={g.icpSub} onClose={onClose} tone="bg-purple-50" wide attrs={{ 'data-guide-modal': 'icp' }}
+      icon={<div className="p-2 bg-purple-100 text-purple-700 rounded-xl shrink-0"><BrainIcon className="w-5 h-5" /></div>}
+      footer={<CloseBtn onClose={onClose} t={t} />}>
+      <div className="flex flex-wrap gap-1.5 mb-3" role="tablist" data-icp-tabs>
+        <button type="button" role="tab" aria-selected={tab === 'mannitol'} onClick={() => setTab('mannitol')} data-icp-tab="mannitol"
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'mannitol' ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+          {g.icpTabs.mannitol}
+        </button>
+        <button type="button" role="tab" aria-selected={tab === 'nacl3'} onClick={() => setTab('nacl3')} data-icp-tab="nacl3"
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'nacl3' ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+          {g.icpTabs.nacl3}
+        </button>
+        <button type="button" role="tab" aria-selected={tab === 'decision'} onClick={() => setTab('decision')} data-icp-tab="decision"
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'decision' ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+          {g.icpTabs.decision}
+        </button>
+        <button type="button" role="tab" aria-selected={tab === 'cpp'} onClick={() => setTab('cpp')} data-icp-tab="cpp"
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'cpp' ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+          {g.icpTabs.cpp}
+        </button>
+      </div>
+
+      {tab === 'mannitol' && (
+        <div className="flex flex-col gap-3" data-icp-mannitol-view>
+          <Section title={g.icpManTitle} tone="bg-purple-50/60 border-purple-200">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <NumInput label={g.icpWeight} unit={g.kg} value={weight} onChange={setWeight} attrs={{ 'data-icp-weight': '' }} />
+              <NumInput label={g.icpManDoseLabel} unit="g/kg" value={manDose} onChange={setManDose} attrs={{ 'data-man-dose-input': '' }} />
+              <div className="flex flex-col gap-1">
+                <span className="text-[11px] font-bold text-slate-500">{g.planQuick} (g/kg)</span>
+                <div className="flex flex-wrap gap-1.5" data-man-presets>
+                  {['0.25', '0.5', '1.0'].map(v => (
+                    <button key={v} type="button" onClick={() => setManDose(v)} aria-pressed={manDose === v} data-man-preset={v}
+                      className={`min-w-[2.5rem] px-2.5 py-1.5 rounded-lg border text-xs font-bold tabular-nums transition-colors ${manDose === v ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+                      {v}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
+              {g.icpManAdminTime} | <span className="font-semibold text-slate-700">{g.icpManKinetics}</span>
+            </p>
+          </Section>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-man-results>
+            <div className="rounded-xl border border-purple-200 bg-purple-50 p-3 text-purple-900">
+              <div className="text-[11px] font-bold opacity-80">{g.icpManCalcGrams}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-man-dose-g>
+                {manGrams ? manGrams.toFixed(1) : '—'} <span className="text-xs font-semibold">g</span>
+              </div>
+              <div className="text-[11px] font-medium mt-0.5">20% = 0.20 g/mL</div>
+            </div>
+
+            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
+              <div className="text-[11px] font-bold opacity-80">{g.icpManCalcVol}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-man-vol-ml>
+                {manVolMl ? Math.round(manVolMl) : '—'} <span className="text-xs font-semibold">mL</span>
+              </div>
+              <div className="text-[11px] font-medium mt-0.5">15–20 min IV bolus</div>
+            </div>
+
+            <div className={`rounded-xl border p-3 ${isOsmDanger ? 'border-rose-300 bg-rose-50 text-rose-900' : isOsmCaution ? 'border-amber-300 bg-amber-50 text-amber-900' : 'border-emerald-200 bg-emerald-50 text-emerald-900'}`}>
+              <NumInput label={g.icpManOsmLabel} unit="mOsm/kg" value={serumOsm} onChange={setSerumOsm} attrs={{ 'data-man-osm-input': '' }} />
+              <div className="text-[11px] font-extrabold mt-1">
+                {isOsmDanger ? '⚠️ ≥ 320 (HOLD)' : isOsmCaution ? '⚠️ 310–319 (Caution)' : '✓ < 310 (Safe)'}
+              </div>
+            </div>
+          </div>
+
+          {isOsmDanger && (
+            <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-man-osm-alert="danger">
+              {g.icpManOsmDanger}
+            </div>
+          )}
+
+          {isOsmCaution && (
+            <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-man-osm-alert="caution">
+              {g.icpManOsmCaution}
+            </div>
+          )}
+
+          {isOsmSafe && (
+            <div className="rounded-xl border border-emerald-300 bg-emerald-50 p-2.5 text-xs text-emerald-900 leading-snug font-medium" data-man-osm-alert="safe">
+              {g.icpManOsmSafe}
+            </div>
+          )}
+
+          <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-3">
+            <button type="button" onClick={() => setShowGap(!showGap)} data-man-gap-toggle
+              className="w-full flex items-center justify-between text-left text-xs font-bold text-slate-700 hover:text-purple-700 cursor-pointer">
+              <span className="flex items-center gap-1.5">
+                <InfoIcon className="w-3.5 h-3.5" /> {g.icpGapToggle}
+              </span>
+              <span className="text-[10px] text-purple-600 underline">{showGap ? '▲ Hide' : '▼ Calculate'}</span>
+            </button>
+            {showGap && (
+              <div className="mt-3 pt-3 border-t border-slate-200 flex flex-col gap-2.5" data-gap-panel>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <NumInput label={g.icpGapNa} unit="mmol/L" value={gapNa} onChange={setGapNa} attrs={{ 'data-gap-na': '' }} />
+                  <NumInput label={g.icpGapGlu} unit="mg/dL" value={gapGlu} onChange={setGapGlu} attrs={{ 'data-gap-glu': '' }} />
+                  <NumInput label={g.icpGapBun} unit="mg/dL" value={gapBun} onChange={setGapBun} attrs={{ 'data-gap-bun': '' }} />
+                </div>
+                <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-slate-700">
+                  <span>{g.icpGapCalcOsm}: <span className="tabular-nums font-extrabold" data-gap-calc-osm>{calcOsm ? calcOsm.toFixed(1) : '—'}</span> mOsm/kg</span>
+                  <span>{g.icpGapVal}: <span className="tabular-nums font-extrabold text-purple-700" data-man-gap-val>{osmGap !== null ? (osmGap >= 0 ? '+' : '') + osmGap.toFixed(1) : '—'}</span> mOsm/kg</span>
+                </div>
+                {isGapHigh ? (
+                  <div className="rounded-lg border border-amber-300 bg-amber-50 p-2 text-xs text-amber-900 font-medium" data-man-gap-alert="high">
+                    {g.icpGapHigh}
+                  </div>
+                ) : (
+                  <div className="rounded-lg border border-slate-200 bg-slate-50 p-2 text-xs text-slate-700" data-man-gap-alert="normal">
+                    {g.icpGapNormal}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          <Section title={t.detailFlags} tone="bg-slate-50 border-slate-200">
+            <ul className="text-xs text-slate-700 space-y-1.5 pl-4 list-disc">
+              {g.icpManNotes.map((note, idx) => <li key={idx}>{note}</li>)}
+            </ul>
+          </Section>
+
+          <div className="flex justify-end">
+            <button type="button" onClick={() => onOpenFluid('mannitol20')} data-open-mannitol-btn
+              className="px-3 py-2 rounded-lg bg-white border border-slate-200 shadow-sm text-xs font-bold text-purple-700 hover:bg-purple-50 transition-colors flex items-center gap-1.5 cursor-pointer">
+              <BoxIcon className="w-3.5 h-3.5" /> {g.icpOpenMan}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {tab === 'nacl3' && (
+        <div className="flex flex-col gap-3" data-icp-nacl3-view>
+          <Section title={g.icpNacl3Title} tone="bg-purple-50/60 border-purple-200">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <NumInput label={g.icpWeight} unit={g.kg} value={weight} onChange={setWeight} attrs={{ 'data-icp-weight': '' }} />
+              <div className="flex flex-col gap-1 sm:col-span-2">
+                <span className="text-[11px] font-bold text-slate-500">{g.icpNacl3BolusLabel}</span>
+                <div className="flex flex-wrap gap-1.5" data-nacl3-presets>
+                  {[
+                    ['250', '250 mL'],
+                    ['500', '500 mL'],
+                    ['2', '2 mL/kg'],
+                    ['3', '3 mL/kg'],
+                    ['5', '5 mL/kg'],
+                    ['custom', 'Custom'],
+                  ].map(([k, label]) => (
+                    <button key={k} type="button" onClick={() => setNaclRegimen(k)} aria-pressed={naclRegimen === k} data-nacl3-preset={k}
+                      className={`px-2.5 py-1.5 rounded-lg border text-xs font-bold transition-colors ${naclRegimen === k ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            {naclRegimen === 'custom' && (
+              <div className="mt-3 max-w-xs">
+                <NumInput label={g.icpNacl3Vol} unit="mL" value={customVol} onChange={setCustomVol} attrs={{ 'data-nacl3-custom-vol': '' }} />
+              </div>
+            )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
+              <NumInput label={g.icpNacl3NaCurrent} unit="mmol/L" value={serumNa} onChange={setSerumNa} attrs={{ 'data-nacl3-sna-input': '' }} />
+              <div className="flex flex-col justify-end">
+                <span className="text-xs font-bold text-purple-800 bg-purple-50 border border-purple-200 rounded-lg px-3 py-2">
+                  {g.icpNacl3TargetNote}
+                </span>
+              </div>
+            </div>
+            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
+              {g.icpNacl3Admin}
+            </p>
+          </Section>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-nacl3-results>
+            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
+              <div className="text-[11px] font-bold opacity-80">{g.icpNacl3Vol}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-nacl3-vol-ml>
+                {Math.round(naclVol)} <span className="text-xs font-semibold">mL</span>
+              </div>
+              <div className="text-[11px] font-medium mt-0.5">10–20 min IV bolus</div>
+            </div>
+
+            <div className="rounded-xl border border-purple-200 bg-purple-50 p-3 text-purple-900">
+              <div className="text-[11px] font-bold opacity-80">{g.icpNacl3Rise}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-nacl3-rise-val>
+                {acuteRise ? '+' + acuteRise.toFixed(1) : '—'} <span className="text-xs font-semibold">mmol/L</span>
+              </div>
+              <div className="text-[11px] font-medium mt-0.5">Adrogué–Madias</div>
+            </div>
+
+            <div className={`rounded-xl border p-3 ${isNaHighAlert ? 'border-rose-300 bg-rose-50 text-rose-900' : isNaCaution ? 'border-amber-300 bg-amber-50 text-amber-900' : 'border-emerald-200 bg-emerald-50 text-emerald-900'}`}>
+              <div className="text-[11px] font-bold opacity-80">{g.icpNacl3PredictedNa}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-nacl3-pred-val>
+                {predictedNa ? predictedNa.toFixed(1) : '—'} <span className="text-xs font-semibold">mmol/L</span>
+              </div>
+              <div className="text-[11px] font-extrabold mt-0.5">
+                {isNaHighAlert ? '⚠️ ≥ 155 (HOLD)' : isNaTherapeutic ? '✓ 145–155 (Target)' : '< 145'}
+              </div>
+            </div>
+          </div>
+
+          {isNaHighAlert && (
+            <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-nacl3-alert="high">
+              {g.icpNacl3HighAlert}
+            </div>
+          )}
+
+          {isNaCaution && (
+            <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-nacl3-alert="caution">
+              ⚠️ {g.icpNacl3PredictedNa} &gt; 155 mmol/L. Monitor electrolytes closely.
+            </div>
+          )}
+
+          {isNaTherapeutic && (
+            <div className="rounded-xl border border-emerald-300 bg-emerald-50 p-2.5 text-xs text-emerald-900 leading-snug font-medium" data-nacl3-alert="safe">
+              {g.icpNacl3Safe}
+            </div>
+          )}
+
+          <Section title={t.detailFlags} tone="bg-slate-50 border-slate-200">
+            <ul className="text-xs text-slate-700 space-y-1.5 pl-4 list-disc">
+              {g.icpNacl3Notes.map((note, idx) => <li key={idx}>{note}</li>)}
+            </ul>
+          </Section>
+
+          <div className="flex justify-end">
+            <button type="button" onClick={() => onOpenFluid('nacl3')} data-open-nacl3-btn
+              className="px-3 py-2 rounded-lg bg-white border border-slate-200 shadow-sm text-xs font-bold text-purple-700 hover:bg-purple-50 transition-colors flex items-center gap-1.5 cursor-pointer">
+              <BoxIcon className="w-3.5 h-3.5" /> {g.icpOpenNacl3}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {tab === 'decision' && (
+        <div className="flex flex-col gap-3" data-icp-decision-view>
+          <Section title={g.icpDecisionTitle} tone="bg-slate-50 border-slate-200">
+            <div className="flex flex-col gap-2" data-icp-scenario-list>
+              {g.icpScenarios.map((sc, idx) => (
+                <div key={idx} className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm flex flex-col gap-1.5" data-icp-scenario={idx}>
+                  <div className="flex flex-wrap items-center justify-between gap-1.5">
+                    <span className="font-bold text-xs text-slate-800">{sc.cond}</span>
+                    <span className={`px-2 py-0.5 rounded-full text-[11px] font-bold ${sc.tone === 'emerald' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'}`}>
+                      {sc.agent}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-600 leading-snug">{sc.text}</p>
+                </div>
+              ))}
+            </div>
+          </Section>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+              <div className="text-[11px] font-bold text-slate-400 uppercase">Osmolality Cutoff</div>
+              <div className="text-xs font-bold text-slate-800 mt-1">Mannitol: &lt; 320 mOsm/kg</div>
+              <div className="text-xs font-bold text-purple-700 mt-0.5">3% NaCl: &lt; 360 mOsm/kg</div>
+              <div className="text-[10px] text-slate-500 mt-1">Mannitol risks acute tubular necrosis if &gt; 320.</div>
+            </div>
+            <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+              <div className="text-[11px] font-bold text-slate-400 uppercase">Hemodynamics</div>
+              <div className="text-xs font-bold text-slate-800 mt-1">Mannitol: Diuresis ↓ BP</div>
+              <div className="text-xs font-bold text-emerald-700 mt-0.5">3% NaCl: Volume ↑ MAP/CPP</div>
+              <div className="text-[10px] text-slate-500 mt-1">Never use mannitol in hypovolemia/shock.</div>
+            </div>
+            <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
+              <div className="text-[11px] font-bold text-slate-400 uppercase">Line Access</div>
+              <div className="text-xs font-bold text-slate-800 mt-1">Mannitol: In-line filter</div>
+              <div className="text-xs font-bold text-slate-800 mt-0.5">3% NaCl: Large-bore / Central</div>
+              <div className="text-[10px] text-slate-500 mt-1">Acute boluses allowed peripherally in emergency.</div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {tab === 'cpp' && (
+        <div className="flex flex-col gap-3" data-icp-cpp-view>
+          <Section title={g.icpCppTitle} tone="bg-purple-50/60 border-purple-200">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <NumInput label={g.icpSbp} unit="mmHg" value={sbp} onChange={setSbp} attrs={{ 'data-cpp-sbp': '' }} />
+              <NumInput label={g.icpDbp} unit="mmHg" value={dbp} onChange={setDbp} attrs={{ 'data-cpp-dbp': '' }} />
+              <NumInput label={g.icpIcpVal} unit="mmHg" value={icp} onChange={setIcp} attrs={{ 'data-cpp-icp-input': '' }} />
+            </div>
+            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
+              {g.icpCppFormula} <RefTag k="btfIcp" />
+            </p>
+          </Section>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-cpp-results>
+            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
+              <div className="text-[11px] font-bold opacity-80">{g.icpMap}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-cpp-map-val>
+                {calcMap ? calcMap.toFixed(1) : '—'} <span className="text-xs font-semibold">mmHg</span>
+              </div>
+              <div className="text-[11px] font-medium mt-0.5">DBP + ⅓(SBP − DBP)</div>
+            </div>
+
+            <div className={`rounded-xl border p-3 ${isIcpHigh ? 'border-rose-300 bg-rose-50 text-rose-900' : 'border-slate-200 bg-slate-50 text-slate-900'}`}>
+              <div className="text-[11px] font-bold opacity-80">{g.icpIcpVal}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-cpp-icp-val>
+                {nIcp ? nIcp.toFixed(0) : '—'} <span className="text-xs font-semibold">mmHg</span>
+              </div>
+              <div className="text-[11px] font-bold mt-0.5">
+                {isIcpHigh ? '⚠️ > 22 (High ICP)' : '✓ < 22 (Normal)'}
+              </div>
+            </div>
+
+            <div className={`rounded-xl border p-3 ${isCppLow ? 'border-rose-300 bg-rose-50 text-rose-900' : isCppHigh ? 'border-amber-300 bg-amber-50 text-amber-900' : 'border-emerald-200 bg-emerald-50 text-emerald-900'}`}>
+              <div className="text-[11px] font-bold opacity-80">{g.icpCppVal}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-cpp-val>
+                {calcCpp ? calcCpp.toFixed(1) : '—'} <span className="text-xs font-semibold">mmHg</span>
+              </div>
+              <div className="text-[11px] font-extrabold mt-0.5">
+                {isCppLow ? '⚠️ < 60 (Ischemia)' : isCppHigh ? '⚠️ > 70 (High CPP)' : '✓ 60–70 (Target)'}
+              </div>
+            </div>
+          </div>
+
+          {isCppLow && (
+            <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-cpp-alert="low">
+              {g.icpCppLowAlert}
+            </div>
+          )}
+
+          {isCppHigh && (
+            <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-cpp-alert="high">
+              {g.icpCppHighAlert}
+            </div>
+          )}
+
+          {isIcpHigh && !isCppLow && (
+            <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-cpp-alert="icp">
+              {g.icpIcpHighAlert}
+            </div>
+          )}
+
+          {isCppNormal && !isIcpHigh && (
+            <div className="rounded-xl border border-emerald-300 bg-emerald-50 p-2.5 text-xs text-emerald-900 leading-snug font-medium" data-cpp-alert="normal">
+              {g.icpCppNormal}
+            </div>
+          )}
+        </div>
+      )}
+    </Modal>
+  );
+};
+
 // =====================================================================
 // Search
 // =====================================================================
@@ -2761,6 +3348,7 @@ function App() {
     ['water', 'bg-cyan-600 hover:bg-cyan-700 border-cyan-700', DropIcon],
     ['drip', 'bg-blue-600 hover:bg-blue-700 border-blue-700', DripIcon],
     ['gir', 'bg-teal-600 hover:bg-teal-700 border-teal-700', TrendingUpIcon],
+    ['icp', 'bg-purple-700 hover:bg-purple-800 border-purple-800', BrainIcon],
   ];
 
   return (
@@ -2835,7 +3423,7 @@ function App() {
         </header>
 
         <div ref={barRef} className="sticky top-0 z-30 pt-2 pb-2 md:pt-3 md:pb-2.5 -mt-2 md:-mt-3 bg-slate-100/95 backdrop-blur-md" data-search-bar>
-          <div className="grid grid-cols-4 gap-1 sm:flex sm:flex-row sm:flex-wrap sm:items-center sm:gap-2 w-full mb-2" data-guide-buttons>
+          <div className="grid grid-cols-3 gap-1 sm:flex sm:flex-row sm:flex-wrap sm:items-center sm:gap-2 w-full mb-2" data-guide-buttons>
             {GUIDE_BTNS.map(([k, tone, Icon]) => (
               <button key={k} onClick={() => setGuide(k)} data-guide={k} aria-label={t.guides[k]} title={t.guides[k]} className={`flex flex-col sm:flex-row min-w-0 items-center justify-center gap-0.5 sm:gap-1.5 md:gap-2 ${tone} border text-white px-0.5 py-1.5 sm:px-3 sm:py-2 md:px-4 rounded-lg font-bold shadow-sm transition-all active:scale-95 text-xs md:text-sm`}>
                 <Icon className="w-4 h-4 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 shrink-0" /> <span className="text-[10px] leading-[1.15] text-center sm:text-[length:inherit] sm:leading-normal sm:whitespace-nowrap min-w-0 max-w-full break-words">{narrow ? t.guideShort[k] : t.guides[k]}</span>
@@ -2956,6 +3544,7 @@ function App() {
       {guide === 'water' && <WaterGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
       {guide === 'drip' && <DripGuide lang={lang} t={t} onClose={() => setGuide(null)} />}
       {guide === 'gir' && <GirGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
+      {guide === 'icp' && <IcpGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
     </div>
   );
 }

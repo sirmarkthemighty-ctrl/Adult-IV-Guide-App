@@ -8,14 +8,16 @@ It is decision support for healthcare professionals, not a substitute for produc
 
 ## What it contains
 
-- 18 fluids (NSS, NSS/2, 3% NaCl, 5% and 10% dextrose, dextrose-saline strengths, premixed potassium, LRS, Ringer's acetate,
-  TOP Balance, Sterofundin ISO, Plasma-Lyte A) with sodium, potassium, chloride, calcium, magnesium, buffer, dextrose, energy,
+- 20 crystalloids and colloids (NSS, NSS/2, 3% NaCl, 5% and 10% dextrose, dextrose-saline strengths, premixed potassium, LRS, Ringer's acetate,
+  TOP Balance, Sterofundin ISO, Plasma-Lyte A, Human Albumin 20%, Mannitol 20%) with sodium, potassium, chloride, calcium, magnesium, buffer, dextrose, energy,
   osmolarity and pH per litre. Every value names its source; values worked out from a printed formula are marked "calc.",
   and anything without a source shows "Unknown".
 - Registration in Thailand (Thai FDA), the US (Drugs@FDA), the UK (NHS dm+d), the EU (Irish HPRA list) and Japan (PMDA),
   with links to the records, as country chips and a status filter.
-- Guides: fluid choice (NICE CG174, Surviving Sepsis 2021), maintenance (NICE CG174), sodium change per litre
-  (Adrogué–Madias), free water deficit, and drip rate.
+- Guides & Calculators: fluid choice (NICE CG174, Surviving Sepsis 2021), maintenance (NICE CG174), sodium change & acute 3% NaCl bolus
+  (Adrogué–Madias, Sterns), potassium replacement & safe rate, DKA/HHS fluid & electrolyte protocol (Katz corrected Na), free water deficit,
+  drip rate, Glucose Infusion Rate (GIR), and ICP & osmotherapy (Mannitol 20% vs 3% NaCl, osmolality/gap limits, and CPP calculator).
+- Multi-fluid comparison (up to 6 fluids side by side) and high-resolution PNG card/table export.
 
 Tap the version badge next to the title for the changelog.
 

@@ -216,6 +216,29 @@ window.__ivfE2E = async function () {
   log('GIR target-to-rate calculation: target 4 mg/kg/min in 60 kg gives 288 mL/h', /288/.test(($('[data-gir-rate-result]') || {}).textContent || ''), ($('[data-gir-rate-result]') || {}).textContent);
   await esc();
 
+  // ICP & Osmotherapy guide
+  $('[data-guide="icp"]').click(); await wait(350);
+  log('ICP guide opened', !!$('[data-guide-modal="icp"]'), '');
+  await type($('[data-icp-weight]'), '70');
+  $('[data-man-presets] [data-man-preset="0.5"]').click(); await wait(150);
+  // 70 kg at 0.5 g/kg: 35.0 g, 175 mL
+  log('Mannitol 20% calculation: 70 kg at 0.5 g/kg gives 35.0 g and 175 mL', /35\.0/.test(($('[data-man-dose-g]') || {}).textContent || '') && /175/.test(($('[data-man-vol-ml]') || {}).textContent || ''), [($('[data-man-dose-g]') || {}).textContent, ($('[data-man-vol-ml]') || {}).textContent]);
+  await type($('[data-man-osm-input]'), '325'); await wait(150);
+  log('Mannitol osmolality >= 320 mOsm/kg triggers danger HOLD alert', !!$('[data-man-osm-alert="danger"]'), '');
+  $('[data-icp-tab="nacl3"]').click(); await wait(250);
+  $('[data-nacl3-presets] [data-nacl3-preset="250"]').click(); await wait(150);
+  await type($('[data-nacl3-sna-input]'), '138'); await wait(150);
+  log('3% NaCl bolus calculation: 250 mL bolus rise and predicted Na shown', /250/.test(($('[data-nacl3-vol-ml]') || {}).textContent || '') && /mmol\/L/.test(($('[data-nacl3-rise-val]') || {}).textContent || ''), ($('[data-nacl3-rise-val]') || {}).textContent);
+  await type($('[data-nacl3-sna-input]'), '156'); await wait(150);
+  log('3% NaCl current Na >= 155 mmol/L triggers high alert', !!$('[data-nacl3-alert="high"]'), '');
+  $('[data-icp-tab="decision"]').click(); await wait(250);
+  log('ICP osmotherapy decision matrix rendered with clinical scenarios', $$('[data-icp-scenario]').length === 5, '');
+  $('[data-icp-tab="cpp"]').click(); await wait(250);
+  await type($('[data-cpp-sbp]'), '130'); await type($('[data-cpp-dbp]'), '80'); await type($('[data-cpp-icp-input]'), '18'); await wait(150);
+  // MAP = 80 + 50/3 = 96.7 mmHg; CPP = 96.7 - 18 = 78.7 mmHg
+  log('CPP calculator: MAP and CPP calculated with target ranges', /96\.7/.test(($('[data-cpp-map-val]') || {}).textContent || '') && /78\.7/.test(($('[data-cpp-val]') || {}).textContent || ''), [($('[data-cpp-map-val]') || {}).textContent, ($('[data-cpp-val]') || {}).textContent]);
+  await esc();
+
   // Language and theme
   $('[data-lang]').click(); await wait(300);
   log('Thai: title, card labels and Unknown in Thai', /คู่มือสารน้ำ/.test($('h1').textContent) && /ไม่ทราบ/.test(fact('d5s5', 'ph')) && /ไทยนครพัฒนา|เอ\.เอ็น\.บี/.test(card('nss').querySelector('[data-holder-line="th"]').textContent) && /ปัจจุบัน/.test($('[data-filter-reg="current"]').textContent), $('h1').textContent);
