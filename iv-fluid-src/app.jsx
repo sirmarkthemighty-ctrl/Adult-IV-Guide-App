@@ -62,12 +62,14 @@ const DropletIcon = ({ className }) => (
   const neutrals = {
     'bg-white': 'background-color:#151f32', 'bg-slate-50': 'background-color:#101a2b',
     'bg-slate-50/50': 'background-color:rgba(16,26,43,.5)', 'bg-slate-100': 'background-color:#0b1220',
-    'bg-slate-100/95': 'background-color:rgba(11,18,32,.95)', 'bg-slate-200': 'background-color:#24324a',
-    'text-slate-900': 'color:#f1f5f9', 'text-slate-800': 'color:#e2e8f0', 'text-slate-700': 'color:#cbd5e1',
+    'bg-slate-100/70': 'background-color:rgba(11,18,32,.7)', 'bg-slate-100/95': 'background-color:rgba(11,18,32,.95)',
+    'bg-slate-200': 'background-color:#24324a', 'bg-slate-900/70': 'background-color:rgba(11,18,32,.7)',
+    'text-slate-950': 'color:#f1f5f9', 'text-slate-900': 'color:#f1f5f9', 'text-slate-800': 'color:#e2e8f0', 'text-slate-700': 'color:#cbd5e1',
     'text-slate-600': 'color:#a8b4c6', 'text-slate-500': 'color:#94a3b8', 'text-slate-400': 'color:#7d8ba1',
     'text-slate-300': 'color:#4a5a73', 'text-slate-200': 'color:#33425a',
     'border-slate-100': 'border-color:#1d2940', 'border-slate-200': 'border-color:#263449',
     'border-slate-200/50': 'border-color:rgba(38,52,73,.5)', 'border-slate-300': 'border-color:#33435c',
+    'border-slate-700': 'border-color:#33435c',
   };
   const hoverNeutrals = {
     'hover:bg-white': 'background-color:#1b2740', 'hover:bg-slate-50': 'background-color:#1b2740',
@@ -80,16 +82,18 @@ const DropletIcon = ({ className }) => (
   Object.entries(neutrals).forEach(([c, d]) => add(c, d));
   Object.entries(hoverNeutrals).forEach(([c, d]) => add(c, d, true));
   Object.entries(tints).forEach(([f, [c300, c400, c500]]) => {
-    [['50', 0.12], ['100', 0.2]].forEach(([shade, a]) => {
+    [['50', 0.12], ['100', 0.2], ['200', 0.28]].forEach(([shade, a]) => {
       add(`bg-${f}-${shade}`, `background-color:rgba(${c500},${a})`);
-      [10, 50, 80].forEach((o) => add(`bg-${f}-${shade}/${o}`, `background-color:rgba(${c500},${(a * o / 100).toFixed(3)})`));
+      [10, 20, 30, 40, 50, 60, 70, 80, 90].forEach((o) => add(`bg-${f}-${shade}/${o}`, `background-color:rgba(${c500},${(a * o / 100).toFixed(3)})`));
       add(`hover:bg-${f}-${shade}`, `background-color:rgba(${c500},${a + 0.06})`, true);
     });
-    ['500', '600'].forEach((s) => add(`text-${f}-${s}`, `color:rgb(${c400})`));
-    ['700', '800', '900'].forEach((s) => add(`text-${f}-${s}`, `color:rgb(${c300})`));
-    ['500', '600'].forEach((s) => add(`hover:text-${f}-${s}`, `color:rgb(${c300})`, true));
+    ['400', '500', '600'].forEach((s) => add(`text-${f}-${s}`, `color:rgb(${c400})`));
+    ['700', '800', '900', '950'].forEach((s) => add(`text-${f}-${s}`, `color:rgb(${c300})`));
+    ['400', '500', '600'].forEach((s) => add(`hover:text-${f}-${s}`, `color:rgb(${c300})`, true));
+    ['700', '800', '900', '950'].forEach((s) => add(`hover:text-${f}-${s}`, `color:rgb(${c300})`, true));
     [['100', 0.28], ['200', 0.35], ['300', 0.45]].forEach(([s, a]) => {
       add(`border-${f}-${s}`, `border-color:rgba(${c500},${a})`);
+      [40, 50, 60, 70, 80].forEach((o) => add(`border-${f}-${s}/${o}`, `border-color:rgba(${c500},${(a * o / 100).toFixed(3)})`));
       add(`hover:border-${f}-${s}`, `border-color:rgba(${c500},.6)`, true);
     });
   });
@@ -392,10 +396,10 @@ const thProducts = (f) => f.thai.map(r => ({ reg: r, code: TH_REG[r][0], name: T
 const REGIONS = ['th', 'us', 'uk', 'eu', 'jp'];
 const REG_STATUSES = ['current', 'past', 'never'];
 const COUNTRY_COLORS = {
-  th: { on: 'bg-emerald-600 text-white shadow-sm', off: 'text-emerald-700 hover:bg-emerald-50', chip: 'border-emerald-200 bg-emerald-50 text-emerald-700' },
+  th: { on: 'bg-emerald-700 text-white shadow-sm', off: 'text-emerald-700 hover:bg-emerald-50', chip: 'border-emerald-200 bg-emerald-50 text-emerald-700' },
   us: { on: 'bg-blue-600 text-white shadow-sm', off: 'text-blue-700 hover:bg-blue-50', chip: 'border-blue-200 bg-blue-50 text-blue-700' },
   uk: { on: 'bg-rose-600 text-white shadow-sm', off: 'text-rose-700 hover:bg-rose-50', chip: 'border-rose-200 bg-rose-50 text-rose-700' },
-  eu: { on: 'bg-amber-500 text-white shadow-sm', off: 'text-amber-700 hover:bg-amber-50', chip: 'border-amber-200 bg-amber-50 text-amber-800' },
+  eu: { on: 'bg-amber-700 text-white shadow-sm', off: 'text-amber-700 hover:bg-amber-50', chip: 'border-amber-200 bg-amber-50 text-amber-800' },
   jp: { on: 'bg-violet-600 text-white shadow-sm', off: 'text-violet-700 hover:bg-violet-50', chip: 'border-violet-200 bg-violet-50 text-violet-700' },
 };
 const US_SPONSOR = { baxter: 'Baxter Healthcare', bbraun: 'B. Braun', icu: 'Otsuka ICU Medical', hospira: 'Hospira', fresenius: 'Fresenius Kabi USA' };
@@ -933,9 +937,9 @@ const FAMILY_STYLE = {
 };
 const FAMILIES = ['saline', 'balanced', 'dextrose', 'dexsaline', 'hypertonic', 'colloid'];
 const NA_BANDS = ['low', 'resus', 'high'];
-const NA_BAND_STYLE = { low: ['bg-amber-500 text-white shadow-sm', 'text-amber-700 hover:bg-amber-50'], resus: ['bg-emerald-600 text-white shadow-sm', 'text-emerald-700 hover:bg-emerald-50'], high: ['bg-rose-600 text-white shadow-sm', 'text-rose-700 hover:bg-rose-50'] };
+const NA_BAND_STYLE = { low: ['bg-amber-700 text-white shadow-sm', 'text-amber-800 hover:bg-amber-50'], resus: ['bg-emerald-700 text-white shadow-sm', 'text-emerald-800 hover:bg-emerald-50'], high: ['bg-rose-700 text-white shadow-sm', 'text-rose-800 hover:bg-rose-50'] };
 const PH_BANDS = ['acidic', 'physio'];
-const PH_BAND_STYLE = { acidic: ['bg-amber-600 text-white shadow-sm', 'text-amber-700 hover:bg-amber-50'], physio: ['bg-teal-600 text-white shadow-sm', 'text-teal-700 hover:bg-teal-50'] };
+const PH_BAND_STYLE = { acidic: ['bg-amber-700 text-white shadow-sm', 'text-amber-800 hover:bg-amber-50'], physio: ['bg-teal-700 text-white shadow-sm', 'text-teal-800 hover:bg-teal-50'] };
 const CONTAINS = ['k', 'ca', 'mg', 'glucose', 'buffer'];
 // Ion tiles on the cards: colour per ion
 const ION_TILES = [
@@ -1206,7 +1210,7 @@ const Modal = ({ title, sub, onClose, children, footer, tone = 'bg-slate-50', ic
           {icon}
           <div className="min-w-0 flex-1">
             <h2 className="text-lg sm:text-xl font-extrabold text-slate-800 leading-tight break-words">{title}</h2>
-            {sub && <p className="text-xs text-slate-500 mt-0.5">{sub}</p>}
+            {sub && <p className="text-xs text-slate-600 mt-0.5">{sub}</p>}
           </div>
           <button onClick={onClose} data-modal-close className="p-2 -m-1 text-slate-400 hover:text-slate-700 hover:bg-white rounded-full transition-colors shrink-0" aria-label="Close"><X className="w-5 h-5" /></button>
         </div>
@@ -1218,7 +1222,7 @@ const Modal = ({ title, sub, onClose, children, footer, tone = 'bg-slate-50', ic
 };
 const Section = ({ title, children, attrs = {}, tone = 'bg-slate-50 border-slate-200' }) => (
   <section className={`${tone} rounded-xl border p-3 sm:p-4 min-w-0`} {...attrs}>
-    {title && <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">{title}</h3>}
+    {title && <h3 className="text-[11px] font-bold text-slate-600 uppercase tracking-wider mb-1.5">{title}</h3>}
     {children}
   </section>
 );
@@ -2311,7 +2315,7 @@ const NumInput = ({ label, value, onChange, unit, attrs = {}, step = 'any', min 
     <span className="flex items-center gap-1.5">
       <input type="number" inputMode="decimal" min={min} step={step} value={value} onChange={(e) => onChange(e.target.value)} placeholder="—"
         className="w-full min-w-0 h-9 px-2.5 rounded-lg border border-slate-200 bg-white text-base sm:text-sm font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 tabular-nums" {...attrs} />
-      {unit && <span className="text-xs text-slate-400 font-medium shrink-0">{unit}</span>}
+      {unit && <span className="text-xs text-slate-500 font-medium shrink-0">{unit}</span>}
     </span>
   </label>
 );
@@ -3603,11 +3607,11 @@ const AlbuminGuide = ({ lang, t, onClose, onOpenFluid }) => {
               </div>
               <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-fuchsia-200/60 text-xs">
                 <div>
-                  <div className="text-[10px] text-slate-500 font-bold">20% Volume</div>
+                  <div className="text-[10px] text-slate-600 font-bold">20% Volume</div>
                   <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day1-vol20>{sbpDay1Vol20 ? Math.round(sbpDay1Vol20) : '—'} mL</div>
                 </div>
                 <div>
-                  <div className="text-[10px] text-slate-500 font-bold">25% Volume</div>
+                  <div className="text-[10px] text-slate-600 font-bold">25% Volume</div>
                   <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day1-vol25>{sbpDay1Vol25 ? Math.round(sbpDay1Vol25) : '—'} mL</div>
                 </div>
               </div>
@@ -3626,11 +3630,11 @@ const AlbuminGuide = ({ lang, t, onClose, onOpenFluid }) => {
               </div>
               <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-sky-200/60 text-xs">
                 <div>
-                  <div className="text-[10px] text-slate-500 font-bold">20% Volume</div>
+                  <div className="text-[10px] text-slate-600 font-bold">20% Volume</div>
                   <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day3-vol20>{sbpDay3Vol20 ? Math.round(sbpDay3Vol20) : '—'} mL</div>
                 </div>
                 <div>
-                  <div className="text-[10px] text-slate-500 font-bold">25% Volume</div>
+                  <div className="text-[10px] text-slate-600 font-bold">25% Volume</div>
                   <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day3-vol25>{sbpDay3Vol25 ? Math.round(sbpDay3Vol25) : '—'} mL</div>
                 </div>
               </div>
@@ -3924,16 +3928,16 @@ function App() {
 
   const groupBox = 'flex bg-white rounded-md border border-slate-200 p-0.5 shadow-sm shrink-0 items-center h-[26px] md:h-7 gap-0.5';
   const segBtn = 'h-full px-1.5 md:px-2 rounded flex items-center justify-center text-[10px] font-bold transition-all whitespace-nowrap';
-  const groupLabel = (text, title) => <span className="pl-1 pr-0.5 text-[10px] font-bold text-slate-400 whitespace-nowrap" title={title}>{text}:</span>;
+  const groupLabel = (text, title) => <span className="pl-1 pr-0.5 text-[10px] font-bold text-slate-500 whitespace-nowrap" title={title}>{text}:</span>;
   const GUIDE_BTNS = [
     ['choose', 'bg-rose-600 hover:bg-rose-700 border-rose-700', ActivityIcon],
-    ['maint', 'bg-emerald-600 hover:bg-emerald-700 border-emerald-700', Stethoscope],
+    ['maint', 'bg-emerald-700 hover:bg-emerald-800 border-emerald-800', Stethoscope],
     ['sodium', 'bg-violet-600 hover:bg-violet-700 border-violet-700', ScaleIcon],
-    ['kguide', 'bg-amber-600 hover:bg-amber-700 border-amber-700', ZapIcon],
+    ['kguide', 'bg-amber-700 hover:bg-amber-800 border-amber-800', ZapIcon],
     ['dka', 'bg-indigo-600 hover:bg-indigo-700 border-indigo-700', FlameIcon],
-    ['water', 'bg-cyan-600 hover:bg-cyan-700 border-cyan-700', DropIcon],
+    ['water', 'bg-cyan-700 hover:bg-cyan-800 border-cyan-800', DropIcon],
     ['drip', 'bg-blue-600 hover:bg-blue-700 border-blue-700', DripIcon],
-    ['gir', 'bg-teal-600 hover:bg-teal-700 border-teal-700', TrendingUpIcon],
+    ['gir', 'bg-teal-700 hover:bg-teal-800 border-teal-800', TrendingUpIcon],
     ['icp', 'bg-purple-700 hover:bg-purple-800 border-purple-800', BrainIcon],
     ['albumin', 'bg-fuchsia-700 hover:bg-fuchsia-800 border-fuchsia-800', DropletIcon],
   ];
@@ -4004,7 +4008,7 @@ function App() {
           <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-800 mb-1 md:mb-2 leading-tight sm:pr-32 md:pr-48">{t.title}</h1>
           <p className="hidden sm:block text-xs md:text-sm text-slate-600">{t.subtitle}</p>
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5 sm:block">
-            <p className="text-[10px] md:text-xs font-semibold text-indigo-500 sm:mt-1">{t.madeBy}</p>
+            <p className="text-[10px] md:text-xs font-semibold text-indigo-600 sm:mt-1">{t.madeBy}</p>
             <a href="#disclaimer-heading" onClick={(e) => { e.preventDefault(); const el = document.getElementById('disclaimer-heading'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }} className="block sm:mt-1 text-[11px] md:text-xs font-semibold text-amber-700 hover:underline">{t.discLink}</a>
           </div>
         </header>
@@ -4051,8 +4055,8 @@ function App() {
               {REGIONS.map(r => <button key={r} onClick={() => toggleCountry(r)} aria-pressed={countries.includes(r)} title={t.countryNames[r]} data-filter-country={r} className={`${segBtn} ${countries.includes(r) ? COUNTRY_COLORS[r].on : COUNTRY_COLORS[r].off}`}>{t.countryCodes[r]}</button>)}
             </div>
             <div className={groupBox} role="group" aria-label={t.regTitle} title={t.regTitle}>
-              <span className="pl-1 pr-0.5 text-[10px] font-bold text-slate-400 whitespace-nowrap inline-flex items-center gap-0.5">{t.regLabel}<Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-emerald-600" /></span>
-              {REG_STATUSES.map(k => { const on = regStatus.includes(k); const tone = k === 'current' ? ['bg-emerald-600 text-white shadow-sm', 'text-emerald-700 hover:bg-emerald-50'] : k === 'past' ? ['bg-amber-500 text-white shadow-sm', 'text-amber-700 hover:bg-amber-50'] : ['bg-slate-600 text-white shadow-sm', 'text-slate-600 hover:bg-slate-50']; return (
+              <span className="pl-1 pr-0.5 text-[10px] font-bold text-slate-500 whitespace-nowrap inline-flex items-center gap-0.5">{t.regLabel}<Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-emerald-600" /></span>
+              {REG_STATUSES.map(k => { const on = regStatus.includes(k); const tone = k === 'current' ? ['bg-emerald-700 text-white shadow-sm', 'text-emerald-800 hover:bg-emerald-50'] : k === 'past' ? ['bg-amber-700 text-white shadow-sm', 'text-amber-800 hover:bg-amber-50'] : ['bg-slate-700 text-white shadow-sm', 'text-slate-700 hover:bg-slate-50']; return (
                 <button key={k} onClick={() => toggleRegStatus(k)} aria-pressed={on} data-filter-reg={k} className={`${segBtn} gap-1 ${on ? tone[0] : tone[1]}`}>{k !== 'current' && <span aria-hidden="true">{k === 'past' ? '†' : '⊘'}</span>}{t.regOpts[k]}</button>); })}
             </div>
           </div>
@@ -4076,7 +4080,7 @@ function App() {
             </div>
             <div className={groupBox} role="group" aria-label={t.containsLabel}>
               {groupLabel(t.containsLabel)}
-              {CONTAINS.map(k => { const on = contains.includes(k); return <button key={k} onClick={() => toggleIn(setContains)(k)} aria-pressed={on} data-filter-has={k} title={t.containsLong[k]} className={`${segBtn} ${on ? 'bg-cyan-600 text-white shadow-sm' : 'text-cyan-700 hover:bg-cyan-50'}`}>{t.contains[k]}</button>; })}
+              {CONTAINS.map(k => { const on = contains.includes(k); return <button key={k} onClick={() => toggleIn(setContains)(k)} aria-pressed={on} data-filter-has={k} title={t.containsLong[k]} className={`${segBtn} ${on ? 'bg-cyan-700 text-white shadow-sm' : 'text-cyan-800 hover:bg-cyan-50'}`}>{t.contains[k]}</button>; })}
             </div>
           </div>
         </div>
@@ -4093,7 +4097,7 @@ function App() {
             </div>
           )}
           <div className="flex items-start justify-between gap-2">
-            <div className="text-[11px] md:text-xs text-slate-500 min-w-0 pt-0.5" aria-live="polite" data-count>
+            <div className="text-[11px] md:text-xs text-slate-600 min-w-0 pt-0.5" aria-live="polite" data-count>
               {t.countShowing} <span className="font-bold text-slate-800 tabular-nums">{shown.length}</span> {t.countOf} <span className="font-bold text-slate-800 tabular-nums">{FLUIDS.length}</span> {t.countFluids}
             </div>
             <button onClick={() => setIsLegendOpen(true)} data-legend-btn title={t.legendTitle} className="shrink-0 inline-flex items-center gap-1 h-6 md:h-7 px-2 rounded-md border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 hover:text-slate-900 shadow-sm text-[11px] font-bold whitespace-nowrap transition-colors">
