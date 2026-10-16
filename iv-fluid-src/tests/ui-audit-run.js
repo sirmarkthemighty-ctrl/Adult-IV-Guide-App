@@ -20,7 +20,7 @@ window.__uiAuditRun = async () => {
     audit(lang + ' header', $('header')); audit(lang + ' pinned bar', $('[data-search-bar]'));
     { const ft = $('[data-filters-toggle]'); const open = () => $('[data-filter-bar]').offsetParent; if (!open()) { ft.click(); await wait(300); } $('[data-filter-family="balanced"]').click(); await wait(250); audit(lang + ' filter panel and chips'); $('[data-clear-filters]').click(); await wait(250); }
     { const so = $('[data-search-open]'); if (so && so.getBoundingClientRect().width > 0) { so.click(); await wait(300); audit(lang + ' search open (phone)', $('[data-search-bar]')); document.activeElement && document.activeElement.blur(); await wait(200); } }
-    for (const id of ['acetar', 'sterofundin', 'd5s2k40', 'nss', 'nacl3']) {
+    for (const id of ['acetar', 'sterofundin', 'd5s2k40', 'nss', 'nacl3', 'alb25']) {
       $('[data-fluid="' + id + '"] [data-details]').click(); await wait(400);
       const st = $('[data-src-toggle][aria-pressed="false"]'); if (st) { st.click(); await wait(250); }
       if (modal()) audit(lang + ' detail ' + id, modal());
@@ -58,6 +58,15 @@ window.__uiAuditRun = async () => {
     if (modal()) audit(lang + ' icp guide decision', modal());
     $('[data-icp-tab="cpp"]').click(); await wait(250);
     if (modal()) audit(lang + ' icp guide cpp', modal());
+    await esc();
+    $('[data-guide="albumin"]').click(); await wait(400);
+    if (modal()) audit(lang + ' albumin guide lvp', modal());
+    $('[data-alb-tab="sbp"]').click(); await wait(250);
+    if (modal()) audit(lang + ' albumin guide sbp', modal());
+    $('[data-alb-tab="hrs"]').click(); await wait(250);
+    if (modal()) audit(lang + ' albumin guide hrs', modal());
+    $('[data-alb-tab="compare"]').click(); await wait(250);
+    if (modal()) audit(lang + ' albumin guide compare', modal());
     await esc();
     $('[data-guide="choose"]').click(); await wait(400);
     for (const tab of ['resus', 'maint', 'replace', 'reassess']) { const b = $('[data-tab="' + tab + '"]'); if (b) { b.click(); await wait(250); audit(lang + ' fluid choice ' + tab, modal()); } }

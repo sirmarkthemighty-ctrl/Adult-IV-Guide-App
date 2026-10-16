@@ -34,6 +34,12 @@ const BrainIcon = ({ className }) => (
     <path d="M6.5 14c-.3-.4-.5-.9-.5-1.5"/>
   </svg>
 );
+const DropletIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M12 2.5c-3.5 4.5-6 8-6 11.5a6 6 0 0 0 12 0c0-3.5-2.5-7-6-11.5z" />
+    <path d="M12 11v6M9 14h6" strokeWidth="1.8" />
+  </svg>
+);
 
 // --- Dark theme layer ---
 // The UI is written in light-mode Tailwind classes. Rather than add a dark:
@@ -198,6 +204,10 @@ const TH_REG = {
   '2C 16/53': ['U1DR2C1022530001611C', 'Sterofundin ISO', 'bbraun'],
   '2C 1/46 (NBC)': ['U1DR2C1022460000111C', 'Albumin (Human) 20% Baxter', 'baxter'],
   '2C 2/46 (NBC)': ['U1DR2C1022460000211C', 'Human Albumin 20% B. Braun', 'bbraun'],
+  '2C 3/46 (NBC)': ['U1DR2C1022460000311C', 'Albumin (Human) 5% Baxter', 'baxter'],
+  '2C 4/46 (NBC)': ['U1DR2C1022460000411C', 'Human Albumin 5% B. Braun', 'bbraun'],
+  '2C 5/46 (NBC)': ['U1DR2C1022460000511C', 'Albumin (Human) 25% Baxter', 'baxter'],
+  '2C 6/46 (NBC)': ['U1DR2C1022460000611C', 'Human Albumin 25% B. Braun', 'bbraun'],
 };
 // Every record listed on a card was opened on 14 Oct 2026: its formula field matches the card's formula.
 const thRecordUrl = (code) => 'https://pertento.fda.moph.go.th/FDA_INFORMATION_DRUG/Home/Public_Information_Drug?Newcode=' + code;
@@ -212,7 +222,9 @@ const SOURCES = {
   usKDexNaCl: { cite: 'Potassium Chloride in 5% Dextrose and Sodium Chloride Injection USP, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c553fed1-3de5-4826-8eff-633b5923bf0b' },
   usLR: { cite: "Lactated Ringer's Injection USP, Baxter, US label (DailyMed)", url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dad7735c-709b-40ea-ab7a-15577e24a966' },
   usPL: { cite: 'PLASMA-LYTE A Injection pH 7.4, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6ec9e61c-2c26-402f-8604-f446b2e34058' },
+  usAlb5: { cite: 'Albumin (Human) 5% Solution USP, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f66cb7d-6f77-4c4f-9e1e-c75be7be2db9' },
   usAlb: { cite: 'Albumin (Human) 20% Solution USP, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=27d8e8b0-8c20-41ff-80c7-cb151df051f6' },
+  usAlb25: { cite: 'Albumin (Human) 25% Solution USP, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=27d8e8b0-8c20-41ff-80c7-cb151df051f6' },
   usMan: { cite: 'Osmitrol (Mannitol Injection USP 20%), Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=423c4dbb-bcae-4f76-a0e2-636b04294b0f' },
   thTopBal: { cite: 'TOP Balance Salt Solution, Summary of Product Characteristics, Thai FDA (Thai Otsuka)', url: 'https://ndi.fda.moph.go.th/uploads/drug_detail_corporation/doc/word/1163/09c51bdacb089726f3a2afb88373528e-a1.pdf' },
   thAcetRinger: { cite: "Acetate Ringer's Injection (Able Medical, 2A 15221/63), Summary of Product Characteristic, Thai FDA", url: 'https://ndi.fda.moph.go.th/uploads/drug_detail_corporation/doc/word/1279/f3f314f0cf93470bd742dd647f331448-a1.pdf' },
@@ -317,11 +329,21 @@ const FLUIDS = [
     formula: [['NaCl', 5.26], ['NaGluconate', 5.02], ['NaAcetate_3H2O', 3.68], ['KCl', 0.37], ['MgCl2_6H2O', 0.30]], formulaSrc: 'usPL',
     label: { na: 140, k: 5, mg: 1.5, cl: 98, acetate: 27, gluconate: 23, osm: 294, kcal: 21, ph: '7.4 (6.5–8.0)' }, labelSrc: 'usPL', labelMEq: { mg: 3 },
     thai: [] },
+  { id: 'alb5', short: 'Albumin 5%', name: { en: 'Human Albumin 5% (50 g/L)', th: 'ฮิวแมน อัลบูมิน 5% (50 ก./ล.)' }, family: 'colloid',
+    aliases: ['albumin 5%', 'human albumin 5%', '5% albumin', 'alb5', 'has 5%', 'colloid', 'iso-oncotic', 'อัลบูมิน 5%', 'อัลบูมิน 5'],
+    formula: null, formulaSrc: 'usAlb5',
+    label: { na: 145, k: 1, cl: 100, osm: 300, kcal: 200, ph: '6.9 (6.4–7.4)' }, labelSrc: 'usAlb5',
+    thai: ['2C 3/46 (NBC)', '2C 4/46 (NBC)'] },
   { id: 'alb20', short: 'Albumin 20%', name: { en: 'Human Albumin 20% (200 g/L)', th: 'ฮิวแมน อัลบูมิน 20% (200 ก./ล.)' }, family: 'colloid',
     aliases: ['albumin', 'human albumin', 'alb', 'colloid', '20% albumin', 'has', 'อัลบูมิน'],
     formula: null, formulaSrc: 'usAlb',
     label: { na: 145, k: 1, cl: 100, osm: 300, kcal: 800, ph: '6.9 (6.4–7.4)' }, labelSrc: 'usAlb',
     thai: ['2C 1/46 (NBC)', '2C 2/46 (NBC)'] },
+  { id: 'alb25', short: 'Albumin 25%', name: { en: 'Human Albumin 25% (250 g/L)', th: 'ฮิวแมน อัลบูมิน 25% (250 ก./ล.)' }, family: 'colloid',
+    aliases: ['albumin 25%', 'human albumin 25%', '25% albumin', 'alb25', 'has 25%', 'colloid', 'hyperoncotic', 'salt poor albumin', 'อัลบูมิน 25%', 'อัลบูมิน 25'],
+    formula: null, formulaSrc: 'usAlb25',
+    label: { na: 145, k: 1, cl: 100, osm: 300, kcal: 1000, ph: '6.9 (6.4–7.4)' }, labelSrc: 'usAlb25',
+    thai: ['2C 5/46 (NBC)', '2C 6/46 (NBC)'] },
   { id: 'man20', short: 'Mannitol 20%', name: { en: 'Mannitol 20% (200 g/L)', th: 'แมนนิทอล 20% (200 ก./ล.)' }, family: 'hypertonic',
     aliases: ['mannitol', 'osmitrol', 'osmotic diuretic', '20% mannitol', 'แมนนิทอล'],
     formula: null, formulaSrc: 'usMan',
@@ -477,10 +499,22 @@ const ABROAD = {
     eu: ['current', [['Plasma-Lyte 148 (pH 7.4) solution for infusion', 'Baxter Holding B.V.', 'PA2299/032/001']]],
     jp: ['never', []],
   },
+  alb5: {
+    us: ['current', usApps(['baxter', 'BLA103984', 'Albumin (Human) 5%'])],
+    uk: ['current', [['Human Albumin 5% solution for infusion', 'Bio Products Laboratory', '10002']]],
+    eu: ['current', [['Human Albumin 50 g/l Solution for Infusion', 'Baxter Holding B.V.', 'PA2299/040/002']]],
+    jp: ['never', []],
+  },
   alb20: {
     us: ['current', usApps(['baxter', 'BLA103984', 'Albumin (Human) 20%'])],
     uk: ['current', [['Human Albumin 20% solution for infusion', 'Bio Products Laboratory', '10001']]],
     eu: ['current', [['Human Albumin 200 g/l Solution for Infusion', 'Baxter Holding B.V.', 'PA2299/040/001']]],
+    jp: ['never', []],
+  },
+  alb25: {
+    us: ['current', usApps(['baxter', 'BLA103984', 'Albumin (Human) 25%'])],
+    uk: ['current', [['Human Albumin 25% solution for infusion', 'Bio Products Laboratory', '10003']]],
+    eu: ['current', [['Human Albumin 250 g/l Solution for Infusion', 'Baxter Holding B.V.', 'PA2299/040/003']]],
     jp: ['never', []],
   },
   man20: {
@@ -543,7 +577,10 @@ const REFERENCES = [
   { key: 'sternsK', cite: 'Sterns RH, Grieff M, Bernstein PL. Treatment of hypokalemia in adults. UpToDate 2024; Mount DB. Disorders of potassium balance. In: Brenner and Rector\'s The Kidney 11th ed.', url: null },
   { key: 'aspenGir', cite: 'ASPEN Clinical Guidelines: Nutrition Support in Adult Patients; Wolfe RR et al. Ann Surg 1979 (glucose kinetics and oxidation limits).', url: 'https://doi.org/10.1097/00000658-197910000-00006' },
   { key: 'btfIcp', cite: 'Carney N et al. Guidelines for the Management of Severe Traumatic Brain Injury, 4th Edition. Neurosurgery 2017;80(1):6–15; Neurocritical Care Society (NCS) Emergency Neurological Life Support (ENLS): Intracranial Hypertension and Herniation.', url: 'https://doi.org/10.1093/neuros/nyw321' },
-  ...['usNaCl09', 'usNaCl045', 'usNaCl3', 'usDex', 'usDexNaCl', 'usKDexNaCl', 'usLR', 'usPL', 'usAlb', 'usMan', 'thTopBal', 'thAcetRinger', 'euSterofundin'].map(k => ({ key: k, cite: SOURCES[k].cite, url: SOURCES[k].url })),
+  { key: 'aasldAlb', cite: 'Biggins SW, Angeli P, Garcia-Tsao G, et al. Diagnosis, Evaluation, and Management of Ascites and Hepatorenal Syndrome: 2021 Practice Guidance by the AASLD. Hepatology 2021;74:1014–1048; EASL Clinical Practice Guidelines: Management of decompensated cirrhosis. J Hepatol 2018;69:406–460.', url: 'https://doi.org/10.1002/hep.31884' },
+  { key: 'sortSbp', cite: 'Sort P, Navasa M, Arroyo V, et al. Effect of intravenous albumin on renal impairment and mortality in patients with cirrhosis and spontaneous bacterial peritonitis. N Engl J Med 1999;341:403–409.', url: 'https://doi.org/10.1056/NEJM199908053410603' },
+  { key: 'safeAlb', cite: 'The SAFE Study Investigators. A comparison of albumin and saline for fluid resuscitation in the intensive care unit. N Engl J Med 2004;350:2247–2256; SAFE-TBI Investigators. Saline or Albumin for Fluid Resuscitation in Patients with Traumatic Brain Injury. N Engl J Med 2007;357:874–884.', url: 'https://doi.org/10.1056/NEJMoa040232' },
+  ...['usNaCl09', 'usNaCl045', 'usNaCl3', 'usDex', 'usDexNaCl', 'usKDexNaCl', 'usLR', 'usPL', 'usAlb5', 'usAlb', 'usAlb25', 'usMan', 'thTopBal', 'thAcetRinger', 'euSterofundin'].map(k => ({ key: k, cite: SOURCES[k].cite, url: SOURCES[k].url })),
 ];
 const refUrl = (key) => (REFERENCES.find(r => r.key === key) || {}).url;
 
@@ -551,6 +588,14 @@ const refUrl = (key) => (REFERENCES.find(r => r.key === key) || {}).url;
 // Changelog (newest first; one entry per day)
 // =====================================================================
 const changelogData = [
+  { version: 'v1.6.0', date: 'October 16, 2026', features: [
+    'Albumin Indication & Clinical Dosing Guide: Bedside decision guide and dose calculator for Human Albumin indications in cirrhosis, critical care, and volume overload.',
+    'Large-Volume Paracentesis (LVP > 5 L) Calculator: Evidence-based calculation (6–8 g per litre removed) preventing paracentesis-induced circulatory dysfunction (PICD), with 20% vs 25% volume breakdown.',
+    'Spontaneous Bacterial Peritonitis (SBP) Dosing: Stepwise weight-based protocol (Day 1: 1.5 g/kg, Day 3: 1.0 g/kg) proven to reduce hepatorenal syndrome and in-hospital mortality (Sort et al., NEJM 1999 / AASLD guidelines).',
+    'Hepatorenal Syndrome (HRS-AKI) Protocol: Diagnostic volume challenge calculator (1 g/kg/day for 2 days, max 100 g/day), diuretic cessation rules, and treatment guidance with vasoconstrictors (terlipressin / norepinephrine).',
+    'Iso-oncotic (5%) vs Hyper-oncotic (20% & 25%) Selection Matrix: Head-to-head oncotic and volume expansion comparison, clinical indications, and black box contraindications (strict avoidance in traumatic brain injury - SAFE study).',
+    'Added Human Albumin 5% (50 g/L, iso-oncotic) and Human Albumin 25% (250 g/L, hyper-oncotic): Full compositions, registrations in Thailand and abroad, and clinical warning flags.',
+  ], bugs: [] },
   { version: 'v1.5.0', date: 'October 16, 2026', features: [
     'ICP & Osmotherapy Clinical Protocol: Bedside guide for acute intracranial hypertension management with Mannitol 20% vs. 3% Hypertonic Saline.',
     'Mannitol 20% Dosing & Safety Guard: Gram and volume calculator (0.25–1.0 g/kg), 15–20 min infusion guidance with filter needle alerts, serum osmolality cutoff (< 320 mOsm/kg alert to prevent AKI), and osmolar gap accumulation calculator.',
@@ -587,6 +632,14 @@ const changelogData = [
   ], bugs: [] },
 ];
 const CHANGELOG_TH = {
+  'v1.6.0': { features: [
+    'แนวทางการใช้อัลบูมินทางคลินิก (Albumin Indication Guide): เครื่องคำนวณขนาดยาและแนวทางตัดสินใจการใช้อัลบูมินในภาวะแทรกซ้อนของโรคตับแข็งและผู้ป่วยวิกฤต',
+    'เครื่องคำนวณการเจาะระบายน้ำในช่องท้องปริมาณมาก (LVP > 5 L): คำนวณขนาดยาตามเกณฑ์มาตรฐาน (6–8 g ต่อลิตรของน้ำที่เจาะออก) เพื่อป้องกัน Paracentesis-Induced Circulatory Dysfunction (PICD) พร้อมคำนวณปริมาตรของ 20% และ 25% อัลบูมิน',
+    'แนวทางการให้ยาในภาวะเยื่อบุช่องท้องอักเสบติดเชื้อ (SBP): คำนวณขนาดยาตามน้ำหนักตัว (วันที่ 1: 1.5 g/kg, วันที่ 3: 1.0 g/kg) ตามหลักฐานเชิงประจักษ์ที่ช่วยลดภาวะไตวายและอัตราการเสียชีวิตอย่างมีนัยสำคัญ (Sort et al., NEJM 1999 / AASLD)',
+    'แนวทางการดูแล Hepatorenal Syndrome (HRS-AKI): คำนวณขนาด Albumin fluid challenge (1 g/kg/วัน สูงสุด 100 g/วัน เป็นเวลา 2 วัน) เพื่อแยกภาวะ Pre-renal azotemia พร้อมแนวทางการให้ยาร่วมกับ vasoconstrictor (Terlipressin / Norepinephrine)',
+    'ตารางเปรียบเทียบ Albumin 5% (Iso-oncotic) เทียบกับ 20% และ 25% (Hyper-oncotic): เปรียบเทียบแรงดันออนโคติกและอัตราการดึงน้ำเข้าหลอดเลือด พร้อมข้อบ่งชี้และข้อห้ามใช้วิกฤต (ห้ามใช้ในผู้บาดเจ็บทางสมอง TBI - การศึกษา SAFE)',
+    'เพิ่มสารน้ำ Human Albumin 5% (50 g/L) และ Human Albumin 25% (250 g/L): ข้อมูลส่วนประกอบครบถ้วน การขึ้นทะเบียนในไทยและต่างประเทศ พร้อมข้อควรระวังทางคลินิก',
+  ], bugs: [] },
   'v1.5.0': { features: [
     'แนวทางการใช้สารน้ำลดความดันในกะโหลกศีรษะ (ICP & Osmotherapy): คำนวณขนาดยาและการให้ Mannitol 20% เทียบกับ 3% Hypertonic Saline สำหรับภาวะความดันในกะโหลกศีรษะสูงวิกฤต',
     'เครื่องคำนวณและข้อควรระวัง Mannitol 20%: คำนวณขนาดยา (กรัมและมิลลิลิตร) ตามน้ำหนักตัว (0.25–1.0 g/kg), แจ้งเตือนเวลาการให้ (15–20 นาที) และการใช้สายกรอง (in-line filter), ระบบตรวจสอบระดับ Serum Osmolality (< 320 mOsm/kg ป้องกันไตวายเฉียบพลัน) พร้อมการคำนวณ Osmolar Gap',
@@ -722,8 +775,8 @@ const translations = {
     keyNone: 'The fluid contains none.',
     keyCountries: 'Country chips', keyChipCurrent: 'Registered (country colour); the line beside it names the makers', keyChipPast: 'Registration ended (withdrawn or discontinued)', keyChipNever: 'Not registered: no product of this fluid and strength found', keyBands: 'Sodium bands', keyFlags: 'Warnings at the bottom of each card', keyFamilies: 'Types',
     // guides
-    guides: { choose: 'Fluid choice', maint: 'Maintenance', sodium: 'Sodium & 3% bolus', kguide: 'Potassium guide', dka: 'DKA / HHS', water: 'Water deficit', drip: 'Drip rate', gir: 'GIR Calculator', icp: 'ICP & Osmotherapy' },
-    guideShort: { choose: 'Choice', maint: 'Maint.', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'Water', drip: 'Drip', gir: 'GIR', icp: 'ICP' },
+    guides: { choose: 'Fluid choice', maint: 'Maintenance', sodium: 'Sodium & 3% bolus', kguide: 'Potassium guide', dka: 'DKA / HHS', water: 'Water deficit', drip: 'Drip rate', gir: 'GIR Calculator', icp: 'ICP & Osmotherapy', albumin: 'Albumin Guide' },
+    guideShort: { choose: 'Choice', maint: 'Maint.', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'Water', drip: 'Drip', gir: 'GIR', icp: 'ICP', albumin: 'Albumin' },
     // disclaimer and references
     discTitle: 'Disclaimer',
     discPoints: [
@@ -741,8 +794,11 @@ const translations = {
       adaDka: 'DKA and HHS fluid resuscitation phases, dextrose addition threshold, and potassium replenishment protocol', katz: 'Corrected sodium formula in hyperglycemia', sternsK: 'Potassium deficit estimation, peripheral vs central infusion rates, and magnesium alert',
       aspenGir: 'Glucose infusion rate limits, maximal oxidation capacity (4–7 mg/kg/min) and daily dextrose calculation',
       btfIcp: 'ICP osmotherapy targets (serum Na 145–155, Osm < 320), Mannitol vs 3% NaCl dosing, and CPP targets (60–70 mmHg)',
+      aasldAlb: 'AASLD guidelines for large-volume paracentesis (6–8 g/L removed) and hepatorenal syndrome diagnostic challenge (1 g/kg/day)',
+      sortSbp: 'Sort et al. SBP albumin protocol (1.5 g/kg day 1, 1.0 g/kg day 3)',
+      safeAlb: 'SAFE trial volume resuscitation and SAFE-TBI caution against albumin in traumatic brain injury',
       usNaCl09: 'NSS values', usNaCl045: 'NSS/2 values, hyponatraemia warning', usNaCl3: '3% NaCl values, large-vein warning', usDex: '5% and 10% dextrose values, central vein at 900 mOsm/L or more, blood glucose', usDexNaCl: '5%D/NSS and 5%D/N/2 values, hyponatraemia warning', usKDexNaCl: '5%D/N/2 with KCl values',
-      usLR: "Lactated Ringer's values, citrated-blood warning", usPL: 'Plasma-Lyte A values', usAlb: 'Albumin 20% values, oncotic colloid warnings', usMan: 'Mannitol 20% values, osmotic diuresis alerts', thTopBal: 'TOP Balance values', thAcetRinger: "Ringer's acetate pH, calcium and ceftriaxone warning", euSterofundin: 'Sterofundin ISO values',
+      usLR: "Lactated Ringer's values, citrated-blood warning", usPL: 'Plasma-Lyte A values', usAlb5: 'Albumin 5% values, iso-oncotic volume expansion', usAlb: 'Albumin 20% values, oncotic colloid warnings', usAlb25: 'Albumin 25% values, hyper-oncotic colloid shift warnings', usMan: 'Mannitol 20% values, osmotic diuresis alerts', thTopBal: 'TOP Balance values', thAcetRinger: "Ringer's acetate pH, calcium and ceftriaxone warning", euSterofundin: 'Sterofundin ISO values',
     },
     madeBy: 'Made by Warodom Phaenthong, M.D.',
     changelogTitle: 'Version history', changelogSub: 'What changed and when', latest: 'Latest', newFeatures: 'New', bugFixes: 'Fixes',
@@ -835,8 +891,8 @@ const translations = {
     keyUnknown: 'ไม่มีเอกสารของผลิตภัณฑ์นี้ที่ระบุค่า',
     keyNone: 'สารน้ำนี้ไม่มีส่วนประกอบนี้',
     keyCountries: 'ชิปประเทศ', keyChipCurrent: 'มีทะเบียน (สีของประเทศ) ข้างชิประบุผู้ผลิต', keyChipPast: 'ทะเบียนสิ้นสุดแล้ว (ถอนหรือเลิกจำหน่าย)', keyChipNever: 'ไม่มีทะเบียน: ไม่พบผลิตภัณฑ์ชนิดและความแรงนี้', keyBands: 'ช่วงโซเดียม', keyFlags: 'คำเตือนด้านล่างของแต่ละการ์ด', keyFamilies: 'ชนิด',
-    guides: { choose: 'เลือกสารน้ำ', maint: 'บำรุงรักษา', sodium: 'Na⁺ และ 3% bolus', kguide: 'คู่มือโพแทสเซียม', dka: 'โปรโตคอล DKA/HHS', water: 'การขาดน้ำ', drip: 'อัตราหยด', gir: 'เครื่องคำนวณ GIR', icp: 'ICP และ Osmotherapy' },
-    guideShort: { choose: 'เลือก', maint: 'บำรุง', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'น้ำ', drip: 'หยด', gir: 'GIR', icp: 'ICP' },
+    guides: { choose: 'เลือกสารน้ำ', maint: 'บำรุงรักษา', sodium: 'Na⁺ และ 3% bolus', kguide: 'คู่มือโพแทสเซียม', dka: 'โปรโตคอล DKA/HHS', water: 'การขาดน้ำ', drip: 'อัตราหยด', gir: 'เครื่องคำนวณ GIR', icp: 'ICP และ Osmotherapy', albumin: 'แนวทางใช้อัลบูมิน' },
+    guideShort: { choose: 'เลือก', maint: 'บำรุง', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'น้ำ', drip: 'หยด', gir: 'GIR', icp: 'ICP', albumin: 'อัลบูมิน' },
     discTitle: 'ข้อควรทราบ',
     discPoints: [
       'คู่มือนี้ช่วยประกอบการตัดสินใจทางคลินิก ไม่ได้ใช้แทน ตรวจสอบฉลากของถุงที่ใช้จริงเสมอ เพราะผลิตภัณฑ์ต่างผู้ผลิตอาจแตกต่างกัน',
@@ -853,8 +909,11 @@ const translations = {
       adaDka: 'ขั้นตอนการให้สารน้ำ DKA/HHS เกณฑ์การเติมเดกซ์โทรส และความปลอดภัยของโพแทสเซียม', katz: 'สูตรคำนวณโซเดียมปรับค่าเมื่อน้ำตาลในเลือดสูง', sternsK: 'การประมาณการโพแทสเซียมที่ขาด อัตราการให้ทางหลอดเลือดดำส่วนปลายและส่วนกลาง และการตรวจแมกนีเซียม',
       aspenGir: 'ขีดจำกัดอัตราการให้กลูโคส (GIR) อัตราเผาผลาญสูงสุด (4–7 mg/kg/นาที) และพลังงานเดกซ์โทรส',
       btfIcp: 'เกณฑ์การใช้ Osmotherapy ลด ICP (โซเดียม 145–155, Osm < 320), ขนาดยา Mannitol เทียบกับ 3% NaCl และเป้าหมาย CPP (60–70 mmHg)',
+      aasldAlb: 'แนวทาง AASLD สำหรับการเจาะระบายน้ำในช่องท้องปริมาณมาก (6–8 g/L) และการทดสอบวินิจฉัย Hepatorenal syndrome (1 g/kg/วัน)',
+      sortSbp: 'Sort et al. ขนาดยาอัลบูมินในภาวะเยื่อบุช่องท้องอักเสบติดเชื้อ SBP (1.5 g/kg วันที่ 1 และ 1.0 g/kg วันที่ 3)',
+      safeAlb: 'การศึกษา SAFE กู้ชีพด้วยสารน้ำและข้อห้ามใช้อัลบูมินในผู้ป่วยบาดเจ็บที่ศีรษะ (SAFE-TBI)',
       usNaCl09: 'ค่าของ NSS', usNaCl045: 'ค่าของ NSS/2', usNaCl3: 'ค่าของ 3% NaCl คำเตือนให้ทางหลอดเลือดใหญ่', usDex: 'ค่าของ 5% และ 10% เดกซ์โทรส central vein เมื่อ 900 mOsm/L ขึ้นไป น้ำตาลในเลือด', usDexNaCl: 'ค่าของ 5%D/NSS และ 5%D/N/2 คำเตือนโซเดียมต่ำ', usKDexNaCl: 'ค่าของ 5%D/N/2 ผสม KCl',
-      usLR: "ค่าของ Lactated Ringer's คำเตือนเรื่องแคลเซียม", usPL: 'ค่าของ Plasma-Lyte A', usAlb: 'ข้อมูล Human Albumin 20% และข้อควรระวังคอลลอยด์', usMan: 'ข้อมูล Mannitol 20% และข้อควรระวังการขับปัสสาวะออสโมติก', thTopBal: 'ค่าของ TOP Balance', thAcetRinger: "pH ของ Ringer's acetate คำเตือนแคลเซียมกับ ceftriaxone", euSterofundin: 'ค่าของ Sterofundin ISO',
+      usLR: "ค่าของ Lactated Ringer's คำเตือนเรื่องแคลเซียม", usPL: 'ค่าของ Plasma-Lyte A', usAlb5: 'ข้อมูลฉลาก Albumin 5% การขยายปริมาตรในหลอดเลือดแบบ Iso-oncotic', usAlb: 'ข้อมูล Human Albumin 20% และข้อควรระวังคอลลอยด์', usAlb25: 'ข้อมูลฉลาก Albumin 25% ข้อควรระวังการดึงน้ำแบบ Hyper-oncotic', usMan: 'ข้อมูล Mannitol 20% และข้อควรระวังการขับปัสสาวะออสโมติก', thTopBal: 'ค่าของ TOP Balance', thAcetRinger: "pH ของ Ringer's acetate คำเตือนแคลเซียมกับ ceftriaxone", euSterofundin: 'ค่าของ Sterofundin ISO',
     },
     madeBy: 'Made by Warodom Phaenthong, M.D.',
     changelogTitle: 'ประวัติเวอร์ชัน', changelogSub: 'สิ่งที่เปลี่ยนแปลงและวันที่', latest: 'ล่าสุด', newFeatures: 'ใหม่', bugFixes: 'แก้ไข',
@@ -901,7 +960,7 @@ const FLAG_RULES = [
 ];
 const flagsOf = (f) => FLAG_RULES.filter(([, test]) => test(f));
 const srcItem = (key) => ({ label: (REFERENCES.find(r => r.key === key) || SOURCES[key] || {}).cite || key, url: refUrl(key) || (SOURCES[key] || {}).url });
-const SHORT_SRC = { szczech: 'Szczech 2025', nice: 'NICE CG174', ssc: 'SSC 2021', myburgh: 'Myburgh 2013', adrogueHypo: 'Adrogué 2000', adrogueHyper: 'Adrogué 2000', spasovski: 'Spasovski 2014', devine: 'Devine 1974', btfIcp: 'BTF / ENLS' };
+const SHORT_SRC = { szczech: 'Szczech 2025', nice: 'NICE CG174', ssc: 'SSC 2021', myburgh: 'Myburgh 2013', adrogueHypo: 'Adrogué 2000', adrogueHyper: 'Adrogué 2000', spasovski: 'Spasovski 2014', devine: 'Devine 1974', btfIcp: 'BTF / ENLS', aasldAlb: 'AASLD 2021', sortSbp: 'Sort 1999', safeAlb: 'SAFE 2004' };
 
 // --- IV bag picture: bag tinted by type, liquid level, port ---
 const BagIcon = ({ family, className }) => {
@@ -1901,6 +1960,65 @@ const GUIDE_TEXT = {
     icpIcpHighAlert: '🚨 ICP > 22 mmHg: Pathological intracranial hypertension! Escalate neurocritical care interventions immediately.',
     icpCppNormal: '✓ CPP is within optimal target range (60–70 mmHg).',
     icpCppFormula: 'MAP = DBP + (SBP − DBP) / 3 | CPP = MAP − ICP',
+    // Albumin Guide
+    albSub: 'Evidence-based albumin indications in cirrhosis & critical care: Paracentesis (LVP), SBP, HRS-AKI challenge & 5% vs 20%/25% selection',
+    albTabs: { lvp: 'Paracentesis (LVP)', sbp: 'SBP Dosing', hrs: 'HRS-AKI Protocol', compare: '5% vs 20% vs 25%' },
+    albLvpTitle: 'Large-Volume Paracentesis (LVP > 5 L) Albumin Calculator',
+    albLvpVolRemoved: 'Ascites Volume Removed',
+    albLvpDoseFactor: 'Albumin Ratio (g/L ascites)',
+    albLvpDoseGrams: 'Total Albumin Required',
+    albLvpVol20: '20% Albumin Volume',
+    albLvpVol25: '25% Albumin Volume',
+    albLvpVol5Compare: '5% Equivalent (Not Rec.)',
+    albLvpSafeAlert: '✓ LVP ≥ 5 L: Albumin replacement (6–8 g per litre removed) is strongly recommended by AASLD & EASL to prevent Paracentesis-Induced Circulatory Dysfunction (PICD), hyponatremia, and renal impairment.',
+    albLvpLowAlert: 'ℹ️ Paracentesis < 5 L: Routine albumin administration is generally not required (low risk of PICD). Consider only if patient is hypotensive, cirrhotic cardiomyopathy, or history of SBP.',
+    albLvpRateNote: 'Administration: Infuse IV over 30–60 minutes immediately upon completion of paracentesis (or infuse concurrently if volume > 8 L).',
+    albLvpNotes: [
+      'Paracentesis-Induced Circulatory Dysfunction (PICD): Rapid removal of ascites causes splanchnic vasodilation, marked reduction in effective arterial blood volume, severe activation of RAAS and SNS, leading to rapid re-accumulation of ascites, hyponatremia, and hepatorenal syndrome.',
+      'Dosing standard: 8 g albumin per litre of ascites removed is the standard trial-tested regimen; 6 g/L is accepted in European guidance for volumes between 5–8 L.',
+      'Avoid 5% albumin in LVP: 5% albumin provides excessive sodium and water volume (4–5x fluid volume compared to 20–25%), worsening sodium retention in cirrhosis.',
+    ],
+    albSbpTitle: 'Spontaneous Bacterial Peritonitis (SBP) Dosing Protocol',
+    albSbpWeight: 'Patient Weight',
+    albSbpDay1Dose: 'Day 1 Dose (within 6h)',
+    albSbpDay3Dose: 'Day 3 Dose (at 48h)',
+    albSbpTotalGrams: 'Total Course Albumin',
+    albSbpDay1Sub: '1.5 g/kg IV within 6 hours of diagnosis',
+    albSbpDay3Sub: '1.0 g/kg IV at 48 hours',
+    albSbpTrialAlert: '★ Sort et al. (NEJM 1999) Landmark Trial: Albumin (1.5 g/kg Day 1 + 1.0 g/kg Day 3) reduced hepatorenal syndrome from 33% to 10% and in-hospital mortality from 29% to 10% (P = 0.01).',
+    albSbpHighRiskNote: 'Greatest benefit seen in high-risk patients: Serum Bilirubin ≥ 4 mg/dL (≥ 68 μmol/L) or Serum Creatinine ≥ 1.0 mg/dL (≥ 88 μmol/L). However, current AASLD/EASL guidelines recommend albumin for ALL patients with SBP (ascitic PMN ≥ 250/mm³).',
+    albSbpNotes: [
+      'Timing is critical: The Day 1 dose of 1.5 g/kg must be initiated within 6 hours of paracentesis confirming SBP alongside broad-spectrum IV antibiotics (e.g. 3rd-gen cephalosporin).',
+      'Infusion rate: 20% or 25% albumin is typically infused over 2–4 hours. Monitor for acute pulmonary edema or fluid overload.',
+    ],
+    albHrsTitle: 'Hepatorenal Syndrome (HRS-AKI) Diagnostic & Treatment Protocol',
+    albHrsWeight: 'Patient Weight',
+    albHrsChallengeTitle: 'Phase 1: Diagnostic Volume Challenge (Rule out Pre-renal AKI)',
+    albHrsChallengeDose: 'Albumin 1 g/kg/day (Max 100 g/day) × 2 Consecutive Days',
+    albHrsChallengeGrams: 'Daily Challenge Dose',
+    albHrsChallengeVol20: '20% Daily Volume',
+    albHrsChallengeVol25: '25% Daily Volume',
+    albHrsChallengeAction: 'Action required: Complete withdrawal of all diuretics, antihypertensives, and vasodilators. Infuse albumin 1 g/kg/day for 48 hours.',
+    albHrsDiagnosisCriteria: 'HRS-AKI Diagnostic Criteria (AASLD / IAC): Cirrhosis with ascites; AKI per ICA criteria; No response after 2 consecutive days of diuretic withdrawal and albumin volume expansion; Absence of shock; No recent exposure to nephrotoxic drugs; Absence of structural kidney injury (proteinuria < 500 mg/d, microhematuria < 50 RBC/hpf, normal renal ultrasound).',
+    albHrsRxTitle: 'Phase 2: Confirmed HRS-AKI Pharmacotherapy',
+    albHrsRxAlbumin: 'Albumin: 20–40 g/day IV maintenance during vasoconstrictor therapy.',
+    albHrsRxVasoconstrictors: 'Vasoconstrictor of choice:',
+    albHrsRxTerli: '• Terlipressin: 0.85–1.0 mg IV bolus q4–6h OR continuous IV infusion 2 mg/day (titrate up to 12 mg/day if SCr doesn\'t decrease ≥ 25% after 48h). Most effective agent for reversal of HRS.',
+    albHrsRxNorepi: '• Norepinephrine: Continuous infusion 0.5–3.0 mg/h in ICU, titrated to raise MAP by ≥ 10 mmHg or MAP > 65–70 mmHg.',
+    albHrsRxMidOct: '• Midodrine (oral 7.5–15 mg TID) + Octreotide (SC 100–200 mcg TID): Secondary option if terlipressin/norepinephrine unavailable.',
+    albHrsRespAlert: '⚠️ Respiratory Warning (CONFIRM Trial): Terlipressin + Albumin carries substantial risk of acute pulmonary edema and respiratory failure. Monitor continuous pulse oximetry. Discontinue or reduce if SpO₂ drops or dyspnea develops.',
+    albCompareTitle: 'Albumin Concentration Selection (5% vs 20% vs 25%) & Safety Matrix',
+    albColConcentration: 'Concentration',
+    albColOncotic: 'Oncotic Pressure',
+    albColVolumeExpansion: 'Intravascular Expansion',
+    albColIndications: 'Primary Clinical Indications',
+    albContraTitle: 'Critical Black Box Warnings & Contraindications',
+    albTbiAlert: '🚨 STRICT CONTRAINDICATION in Traumatic Brain Injury (TBI): The SAFE-TBI study (NEJM 2007) demonstrated significantly higher 2-year mortality with albumin resuscitation in severe TBI (relative risk of death 1.88, P < 0.001) due to delayed BBB leakage and raised ICP. Use isotonic crystalloid (NSS / balanced) instead!',
+    albChfAlert: '⚠️ Fluid Overload & Heart Failure: Albumin (especially 20% & 25%) rapidly mobilizes interstitial water into the vascular tree. Contraindicated in severe circulatory failure or pulmonary edema. Monitor volume status meticulously.',
+    albSepsisNote: 'Sepsis Resuscitation (Surviving Sepsis Campaign 2021): Suggest using albumin (5% or 20%) in patients who received large volumes of crystalloids to maintain MAP and reduce cumulative fluid balance (weak recommendation, moderate-quality evidence).',
+    albOpenFluid5: 'Open 5% Albumin Card',
+    albOpenFluid20: 'Open 20% Albumin Card',
+    albOpenFluid25: 'Open 25% Albumin Card',
   },
   th: {
     chooseSub: 'NICE CG174 "5 Rs" และ Surviving Sepsis Campaign 2021',
@@ -2122,6 +2240,65 @@ const GUIDE_TEXT = {
     icpIcpHighAlert: '🚨 ICP > 22 mmHg: ความดันในกะโหลกศีรษะสูงผิดปกติ! ให้การรักษาทางระบบประสาทวิกฤตทันที',
     icpCppNormal: '✓ ค่า CPP อยู่ในช่วงเป้าหมายที่เหมาะสม (60–70 mmHg)',
     icpCppFormula: 'MAP = DBP + (SBP − DBP) / 3 | CPP = MAP − ICP',
+    // Albumin Guide
+    albSub: 'แนวทางการใช้อัลบูมินตามหลักฐานเชิงประจักษ์: การเจาะท้อง (LVP), ภาวะเยื่อบุช่องท้องอักเสบ (SBP), ไตวายโรคตับ (HRS-AKI) และการเลือก 5% vs 20%/25%',
+    albTabs: { lvp: 'เจาะระบายน้ำในท้อง (LVP)', sbp: 'การให้ใน SBP', hrs: 'ภาวะ HRS-AKI', compare: 'เปรียบเทียบ 5% vs 20% vs 25%' },
+    albLvpTitle: 'เครื่องคำนวณอัลบูมินสำหรับการเจาะระบายน้ำในช่องท้องปริมาณมาก (LVP > 5 L)',
+    albLvpVolRemoved: 'ปริมาตรน้ำในช่องท้องที่เจาะออก',
+    albLvpDoseFactor: 'อัตราส่วนอัลบูมิน (g/L ของน้ำที่เจาะ)',
+    albLvpDoseGrams: 'ปริมาณอัลบูมินที่ต้องให้ทั้งหมด',
+    albLvpVol20: 'ปริมาตร Albumin 20%',
+    albLvpVol25: 'ปริมาตร Albumin 25%',
+    albLvpVol5Compare: 'เทียบเท่า 5% (ไม่แนะนำใน LVP)',
+    albLvpSafeAlert: '✓ เจาะระบายน้ำ ≥ 5 L: AASLD และ EASL แนะนำอย่างยิ่งให้ให้อัลบูมินชดเชย (6–8 g ต่อน้ำ 1 ลิตรที่เจาะออก) เพื่อป้องกันภาวะ Paracentesis-Induced Circulatory Dysfunction (PICD), โซเดียมในเลือดต่ำ และไตวายเฉียบพลัน',
+    albLvpLowAlert: 'ℹ️ เจาะระบายน้ำ < 5 L: โดยทั่วไปไม่จำเป็นต้องให้อัลบูมิน (ความเสี่ยง PICD ต่ำ) พิจารณาเฉพาะในผู้ป่วยที่มีความดันโลหิตต่ำ โรคกล้ามเนื้อหัวใจจากตับแข็ง หรือเคยมีประวัติ SBP',
+    albLvpRateNote: 'วิธีการให้: หยดเข้าหลอดเลือดดำในเวลา 30–60 นาทีทันทีหลังเจาะท้องเสร็จสิ้น (หรือให้ระหว่างการเจาะหากเจาะออกเกิน 8 ลิตร)',
+    albLvpNotes: [
+      'ภาวะ Paracentesis-Induced Circulatory Dysfunction (PICD): การเจาะน้ำออกปริมาณมากอย่างรวดเร็วทำให้หลอดเลือดในช่องท้องขยายตัว ปริมาตรเลือดที่ไปเลี้ยงอวัยวะสำคัญลดลง กระตุ้นระบบ RAAS และประสาทซิมพาเทติกอย่างรุนแรง ส่งผลให้น้ำในช่องท้องกลับมาคั่งอย่างรวดเร็ว โซเดียมในเลือดต่ำ และเกิดไตวายเฉียบพลัน',
+      'เกณฑ์ขนาดยามาตรฐาน: 8 g อัลบูมินต่อน้ำ 1 ลิตร เป็นขนาดมาตรฐานจากการวิจัยหลัก ส่วนขนาด 6 g/L ได้รับการยอมรับในแนวทางยุโรปสำหรับปริมาตรเจาะ 5–8 L',
+      'หลีกเลี่ยง Albumin 5% ในการเจาะท้อง: อัลบูมิน 5% มีปริมาตรน้ำและโซเดียมสูงกว่ามาก (ต้องให้สารน้ำมากกว่าชนิด 20–25% ถึง 4–5 เท่า) ซึ่งจะทำให้อาการบวมและคั่งน้ำคั่งเกลือในผู้ป่วยตับแข็งแย่ลง',
+    ],
+    albSbpTitle: 'แนวทางการให้อัลบูมินในภาวะเยื่อบุช่องท้องอักเสบติดเชื้อ (SBP)',
+    albSbpWeight: 'น้ำหนักตัวผู้ป่วย',
+    albSbpDay1Dose: 'ขนาดยาวันที่ 1 (ภายใน 6 ชม.)',
+    albSbpDay3Dose: 'ขนาดยาวันที่ 3 (ที่ 48 ชม.)',
+    albSbpTotalGrams: 'ปริมาณอัลบูมินรวมทั้งคอร์ส',
+    albSbpDay1Sub: '1.5 g/kg IV ภายใน 6 ชั่วโมงหลังวินิจฉัย',
+    albSbpDay3Sub: '1.0 g/kg IV ที่ 48 ชั่วโมง',
+    albSbpTrialAlert: '★ การศึกษาหมุดหมาย Sort et al. (NEJM 1999): การให้อัลบูมิน (1.5 g/kg วันที่ 1 + 1.0 g/kg วันที่ 3) ลดการเกิดไตวาย (HRS) จาก 33% เหลือ 10% และลดอัตราเสียชีวิตในโรงพยาบาลจาก 29% เหลือ 10% (P = 0.01)',
+    albSbpHighRiskNote: 'ประโยชน์สูงสุดพบในกลุ่มเสี่ยงสูง: ซีรัมบิลิรูบิน ≥ 4 mg/dL หรือ ครีเอตินิน ≥ 1.0 mg/dL อย่างไรก็ตาม แนวทาง AASLD/EASL ในปัจจุบันแนะนำให้อัลบูมินแก่ผู้ป่วย SBP ทุกราย (เมื่อน้ำในช่องท้องมี PMN ≥ 250/mm³)',
+    albSbpNotes: [
+      'เวลาเป็นสิ่งสำคัญยิ่ง: ขนาดยาวันที่ 1 (1.5 g/kg) ต้องเริ่มให้ภายใน 6 ชั่วโมงหลังเจาะตรวจพบ SBP ร่วมกับการให้ยาปฏิชีวนะทางหลอดเลือดดำทันที (เช่น 3rd-gen cephalosporin)',
+      'อัตราการให้ยา: สารละลาย 20% หรือ 25% มักหยดให้ในเวลา 2–4 ชั่วโมง ติดตามภาวะน้ำเกินหรือน้ำท่วมปอดอย่างใกล้ชิด',
+    ],
+    albHrsTitle: 'แนวทางการวินิจฉัยและรักษา Hepatorenal Syndrome (HRS-AKI)',
+    albHrsWeight: 'น้ำหนักตัวผู้ป่วย',
+    albHrsChallengeTitle: 'ระยะที่ 1: การทดสอบขยายปริมาตรเลือดเพื่อการวินิจฉัย (แยก Pre-renal AKI)',
+    albHrsChallengeDose: 'Albumin 1 g/kg/วัน (สูงสุด 100 g/วัน) เป็นเวลา 2 วันติดต่อกัน',
+    albHrsChallengeGrams: 'ขนาดยาที่ต้องให้ต่อวัน',
+    albHrsChallengeVol20: 'ปริมาตร 20% ต่อวัน',
+    albHrsChallengeVol25: 'ปริมาตร 25% ต่อวัน',
+    albHrsChallengeAction: 'สิ่งที่ต้องทำ: หยุดยาขับปัสสาวะ ยาลดความดัน และยาขยายหลอดเลือดทุกชนิดทันที และให้อัลบูมิน 1 g/kg/วัน ต่อเนื่อง 48 ชั่วโมง',
+    albHrsDiagnosisCriteria: 'เกณฑ์การวินิจฉัย HRS-AKI (AASLD / IAC): ผู้ป่วยตับแข็งที่มีน้ำในช่องท้อง; เกิดภาวะไตวายเฉียบพลันตามเกณฑ์ ICA; ค่าการทำงานของไตไม่ดีขึ้นหลังหยุดยาขับปัสสาวะและให้อัลบูมินครบ 2 วัน; ไม่มีภาวะช็อก; ไม่ได้รับยาที่เป็นพิษต่อไต; ไม่พบรอยโรคโครงสร้างไต (โปรตีนในปัสสาวะ < 500 mg/วัน, เม็ดเลือดแดงในปัสสาวะ < 50 เซลล์, อัลตราซาวด์ไตปกติ)',
+    albHrsRxTitle: 'ระยะที่ 2: การรักษาผู้ป่วยที่ได้รับการยืนยัน HRS-AKI',
+    albHrsRxAlbumin: 'Albumin: ให้ต่อเนื่อง 20–40 g/วัน ร่วมกับการให้ยาบีบหลอดเลือด',
+    albHrsRxVasoconstrictors: 'ยาบีบหลอดเลือด (Vasoconstrictor) ทางเลือก:',
+    albHrsRxTerli: '• Terlipressin: ยาทางเลือกแรก 0.85–1.0 mg IV bolus ทุก 4–6 ชม. หรือให้แบบ continuous infusion 2 mg/วัน (ปรับเพิ่มได้สูงสุด 12 mg/วัน หาก SCr ไม่ลดลง ≥ 25% หลัง 48 ชม.) เป็นยาที่มีประสิทธิภาพสูงสุดในการกู้การทำงานของไต',
+    albHrsRxNorepi: '• Norepinephrine: หยดต่อเนื่อง 0.5–3.0 mg/ชม. ในหอผู้ป่วยวิกฤต ปรับขนาดเพื่อเพิ่ม MAP ขึ้น ≥ 10 mmHg หรือให้ MAP > 65–70 mmHg',
+    albHrsRxMidOct: '• Midodrine (รับประทาน 7.5–15 mg วันละ 3 ครั้ง) + Octreotide (ฉีดใต้ผิวหนัง 100–200 mcg วันละ 3 ครั้ง): ทางเลือกรองหากไม่มี Terlipressin หรือ Norepinephrine',
+    albHrsRespAlert: '⚠️ คำเตือนด้านระบบหายใจ (การศึกษา CONFIRM): การใช้ Terlipressin ร่วมกับ Albumin มีความเสี่ยงสำคัญต่อภาวะน้ำท่วมปอดเฉียบพลันและระบบหายใจล้มเหลว ตรวจติดตามระดับออกซิเจนในเลือด (SpO₂) สม่ำเสมอ ระงับยาหรือปรับลดทันทีหากเริ่มมีอาการเหนื่อยหรือออกซิเจนลดลง',
+    albCompareTitle: 'การเลือกความเข้มข้นของอัลบูมิน (5% vs 20% vs 25%) และตารางความปลอดภัย',
+    albColConcentration: 'ความเข้มข้น',
+    albColOncotic: 'แรงดันออนโคติก (COP)',
+    albColVolumeExpansion: 'การขยายปริมาตรในหลอดเลือด',
+    albColIndications: 'ข้อบ่งชี้ทางคลินิกหลัก',
+    albContraTitle: 'ข้อห้ามใช้และคำเตือนสำคัญวิกฤต (Black Box Warnings)',
+    albTbiAlert: '🚨 ข้อห้ามใช้เด็ดขาดในผู้บาดเจ็บทางสมอง (TBI): การศึกษา SAFE-TBI (NEJM 2007) พบว่าการให้อัลบูมินกู้ชีพในผู้ป่วยบาดเจ็บที่ศีรษะรุนแรงเพิ่มอัตราการเสียชีวิตอย่างมีนัยสำคัญ (อัตราเสี่ยงเสียชีวิต 1.88, P < 0.001) เนื่องจากอัลบูมินรั่วซึมผ่าน blood-brain barrier ที่เสียหายและทำให้ความดันในกะโหลกศีรษะสูงขึ้น ให้ใช้ Isotonic Crystalloid (NSS / balanced) แทนเสมอ!',
+    albChfAlert: '⚠️ ภาวะสารน้ำเกินและหัวใจล้มเหลว: อัลบูมิน (โดยเฉพาะ 20% และ 25%) ดึงน้ำจากช่องว่างระหว่างเซลล์เข้าสู่หลอดเลือดอย่างรวดเร็ว ห้ามใช้ในภาวะหัวใจวายรุนแรงหรือน้ำท่วมปอด ติดตามภาวะสารน้ำอย่างเคร่งครัด',
+    albSepsisNote: 'การกู้ชีพในภาวะติดเชื้อในกระแสเลือด (Surviving Sepsis Campaign 2021): แนะนำให้พิจารณาใช้อัลบูมิน (5% หรือ 20%) ในผู้ป่วยที่ได้รับสารน้ำคริสตัลลอยด์ปริมาณมากแล้ว เพื่อช่วยพยุงความดันและลดปริมาณสารน้ำสะสมในร่างกาย (คำแนะนำอ่อน หลักฐานคุณภาพปานกลาง)',
+    albOpenFluid5: 'เปิดการ์ด Albumin 5%',
+    albOpenFluid20: 'เปิดการ์ด Albumin 20%',
+    albOpenFluid25: 'เปิดการ์ด Albumin 25%',
   },
 };
 
@@ -3232,6 +3409,415 @@ const IcpGuide = ({ lang, t, onClose, onOpenFluid }) => {
 };
 
 // =====================================================================
+// Albumin Indication Guide & Clinical Dosing Calculator
+// =====================================================================
+const AlbuminGuide = ({ lang, t, onClose, onOpenFluid }) => {
+  const g = GUIDE_TEXT[lang];
+  const [tab, setTab] = useState('lvp'); // 'lvp' | 'sbp' | 'hrs' | 'compare'
+
+  // LVP state
+  const [ascitesVol, setAscitesVol] = useState('6');
+  const [doseRatio, setDoseRatio] = useState('8'); // '6' or '8' g/L
+
+  // SBP state
+  const [sbpWeight, setSbpWeight] = useState('60');
+
+  // HRS state
+  const [hrsWeight, setHrsWeight] = useState('60');
+
+  // Calculations:
+  // LVP:
+  const nAscites = toNum(ascitesVol) || 0;
+  const nRatio = toNum(doseRatio) || 8;
+  const lvpGrams = nAscites > 0 ? nAscites * nRatio : 0;
+  // 20% = 20 g / 100 mL = 0.20 g/mL (5 mL per gram)
+  // 25% = 25 g / 100 mL = 0.25 g/mL (4 mL per gram)
+  const lvpVol20 = lvpGrams > 0 ? lvpGrams * 5 : 0;
+  const lvpVol25 = lvpGrams > 0 ? lvpGrams * 4 : 0;
+  const isLvpLarge = nAscites >= 5;
+
+  // SBP:
+  // Day 1: 1.5 g/kg; Day 3: 1.0 g/kg
+  const nSbpWt = toNum(sbpWeight) || 0;
+  const sbpDay1G = nSbpWt > 0 ? nSbpWt * 1.5 : 0;
+  const sbpDay1Vol20 = sbpDay1G > 0 ? sbpDay1G * 5 : 0;
+  const sbpDay1Vol25 = sbpDay1G > 0 ? sbpDay1G * 4 : 0;
+
+  const sbpDay3G = nSbpWt > 0 ? nSbpWt * 1.0 : 0;
+  const sbpDay3Vol20 = sbpDay3G > 0 ? sbpDay3G * 5 : 0;
+  const sbpDay3Vol25 = sbpDay3G > 0 ? sbpDay3G * 4 : 0;
+
+  const sbpTotalG = sbpDay1G + sbpDay3G;
+
+  // HRS:
+  // Diagnostic challenge: 1 g/kg/day (max 100 g/day) for 2 days
+  const nHrsWt = toNum(hrsWeight) || 0;
+  const hrsChallengeG = nHrsWt > 0 ? Math.min(100, nHrsWt * 1.0) : 0;
+  const hrsChallengeVol20 = hrsChallengeG > 0 ? hrsChallengeG * 5 : 0;
+  const hrsChallengeVol25 = hrsChallengeG > 0 ? hrsChallengeG * 4 : 0;
+
+  return (
+    <Modal title={t.guides.albumin} sub={g.albSub} onClose={onClose} tone="bg-fuchsia-50" wide attrs={{ 'data-guide-modal': 'albumin' }}
+      icon={<div className="p-2 bg-fuchsia-100 text-fuchsia-700 rounded-xl shrink-0"><DropletIcon className="w-5 h-5" /></div>}
+      footer={<CloseBtn onClose={onClose} t={t} />}>
+      <div className="flex flex-wrap gap-1.5 mb-3" role="tablist" data-alb-tabs>
+        <button type="button" role="tab" aria-selected={tab === 'lvp'} onClick={() => setTab('lvp')} data-alb-tab="lvp"
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'lvp' ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+          {g.albTabs.lvp}
+        </button>
+        <button type="button" role="tab" aria-selected={tab === 'sbp'} onClick={() => setTab('sbp')} data-alb-tab="sbp"
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'sbp' ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+          {g.albTabs.sbp}
+        </button>
+        <button type="button" role="tab" aria-selected={tab === 'hrs'} onClick={() => setTab('hrs')} data-alb-tab="hrs"
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'hrs' ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+          {g.albTabs.hrs}
+        </button>
+        <button type="button" role="tab" aria-selected={tab === 'compare'} onClick={() => setTab('compare')} data-alb-tab="compare"
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'compare' ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+          {g.albTabs.compare}
+        </button>
+      </div>
+
+      {tab === 'lvp' && (
+        <div className="flex flex-col gap-3" data-alb-lvp-view>
+          <Section title={g.albLvpTitle} tone="bg-fuchsia-50/60 border-fuchsia-200">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <NumInput label={g.albLvpVolRemoved} unit="L" value={ascitesVol} onChange={setAscitesVol} attrs={{ 'data-lvp-vol-input': '' }} />
+              <div className="flex flex-col gap-1 min-w-0">
+                <span className="text-[11px] font-bold text-slate-500">{g.albLvpDoseFactor}</span>
+                <div className="flex gap-1.5 h-9" data-lvp-ratio-group>
+                  {['8', '6'].map(r => (
+                    <button key={r} type="button" onClick={() => setDoseRatio(r)} aria-pressed={doseRatio === r} data-lvp-ratio={r}
+                      className={`flex-1 rounded-lg border text-xs font-bold transition-colors ${doseRatio === r ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+                      {r} g/L {r === '8' ? '(AASLD)' : '(EASL)'}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="text-[11px] font-bold text-slate-500">{g.planQuick} (L)</span>
+                <div className="flex flex-wrap gap-1.5" data-lvp-presets>
+                  {['4', '5', '6', '8', '10'].map(v => (
+                    <button key={v} type="button" onClick={() => setAscitesVol(v)} aria-pressed={ascitesVol === v} data-lvp-preset={v}
+                      className={`min-w-[2.3rem] px-2 py-1.5 rounded-lg border text-xs font-bold tabular-nums transition-colors ${ascitesVol === v ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+                      {v} L
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
+              {g.albLvpRateNote} <RefTag k="aasldAlb" />
+            </p>
+          </Section>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-lvp-results>
+            <div className="rounded-xl border border-fuchsia-200 bg-fuchsia-50 p-3 text-fuchsia-900">
+              <div className="text-[11px] font-bold opacity-80">{g.albLvpDoseGrams}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-lvp-dose-g>
+                {lvpGrams ? lvpGrams.toFixed(0) : '—'} <span className="text-xs font-semibold">g</span>
+              </div>
+              <div className="text-[11px] font-medium mt-0.5">{nAscites} L × {nRatio} g/L</div>
+            </div>
+
+            <div className="rounded-xl border border-purple-200 bg-purple-50 p-3 text-purple-900">
+              <div className="text-[11px] font-bold opacity-80">{g.albLvpVol20}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-lvp-vol-20>
+                {lvpVol20 ? Math.round(lvpVol20) : '—'} <span className="text-xs font-semibold">mL</span>
+              </div>
+              <div className="text-[11px] font-medium mt-0.5">20% = 0.20 g/mL (× 5)</div>
+            </div>
+
+            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
+              <div className="text-[11px] font-bold opacity-80">{g.albLvpVol25}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-lvp-vol-25>
+                {lvpVol25 ? Math.round(lvpVol25) : '—'} <span className="text-xs font-semibold">mL</span>
+              </div>
+              <div className="text-[11px] font-medium mt-0.5">25% = 0.25 g/mL (× 4)</div>
+            </div>
+          </div>
+
+          {isLvpLarge ? (
+            <div className="rounded-xl border border-emerald-300 bg-emerald-50 p-3 text-xs text-emerald-900 leading-snug font-medium" data-lvp-alert="safe">
+              {g.albLvpSafeAlert}
+            </div>
+          ) : (
+            <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-lvp-alert="low">
+              {g.albLvpLowAlert}
+            </div>
+          )}
+
+          <Section title={t.detailFlags} tone="bg-slate-50 border-slate-200">
+            <ul className="text-xs text-slate-700 space-y-1.5 pl-4 list-disc">
+              {g.albLvpNotes.map((note, idx) => <li key={idx}>{note}</li>)}
+            </ul>
+          </Section>
+
+          <div className="flex flex-wrap justify-end gap-2">
+            <button type="button" onClick={() => onOpenFluid('alb20')} data-open-alb20-btn
+              className="px-3 py-2 rounded-lg bg-white border border-slate-200 shadow-sm text-xs font-bold text-fuchsia-700 hover:bg-fuchsia-50 transition-colors flex items-center gap-1.5 cursor-pointer">
+              <BoxIcon className="w-3.5 h-3.5" /> {g.albOpenFluid20}
+            </button>
+            <button type="button" onClick={() => onOpenFluid('alb25')} data-open-alb25-btn
+              className="px-3 py-2 rounded-lg bg-white border border-slate-200 shadow-sm text-xs font-bold text-fuchsia-700 hover:bg-fuchsia-50 transition-colors flex items-center gap-1.5 cursor-pointer">
+              <BoxIcon className="w-3.5 h-3.5" /> {g.albOpenFluid25}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {tab === 'sbp' && (
+        <div className="flex flex-col gap-3" data-alb-sbp-view>
+          <Section title={g.albSbpTitle} tone="bg-fuchsia-50/60 border-fuchsia-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <NumInput label={g.albSbpWeight} unit={g.kg} value={sbpWeight} onChange={setSbpWeight} attrs={{ 'data-sbp-weight': '' }} />
+              <div className="flex flex-col gap-1">
+                <span className="text-[11px] font-bold text-slate-500">{g.planQuick} (kg)</span>
+                <div className="flex flex-wrap gap-1.5" data-sbp-presets>
+                  {['50', '60', '70', '80'].map(v => (
+                    <button key={v} type="button" onClick={() => setSbpWeight(v)} aria-pressed={sbpWeight === v} data-sbp-preset={v}
+                      className={`min-w-[2.5rem] px-2.5 py-1.5 rounded-lg border text-xs font-bold tabular-nums transition-colors ${sbpWeight === v ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+                      {v} kg
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
+              {g.albSbpHighRiskNote} <RefTag k="sortSbp" />
+            </p>
+          </Section>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" data-sbp-results>
+            <div className="rounded-xl border border-fuchsia-200 bg-fuchsia-50 p-3.5 text-fuchsia-950 flex flex-col gap-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-extrabold uppercase tracking-wide text-fuchsia-800">{g.albSbpDay1Dose}</span>
+                <span className="text-[11px] font-bold bg-fuchsia-200 text-fuchsia-800 px-2 py-0.5 rounded-full">1.5 g/kg</span>
+              </div>
+              <div className="text-2xl font-black tabular-nums text-fuchsia-900" data-sbp-day1-g>
+                {sbpDay1G ? sbpDay1G.toFixed(1) : '—'} <span className="text-sm font-bold">g</span>
+              </div>
+              <div className="text-xs text-slate-600 font-medium">
+                {g.albSbpDay1Sub}
+              </div>
+              <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-fuchsia-200/60 text-xs">
+                <div>
+                  <div className="text-[10px] text-slate-500 font-bold">20% Volume</div>
+                  <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day1-vol20>{sbpDay1Vol20 ? Math.round(sbpDay1Vol20) : '—'} mL</div>
+                </div>
+                <div>
+                  <div className="text-[10px] text-slate-500 font-bold">25% Volume</div>
+                  <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day1-vol25>{sbpDay1Vol25 ? Math.round(sbpDay1Vol25) : '—'} mL</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3.5 text-sky-950 flex flex-col gap-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-extrabold uppercase tracking-wide text-sky-800">{g.albSbpDay3Dose}</span>
+                <span className="text-[11px] font-bold bg-sky-200 text-sky-800 px-2 py-0.5 rounded-full">1.0 g/kg</span>
+              </div>
+              <div className="text-2xl font-black tabular-nums text-sky-900" data-sbp-day3-g>
+                {sbpDay3G ? sbpDay3G.toFixed(1) : '—'} <span className="text-sm font-bold">g</span>
+              </div>
+              <div className="text-xs text-slate-600 font-medium">
+                {g.albSbpDay3Sub}
+              </div>
+              <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-sky-200/60 text-xs">
+                <div>
+                  <div className="text-[10px] text-slate-500 font-bold">20% Volume</div>
+                  <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day3-vol20>{sbpDay3Vol20 ? Math.round(sbpDay3Vol20) : '—'} mL</div>
+                </div>
+                <div>
+                  <div className="text-[10px] text-slate-500 font-bold">25% Volume</div>
+                  <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day3-vol25>{sbpDay3Vol25 ? Math.round(sbpDay3Vol25) : '—'} mL</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-3 text-xs text-indigo-900 leading-snug font-medium" data-sbp-alert="trial">
+            <span className="font-extrabold block mb-0.5">{g.albSbpTotalGrams}: {sbpTotalG ? sbpTotalG.toFixed(1) : '—'} g ({sbpTotalG ? Math.round(sbpTotalG * 5) : '—'} mL of 20% or {sbpTotalG ? Math.round(sbpTotalG * 4) : '—'} mL of 25%)</span>
+            {g.albSbpTrialAlert}
+          </div>
+
+          <Section title={t.detailFlags} tone="bg-slate-50 border-slate-200">
+            <ul className="text-xs text-slate-700 space-y-1.5 pl-4 list-disc">
+              {g.albSbpNotes.map((note, idx) => <li key={idx}>{note}</li>)}
+            </ul>
+          </Section>
+        </div>
+      )}
+
+      {tab === 'hrs' && (
+        <div className="flex flex-col gap-3" data-alb-hrs-view>
+          <Section title={g.albHrsChallengeTitle} tone="bg-fuchsia-50/60 border-fuchsia-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <NumInput label={g.albHrsWeight} unit={g.kg} value={hrsWeight} onChange={setHrsWeight} attrs={{ 'data-hrs-weight': '' }} />
+              <div className="flex flex-col gap-1">
+                <span className="text-[11px] font-bold text-slate-500">{g.planQuick} (kg)</span>
+                <div className="flex flex-wrap gap-1.5" data-hrs-presets>
+                  {['50', '60', '70', '80'].map(v => (
+                    <button key={v} type="button" onClick={() => setHrsWeight(v)} aria-pressed={hrsWeight === v} data-hrs-preset={v}
+                      className={`min-w-[2.5rem] px-2.5 py-1.5 rounded-lg border text-xs font-bold tabular-nums transition-colors ${hrsWeight === v ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
+                      {v} kg
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
+              {g.albHrsChallengeAction} <RefTag k="aasldAlb" />
+            </p>
+          </Section>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-hrs-results>
+            <div className="rounded-xl border border-fuchsia-200 bg-fuchsia-50 p-3 text-fuchsia-900">
+              <div className="text-[11px] font-bold opacity-80">{g.albHrsChallengeGrams}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-hrs-challenge-g>
+                {hrsChallengeG ? hrsChallengeG.toFixed(0) : '—'} <span className="text-xs font-semibold">g/day</span>
+              </div>
+              <div className="text-[11px] font-medium mt-0.5">1 g/kg/day (max 100 g)</div>
+            </div>
+
+            <div className="rounded-xl border border-purple-200 bg-purple-50 p-3 text-purple-900">
+              <div className="text-[11px] font-bold opacity-80">{g.albHrsChallengeVol20}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-hrs-challenge-vol20>
+                {hrsChallengeVol20 ? Math.round(hrsChallengeVol20) : '—'} <span className="text-xs font-semibold">mL/day</span>
+              </div>
+              <div className="text-[11px] font-medium mt-0.5">20% Albumin (× 5)</div>
+            </div>
+
+            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
+              <div className="text-[11px] font-bold opacity-80">{g.albHrsChallengeVol25}</div>
+              <div className="text-xl font-extrabold tabular-nums" data-hrs-challenge-vol25>
+                {hrsChallengeVol25 ? Math.round(hrsChallengeVol25) : '—'} <span className="text-xs font-semibold">mL/day</span>
+              </div>
+              <div className="text-[11px] font-medium mt-0.5">25% Albumin (× 4)</div>
+            </div>
+          </div>
+
+          <Section title={g.albHrsRxTitle} tone="bg-slate-50 border-slate-200">
+            <div className="flex flex-col gap-2 text-xs text-slate-700">
+              <div className="font-bold text-slate-800">{g.albHrsRxAlbumin}</div>
+              <div className="font-semibold text-slate-600 mt-1">{g.albHrsRxVasoconstrictors}</div>
+              <div className="pl-2 space-y-1 text-slate-700">
+                <p>{g.albHrsRxTerli}</p>
+                <p>{g.albHrsRxNorepi}</p>
+                <p>{g.albHrsRxMidOct}</p>
+              </div>
+            </div>
+          </Section>
+
+          <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-hrs-alert="resp">
+            {g.albHrsRespAlert}
+          </div>
+
+          <Section title="IAC Diagnostic Criteria" tone="bg-slate-50 border-slate-200">
+            <p className="text-xs text-slate-600 leading-snug">{g.albHrsDiagnosisCriteria}</p>
+          </Section>
+        </div>
+      )}
+
+      {tab === 'compare' && (
+        <div className="flex flex-col gap-3" data-alb-compare-view>
+          <Section title={g.albCompareTitle} tone="bg-slate-50 border-slate-200">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5" data-alb-matrix-cards>
+              <div className="rounded-xl border border-blue-200 bg-white p-3.5 shadow-sm flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-sm text-blue-900">Albumin 5%</span>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800">Iso-oncotic</span>
+                </div>
+                <div className="text-xs space-y-1 text-slate-600">
+                  <div><b>Concentration:</b> 50 g/L (5%)</div>
+                  <div><b>Oncotic Pressure:</b> ~20 mmHg</div>
+                  <div><b>Volume Effect:</b> ~100% (1:1 expander)</div>
+                  <div className="pt-1.5 border-t border-slate-100">
+                    <b className="text-slate-800">Primary Uses:</b>
+                    <ul className="list-disc pl-4 mt-0.5 space-y-0.5 text-[11px]">
+                      <li>Sepsis resuscitation</li>
+                      <li>Plasma exchange (TPE)</li>
+                      <li>Burns (> 24h)</li>
+                    </ul>
+                  </div>
+                </div>
+                <button type="button" onClick={() => onOpenFluid('alb5')} data-open-alb5-btn
+                  className="mt-auto pt-2 text-[11px] font-bold text-blue-700 hover:underline flex items-center gap-1 cursor-pointer">
+                  <BoxIcon className="w-3 h-3" /> {g.albOpenFluid5}
+                </button>
+              </div>
+
+              <div className="rounded-xl border border-purple-200 bg-white p-3.5 shadow-sm flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-sm text-purple-900">Albumin 20%</span>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-800">Hyper-oncotic</span>
+                </div>
+                <div className="text-xs space-y-1 text-slate-600">
+                  <div><b>Concentration:</b> 200 g/L (20%)</div>
+                  <div><b>Oncotic Pressure:</b> ~70–80 mmHg (~4x)</div>
+                  <div><b>Volume Effect:</b> Expands ~4x infused vol</div>
+                  <div className="pt-1.5 border-t border-slate-100">
+                    <b className="text-slate-800">Primary Uses:</b>
+                    <ul className="list-disc pl-4 mt-0.5 space-y-0.5 text-[11px]">
+                      <li>Paracentesis (LVP > 5 L)</li>
+                      <li>Peritonitis (SBP)</li>
+                      <li>Hepatorenal syndrome (HRS)</li>
+                    </ul>
+                  </div>
+                </div>
+                <button type="button" onClick={() => onOpenFluid('alb20')} data-open-alb20-btn
+                  className="mt-auto pt-2 text-[11px] font-bold text-purple-700 hover:underline flex items-center gap-1 cursor-pointer">
+                  <BoxIcon className="w-3 h-3" /> {g.albOpenFluid20}
+                </button>
+              </div>
+
+              <div className="rounded-xl border border-fuchsia-200 bg-white p-3.5 shadow-sm flex flex-col gap-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-sm text-fuchsia-900">Albumin 25%</span>
+                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-fuchsia-100 text-fuchsia-800">Hyper-oncotic</span>
+                </div>
+                <div className="text-xs space-y-1 text-slate-600">
+                  <div><b>Concentration:</b> 250 g/L (25%)</div>
+                  <div><b>Oncotic Pressure:</b> ~100 mmHg (~5x)</div>
+                  <div><b>Volume Effect:</b> Expands 4–5x infused vol</div>
+                  <div className="pt-1.5 border-t border-slate-100">
+                    <b className="text-slate-800">Primary Uses:</b>
+                    <ul className="list-disc pl-4 mt-0.5 space-y-0.5 text-[11px]">
+                      <li>Cirrhosis (LVP > 5 L, SBP, HRS)</li>
+                      <li>Nephrotic syndrome edema</li>
+                      <li>Fluid-restricted volume pull</li>
+                    </ul>
+                  </div>
+                </div>
+                <button type="button" onClick={() => onOpenFluid('alb25')} data-open-alb25-btn
+                  className="mt-auto pt-2 text-[11px] font-bold text-fuchsia-700 hover:underline flex items-center gap-1 cursor-pointer">
+                  <BoxIcon className="w-3 h-3" /> {g.albOpenFluid25}
+                </button>
+              </div>
+            </div>
+          </Section>
+
+          <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-alb-alert="tbi">
+            <div className="font-bold mb-1">{g.albContraTitle}</div>
+            <p>{g.albTbiAlert} <RefTag k="safeAlb" /></p>
+          </div>
+
+          <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-alb-alert="chf">
+            {g.albChfAlert}
+          </div>
+
+          <div className="rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-700 leading-snug" data-alb-alert="sepsis">
+            <span className="font-bold text-slate-800 block mb-0.5">Surviving Sepsis Campaign 2021 Guidance</span>
+            {g.albSepsisNote} <RefTag k="ssc" />
+          </div>
+        </div>
+      )}
+    </Modal>
+  );
+};
+
+// =====================================================================
 // Search
 // =====================================================================
 const normalise = (s) => String(s).toLowerCase().replace(/[\s.\-]+/g, '');
@@ -3349,6 +3935,7 @@ function App() {
     ['drip', 'bg-blue-600 hover:bg-blue-700 border-blue-700', DripIcon],
     ['gir', 'bg-teal-600 hover:bg-teal-700 border-teal-700', TrendingUpIcon],
     ['icp', 'bg-purple-700 hover:bg-purple-800 border-purple-800', BrainIcon],
+    ['albumin', 'bg-fuchsia-700 hover:bg-fuchsia-800 border-fuchsia-800', DropletIcon],
   ];
 
   return (
@@ -3545,6 +4132,7 @@ function App() {
       {guide === 'drip' && <DripGuide lang={lang} t={t} onClose={() => setGuide(null)} />}
       {guide === 'gir' && <GirGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
       {guide === 'icp' && <IcpGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
+      {guide === 'albumin' && <AlbuminGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
     </div>
   );
 }

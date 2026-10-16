@@ -17,13 +17,15 @@ window.__ivfE2E = async function () {
   // start in English (the language choice is remembered on the device)
   if ($('[data-lang]').textContent.trim() === 'EN') { $('[data-lang]').click(); await wait(300); }
   if ($('[data-view="grid"][aria-pressed="false"]')) { $('[data-view="grid"]').click(); await wait(300); }
-  log('default view (Thailand, current): 19 fluids, NSS first, Plasma-Lyte A hidden', $$('#fluid-list [data-fluid]').length === 19 && $('#fluid-list [data-fluid]').dataset.fluid === 'nss' && !card('pla'), $$('#fluid-list [data-fluid]').length);
+  log('default view (Thailand, current): 21 fluids, NSS first, Plasma-Lyte A hidden', $$('#fluid-list [data-fluid]').length === 21 && $('#fluid-list [data-fluid]').dataset.fluid === 'nss' && !card('pla'), $$('#fluid-list [data-fluid]').length);
   $('[data-country-all]').click(); await wait(250);
-  log('All countries: 20 fluids', $$('#fluid-list [data-fluid]').length === 20, $$('#fluid-list [data-fluid]').length);
+  log('All countries: 22 fluids', $$('#fluid-list [data-fluid]').length === 22, $$('#fluid-list [data-fluid]').length);
 
   // Label values
   log('NSS: Na 154, Cl 154, 308 mOsm/L, pH 5.0 (4.5–7.0)', /154/.test(tile('nss', 'na')) && /154/.test(tile('nss', 'cl')) && /308/.test(fact('nss', 'osm')) && /5\.0 \(4\.5–7\.0\)/.test(fact('nss', 'ph')), [tile('nss', 'na'), fact('nss', 'osm')]);
   log("Lactated Ringer's: Na 130, K 4, Ca 1.35 mmol/L, Cl 109, lactate 28, 273 mOsm/L", /130/.test(tile('lrs', 'na')) && /^K⁺4$/.test(tile('lrs', 'k')) && /1\.35/.test(tile('lrs', 'ca')) && /109/.test(tile('lrs', 'cl')) && /Lactate 28/.test(fact('lrs', 'buffer')) && /273/.test(fact('lrs', 'osm')), [tile('lrs', 'ca'), fact('lrs', 'buffer')]);
+  log('Albumin 5%: Na 145, K 1, Cl 100, 300 mOsm/L, 200 kcal/L, pH 6.9 (6.4–7.4)', /145/.test(tile('alb5', 'na')) && /^K⁺1$/.test(tile('alb5', 'k')) && /100/.test(tile('alb5', 'cl')) && /300/.test(fact('alb5', 'osm')) && /200/.test(fact('alb5', 'kcal')) && /6\.9 \(6\.4–7\.4\)/.test(fact('alb5', 'ph')), [tile('alb5', 'na'), fact('alb5', 'osm')]);
+  log('Albumin 25%: Na 145, K 1, Cl 100, 300 mOsm/L, 1000 kcal/L, pH 6.9 (6.4–7.4)', /145/.test(tile('alb25', 'na')) && /^K⁺1$/.test(tile('alb25', 'k')) && /100/.test(tile('alb25', 'cl')) && /300/.test(fact('alb25', 'osm')) && /1000/.test(fact('alb25', 'kcal')) && /6\.9 \(6\.4–7\.4\)/.test(fact('alb25', 'ph')), [tile('alb25', 'na'), fact('alb25', 'osm')]);
   log('5%D/N/2: Na 77, dextrose 50 g/L, 170 kcal/L, 406 mOsm/L', /77/.test(tile('d5s2', 'na')) && /50/.test(fact('d5s2', 'dex')) && /170/.test(fact('d5s2', 'kcal')) && /406/.test(fact('d5s2', 'osm')), fact('d5s2', 'osm'));
   log('TOP Balance: label Na 140, K 5, Mg 1.5, Cl 98; osmolarity 294; pH 7.4 (6.5–8.0)', /140/.test(tile('topbal', 'na')) && /1\.5/.test(tile('topbal', 'mg')) && /98/.test(tile('topbal', 'cl')) && /294/.test(fact('topbal', 'osm')) && /7\.4 \(6\.5–8\.0\)/.test(fact('topbal', 'ph')), [fact('topbal', 'osm'), fact('topbal', 'ph')]);
   log('Sterofundin ISO: Na 145, Ca 2.5, Mg 1, Cl 127, acetate 24 + malate 5, 309 mOsm/L', /145/.test(tile('sterofundin', 'na')) && /2\.5/.test(tile('sterofundin', 'ca')) && /127/.test(tile('sterofundin', 'cl')) && /Acetate 24 \+ Malate 5/.test(fact('sterofundin', 'buffer')) && /309/.test(fact('sterofundin', 'osm')), fact('sterofundin', 'buffer'));
@@ -59,13 +61,13 @@ window.__ivfE2E = async function () {
   log('Balanced + contains calcium: LRS, Acetar, Acetar-5, Sterofundin', $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).sort().join() === 'acetar,acetar5,lrs,sterofundin', $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).join());
   $('[data-clear-filters]').click(); await wait(200);
   $('[data-filter-band="resus"]').click(); await wait(200);
-  log('Na 130–154 band: 9 fluids', $$('#fluid-list [data-fluid]').every(x => { const f = FLUIDS.find(y => y.id === x.dataset.fluid); return num(f, 'na') >= 130 && num(f, 'na') <= 154; }) && $$('#fluid-list [data-fluid]').length === 9, $$('#fluid-list [data-fluid]').length);
+  log('Na 130–154 band: 11 fluids', $$('#fluid-list [data-fluid]').every(x => { const f = FLUIDS.find(y => y.id === x.dataset.fluid); return num(f, 'na') >= 130 && num(f, 'na') <= 154; }) && $$('#fluid-list [data-fluid]').length === 11, $$('#fluid-list [data-fluid]').length);
   $('[data-clear-filters]').click(); await wait(200);
   $('[data-filter-ph="acidic"]').click(); await wait(200);
   log('filter pH < 6.0 (acidic): fluids with pH < 6.0 and chip shown', $$('#fluid-list [data-fluid]').length >= 6 && !!$('[data-chip="ph-acidic"]'), $$('#fluid-list [data-fluid]').length);
   $('[data-filter-ph="acidic"]').click(); await wait(200);
   $('[data-filter-ph="physio"]').click(); await wait(200);
-  log('filter pH 6.0–7.5 (near-physio): LRS, TOP Balance, PLA, Albumin', ['lrs', 'topbal', 'pla', 'alb20'].every(id => $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).includes(id)), $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).join());
+  log('filter pH 6.0–7.5 (near-physio): LRS, TOP Balance, PLA, Albumin', ['lrs', 'topbal', 'pla', 'alb5', 'alb20', 'alb25'].every(id => $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).includes(id)), $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).join());
   $('[data-clear-filters]').click(); await wait(200);
   // Countries and registration status (All countries are on from the start of the test)
   const ids = () => $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).sort().join();
@@ -79,7 +81,7 @@ window.__ivfE2E = async function () {
   $('[data-filter-reg="never"]').click(); await wait(200); $('[data-filter-reg="past"]').click(); await wait(200);
   log('status Never only: fluids missing from at least one country (5%D/N/5, TOP Balance; not NSS)', ids().includes('d5s5') && ids().includes('topbal') && !ids().split(',').includes('nss'), ids());
   $('[data-filter-reg="current"]').click(); await wait(200); $('[data-filter-reg="never"]').click(); await wait(200);
-  log('back to current in all countries: 20 fluids', $$('#fluid-list [data-fluid]').length === 20, $$('#fluid-list [data-fluid]').length);
+  log('back to current in all countries: 22 fluids', $$('#fluid-list [data-fluid]').length === 22, $$('#fluid-list [data-fluid]').length);
 
   // Sort
   const sort = $('[data-sort]'); const setSort = async (v) => { const set = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, 'value').set; set.call(sort, v); sort.dispatchEvent(new Event('change', { bubbles: true })); await wait(200); };
@@ -239,6 +241,30 @@ window.__ivfE2E = async function () {
   log('CPP calculator: MAP and CPP calculated with target ranges', /96\.7/.test(($('[data-cpp-map-val]') || {}).textContent || '') && /78\.7/.test(($('[data-cpp-val]') || {}).textContent || ''), [($('[data-cpp-map-val]') || {}).textContent, ($('[data-cpp-val]') || {}).textContent]);
   await esc();
 
+  // Albumin Indication Guide & Clinical Dosing Calculator
+  $('[data-guide="albumin"]').click(); await wait(350);
+  log('Albumin guide opened', !!$('[data-guide-modal="albumin"]'), '');
+  await type($('[data-lvp-vol-input]'), '6');
+  $('[data-lvp-ratio="8"]').click(); await wait(150);
+  // 6 L removed at 8 g/L -> 48 g albumin; 20% = 240 mL; 25% = 192 mL
+  log('Albumin LVP calculation: 6 L at 8 g/L gives 48 g albumin (240 mL 20%, 192 mL 25%)', /48/.test(($('[data-lvp-dose-g]') || {}).textContent || '') && /240/.test(($('[data-lvp-vol-20]') || {}).textContent || '') && /192/.test(($('[data-lvp-vol-25]') || {}).textContent || ''), [($('[data-lvp-dose-g]') || {}).textContent, ($('[data-lvp-vol-20]') || {}).textContent]);
+  log('Albumin LVP >= 5 L triggers large-volume paracentesis safe alert', !!$('[data-lvp-alert="safe"]'), '');
+  $('[data-lvp-presets] [data-lvp-preset="4"]').click(); await wait(150);
+  log('Albumin LVP < 5 L triggers low volume warning alert', !!$('[data-lvp-alert="low"]'), '');
+  $('[data-alb-tab="sbp"]').click(); await wait(250);
+  await type($('[data-sbp-weight]'), '60'); await wait(150);
+  // 60 kg: Day 1 (1.5 g/kg) = 90.0 g (450 mL 20%, 360 mL 25%); Day 3 (1.0 g/kg) = 60.0 g (300 mL 20%, 240 mL 25%)
+  log('Albumin SBP protocol: 60 kg gives Day 1 90.0 g (450 mL 20%) and Day 3 60.0 g (300 mL 20%)', /90\.0/.test(($('[data-sbp-day1-g]') || {}).textContent || '') && /450/.test(($('[data-sbp-day1-vol20]') || {}).textContent || '') && /60\.0/.test(($('[data-sbp-day3-g]') || {}).textContent || '') && /300/.test(($('[data-sbp-day3-vol20]') || {}).textContent || ''), [($('[data-sbp-day1-g]') || {}).textContent, ($('[data-sbp-day3-g]') || {}).textContent]);
+  $('[data-alb-tab="hrs"]').click(); await wait(250);
+  await type($('[data-hrs-weight]'), '60'); await wait(150);
+  // 60 kg: 1 g/kg/day = 60 g/day (300 mL 20%, 240 mL 25%)
+  log('Albumin HRS diagnostic challenge: 60 kg gives 60 g/day (300 mL 20%, 240 mL 25%) with respiratory alert', /60/.test(($('[data-hrs-challenge-g]') || {}).textContent || '') && /300/.test(($('[data-hrs-challenge-vol20]') || {}).textContent || '') && /240/.test(($('[data-hrs-challenge-vol25]') || {}).textContent || '') && !!$('[data-hrs-alert="resp"]'), [($('[data-hrs-challenge-g]') || {}).textContent, ($('[data-hrs-challenge-vol20]') || {}).textContent]);
+  $('[data-alb-tab="compare"]').click(); await wait(250);
+  log('Albumin compare tab: 5%, 20%, 25% comparison matrix and TBI warning shown', !!$('[data-alb-matrix-cards]') && /SAFE/i.test(($('[data-guide-modal="albumin"]') || {}).textContent || '') && !!$('[data-open-alb5-btn]'), '');
+  $('[data-open-alb5-btn]').click(); await wait(300);
+  log('Albumin compare card link opens Albumin 5% detail modal', !!$('[data-detail-modal="alb5"]'), '');
+  await esc();
+
   // Language and theme
   $('[data-lang]').click(); await wait(300);
   log('Thai: title, card labels and Unknown in Thai', /คู่มือสารน้ำ/.test($('h1').textContent) && /ไม่ทราบ/.test(fact('d5s5', 'ph')) && /ไทยนครพัฒนา|เอ\.เอ็น\.บี/.test(card('nss').querySelector('[data-holder-line="th"]').textContent) && /ปัจจุบัน/.test($('[data-filter-reg="current"]').textContent), $('h1').textContent);
@@ -249,7 +275,7 @@ window.__ivfE2E = async function () {
   $('[data-theme-toggle]').click(); await wait(150);
   // List view
   $('[data-view="list"]').click(); await wait(250);
-  log('list view shows every fluid with values', $('#fluid-list').dataset.viewMode === 'list' && $$('#fluid-list [data-row-values]').length === 20, '');
+  log('list view shows every fluid with values', $('#fluid-list').dataset.viewMode === 'list' && $$('#fluid-list [data-row-values]').length === 22, '');
   $('[data-view="grid"]').click(); await wait(250);
   // Changelog
   $('[data-version]').click(); await wait(300);
