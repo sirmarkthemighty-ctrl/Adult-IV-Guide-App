@@ -24,15 +24,15 @@ window.__ivfE2E = async function () {
   // Label values
   log('NSS: Na 154, Cl 154, 308 mOsm/L, pH 5.0 (4.5–7.0)', /154/.test(tile('nss', 'na')) && /154/.test(tile('nss', 'cl')) && /308/.test(fact('nss', 'osm')) && /5\.0 \(4\.5–7\.0\)/.test(fact('nss', 'ph')), [tile('nss', 'na'), fact('nss', 'osm')]);
   log("Lactated Ringer's: Na 130, K 4, Ca 1.35 mmol/L, Cl 109, lactate 28, 273 mOsm/L", /130/.test(tile('lrs', 'na')) && /^K⁺4$/.test(tile('lrs', 'k')) && /1\.35/.test(tile('lrs', 'ca')) && /109/.test(tile('lrs', 'cl')) && /Lactate 28/.test(fact('lrs', 'buffer')) && /273/.test(fact('lrs', 'osm')), [tile('lrs', 'ca'), fact('lrs', 'buffer')]);
-  log('Albumin 5%: Na 145, K 1, Cl 100, 300 mOsm/L, 200 kcal/L, pH 6.9 (6.4–7.4)', /145/.test(tile('alb5', 'na')) && /^K⁺1$/.test(tile('alb5', 'k')) && /100/.test(tile('alb5', 'cl')) && /300/.test(fact('alb5', 'osm')) && /200/.test(fact('alb5', 'kcal')) && /6\.9 \(6\.4–7\.4\)/.test(fact('alb5', 'ph')), [tile('alb5', 'na'), fact('alb5', 'osm')]);
-  log('Albumin 25%: Na 145, K 1, Cl 100, 300 mOsm/L, 1000 kcal/L, pH 6.9 (6.4–7.4)', /145/.test(tile('alb25', 'na')) && /^K⁺1$/.test(tile('alb25', 'k')) && /100/.test(tile('alb25', 'cl')) && /300/.test(fact('alb25', 'osm')) && /1000/.test(fact('alb25', 'kcal')) && /6\.9 \(6\.4–7\.4\)/.test(fact('alb25', 'ph')), [tile('alb25', 'na'), fact('alb25', 'osm')]);
+  log('Albumin 5%: label Na 145 ± 15; osmolarity and pH Unknown (not on the label)', /145/.test(tile('alb5', 'na')) && /Unknown/.test(fact('alb5', 'osm')) && /Unknown/.test(fact('alb5', 'ph')), [tile('alb5', 'na'), fact('alb5', 'osm')]);
+  log('Albumin 25%: label Na 145 ± 15; osmolarity and pH Unknown (not on the label)', /145/.test(tile('alb25', 'na')) && /Unknown/.test(fact('alb25', 'osm')) && /Unknown/.test(fact('alb25', 'ph')), [tile('alb25', 'na'), fact('alb25', 'osm')]);
   log('5%D/N/2: Na 77, dextrose 50 g/L, 170 kcal/L, 406 mOsm/L', /77/.test(tile('d5s2', 'na')) && /50/.test(fact('d5s2', 'dex')) && /170/.test(fact('d5s2', 'kcal')) && /406/.test(fact('d5s2', 'osm')), fact('d5s2', 'osm'));
-  log('TOP Balance: label Na 140, K 5, Mg 1.5, Cl 98; osmolarity 294; pH 7.4 (6.5–8.0)', /140/.test(tile('topbal', 'na')) && /1\.5/.test(tile('topbal', 'mg')) && /98/.test(tile('topbal', 'cl')) && /294/.test(fact('topbal', 'osm')) && /7\.4 \(6\.5–8\.0\)/.test(fact('topbal', 'ph')), [fact('topbal', 'osm'), fact('topbal', 'ph')]);
+  log('TOP Balance: label Na 140, K 5, Mg 1.5, Cl 98; osmolarity calculated 294; pH Unknown', /140/.test(tile('topbal', 'na')) && /1.5/.test(tile('topbal', 'mg')) && /98/.test(tile('topbal', 'cl')) && /294/.test(fact('topbal', 'osm')) && !!card('topbal').querySelector('[data-fact="osm"] [data-calc]') && /Unknown/.test(fact('topbal', 'ph')), [fact('topbal', 'osm'), fact('topbal', 'ph')]);
   log('Sterofundin ISO: Na 145, Ca 2.5, Mg 1, Cl 127, acetate 24 + malate 5, 309 mOsm/L', /145/.test(tile('sterofundin', 'na')) && /2\.5/.test(tile('sterofundin', 'ca')) && /127/.test(tile('sterofundin', 'cl')) && /Acetate 24 \+ Malate 5/.test(fact('sterofundin', 'buffer')) && /309/.test(fact('sterofundin', 'osm')), fact('sterofundin', 'buffer'));
   // Calculated values (from the Thai register formula)
   log('Acetar: calculated from the Thai register formula (Na 131, K 4.02, Ca 1.36, Cl 109, acetate 28, 273 mOsm/L) and marked calc.', /131/.test(tile('acetar', 'na')) && /4\.02/.test(tile('acetar', 'k')) && /1\.36/.test(tile('acetar', 'ca')) && /109/.test(tile('acetar', 'cl')) && /Acetate 28/.test(fact('acetar', 'buffer')) && /273/.test(fact('acetar', 'osm')) && card('acetar').querySelectorAll('[data-calc]').length >= 5, [tile('acetar', 'na'), tile('acetar', 'k'), fact('acetar', 'osm')]);
   log('5%D/N/5 (0.18%): Na 31 calc., 314 mOsm/L calc., 170 kcal/L calc., pH Unknown', /31/.test(tile('d5s5', 'na')) && /314/.test(fact('d5s5', 'osm')) && /170/.test(fact('d5s5', 'kcal')) && /Unknown/.test(fact('d5s5', 'ph')), [tile('d5s5', 'na'), fact('d5s5', 'osm')]);
-  log('energy Unknown without a label value: Acetar-5 (anhydrous dextrose) and Acetar (buffer calories); TOP Balance 21 kcal; NSS none', /Unknown/.test(fact('acetar', 'kcal')) && /21/.test(fact('topbal', 'kcal')) && /–/.test(fact('nss', 'kcal')) && /Unknown/.test(fact('acetar5', 'kcal')) && /anhydrous/.test(fact('acetar5', 'dex')), [fact('topbal', 'kcal'), fact('acetar5', 'kcal')]);
+  log('energy Unknown without a label value: Acetar-5 (anhydrous dextrose), Acetar and TOP Balance (buffer calories); NSS none', /Unknown/.test(fact('acetar', 'kcal')) && /Unknown/.test(fact('topbal', 'kcal')) && /–/.test(fact('nss', 'kcal')) && /Unknown/.test(fact('acetar5', 'kcal')) && /anhydrous/.test(fact('acetar5', 'dex')), fact('acetar5', 'kcal'));
   // Formula calculation agrees with labels where both exist
   { const bad = FLUIDS.filter(f => f.formula && f.labelSrc).flatMap(f => { const c = ionsFromFormula(f.formula); return ['na', 'k', 'cl', 'osm'].filter(k => f.label[k] != null && Math.abs(c[k] - f.label[k]) > Math.max(1.5, f.label[k] * 0.01)).map(k => `${f.id}.${k}: label ${f.label[k]} vs calc ${c[k].toFixed(1)}`); });
     log('calculated composition matches the printed label values (within 1%)', bad.length === 0, bad); }
@@ -67,17 +67,17 @@ window.__ivfE2E = async function () {
   log('filter pH < 6.0 (acidic): fluids with pH < 6.0 and chip shown', $$('#fluid-list [data-fluid]').length >= 6 && !!$('[data-chip="ph-acidic"]'), $$('#fluid-list [data-fluid]').length);
   $('[data-filter-ph="acidic"]').click(); await wait(200);
   $('[data-filter-ph="physio"]').click(); await wait(200);
-  log('filter pH 6.0–7.5 (near-physio): LRS, TOP Balance, PLA, Albumin', ['lrs', 'topbal', 'pla', 'alb5', 'alb20', 'alb25'].every(id => $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).includes(id)), $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).join());
+  log('filter pH 6.0–7.5 (near-physio): LRS and PLA (TOP Balance and albumin pH not on their labels)', $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).sort().join() === 'lrs,pla', $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).join());
   $('[data-clear-filters]').click(); await wait(200);
   // Countries and registration status (All countries are on from the start of the test)
   const ids = () => $$('#fluid-list [data-fluid]').map(x => x.dataset.fluid).sort().join();
   $('[data-country-all]').click(); await wait(200);
   log('no country selected: empty list with a note', $$('#fluid-list [data-fluid]').length === 0 && /country/i.test($('[data-empty-note]').textContent), '');
   $('[data-filter-country="jp"]').click(); await wait(200);
-  log('Japan, current: NSS, 5% and 10% dextrose, LRS, Acetar, Acetar-5', ids() === 'acetar,acetar5,d10w,d5w,lrs,nss', ids());
+  log('Japan, current: NSS, 5% and 10% dextrose, LRS, Acetar, Acetar-5, albumin 5/20/25%, mannitol 20%', ids() === 'acetar,acetar5,alb20,alb25,alb5,d10w,d5w,lrs,man20,nss', ids());
   $('[data-country-all]').click(); await wait(200);
   $('[data-filter-reg="past"]').click(); await wait(200); $('[data-filter-reg="current"]').click(); await wait(200);
-  log('status Past only (all countries): 3% NaCl (withdrawn in Ireland)', ids() === 'nacl3', ids());
+  log('status Past only (all countries): 3% NaCl (Ireland), albumin 25% (UK, Ireland), mannitol 20% (Ireland)', ids() === 'alb25,man20,nacl3', ids());
   $('[data-filter-reg="never"]').click(); await wait(200); $('[data-filter-reg="past"]').click(); await wait(200);
   log('status Never only: fluids missing from at least one country (5%D/N/5, TOP Balance; not NSS)', ids().includes('d5s5') && ids().includes('topbal') && !ids().split(',').includes('nss'), ids());
   $('[data-filter-reg="current"]').click(); await wait(200); $('[data-filter-reg="never"]').click(); await wait(200);
@@ -134,13 +134,15 @@ window.__ivfE2E = async function () {
   log('Raise + 12 gives +12', $('[data-na-plan]').value === '12', $('[data-na-plan]').value);
   $('[data-na-presets] [data-preset="8"]').click(); await wait(200);
   log('planned change 8 mmol/L with 3% NaCl: about 0.7 L', /0\.7 L/.test($('[data-na-row="nacl3"] [data-na-litres]').textContent), ($('[data-na-row="nacl3"] [data-na-litres]') || {}).textContent);
-  // Acute 3% NaCl Bolus protocol tab
+  // 3% bolus tab (European guideline 2014): Na 115, 60 kg man -> TBW 36; 150 mL raises (513-115)/37 x 0.15 = +1.6
   $('[data-sodium-tab="bolus"]').click(); await wait(250);
-  log('acute 3% bolus view opened with indications and regimen', !!$('[data-sodium-bolus-view]') && !!$('[data-bolus-indications]') && !!$('[data-bolus-regimen]'), '');
+  log('3% bolus tab shows the symptom classes and the severe-symptom steps', !!$('[data-sodium-bolus-view]') && !!$('[data-bolus-symptoms]') && !!$('[data-bolus-severe]') && !!$('[data-bolus-moderate]'), '');
   await type($('[data-bolus-na]'), '115'); await type($('[data-bolus-weight]'), '60'); await wait(150);
-  log('acute bolus 100 mL rise: +1.3 mmol/L acute rise calculated', /\+1\.3/.test(($('[data-bolus-rise-text]') || {}).textContent || ''), ($('[data-bolus-rise-text]') || {}).textContent);
-  $('[data-bolus-btn="2ml"]').click(); await wait(150);
-  log('acute bolus 2 mL/kg (120 mL) rise: +1.6 mmol/L acute rise calculated', /\+1\.6/.test(($('[data-bolus-rise-text]') || {}).textContent || ''), ($('[data-bolus-rise-text]') || {}).textContent);
+  log('150 mL of 3% NaCl: +1.6 mmol/L, sodium after 116.6', /\+1\.6 mmol/.test((($('[data-bolus-rise]') || {}).textContent || '')) && /116\.6/.test((($('[data-bolus-after]') || {}).textContent || '')), (($('[data-bolus-rise]') || {}).textContent || ''));
+  $('[data-bolus-pick] button:nth-child(2)').click(); await wait(150);
+  log('2 mL/kg (120 mL): +1.3 mmol/L', /\+1\.3 mmol/.test((($('[data-bolus-rise]') || {}).textContent || '')), (($('[data-bolus-rise]') || {}).textContent || ''));
+  $('[data-sodium-tab="relowering"]').click(); await wait(250);
+  log('re-lowering tab inside the sodium guide', !!$('[data-guide-modal] [data-relower-view]'), '');
   $('[data-sodium-tab="continuous"]').click(); await wait(200);
   await esc();
   $('[data-bar-clear]').click(); await wait(200);
@@ -185,84 +187,99 @@ window.__ivfE2E = async function () {
   $$('[data-guide-modal="choose"] [data-guide-fluid]')[0].click(); await wait(300);
   log('a fluid in a guide opens its details', !!$('[data-detail-modal="d5s2k40"]'), ''); await esc();
 
-  // Potassium replacement & safe rate guide
+  // Potassium (Kardalas 2018): K 2.8 -> moderate; to 4.0 = 1.2 x 200-400 = 240-480 mmol
   $('[data-guide="kguide"]').click(); await wait(350);
-  log('potassium guide opened', !!$('[data-guide-modal="kguide"]'), '');
-  await type($('[data-k-serum]'), '2.8'); await type($('[data-k-weight]'), '60'); await wait(150);
-  log('potassium deficit for K 2.8, 60 kg: Sterns deficit estimation shown', /mmol/.test(($('[data-k-deficit-val]') || {}).textContent || ''), ($('[data-k-deficit-val]') || {}).textContent);
-  log('potassium safe rate limits: peripheral max 10 mmol/h, central max 20 mmol/h', /10 mmol\/h/.test(($('[data-k-rate-periph]') || {}).textContent || '') && /20 mmol\/h/.test(($('[data-k-rate-central]') || {}).textContent || ''), '');
-  log('potassium vehicle & magnesium safety warnings present', !!$('[data-k-vehicle-alert]') && !!$('[data-k-mg-alert]'), '');
+  await type($('[data-k-serum]'), '2.8'); await wait(150);
+  log('potassium 2.8: moderate band, deficit about 240–480 mmol to reach 4.0', $('[data-k-severity]').dataset.kSeverity === 'moderate' && /240–480 mmol/.test((($('[data-k-deficit-val]') || {}).textContent || '')), (($('[data-k-deficit-val]') || {}).textContent || ''));
+  await type($('[data-k-serum]'), '2.3'); await wait(150);
+  log('potassium 2.3: severe band; IV advice shown', $('[data-k-severity]').dataset.kSeverity === 'severe' && !!$('[data-k-iv]'), '');
+  await type($('[data-k-serum]'), '4.2'); await wait(150);
+  log('potassium above target: no deficit', $('[data-k-severity]').dataset.kSeverity === 'none' && !$('[data-k-deficit]'), '');
   await esc();
 
-  // DKA / HHS fluid protocol guide
+  // DKA / HHS (ADA/EASD 2024): Na 132, glucose 450 mg/dL -> Katz 132 + 1.6 x 3.5 = 137.6
   $('[data-guide="dka"]').click(); await wait(350);
-  log('dka guide opened', !!$('[data-guide-modal="dka"]'), '');
-  await type($('[data-dka-na]'), '132'); await type($('[data-dka-glucose]'), '450'); await type($('[data-dka-k]'), '4.2'); await wait(150);
-  log('DKA Katz corrected sodium: 137.6 mmol/L calculated', /137\.6/.test(($('[data-dka-corrna-val]') || {}).textContent || '') && /≥ 135/.test(($('[data-dka-corrna-badge]') || {}).textContent || ''), ($('[data-dka-corrna-val]') || {}).textContent);
+  await type($('[data-dka-na]'), '132'); await type($('[data-dka-glucose]'), '450'); await type($('[data-dka-k]'), '4.2'); await type($('[data-dka-weight]'), '70'); await wait(150);
+  log('DKA corrected sodium 137.6; insulin 7 units/h at 70 kg; potassium 4.2 in the add-K band', /137\.6/.test((($('[data-dka-corr-val]') || {}).textContent || '')) && /^7 units\/h/.test((($('[data-dka-insulin-rate] [data-stat-value]') || {}).textContent || '')) && $('[data-dka-k-band]').dataset.dkaKBand === 'mid', (($('[data-dka-corr-val]') || {}).textContent || ''));
+  log('glucose 450: dextrose not yet', $('[data-dka-dex]').dataset.dkaDex === 'wait', '');
   await type($('[data-dka-glucose]'), '220'); await wait(150);
-  log('DKA glucose <= 250 mg/dL triggers phase 3 dextrose addition alert', /DEXTROSE|5%D/i.test(($('[data-dka-dex-alert]') || {}).textContent || ''), ($('[data-dka-dex-alert]') || {}).textContent);
-  await type($('[data-dka-k]'), '3.0'); await wait(150);
-  log('DKA K < 3.3 mmol/L triggers insulin hold warning', /insulin/i.test(($('[data-dka-k-alert]') || {}).textContent || '') || /HOLD/i.test(($('[data-dka-k-alert]') || {}).textContent || ''), ($('[data-dka-k-alert]') || {}).textContent);
+  log('glucose below 250 mg/dL: add dextrose', $('[data-dka-dex]').dataset.dkaDex === 'now', (($('[data-dka-dex-alert]') || {}).textContent || ''));
+  await type($('[data-dka-k]'), '3.2'); await wait(150);
+  log('potassium below 3.5: hold-insulin band', $('[data-dka-k-band]').dataset.dkaKBand === 'low', '');
+  await type($('[data-dka-k]'), '5.4'); await wait(150);
+  log('potassium 5.0 or more: no potassium band', $('[data-dka-k-band]').dataset.dkaKBand === 'high', '');
+  $('[data-dka-glu-unit] button:nth-child(2)').click(); await type($('[data-dka-glucose]'), '25'); await wait(150);
+  log('glucose 25 mmol/L (≈ 450 mg/dL) gives the same corrected sodium', /137\.6/.test((($('[data-dka-corr-val]') || {}).textContent || '')), (($('[data-dka-corr-val]') || {}).textContent || ''));
+  $('[data-dka-type] button:nth-child(2)').click(); await wait(150);
+  log('HHS shows the HHS section', !!$('[data-dka-hhs]'), '');
   await esc();
 
-  // Glucose Infusion Rate (GIR) guide
+  // GIR (ESPEN ICU 2019): D5W 100 mL/h at 60 kg = 100 x 5 x 10 / 3600 = 1.39 mg/kg/min
   $('[data-guide="gir"]').click(); await wait(350);
-  log('GIR guide opened', !!$('[data-guide-modal="gir"]'), '');
-  await type($('[data-gir-weight]'), '60');
-  await type($('[data-gir-rate-input]'), '100');
-  // D5W is default (5% = 50 g/L). wt 60 kg, rate 100 mL/h -> GIR = (100 * 5 * 10) / (60 * 60) = 5000 / 3600 = 1.39 mg/kg/min
-  log('GIR rate calculation: 100 mL/h D5W in 60 kg gives 1.39 mg/kg/min', /1\.39/.test(($('[data-gir-val]') || {}).textContent || ''), ($('[data-gir-val]') || {}).textContent);
-  $('[data-gir-mode] button:nth-child(2)').click(); await wait(200);
-  $('[data-gir-presets] [data-gir-preset="4"]').click(); await wait(200);
-  // Target 4 mg/kg/min in 60 kg with D5W -> Rate = (4 * 60 * 60) / 50 = 288 mL/h
-  log('GIR target-to-rate calculation: target 4 mg/kg/min in 60 kg gives 288 mL/h', /288/.test(($('[data-gir-rate-result]') || {}).textContent || ''), ($('[data-gir-rate-result]') || {}).textContent);
+  await type($('[data-gir-weight]'), '60'); await type($('[data-gir-rate]'), '100'); await wait(150);
+  log('GIR: D5W 100 mL/h at 60 kg = 1.39 mg/kg/min, 120 g glucose a day', /1\.39/.test((($('[data-gir-val]') || {}).textContent || '')) && /120 g/.test((($('[data-gir-daily]') || {}).textContent || '')), (($('[data-gir-val]') || {}).textContent || ''));
+  $('[data-gir-mode] button:nth-child(2)').click(); await wait(150);
+  await type($('[data-gir-target]'), '4'); await wait(150);
+  log('target 4 mg/kg/min at 60 kg with D5W = 288 mL/h', /288 mL\/h/.test((($('[data-gir-mlh]') || {}).textContent || '')), (($('[data-gir-mlh]') || {}).textContent || ''));
+  await type($('[data-gir-target]'), '6'); await wait(150);
+  log('above 5 mg/kg/min: over-limit warning', $('[data-gir-val]').dataset.girVal === 'over' && !!$('[data-gir-alert="over"]'), '');
   await esc();
 
-  // ICP & Osmotherapy guide
+  // Raised ICP (SIBICC 2019, Osmitrol label)
   $('[data-guide="icp"]').click(); await wait(350);
-  log('ICP guide opened', !!$('[data-guide-modal="icp"]'), '');
-  await type($('[data-icp-weight]'), '70');
-  $('[data-man-presets] [data-man-preset="0.5"]').click(); await wait(150);
-  // 70 kg at 0.5 g/kg: 35.0 g, 175 mL
-  log('Mannitol 20% calculation: 70 kg at 0.5 g/kg gives 35.0 g and 175 mL', /35\.0/.test(($('[data-man-dose-g]') || {}).textContent || '') && /175/.test(($('[data-man-vol-ml]') || {}).textContent || ''), [($('[data-man-dose-g]') || {}).textContent, ($('[data-man-vol-ml]') || {}).textContent]);
-  await type($('[data-man-osm-input]'), '325'); await wait(150);
-  log('Mannitol osmolality >= 320 mOsm/kg triggers danger HOLD alert', !!$('[data-man-osm-alert="danger"]'), '');
+  await type($('[data-icp-weight]'), '70'); $('[data-man-preset="0.5"]').click(); await wait(150);
+  log('mannitol 20% 0.5 g/kg at 70 kg = 35 g in 175 mL', /^35 g/.test((($('[data-man-grams] [data-stat-value]') || {}).textContent || '')) && /175 mL/.test((($('[data-man-vol]') || {}).textContent || '')), (($('[data-man-grams]') || {}).textContent || ''));
+  await type($('[data-man-osm]'), '310'); await wait(150);
+  log('osmolality 310: no limit warning', !$('[data-man-osm-alert]'), '');
+  await type($('[data-man-osm]'), '325'); await wait(150);
+  log('osmolality 320 or more: limit warning', !!$('[data-man-osm-alert]'), '');
+  await type($('[data-gap-na]'), '140'); await type($('[data-gap-glu]'), '90'); await type($('[data-gap-bun]'), '14'); await wait(150);
+  log('osmol gap: calculated 290.0, gap +35.0', /290\.0/.test((($('[data-gap-result]') || {}).textContent || '')) && /\+35\.0/.test((($('[data-gap-result]') || {}).textContent || '')), (($('[data-gap-result]') || {}).textContent || ''));
   $('[data-icp-tab="nacl3"]').click(); await wait(250);
-  $('[data-nacl3-presets] [data-nacl3-preset="250"]').click(); await wait(150);
-  await type($('[data-nacl3-sna-input]'), '138'); await wait(150);
-  log('3% NaCl bolus calculation: 250 mL bolus rise and predicted Na shown', /250/.test(($('[data-nacl3-vol-ml]') || {}).textContent || '') && /mmol\/L/.test(($('[data-nacl3-rise-val]') || {}).textContent || ''), ($('[data-nacl3-rise-val]') || {}).textContent);
-  await type($('[data-nacl3-sna-input]'), '156'); await wait(150);
-  log('3% NaCl current Na >= 155 mmol/L triggers high alert', !!$('[data-nacl3-alert="high"]'), '');
-  $('[data-icp-tab="decision"]').click(); await wait(250);
-  log('ICP osmotherapy decision matrix rendered with clinical scenarios', $$('[data-icp-scenario]').length === 5, '');
+  await type($('[data-nacl3-vol]'), '250'); await type($('[data-nacl3-na]'), '138'); await wait(150);
+  log('3% NaCl 250 mL at 70 kg, Na 138: +2.2, then 140.2', /\+2\.2/.test((($('[data-nacl3-rise]') || {}).textContent || '')) && /140\.2/.test((($('[data-nacl3-after]') || {}).textContent || '')) && !$('[data-nacl3-alert]'), (($('[data-nacl3-rise]') || {}).textContent || ''));
+  await type($('[data-nacl3-na]'), '156'); await wait(150);
+  log('sodium 155 or more: limit warning', !!$('[data-nacl3-alert]'), '');
+  $('[data-icp-tab="choose"]').click(); await wait(250);
+  log('choosing an agent tab', !!$('[data-icp-choose-view]'), '');
   $('[data-icp-tab="cpp"]').click(); await wait(250);
-  await type($('[data-cpp-sbp]'), '130'); await type($('[data-cpp-dbp]'), '80'); await type($('[data-cpp-icp-input]'), '18'); await wait(150);
-  // MAP = 80 + 50/3 = 96.7 mmHg; CPP = 96.7 - 18 = 78.7 mmHg
-  log('CPP calculator: MAP and CPP calculated with target ranges', /96\.7/.test(($('[data-cpp-map-val]') || {}).textContent || '') && /78\.7/.test(($('[data-cpp-val]') || {}).textContent || ''), [($('[data-cpp-map-val]') || {}).textContent, ($('[data-cpp-val]') || {}).textContent]);
+  await type($('[data-cpp-sbp]'), '130'); await type($('[data-cpp-dbp]'), '80'); await type($('[data-cpp-icp]'), '18'); await wait(150);
+  log('CPP: MAP 96.7, CPP 78.7 (above 60–70)', /96\.7/.test((($('[data-cpp-map]') || {}).textContent || '')) && /78\.7/.test((($('[data-cpp-val]') || {}).textContent || '')), (($('[data-cpp-val]') || {}).textContent || ''));
   await esc();
 
-  // Albumin Indication Guide & Clinical Dosing Calculator
+  // Albumin (EASL 2018)
   $('[data-guide="albumin"]').click(); await wait(350);
-  log('Albumin guide opened', !!$('[data-guide-modal="albumin"]'), '');
-  await type($('[data-lvp-vol-input]'), '6');
-  $('[data-lvp-ratio="8"]').click(); await wait(150);
-  // 6 L removed at 8 g/L -> 48 g albumin; 20% = 240 mL; 25% = 192 mL
-  log('Albumin LVP calculation: 6 L at 8 g/L gives 48 g albumin (240 mL 20%, 192 mL 25%)', /48/.test(($('[data-lvp-dose-g]') || {}).textContent || '') && /240/.test(($('[data-lvp-vol-20]') || {}).textContent || '') && /192/.test(($('[data-lvp-vol-25]') || {}).textContent || ''), [($('[data-lvp-dose-g]') || {}).textContent, ($('[data-lvp-vol-20]') || {}).textContent]);
-  log('Albumin LVP >= 5 L triggers large-volume paracentesis safe alert', !!$('[data-lvp-alert="safe"]'), '');
-  $('[data-lvp-presets] [data-lvp-preset="4"]').click(); await wait(150);
-  log('Albumin LVP < 5 L triggers low volume warning alert', !!$('[data-lvp-alert="low"]'), '');
+  await type($('[data-alb-litres]'), '6'); await wait(150);
+  log('paracentesis 6 L: 48 g = 240 mL of 20% or 192 mL of 25%', /^48 g/.test((($('[data-alb-lvp-g] [data-stat-value]') || {}).textContent || '')) && /240 mL/.test((($('[data-alb-lvp]') || {}).textContent || '')) && /192 mL/.test((($('[data-alb-lvp]') || {}).textContent || '')) && !$('[data-alb-under5]'), (($('[data-alb-lvp-g]') || {}).textContent || ''));
+  await type($('[data-alb-litres]'), '4'); await wait(150);
+  log('5 L or less: note shown', !!$('[data-alb-under5]'), '');
   $('[data-alb-tab="sbp"]').click(); await wait(250);
-  await type($('[data-sbp-weight]'), '60'); await wait(150);
-  // 60 kg: Day 1 (1.5 g/kg) = 90.0 g (450 mL 20%, 360 mL 25%); Day 3 (1.0 g/kg) = 60.0 g (300 mL 20%, 240 mL 25%)
-  log('Albumin SBP protocol: 60 kg gives Day 1 90.0 g (450 mL 20%) and Day 3 60.0 g (300 mL 20%)', /90\.0/.test(($('[data-sbp-day1-g]') || {}).textContent || '') && /450/.test(($('[data-sbp-day1-vol20]') || {}).textContent || '') && /60\.0/.test(($('[data-sbp-day3-g]') || {}).textContent || '') && /300/.test(($('[data-sbp-day3-vol20]') || {}).textContent || ''), [($('[data-sbp-day1-g]') || {}).textContent, ($('[data-sbp-day3-g]') || {}).textContent]);
+  await type($('[data-alb-weight]'), '60'); await wait(150);
+  log('SBP at 60 kg: 90 g on day 1, 60 g on day 3', /^90 g/.test((($('[data-alb-sbp1] [data-stat-value]') || {}).textContent || '')) && /^60 g/.test((($('[data-alb-sbp3] [data-stat-value]') || {}).textContent || '')), (($('[data-alb-sbp1]') || {}).textContent || ''));
   $('[data-alb-tab="hrs"]').click(); await wait(250);
-  await type($('[data-hrs-weight]'), '60'); await wait(150);
-  // 60 kg: 1 g/kg/day = 60 g/day (300 mL 20%, 240 mL 25%)
-  log('Albumin HRS diagnostic challenge: 60 kg gives 60 g/day (300 mL 20%, 240 mL 25%) with respiratory alert', /60/.test(($('[data-hrs-challenge-g]') || {}).textContent || '') && /300/.test(($('[data-hrs-challenge-vol20]') || {}).textContent || '') && /240/.test(($('[data-hrs-challenge-vol25]') || {}).textContent || '') && !!$('[data-hrs-alert="resp"]'), [($('[data-hrs-challenge-g]') || {}).textContent, ($('[data-hrs-challenge-vol20]') || {}).textContent]);
+  await type($('[data-alb-weight]'), '120'); await wait(150);
+  log('AKI/HRS at 120 kg: 1 g/kg capped at 100 g', /^100 g/.test((($('[data-alb-hrs-g] [data-stat-value]') || {}).textContent || '')), (($('[data-alb-hrs-g]') || {}).textContent || ''));
   $('[data-alb-tab="compare"]').click(); await wait(250);
-  log('Albumin compare tab: 5%, 20%, 25% comparison matrix and TBI warning shown', !!$('[data-alb-matrix-cards]') && /SAFE/i.test(($('[data-guide-modal="albumin"]') || {}).textContent || '') && !!$('[data-open-alb5-btn]'), '');
-  $('[data-open-alb5-btn]').click(); await wait(300);
-  log('Albumin compare card link opens Albumin 5% detail modal', !!$('[data-detail-modal="alb5"]'), '');
+  log('5% · 20% · 25% table from the labels', !!$('[data-alb-compare] table') && /145 ± 15/.test((($('[data-alb-compare]') || {}).textContent || '')), '');
+  $('[data-guide-modal="albumin"] [data-guide-fluid="alb5"]').click(); await wait(300);
+  log('albumin 5% opens from the guide', !!$('[data-detail-modal="alb5"]'), '');
+  await esc(); await esc();
+
+  // Re-lowering (European guideline 2014 section 7.5): 112 -> 124 in the first 24 h, 60 kg man
+  $('[data-guide="relower"]').click(); await wait(350);
+  await type($('[data-relower-start]'), '112'); await type($('[data-relower-now]'), '124'); await type($('[data-relower-weight]'), '60'); await wait(150);
+  log('rise +12 over a 10 limit: 2 above, ceiling 122, water 600 mL, D5W 0.60 L', /\+12/.test((($('[data-relower-rise]') || {}).textContent || '')) && /^2 mmol/.test((($('[data-relower-excess] [data-stat-value]') || {}).textContent || '')) && /122/.test((($('[data-relower-ceiling]') || {}).textContent || '')) && /600 mL/.test((($('[data-relower-water]') || {}).textContent || '')) && /0\.60 L/.test((($('[data-relower-d5w]') || {}).textContent || '')), (($('[data-relower-d5w]') || {}).textContent || ''));
+  $('[data-relower-period] button:nth-child(2)').click(); await type($('[data-relower-now]'), '119'); await wait(150);
+  log('later 24 h, rise 7 under 8: within the limit', $('[data-relower-alert]').dataset.relowerAlert === 'within', '');
+  $('[data-relower-tab="clamp"]').click(); await wait(200);
+  $('[data-relower-tab="risk"]').click(); await wait(200);
+  log('dDAVP clamp and risk tabs', !!$('[data-relower-risk]'), '');
+  await esc();
+
+  // Albumin and mannitol are not offered in the crystalloid calculators
+  $('[data-guide="water"]').click(); await wait(300);
+  await type($('[data-water-na]'), '160'); await type($('[data-water-weight]'), '70'); await wait(150);
+  log('water deficit lists no albumin or mannitol', !$('[data-water-row^="alb"]') && !$('[data-water-row="man20"]'), '');
   await esc();
 
   // Language and theme

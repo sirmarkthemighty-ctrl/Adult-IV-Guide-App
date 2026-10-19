@@ -40,6 +40,13 @@ const DropletIcon = ({ className }) => (
     <path d="M12 11v6M9 14h6" strokeWidth="1.8" />
   </svg>
 );
+const ShieldAlertIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+    <path d="M12 8v4" />
+    <path d="M12 16h.01" />
+  </svg>
+);
 
 // --- Dark theme layer ---
 // The UI is written in light-mode Tailwind classes. Rather than add a dark:
@@ -150,7 +157,12 @@ const HOLDERS = {
   innova: { en: 'Pharma Innova Co., Ltd.', th: 'บริษัท ฟาร์ม่า อินโนวา จำกัด' },
   starlab: { en: 'Starlab Co., Ltd.', th: 'บริษัท สตาร์แล็บ จำกัด' },
   bbraun: { en: 'B. Braun (Thailand) Ltd.', th: 'บริษัท บี.บราวน์ (ประเทศไทย) จำกัด' },
-  baxter: { en: 'Baxter Healthcare (Thailand) Co., Ltd.', th: 'บริษัท แบกซ์เตอร์ เฮลธ์แคร์ (ประเทศไทย) จำกัด' },
+  grifols: { en: 'Grifols (Thailand) Ltd.', th: 'บริษัท กริโฟลส์ (ประเทศไทย) จำกัด' },
+  takeda: { en: 'Takeda (Thailand) Ltd.', th: 'บริษัท ทาเคดา (ประเทศไทย) จำกัด' },
+  zuellig: { en: 'Zuellig Pharma Ltd.', th: 'บริษัท ซิลลิค ฟาร์มา จำกัด' },
+  scharoen: { en: 'S. Charoen Bhaesaj Trading Co., Ltd.', th: 'บริษัท ส.เจริญเภสัชเทรดดิ้ง จำกัด' },
+  trcs: { en: 'Thai Red Cross Society', th: 'สภากาชาดไทย' },
+  biogenetech: { en: 'Biogenetech Co., Ltd.', th: 'บริษัท ไบโอจีนีเทค จำกัด' },
 };
 const TH_REG = {
   '1A 1427/30': ['U1DR1A1022300142711C', 'NSS 0.9% Sodium Chloride Injection', 'tnp'],
@@ -162,8 +174,6 @@ const TH_REG = {
   '1A 115/27': ['U1DR1A1022270011511C', 'Sodium Chloride 0.45%', 'ghp'],
   '1A 2412/28': ['U1DR1A1022280241211C', 'Sodium Chloride 3%', 'ghp'],
   '1A 337/56': ['U1DR1A1022560033711C', '3% Sodium Chloride', 'innova'],
-  '1A 120/30': ['U1DR1A1022300012011C', 'Mannitol 20% Injection', 'anb'],
-  '1A 77/52': ['U1DR1A1022520007711C', '20% Mannitol in Water for Injection', 'otsuka'],
   '1A 1988/30': ['U1DR1A1022300198811C', '5% Dextrose Injection U.S.P. D-5-W', 'otsuka'],
   '1A 1174/29': ['U1DR1A1022290117411C', 'Dextrose 5% in Water', 'ghp'],
   '1A 1486/30': ['U1DR1A1022300148611C', 'D5W 5% Dextrose Injection', 'tnp'],
@@ -206,14 +216,24 @@ const TH_REG = {
   '2C 21/51': ['U1DR2C1022510002111C', "5% Dextrose in Acetated Ringer's", 'starlab'],
   '2A 15082/66 (NG)': ['U1DR2A1052661508211C', 'TOP Balance Salt Solution (Multiple Electrolyte Injection Type 1)', 'otsuka'],
   '2C 16/53': ['U1DR2C1022530001611C', 'Sterofundin ISO', 'bbraun'],
-  '2C 1/46 (NBC)': ['U1DR2C1022460000111C', 'Albumin (Human) 20% Baxter', 'baxter'],
-  '2C 2/46 (NBC)': ['U1DR2C1022460000211C', 'Human Albumin 20% B. Braun', 'bbraun'],
-  '2C 3/46 (NBC)': ['U1DR2C1022460000311C', 'Albumin (Human) 5% Baxter', 'baxter'],
-  '2C 4/46 (NBC)': ['U1DR2C1022460000411C', 'Human Albumin 5% B. Braun', 'bbraun'],
-  '2C 5/46 (NBC)': ['U1DR2C1022460000511C', 'Albumin (Human) 25% Baxter', 'baxter'],
-  '2C 6/46 (NBC)': ['U1DR2C1022460000611C', 'Human Albumin 25% B. Braun', 'bbraun'],
 };
 // Every record listed on a card was opened on 14 Oct 2026: its formula field matches the card's formula.
+// Albumin and mannitol records (searched and opened 19 Oct 2026; formula field matches the strength on each card)
+Object.assign(TH_REG, {
+  '1C 374/47': ['U1DR1C1042470037411C', 'Human Albumin Grifols 5%', 'grifols'],
+  '1C 15/63 (B)': ['U1DR1C1042630001511C', 'Flexbumin 20%, Albumin (Human), USP, 20% Solution', 'takeda'],
+  '1C 13/65 (B)': ['U1DR1C1042650001311C', 'Human Albumin 200 g/L Takeda', 'takeda'],
+  '1C 375/47': ['U1DR1C1042470037511C', 'Human Albumin Grifols 20%', 'grifols'],
+  '1C 10/64 (B)': ['U1DR1C1042640001011C', 'Human Albumin 20% Behring, Low Salt', 'zuellig'],
+  '1C 13/55 (B)': ['U1DR1C1042550001311C', 'Albumin Inj. 20% - GCC', 'scharoen'],
+  '1A 4/59 (B)': ['U1DR1A1042590000411C', 'Albumin 20 TRCS', 'trcs'],
+  '1C 99/46': ['U1DR1C1042460009911C', 'Uman Albumin 200 g/L', 'biogenetech'],
+  '1C 14/63 (B)': ['U1DR1C1042630001411C', 'Flexbumin 25%, Albumin (Human), USP, 25% Solution', 'takeda'],
+  '1C 18/63 (B)': ['U1DR1C1042630001811C', 'Albuminar-25', 'zuellig'],
+  '1C 100/46': ['U1DR1C1042460010011C', 'Uman Albumin 250 g/L', 'biogenetech'],
+  '1A 309/30': ['U1DR1A1022300030911C', 'Mannitol Injection (B.P.) 20%', 'otsuka'],
+  '1A 552/33': ['U1DR1A1022330055211C', 'Mannitol 20% A.N.B.', 'anb'],
+});
 const thRecordUrl = (code) => 'https://pertento.fda.moph.go.th/FDA_INFORMATION_DRUG/Home/Public_Information_Drug?Newcode=' + code;
 
 // Sources for values (label = values printed on that document)
@@ -226,10 +246,10 @@ const SOURCES = {
   usKDexNaCl: { cite: 'Potassium Chloride in 5% Dextrose and Sodium Chloride Injection USP, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c553fed1-3de5-4826-8eff-633b5923bf0b' },
   usLR: { cite: "Lactated Ringer's Injection USP, Baxter, US label (DailyMed)", url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=dad7735c-709b-40ea-ab7a-15577e24a966' },
   usPL: { cite: 'PLASMA-LYTE A Injection pH 7.4, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=6ec9e61c-2c26-402f-8604-f446b2e34058' },
-  usAlb5: { cite: 'Albumin (Human) 5% Solution USP, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=1f66cb7d-6f77-4c4f-9e1e-c75be7be2db9' },
-  usAlb: { cite: 'Albumin (Human) 20% Solution USP, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=27d8e8b0-8c20-41ff-80c7-cb151df051f6' },
-  usAlb25: { cite: 'Albumin (Human) 25% Solution USP, Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=27d8e8b0-8c20-41ff-80c7-cb151df051f6' },
-  usMan: { cite: 'Osmitrol (Mannitol Injection USP 20%), Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=423c4dbb-bcae-4f76-a0e2-636b04294b0f' },
+  usAlb5: { cite: 'FLEXBUMIN 5% (Albumin [Human]), Takeda, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=79094f4e-5f5c-44d6-b563-d6078eafe83a' },
+  usAlb: { cite: 'FLEXBUMIN 20% (Albumin [Human]), Takeda, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=98b96ee2-86d2-4056-bdda-4d75d72d891f' },
+  usAlb25: { cite: 'FLEXBUMIN 25% (Albumin [Human]), Takeda, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=bdb4e167-27a2-4b50-b245-43df9cd535cb' },
+  usMan: { cite: 'OSMITROL (Mannitol Injection USP), Baxter, US label (DailyMed)', url: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0d914965-7001-45cb-ba51-d7c5964b05bc' },
   thTopBal: { cite: 'TOP Balance Salt Solution, Summary of Product Characteristics, Thai FDA (Thai Otsuka)', url: 'https://ndi.fda.moph.go.th/uploads/drug_detail_corporation/doc/word/1163/09c51bdacb089726f3a2afb88373528e-a1.pdf' },
   thAcetRinger: { cite: "Acetate Ringer's Injection (Able Medical, 2A 15221/63), Summary of Product Characteristic, Thai FDA", url: 'https://ndi.fda.moph.go.th/uploads/drug_detail_corporation/doc/word/1279/f3f314f0cf93470bd742dd647f331448-a1.pdf' },
   euSterofundin: { cite: 'Sterofundin ISO, Summary of Product Characteristics, B. Braun (Medicines Evaluation Board, Netherlands)', url: 'https://www.geneesmiddeleninformatiebank.nl/smpc/h27041_smpc.pdf' },
@@ -320,7 +340,7 @@ const FLUIDS = [
   { id: 'topbal', short: 'Top Balance', name: { en: 'TOP Balance (Multiple electrolytes, type 1)', th: 'ท็อปบาลานซ์ (Multiple electrolytes, type 1)' }, family: 'balanced',
     aliases: ['top balance', 'topbalance', 'multiple electrolyte', 'plasmalyte', 'plasma-lyte'],
     formula: [['NaCl', 5.26], ['NaGluconate', 5.02], ['NaAcetate_3H2O', 3.68], ['KCl', 0.37], ['MgCl2_6H2O', 0.30]], formulaSrc: 'thTopBal',
-    label: { na: 140, k: 5, mg: 1.5, cl: 98, acetate: 27, gluconate: 23, osm: 294, kcal: 21, ph: '7.4 (6.5–8.0)' }, labelSrc: 'thTopBal', labelMEq: { mg: 3 },
+    label: { na: 140, k: 5, mg: 1.5, cl: 98, acetate: 27, gluconate: 23 }, labelSrc: 'thTopBal', labelMEq: { mg: 3 },
     sameAs: 'pla',
     thai: ['2A 15082/66 (NG)'] },
   { id: 'sterofundin', short: 'Sterofundin ISO', name: { en: 'Sterofundin ISO', th: 'สเตอโรฟุนดิน ไอเอสโอ (Sterofundin ISO)' }, family: 'balanced',
@@ -336,23 +356,23 @@ const FLUIDS = [
   { id: 'alb5', short: 'Albumin 5%', name: { en: 'Human Albumin 5% (50 g/L)', th: 'ฮิวแมน อัลบูมิน 5% (50 ก./ล.)' }, family: 'colloid',
     aliases: ['albumin 5%', 'human albumin 5%', '5% albumin', 'alb5', 'has 5%', 'colloid', 'iso-oncotic', 'อัลบูมิน 5%', 'อัลบูมิน 5'],
     formula: null, formulaSrc: 'usAlb5',
-    label: { na: 145, k: 1, cl: 100, osm: 300, kcal: 200, ph: '6.9 (6.4–7.4)' }, labelSrc: 'usAlb5',
-    thai: ['2C 3/46 (NBC)', '2C 4/46 (NBC)'] },
+    label: { na: 145 }, labelSrc: 'usAlb5', labelMEq: { na: '145 ± 15' },
+    thai: ['1C 374/47'] },
   { id: 'alb20', short: 'Albumin 20%', name: { en: 'Human Albumin 20% (200 g/L)', th: 'ฮิวแมน อัลบูมิน 20% (200 ก./ล.)' }, family: 'colloid',
     aliases: ['albumin', 'human albumin', 'alb', 'colloid', '20% albumin', 'has', 'อัลบูมิน'],
     formula: null, formulaSrc: 'usAlb',
-    label: { na: 145, k: 1, cl: 100, osm: 300, kcal: 800, ph: '6.9 (6.4–7.4)' }, labelSrc: 'usAlb',
-    thai: ['2C 1/46 (NBC)', '2C 2/46 (NBC)'] },
+    label: { na: 145 }, labelSrc: 'usAlb', labelMEq: { na: '145 ± 15' },
+    thai: ['1C 15/63 (B)', '1C 13/65 (B)', '1C 375/47', '1C 10/64 (B)', '1C 13/55 (B)', '1A 4/59 (B)', '1C 99/46'] },
   { id: 'alb25', short: 'Albumin 25%', name: { en: 'Human Albumin 25% (250 g/L)', th: 'ฮิวแมน อัลบูมิน 25% (250 ก./ล.)' }, family: 'colloid',
     aliases: ['albumin 25%', 'human albumin 25%', '25% albumin', 'alb25', 'has 25%', 'colloid', 'hyperoncotic', 'salt poor albumin', 'อัลบูมิน 25%', 'อัลบูมิน 25'],
     formula: null, formulaSrc: 'usAlb25',
-    label: { na: 145, k: 1, cl: 100, osm: 300, kcal: 1000, ph: '6.9 (6.4–7.4)' }, labelSrc: 'usAlb25',
-    thai: ['2C 5/46 (NBC)', '2C 6/46 (NBC)'] },
+    label: { na: 145 }, labelSrc: 'usAlb25', labelMEq: { na: '145 ± 15' },
+    thai: ['1C 14/63 (B)', '1C 18/63 (B)', '1C 100/46'] },
   { id: 'man20', short: 'Mannitol 20%', name: { en: 'Mannitol 20% (200 g/L)', th: 'แมนนิทอล 20% (200 ก./ล.)' }, family: 'hypertonic',
     aliases: ['mannitol', 'osmitrol', 'osmotic diuretic', '20% mannitol', 'แมนนิทอล'],
     formula: null, formulaSrc: 'usMan',
-    label: { na: 0, k: 0, cl: 0, osm: 1098, kcal: 800, ph: '5.5 (4.5–7.0)' }, labelSrc: 'usMan',
-    thai: ['1A 120/30', '1A 77/52'] },
+    label: { na: 0, k: 0, cl: 0, osm: 1098, ph: '5.0 (4.5–7.0)' }, labelSrc: 'usMan',
+    thai: ['1A 309/30', '1A 552/33'], thNote: 'man20Otsuka' },
 ];
 
 // Value of one field: { v, calc, src } or null (Unknown). Label values win; otherwise calculated from the formula.
@@ -503,29 +523,30 @@ const ABROAD = {
     eu: ['current', [['Plasma-Lyte 148 (pH 7.4) solution for infusion', 'Baxter Holding B.V.', 'PA2299/032/001']]],
     jp: ['never', []],
   },
+  // Albumin and mannitol abroad: searched 19 Oct 2026. US albumin is a biologic (not in Drugs@FDA): DailyMed labels.
   alb5: {
-    us: ['current', usApps(['baxter', 'BLA103984', 'Albumin (Human) 5%'])],
-    uk: ['current', [['Human Albumin 5% solution for infusion', 'Bio Products Laboratory', '10002']]],
-    eu: ['current', [['Human Albumin 50 g/l Solution for Infusion', 'Baxter Holding B.V.', 'PA2299/040/002']]],
-    jp: ['never', []],
+    us: ['current', [['FLEXBUMIN 5% (Albumin [Human])', 'Takeda Pharmaceuticals America', '79094f4e-5f5c-44d6-b563-d6078eafe83a']]],
+    uk: ['current', [['Human Albumin Grifols 5% solution for infusion', 'Grifols UK', '14855'], ['Albunorm 5% solution for infusion', 'Octapharma', '61973'], ['Alburex 5% solution for infusion', 'CSL Behring UK', '80341'], ['Octalbin 5% solution for infusion', 'Octapharma', '178394']]],
+    eu: ['current', [['Albunorm 5%, 50 g/l, solution for infusion', 'Octapharma (IP)', 'PA2219/007/001'], ['Human Albumin Baxalta 50 g/l Solution for Infusion', 'Baxalta Innovations GmbH', 'PA2004/004/001'], ['Alburex 5, 50 g/l, solution for infusion', 'CSL Behring GmbH', 'PA0800/008/001'], ['Albutein, 50 g/l, solution for infusion', 'Instituto Grifols S.A.', 'PA0849/006/001']]],
+    jp: ['current', [['献血アルブミン5%静注「JB」', 'Japan Blood Products Organization', '6343410'], ['献血アルブミン5%静注「タケダ」', 'Takeda', '6343410'], ['アルブミナー5%静注 (Albuminar 5%)', 'CSL Behring', '6343410']]],
   },
   alb20: {
-    us: ['current', usApps(['baxter', 'BLA103984', 'Albumin (Human) 20%'])],
-    uk: ['current', [['Human Albumin 20% solution for infusion', 'Bio Products Laboratory', '10001']]],
-    eu: ['current', [['Human Albumin 200 g/l Solution for Infusion', 'Baxter Holding B.V.', 'PA2299/040/001']]],
-    jp: ['never', []],
+    us: ['current', [['FLEXBUMIN 20% (Albumin [Human])', 'Takeda Pharmaceuticals America', '98b96ee2-86d2-4056-bdda-4d75d72d891f'], ['Human Albumin Grifols 20%', 'Grifols USA', 'a43c5ed6-7423-4ee5-8acb-5fccc2d7b6cc']]],
+    uk: ['current', [['Human Albumin Grifols 20% solution for infusion', 'Grifols UK', '146131'], ['Albunorm 20% solution for infusion', 'Octapharma', '61974'], ['Zenalb 20% solution for infusion', 'Bio Products Laboratory', '14036'], ['Alburex 20% solution for infusion', 'CSL Behring UK', '80342']]],
+    eu: ['current', [['Albunorm 20%, 200 g/l, solution for infusion', 'Octapharma (IP)', 'PA2219/007/002'], ['Human Albumin Baxalta 200 g/l Solution for Infusion', 'Baxalta Innovations GmbH', 'PA2004/004/002'], ['Alburex 20, 200 g/l, solution for infusion', 'CSL Behring GmbH', 'PA0800/008/002'], ['Albutein, 200 g/l, solution for infusion', 'Instituto Grifols S.A.', 'PA0849/006/002'], ['Human Albumin CSL Behring, 200 g/l, solution for infusion', 'CSL Behring GmbH', 'PA0800/012/001']]],
+    jp: ['current', [['アルブミン−ベーリング20%静注', 'CSL Behring', '6343410'], ['献血アルブミン20%静注「タケダ」', 'Takeda', '6343410'], ['献血アルブミン20%静注「JB」', 'Japan Blood Products Organization', '6343410'], ['献血アルブミン20%静注「KMB」', 'KM Biologics', '6343410']]],
   },
   alb25: {
-    us: ['current', usApps(['baxter', 'BLA103984', 'Albumin (Human) 25%'])],
-    uk: ['current', [['Human Albumin 25% solution for infusion', 'Bio Products Laboratory', '10003']]],
-    eu: ['current', [['Human Albumin 250 g/l Solution for Infusion', 'Baxter Holding B.V.', 'PA2299/040/003']]],
-    jp: ['never', []],
+    us: ['current', [['FLEXBUMIN 25% (Albumin [Human])', 'Takeda Pharmaceuticals America', 'bdb4e167-27a2-4b50-b245-43df9cd535cb']]],
+    uk: ['past', [['Albutein 25% solution for infusion', 'Grifols UK', '76425']]],
+    eu: ['past', [['Albutein 25%', 'Instituto Grifols S.A.', 'PA0849/005/003'], ['Albuminar 25', 'Aventis Behring Limited', 'PA0010/022/008A']]],
+    jp: ['current', [['アルブミナー25%静注 (Albuminar 25%)', 'CSL Behring', '6343410'], ['献血アルブミン25%静注「ベネシス」', 'Japan Blood Products Organization', '6343410'], ['献血アルブミン25%静注「タケダ」', 'Takeda', '6343410'], ['献血アルブミン25%静注「KMB」', 'KM Biologics', '6343410'], ['赤十字アルブミン25%静注', 'Japan Blood Products Organization', '6343410']]],
   },
   man20: {
-    us: ['current', usApps(['baxter', 'NDA016269', 'Osmitrol 20% (Mannitol 20%)'], ['bbraun', 'NDA020005', 'Mannitol 20%'])],
-    uk: ['current', [['Mannitol 20% infusion', 'Baxter Healthcare', '14050']]],
-    eu: ['current', [['Mannitol 20% w/v Solution for Infusion', 'Baxter Holding B.V.', 'PA2299/015/001']]],
-    jp: ['never', []],
+    us: ['current', [['Osmitrol 20% in Water', 'Baxter Healthcare', 'NDA013684'], ['Mannitol 20% in Plastic Container', 'B. Braun', 'NDA020006'], ['Mannitol 20% in Plastic Container', 'Otsuka ICU Medical', 'NDA019603']]],
+    uk: ['current', [['Polyfusor mannitol 20% infusion', 'Fresenius Kabi', '15678']]],
+    eu: ['past', [['Mannitol 20% Solution for Infusion BP', 'Baxter Healthcare Limited', 'PA0167/037/016']], 'euMan1015'],
+    jp: ['current', [['20%マンニットール注射液「YD」', 'Yoshindo', '2190400']]],
   },
 };
 const hpraUrl = (q, past) => 'https://www.hpra.ie/find-a-medicine/for-human-use/' + (past ? 'withdrawn-medicines' : 'authorised-medicines') + '?data=' +
@@ -533,7 +554,7 @@ const hpraUrl = (q, past) => 'https://www.hpra.ie/find-a-medicine/for-human-use/
 // Link to one product's record in its country's register
 const recordUrl = (r, code, st) => {
   if (r === 'th') return thRecordUrl(TH_REG[code][0]);
-  if (r === 'us') return 'https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=' + code.replace(/^\D+/, '');
+  if (r === 'us') return /^[0-9a-f]{8}-/.test(code) ? 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=' + code : 'https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=' + code.replace(/^\D+/, '');
   if (r === 'uk') return 'https://dmd-browser.nhsbsa.nhs.uk/amp/view/' + code;
   if (r === 'eu') return /^RVG/.test(code) ? SOURCES.euSterofundin.url : hpraUrl(code, st === 'past');
   return 'https://www.pmda.go.jp/PmdaSearch/iyakuDetail/GeneralList/' + code;
@@ -576,14 +597,17 @@ const REFERENCES = [
   { key: 'dmd', cite: 'NHS Business Services Authority. Dictionary of Medicines and Devices (dm+d) browser: products supplied in the UK. Searched 14 October 2026.', url: 'https://dmd-browser.nhsbsa.nhs.uk/' },
   { key: 'hpra', cite: 'Health Products Regulatory Authority (Ireland). Human medicines lists (authorised and withdrawn), XML of 14 October 2026.', url: 'https://www.hpra.ie/find-a-medicine/for-human-use' },
   { key: 'pmda', cite: 'Pharmaceuticals and Medical Devices Agency (Japan). Package insert search for prescription drugs. Searched 14 October 2026.', url: 'https://www.pmda.go.jp/PmdaSearch/iyakuSearch/' },
-  { key: 'adaDka', cite: 'ElSayed NA, Aleppo G, Aroda VR, et al. Hyperglycemic Crises in Adults with Diabetes: Consensus Report by the ADA and EASD. Diabetes Care 2024;47:1186–1204 / UK JBDS-IP 2023.', url: 'https://doi.org/10.2337/dci24-0030' },
-  { key: 'katz', cite: 'Katz MA. Hyperglycemia-induced hypo-osmolar state: formula for corrected sodium. N Engl J Med 1973;289:843–848.', url: 'https://doi.org/10.1056/NEJM197310182891607' },
-  { key: 'sternsK', cite: 'Sterns RH, Grieff M, Bernstein PL. Treatment of hypokalemia in adults. UpToDate 2024; Mount DB. Disorders of potassium balance. In: Brenner and Rector\'s The Kidney 11th ed.', url: null },
-  { key: 'aspenGir', cite: 'ASPEN Clinical Guidelines: Nutrition Support in Adult Patients; Wolfe RR et al. Ann Surg 1979 (glucose kinetics and oxidation limits).', url: 'https://doi.org/10.1097/00000658-197910000-00006' },
-  { key: 'btfIcp', cite: 'Carney N et al. Guidelines for the Management of Severe Traumatic Brain Injury, 4th Edition. Neurosurgery 2017;80(1):6–15; Neurocritical Care Society (NCS) Emergency Neurological Life Support (ENLS): Intracranial Hypertension and Herniation.', url: 'https://doi.org/10.1093/neuros/nyw321' },
-  { key: 'aasldAlb', cite: 'Biggins SW, Angeli P, Garcia-Tsao G, et al. Diagnosis, Evaluation, and Management of Ascites and Hepatorenal Syndrome: 2021 Practice Guidance by the AASLD. Hepatology 2021;74:1014–1048; EASL Clinical Practice Guidelines: Management of decompensated cirrhosis. J Hepatol 2018;69:406–460.', url: 'https://doi.org/10.1002/hep.31884' },
+  { key: 'adaDka', cite: 'Umpierrez GE, Davis GM, ElSayed NA, et al. Hyperglycemic crises in adults with diabetes: a consensus report. Diabetes Care 2024;47:1257–1275.', url: 'https://doi.org/10.2337/dci24-0032' },
+  { key: 'katz', cite: 'Katz MA. Hyperglycemia-induced hyponatremia: calculation of expected serum sodium depression. N Engl J Med 1973;289:843–844.', url: 'https://doi.org/10.1056/NEJM197310182891607' },
+  { key: 'kardalas', cite: 'Kardalas E, Paschou SA, Anagnostis P, et al. Hypokalemia: a clinical update. Endocr Connect 2018;7:R135–R146.', url: 'https://doi.org/10.1530/EC-18-0109' },
+  { key: 'espenIcu', cite: 'Singer P, Blaser AR, Berger MM, et al. ESPEN guideline on clinical nutrition in the intensive care unit. Clin Nutr 2019;38:48–79.', url: 'https://doi.org/10.1016/j.clnu.2018.08.037' },
+  { key: 'sibicc', cite: 'Hawryluk GWJ, Aguilera S, Buki A, et al. A management algorithm for patients with intracranial pressure monitoring: the Seattle International Severe Traumatic Brain Injury Consensus Conference (SIBICC). Intensive Care Med 2019;45:1783–1794.', url: 'https://doi.org/10.1007/s00134-019-05805-9' },
+  { key: 'easl', cite: 'European Association for the Study of the Liver. EASL Clinical Practice Guidelines for the management of patients with decompensated cirrhosis. J Hepatol 2018;69:406–460.', url: 'https://doi.org/10.1016/j.jhep.2018.03.024' },
   { key: 'sortSbp', cite: 'Sort P, Navasa M, Arroyo V, et al. Effect of intravenous albumin on renal impairment and mortality in patients with cirrhosis and spontaneous bacterial peritonitis. N Engl J Med 1999;341:403–409.', url: 'https://doi.org/10.1056/NEJM199908053410603' },
-  { key: 'safeAlb', cite: 'The SAFE Study Investigators. A comparison of albumin and saline for fluid resuscitation in the intensive care unit. N Engl J Med 2004;350:2247–2256; SAFE-TBI Investigators. Saline or Albumin for Fluid Resuscitation in Patients with Traumatic Brain Injury. N Engl J Med 2007;357:874–884.', url: 'https://doi.org/10.1056/NEJMoa040232' },
+  { key: 'safeTbi', cite: 'SAFE Study Investigators. Saline or albumin for fluid resuscitation in patients with traumatic brain injury. N Engl J Med 2007;357:874–884.', url: 'https://doi.org/10.1056/NEJMoa067514' },
+  { key: 'confirm', cite: 'Wong F, Pappas SC, Curry MP, et al. Terlipressin plus albumin for the treatment of type 1 hepatorenal syndrome (CONFIRM). N Engl J Med 2021;384:818–828.', url: 'https://doi.org/10.1056/NEJMoa2008290' },
+  { key: 'sood', cite: 'Sood L, Sterns RH, Hix JK, Silver SM, Chen L. Hypertonic saline and desmopressin: a simple strategy for safe correction of severe hyponatremia. Am J Kidney Dis 2013;61:571–578.', url: 'https://doi.org/10.1053/j.ajkd.2012.11.032' },
+  { key: 'perianayagam', cite: 'Perianayagam A, Sterns RH, Silver SM, et al. DDAVP is effective in preventing and reversing inadvertent overcorrection of hyponatremia. Clin J Am Soc Nephrol 2008;3:331–336.', url: 'https://doi.org/10.2215/CJN.03190807' },
   ...['usNaCl09', 'usNaCl045', 'usNaCl3', 'usDex', 'usDexNaCl', 'usKDexNaCl', 'usLR', 'usPL', 'usAlb5', 'usAlb', 'usAlb25', 'usMan', 'thTopBal', 'thAcetRinger', 'euSterofundin'].map(k => ({ key: k, cite: SOURCES[k].cite, url: SOURCES[k].url })),
 ];
 const refUrl = (key) => (REFERENCES.find(r => r.key === key) || {}).url;
@@ -592,37 +616,33 @@ const refUrl = (key) => (REFERENCES.find(r => r.key === key) || {}).url;
 // Changelog (newest first; one entry per day)
 // =====================================================================
 const changelogData = [
-  { version: 'v1.6.0', date: 'October 16, 2026', features: [
-    'Albumin Indication & Clinical Dosing Guide: Bedside decision guide and dose calculator for Human Albumin indications in cirrhosis, critical care, and volume overload.',
-    'Large-Volume Paracentesis (LVP > 5 L) Calculator: Evidence-based calculation (6–8 g per litre removed) preventing paracentesis-induced circulatory dysfunction (PICD), with 20% vs 25% volume breakdown.',
-    'Spontaneous Bacterial Peritonitis (SBP) Dosing: Stepwise weight-based protocol (Day 1: 1.5 g/kg, Day 3: 1.0 g/kg) proven to reduce hepatorenal syndrome and in-hospital mortality (Sort et al., NEJM 1999 / AASLD guidelines).',
-    'Hepatorenal Syndrome (HRS-AKI) Protocol: Diagnostic volume challenge calculator (1 g/kg/day for 2 days, max 100 g/day), diuretic cessation rules, and treatment guidance with vasoconstrictors (terlipressin / norepinephrine).',
-    'Iso-oncotic (5%) vs Hyper-oncotic (20% & 25%) Selection Matrix: Head-to-head oncotic and volume expansion comparison, clinical indications, and black box contraindications (strict avoidance in traumatic brain injury - SAFE study).',
-    'Added Human Albumin 5% (50 g/L, iso-oncotic) and Human Albumin 25% (250 g/L, hyper-oncotic): Full compositions, registrations in Thailand and abroad, and clinical warning flags.',
-  ], bugs: [] },
-  { version: 'v1.5.0', date: 'October 16, 2026', features: [
-    'ICP & Osmotherapy Clinical Protocol: Bedside guide for acute intracranial hypertension management with Mannitol 20% vs. 3% Hypertonic Saline.',
-    'Mannitol 20% Dosing & Safety Guard: Gram and volume calculator (0.25–1.0 g/kg), 15–20 min infusion guidance with filter needle alerts, serum osmolality cutoff (< 320 mOsm/kg alert to prevent AKI), and osmolar gap accumulation calculator.',
-    '3% Hypertonic Saline Bolus & Sodium Target: 250–500 mL or 2–5 mL/kg dosing, acute sodium rise calculation (Adrogué–Madias), target sodium range (145–155 mmol/L), and hypernatremia safety cutoff alert (> 155 mmol/L).',
-    'Head-to-head Clinical Decision Matrix: Evidence-based guide comparing Mannitol vs 3% NaCl in shock/hypotension, CHF/volume overload, oliguria/renal failure, and baseline sodium abnormalities.',
-    'Cerebral Perfusion Pressure (CPP) Calculator: Calculates MAP and CPP (MAP − ICP) with target ranges (CPP 60–70 mmHg, ICP < 20–22 mmHg) and cerebral ischemia / hyperperfusion alerts (BTF & Neurocritical Care ENLS guidelines).',
+  { version: 'v1.8.0', date: 'October 19, 2026', features: [
+    'Guides rewritten against their sources: 3% bolus and re-lowering (European hyponatraemia guideline 2014, Sood 2013, Perianayagam 2008), potassium (Kardalas 2018), DKA/HHS (ADA/EASD consensus 2024), glucose infusion rate (ESPEN ICU 2019), raised ICP (SIBICC 2019, Osmitrol and 3% NaCl labels) and albumin (EASL 2018, Sort 1999, SAFE-TBI, CONFIRM, Surviving Sepsis 2021, Flexbumin labels).',
+    'Albumin 5%, 20% and 25% and mannitol 20%: real Thai FDA registrations, records in the US, UK, EU and Japan, and label values with sources.',
+  ], bugs: [
+    'Removed Thai registration numbers, label links and records abroad for albumin and mannitol that did not exist.',
+    'TOP Balance no longer shows pH, osmolarity from a label, or energy: its Thai document does not state them (osmolarity is calculated from its formula).',
+    'DKA/HHS: insulin is now held below potassium 3.5 mmol/L (was 3.3), potassium is added below 5.0 mmol/L, dextrose is added below glucose 250 mg/dL, and 0.45% saline only when osmolality is not falling (was chosen by corrected sodium).',
+    'Raised ICP: hypertonic saline has the same limits as mannitol (sodium 155 mmol/L, osmolality 320 mOsm/kg); the unsourced 360 mOsm/kg limit and comparison table were removed.',
+    'Albumin after paracentesis of more than 5 L is 8 g per litre removed, and the guide no longer says that albumin is not needed under 5 L.',
+    'Mannitol 20% pH is 5.0 (4.5–7.0) as on its label, and its card opens from the ICP guide.',
+    'Albumin and mannitol are left out of the sodium change, water deficit and maintenance calculators.',
+    'Version history in Thai no longer stops the app.',
+  ] },
+  { version: 'v1.7.0', date: 'October 16, 2026', features: [
+    'Re-lowering guide for too-rapid correction of hyponatraemia, also a tab in the sodium guide.',
+    'Albumin guide: paracentesis, SBP, AKI/hepatorenal syndrome, and 5% vs 20% vs 25%.',
+    'Raised ICP guide: mannitol 20%, 3% saline, choosing an agent, and perfusion pressure.',
+    'Human albumin 5% and 25% cards.',
+    'Better text contrast in light and dark mode.',
   ], bugs: [] },
   { version: 'v1.4.0', date: 'October 15, 2026', features: [
-    'Export to PNG: Download single fluid summary cards or multi-fluid comparison tables as high-resolution PNG images.',
-    'Expanded multiselect and comparison: Select up to 6 fluids with quick-remove column controls in the comparison modal.',
-    'Completed TOP Balance details: Added verified label values for osmolarity (294 mOsm/L), energy (21 kcal/L), and physiological pH 7.4 (6.5–8.0).',
-    'Added Human Albumin 20% (colloid) and Mannitol 20% (osmotic diuretic) with full compositions, registrations, and clinical warning flags.',
-    'Added pH filter: Filter crystalloids and colloids by solution pH range (< 6.0 acidic vs. 6.0–7.5 near-physiological).',
-    'Added Glucose Infusion Rate (GIR) Calculator: Dual calculation modes (rate-to-GIR and target-to-rate), maximal glucose oxidation limit alerts, and daily dextrose/caloric delivery.',
-  ], bugs: [] },
-  { version: 'v1.3.0', date: 'October 15, 2026', features: [
-    'Acute 3% NaCl bolus protocol for severe symptomatic hyponatraemia (seizures, coma): 100–150 mL (or 2 mL/kg) IV over 10–15 min, repeat timing, target acute rise (+4–6 mmol/L), daily limit (max 8 mmol/L/24h; 4–6 in high-risk ODS), and DDAVP overcorrection rescue (European & US guidelines).',
-    'Potassium replacement & safe rate guide: total body deficit estimation (Sterns / UpToDate), maximum infusion rate and concentration limits for peripheral (10 mmol/h, 40 mmol/L) and central lines (20 mmol/h, 80 mmol/L), alert against dextrose vehicles during initial repletion, and magnesium checking rule.',
-    'DKA / HHS fluid & electrolyte protocol: Katz corrected sodium calculator, phase 1 resuscitation (Hour 1 NSS 1000 mL/h), phase 2 fluid selection based on corrected Na (0.45% vs 0.9% NaCl), phase 3 dextrose addition thresholds (≤ 200–250 mg/dL in DKA, ≤ 300 in HHS), and potassium safety algorithm (hold insulin if K < 3.3 mmol/L; add 20–30 mmol/L if 3.3–5.2).',
-  ], bugs: [] },
-  { version: 'v1.2.1', date: 'October 15, 2026', features: [
-    'The page description now covers all five countries (Thailand, US, UK, EU and Japan), not Thailand only.',
+    'The page description covers all five countries (Thailand, US, UK, EU and Japan), not Thailand only.',
     'Sodium change and water deficit guides: one-tap planned changes of 6, 8, 10 or 12 mmol/L; the sodium change guide also has Raise and Lower buttons.',
+    '3% saline bolus tab in the sodium guide, potassium guide, and DKA/HHS guide.',
+    'Glucose infusion rate calculator.',
+    'Human albumin 20% and mannitol 20% cards; pH filter.',
+    'Save a fluid card or the comparison table as a PNG image; compare up to 6 fluids.',
   ], bugs: [] },
   { version: 'v1.1.0', date: 'October 14, 2026', features: [
     '18 crystalloid fluids used in Thailand: NSS, NSS/2, 3% NaCl, 5% and 10% dextrose, 5%D/NSS, 5%D/N/2 (also with KCl 20 or 40), 5%D/N/3, 5%D/N/4, 5%D/N/5, LRS, Acetar, Acetar-5, TOP Balance, Sterofundin ISO and Plasma-Lyte A.',
@@ -636,37 +656,33 @@ const changelogData = [
   ], bugs: [] },
 ];
 const CHANGELOG_TH = {
-  'v1.6.0': { features: [
-    'แนวทางการใช้อัลบูมินทางคลินิก (Albumin Indication Guide): เครื่องคำนวณขนาดยาและแนวทางตัดสินใจการใช้อัลบูมินในภาวะแทรกซ้อนของโรคตับแข็งและผู้ป่วยวิกฤต',
-    'เครื่องคำนวณการเจาะระบายน้ำในช่องท้องปริมาณมาก (LVP > 5 L): คำนวณขนาดยาตามเกณฑ์มาตรฐาน (6–8 g ต่อลิตรของน้ำที่เจาะออก) เพื่อป้องกัน Paracentesis-Induced Circulatory Dysfunction (PICD) พร้อมคำนวณปริมาตรของ 20% และ 25% อัลบูมิน',
-    'แนวทางการให้ยาในภาวะเยื่อบุช่องท้องอักเสบติดเชื้อ (SBP): คำนวณขนาดยาตามน้ำหนักตัว (วันที่ 1: 1.5 g/kg, วันที่ 3: 1.0 g/kg) ตามหลักฐานเชิงประจักษ์ที่ช่วยลดภาวะไตวายและอัตราการเสียชีวิตอย่างมีนัยสำคัญ (Sort et al., NEJM 1999 / AASLD)',
-    'แนวทางการดูแล Hepatorenal Syndrome (HRS-AKI): คำนวณขนาด Albumin fluid challenge (1 g/kg/วัน สูงสุด 100 g/วัน เป็นเวลา 2 วัน) เพื่อแยกภาวะ Pre-renal azotemia พร้อมแนวทางการให้ยาร่วมกับ vasoconstrictor (Terlipressin / Norepinephrine)',
-    'ตารางเปรียบเทียบ Albumin 5% (Iso-oncotic) เทียบกับ 20% และ 25% (Hyper-oncotic): เปรียบเทียบแรงดันออนโคติกและอัตราการดึงน้ำเข้าหลอดเลือด พร้อมข้อบ่งชี้และข้อห้ามใช้วิกฤต (ห้ามใช้ในผู้บาดเจ็บทางสมอง TBI - การศึกษา SAFE)',
-    'เพิ่มสารน้ำ Human Albumin 5% (50 g/L) และ Human Albumin 25% (250 g/L): ข้อมูลส่วนประกอบครบถ้วน การขึ้นทะเบียนในไทยและต่างประเทศ พร้อมข้อควรระวังทางคลินิก',
-  ], bugs: [] },
-  'v1.5.0': { features: [
-    'แนวทางการใช้สารน้ำลดความดันในกะโหลกศีรษะ (ICP & Osmotherapy): คำนวณขนาดยาและการให้ Mannitol 20% เทียบกับ 3% Hypertonic Saline สำหรับภาวะความดันในกะโหลกศีรษะสูงวิกฤต',
-    'เครื่องคำนวณและข้อควรระวัง Mannitol 20%: คำนวณขนาดยา (กรัมและมิลลิลิตร) ตามน้ำหนักตัว (0.25–1.0 g/kg), แจ้งเตือนเวลาการให้ (15–20 นาที) และการใช้สายกรอง (in-line filter), ระบบตรวจสอบระดับ Serum Osmolality (< 320 mOsm/kg ป้องกันไตวายเฉียบพลัน) พร้อมการคำนวณ Osmolar Gap',
-    'คำนวณ 3% Hypertonic Saline Bolus: ขนาดยา 250–500 mL หรือ 2–5 mL/kg, คำนวณการเพิ่มขึ้นของโซเดียมในเลือดเฉียบพลัน (สูตร Adrogué–Madias), ควบคุมเป้าหมายโซเดียม (145–155 mmol/L) พร้อมการแจ้งเตือนเมื่อโซเดียมเกิน 155 mmol/L',
-    'ตารางเปรียบเทียบการเลือกใช้สารน้ำ (Decision Matrix): เปรียบเทียบข้อดีข้อเสียระหว่าง Mannitol vs 3% NaCl ในภาวะช็อก/ความดันโลหิตต่ำ, หัวใจวาย/น้ำเกิน, ไตวาย และระดับโซเดียมผิดปกติ',
-    'เครื่องคำนวณ Cerebral Perfusion Pressure (CPP): คำนวณ MAP และ CPP (MAP − ICP) พร้อมเป้าหมายตามเกณฑ์มาตรฐาน (CPP 60–70 mmHg, ICP < 20–22 mmHg) และแจ้งเตือนภาวะสมองขาดเลือดหรือเลือดไปเลี้ยงสมองมากเกินไป (Brain Trauma Foundation / ENLS)',
+  'v1.8.0': { features: [
+    'เขียนคู่มือใหม่ตามแหล่งอ้างอิง: 3% bolus และการลดโซเดียมกลับ (แนวทางยุโรป 2014, Sood 2013, Perianayagam 2008) โพแทสเซียม (Kardalas 2018) DKA/HHS (ADA/EASD 2024) อัตราการให้กลูโคส (ESPEN ICU 2019) ความดันในกะโหลกสูง (SIBICC 2019 ฉลาก Osmitrol และ 3% NaCl) และอัลบูมิน (EASL 2018, Sort 1999, SAFE-TBI, CONFIRM, Surviving Sepsis 2021 ฉลาก Flexbumin)',
+    'อัลบูมิน 5% 20% 25% และแมนนิทอล 20%: ทะเบียน อย. จริง ข้อมูลทะเบียนในสหรัฐฯ สหราชอาณาจักร สหภาพยุโรป และญี่ปุ่น และค่าจากฉลากพร้อมแหล่งอ้างอิง',
+  ], bugs: [
+    'นำเลขทะเบียนไทย ลิงก์ฉลาก และข้อมูลทะเบียนต่างประเทศของอัลบูมินและแมนนิทอลที่ไม่มีอยู่จริงออก',
+    'TOP Balance ไม่แสดง pH ออสโมลาริตีจากฉลาก และพลังงานอีก เพราะเอกสารของไทยไม่ได้ระบุ (ออสโมลาริตีคำนวณจากสูตรตำรับ)',
+    'DKA/HHS: เลื่อนอินซูลินเมื่อโพแทสเซียมต่ำกว่า 3.5 mmol/L (เดิม 3.3) เติมโพแทสเซียมเมื่อต่ำกว่า 5.0 mmol/L เติมเดกซ์โทรสเมื่อน้ำตาลต่ำกว่า 250 mg/dL และใช้ 0.45% saline เฉพาะเมื่อออสโมลาลิตีไม่ลดลง (เดิมเลือกตามโซเดียมที่ปรับแล้ว)',
+    'ความดันในกะโหลกสูง: hypertonic saline ใช้ขีดจำกัดเดียวกับแมนนิทอล (โซเดียม 155 mmol/L ออสโมลาลิตี 320 mOsm/kg) นำขีดจำกัด 360 mOsm/kg และตารางเปรียบเทียบที่ไม่มีแหล่งอ้างอิงออก',
+    'อัลบูมินหลังเจาะน้ำในท้องมากกว่า 5 L คือ 8 g ต่อลิตรที่เจาะออก และคู่มือไม่ระบุแล้วว่าไม่ต้องให้อัลบูมินเมื่อน้อยกว่า 5 L',
+    'pH ของแมนนิทอล 20% เป็น 5.0 (4.5–7.0) ตามฉลาก และเปิดการ์ดได้จากคู่มือความดันในกะโหลก',
+    'ไม่รวมอัลบูมินและแมนนิทอลในเครื่องคำนวณการเปลี่ยนแปลงโซเดียม การขาดน้ำ และสารน้ำบำรุงรักษา',
+    'เปิดประวัติเวอร์ชันภาษาไทยแล้วแอปไม่หยุดทำงานอีก',
+  ] },
+  'v1.7.0': { features: [
+    'คู่มือการลดโซเดียมกลับเมื่อแก้โซเดียมต่ำเร็วเกินไป และเป็นแท็บในคู่มือโซเดียมด้วย',
+    'คู่มืออัลบูมิน: การเจาะน้ำในท้อง SBP ไตวายเฉียบพลัน/hepatorenal syndrome และ 5% เทียบ 20% เทียบ 25%',
+    'คู่มือความดันในกะโหลกสูง: แมนนิทอล 20% 3% saline การเลือกยา และความดันเลี้ยงสมอง',
+    'การ์ดอัลบูมิน 5% และ 25%',
+    'ข้อความอ่านง่ายขึ้นทั้งโหมดสว่างและมืด',
   ], bugs: [] },
   'v1.4.0': { features: [
-    'ส่งออกเป็น PNG: ดาวน์โหลดการ์ดสรุปข้อมูลสารน้ำหรือตารางเปรียบเทียบเป็นรูปภาพ PNG คมชัดสูง',
-    'ปรับปรุงการเลือกหลายชนิดและเปรียบเทียบ: เลือกได้สูงสุด 6 ชนิด พร้อมปุ่มกดลบสารน้ำออกจากตารางเปรียบเทียบได้ทันที',
-    'เติมข้อมูล TOP Balance ครบถ้วน: เติมค่าฉลากออสโมลาริตี (294 mOsm/L) พลังงาน (21 kcal/L) และ pH 7.4 (6.5–8.0)',
-    'เพิ่ม Human Albumin 20% (คอลลอยด์) และ Mannitol 20% (สารขับปัสสาวะออสโมติก) พร้อมทะเบียนยาและคำเตือนทางคลินิก',
-    'เพิ่มตัวกรอง pH: กรองสารน้ำตามช่วงความเป็นกรด-ด่าง (< 6.0 กรด เทียบกับ 6.0–7.5 ใกล้เคียงพลาสมา)',
-    'เพิ่มเครื่องคำนวณ GIR (อัตราการให้กลูโคส): คำนวณได้ทั้งสองทิศทาง พร้อมการแจ้งเตือนขีดจำกัดการเผาผลาญกลูโคสและพลังงานต่อวัน',
-  ], bugs: [] },
-  'v1.3.0': { features: [
-    'โปรโตคอล 3% NaCl bolus สำหรับโซเดียมต่ำรุนแรงที่มีอาการ (ชัก หมดสติ): 100–150 mL (หรือ 2 mL/kg) IV ใน 10–15 นาที การให้ซ้ำ เป้าหมายระยะเฉียบพลัน (+4–6 mmol/L) ขีดจำกัดต่อวัน (ไม่เกิน 8 mmol/L/24 ชม. และ 4–6 ในกลุ่มเสี่ยง ODS) และแนวทางแก้ไขเมื่อแก้เกินด้วย DDAVP (แนวทางยุโรปและสหรัฐฯ)',
-    'คู่มือการให้โพแทสเซียมและอัตราที่ปลอดภัย: ประมาณการโพแทสเซียมที่ขาดในร่างกาย (Sterns / UpToDate) ขีดจำกัดอัตราและความเข้มข้นทางหลอดเลือดดำส่วนปลาย (10 mmol/ชม., 40 mmol/L) และส่วนกลาง (20 mmol/ชม., 80 mmol/L) คำเตือนหลีกเลี่ยงเดกซ์โทรสในระยะแรก และการตรวจแมกนีเซียม',
-    'โปรโตคอลสารน้ำและอิเล็กโทรไลต์สำหรับ DKA / HHS: คำนวณโซเดียมปรับค่า (Katz) กู้ชีพชั่วโมงแรกด้วย NSS 1000 mL/ชม. การเลือกสารน้ำตาม Na ปรับค่า (0.45% เทียบกับ 0.9% NaCl) เกณฑ์การเติมเดกซ์โทรส (≤ 200–250 mg/dL ใน DKA, ≤ 300 ใน HHS) และอัลกอริทึมความปลอดภัยของโพแทสเซียม (ระงับอินซูลินถ้า K < 3.3 mmol/L และเติม 20–30 mmol/L ถ้า 3.3–5.2)',
-  ], bugs: [] },
-  'v1.2.1': { features: [
     'คำอธิบายหน้าแอปครอบคลุมทั้งห้าประเทศ (ไทย สหรัฐฯ สหราชอาณาจักร สหภาพยุโรป และญี่ปุ่น) ไม่ใช่เฉพาะไทย',
     'คู่มือการเปลี่ยนแปลงโซเดียมและการขาดน้ำ: ปุ่มเลือกการเปลี่ยนแปลงที่วางแผน 6, 8, 10 หรือ 12 mmol/L และคู่มือการเปลี่ยนแปลงโซเดียมมีปุ่มเพิ่มและลด',
+    'แท็บ 3% saline bolus ในคู่มือโซเดียม คู่มือโพแทสเซียม และคู่มือ DKA/HHS',
+    'เครื่องคำนวณอัตราการให้กลูโคส',
+    'การ์ดอัลบูมิน 20% และแมนนิทอล 20% ตัวกรอง pH',
+    'บันทึกการ์ดสารน้ำหรือตารางเปรียบเทียบเป็นภาพ PNG เปรียบเทียบได้สูงสุด 6 ชนิด',
   ], bugs: [] },
   'v1.1.0': { features: [
     'สารน้ำคริสตัลลอยด์ 18 ชนิดที่ใช้ในประเทศไทย: NSS, NSS/2, 3% NaCl, 5% และ 10% เดกซ์โทรส, 5%D/NSS, 5%D/N/2 (และชนิดผสม KCl 20 หรือ 40), 5%D/N/3, 5%D/N/4, 5%D/N/5, LRS, Acetar, Acetar-5, TOP Balance, Sterofundin ISO และ Plasma-Lyte A',
@@ -719,7 +735,7 @@ const translations = {
     noCountry: "Choose at least one country.",
     registerNames: {"th":"Thai FDA register","us":"Drugs@FDA","uk":"NHS dm+d","eu":"HPRA (Ireland)","jp":"PMDA"},
     regMatchNote: "Other countries: a product of the same fluid and strength on that country's list. Formulas can differ slightly between makers and countries (for example Hartmann's solution in the UK and Ireland); check the local label. UK = products supplied to the NHS (dm+d); EU = the Irish list (HPRA), plus the Dutch register for Sterofundin ISO.",
-    regNotes: {"jpNoHalf":"Japan: no 0.45% sodium chloride infusion was found.","uk27":"UK: 2.7% sodium chloride infusion is supplied instead (Fresenius Kabi).","jp10":"Japan: only 10% sodium chloride ampoules were found.","jpNoDexSaline":"Japan: no dextrose-saline of this strength was found.","euNoKDexHalf":"Ireland: potassium chloride comes premixed in 5% glucose or 0.9% saline, not in 5% glucose with 0.45% saline.","ukK40":"UK: only the 0.15% (20 mmol/L) strength was found in 5% glucose with 0.45% saline.","ukLowSaline":"UK: low-sodium dextrose-saline is 0.18% sodium chloride in 4% glucose.","eu033":"Ireland: 0.3% sodium chloride comes with 3.3% glucose, not 5%.","euLowSaline":"Ireland: low-sodium dextrose-saline is 0.18% sodium chloride in 4% glucose.","us02":"US: the low-sodium strength is 0.2% sodium chloride in 5% dextrose.","hartmann":"Sold as compound sodium lactate (Hartmann's solution); its formula differs slightly from the US Lactated Ringer's.","sameAsPlaAbroad":"The same formula is sold as Plasma-Lyte (see its card).","euNl":"Not on the Irish list; authorised in the Netherlands (CBG, RVG 27041)."},
+    regNotes: {"euMan1015":"Ireland: only 10% and 15% mannitol are authorised now; the 20% product was withdrawn.","jpNoHalf":"Japan: no 0.45% sodium chloride infusion was found.","uk27":"UK: 2.7% sodium chloride infusion is supplied instead (Fresenius Kabi).","jp10":"Japan: only 10% sodium chloride ampoules were found.","jpNoDexSaline":"Japan: no dextrose-saline of this strength was found.","euNoKDexHalf":"Ireland: potassium chloride comes premixed in 5% glucose or 0.9% saline, not in 5% glucose with 0.45% saline.","ukK40":"UK: only the 0.15% (20 mmol/L) strength was found in 5% glucose with 0.45% saline.","ukLowSaline":"UK: low-sodium dextrose-saline is 0.18% sodium chloride in 4% glucose.","eu033":"Ireland: 0.3% sodium chloride comes with 3.3% glucose, not 5%.","euLowSaline":"Ireland: low-sodium dextrose-saline is 0.18% sodium chloride in 4% glucose.","us02":"US: the low-sodium strength is 0.2% sodium chloride in 5% dextrose.","hartmann":"Sold as compound sodium lactate (Hartmann's solution); its formula differs slightly from the US Lactated Ringer's.","sameAsPlaAbroad":"The same formula is sold as Plasma-Lyte (see its card).","euNl":"Not on the Irish list; authorised in the Netherlands (CBG, RVG 27041)."},
     chipsLabel: 'Active filters', clearShort: 'Clear', clearFilters: 'Clear all filters', chipRemove: (l) => `Remove filter: ${l}`,
     countShowing: 'Showing', countOf: 'of', countFluids: 'fluids',
     legendBtn: 'Key', legendTitle: 'Key', legendSub: 'How to read the cards',
@@ -749,8 +765,8 @@ const translations = {
       glu: 'US dextrose labels: dextrose can worsen high blood glucose; monitor blood glucose and give insulin as needed.',
       cl: 'NICE CG174 1.2.5: after fluids with chloride over 120 mmol/L, check serum chloride daily.',
       resus: 'NICE CG174 1.3.1: use crystalloids with sodium 130–154 mmol/L for resuscitation (500 mL bolus over less than 15 minutes).',
-      colloid: 'Colloids remain largely intravascular due to oncotic pressure. Risk of circulatory overload and rare anaphylactoid reactions; contraindicated in severe anemia or heart failure without volume depletion.',
-      osmotic: 'Mannitol draws water from intracellular space into vascular tree; causes profound osmotic diuresis. Monitor renal function, electrolytes, and serum osmolality (< 320 mOsm/kg).',
+      colloid: 'Flexbumin labels: do not use after hypersensitivity to albumin, or in severe anaemia or cardiac failure with normal or increased intravascular volume; infusing too fast can cause circulatory overload and pulmonary oedema.',
+      osmotic: 'Osmitrol label: an osmotic diuretic; evaluate renal, cardiac and pulmonary status first; during and after infusion monitor serum osmolarity, electrolytes, acid-base balance, the osmol gap, volume status and urine output; use a set with an in-line filter (crystals); not through the same set as blood.',
     },
     // detail view
     detailComposition: 'Composition per litre', detailFormula: 'Formula (per litre)', detailFlags: 'Points to watch', detailThai: 'Registration by country',
@@ -765,6 +781,7 @@ const translations = {
     phOther: (ph) => `Not on this product's documents. Ringer's acetate of the same formula (Able Medical) states pH ${ph}.`,
     sameAsPla: 'Same formula as Plasma-Lyte A (US label: 294 mOsm/L, 21 kcal/L, pH 7.4).',
     thNotes: {
+      man20Otsuka: 'Another Thai Otsuka record, 20% Mannitol Intravenous Infusion (1C 164/55), shows "awaiting status check" in the register (19 Oct 2026), so it is not listed.',
       sterofundinMg: 'The Thai register record lists magnesium chloride hexahydrate 0.37 g/L; the SmPC gives 0.20 g/L (1.0 mmol/L), which is used here.',
       acetar5Other: "Two other 5% dextrose in Ringer's acetate products are registered with dextrose monohydrate instead of anhydrous dextrose (a little less glucose): ARI-5 (Thai Nakorn Patana, 2A 604/31) and 5% Dextrose in Acetated Ringer's (Starlab, 2C 21/51).",
     },
@@ -779,8 +796,8 @@ const translations = {
     keyNone: 'The fluid contains none.',
     keyCountries: 'Country chips', keyChipCurrent: 'Registered (country colour); the line beside it names the makers', keyChipPast: 'Registration ended (withdrawn or discontinued)', keyChipNever: 'Not registered: no product of this fluid and strength found', keyBands: 'Sodium bands', keyFlags: 'Warnings at the bottom of each card', keyFamilies: 'Types',
     // guides
-    guides: { choose: 'Fluid choice', maint: 'Maintenance', sodium: 'Sodium & 3% bolus', kguide: 'Potassium guide', dka: 'DKA / HHS', water: 'Water deficit', drip: 'Drip rate', gir: 'GIR Calculator', icp: 'ICP & Osmotherapy', albumin: 'Albumin Guide' },
-    guideShort: { choose: 'Choice', maint: 'Maint.', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'Water', drip: 'Drip', gir: 'GIR', icp: 'ICP', albumin: 'Albumin' },
+    guides: { choose: 'Fluid choice', maint: 'Maintenance', sodium: 'Sodium & 3% bolus', relower: 'Relowering (ODS)', kguide: 'Potassium guide', dka: 'DKA / HHS', water: 'Water deficit', drip: 'Drip rate', gir: 'GIR Calculator', icp: 'ICP & Osmotherapy', albumin: 'Albumin Guide' },
+    guideShort: { choose: 'Choice', maint: 'Maint.', sodium: 'Na⁺', relower: 'Relower', kguide: 'K⁺', dka: 'DKA', water: 'Water', drip: 'Drip', gir: 'GIR', icp: 'ICP', albumin: 'Albumin' },
     // disclaimer and references
     discTitle: 'Disclaimer',
     discPoints: [
@@ -795,14 +812,9 @@ const translations = {
       nice: 'Resuscitation sodium range, maintenance amounts, chloride monitoring, 5 Rs', ssc: 'Fluid choice in sepsis', myburgh: 'Human plasma values', adrogueHypo: 'Sodium change per litre formula and total body water', adrogueHyper: 'Hypernatraemia correction rate',
       spasovski: 'Hyponatraemia correction limits', devine: 'Ideal body weight', thfda: 'Thai registrations, holders and formulas',
       szczech: 'Free water deficit formula and correction limit', drugsfda: 'US registration status', dmd: 'UK products and status', hpra: 'EU (Ireland) registration status', pmda: 'Japan registrations',
-      adaDka: 'DKA and HHS fluid resuscitation phases, dextrose addition threshold, and potassium replenishment protocol', katz: 'Corrected sodium formula in hyperglycemia', sternsK: 'Potassium deficit estimation, peripheral vs central infusion rates, and magnesium alert',
-      aspenGir: 'Glucose infusion rate limits, maximal oxidation capacity (4–7 mg/kg/min) and daily dextrose calculation',
-      btfIcp: 'ICP osmotherapy targets (serum Na 145–155, Osm < 320), Mannitol vs 3% NaCl dosing, and CPP targets (60–70 mmHg)',
-      aasldAlb: 'AASLD guidelines for large-volume paracentesis (6–8 g/L removed) and hepatorenal syndrome diagnostic challenge (1 g/kg/day)',
-      sortSbp: 'Sort et al. SBP albumin protocol (1.5 g/kg day 1, 1.0 g/kg day 3)',
-      safeAlb: 'SAFE trial volume resuscitation and SAFE-TBI caution against albumin in traumatic brain injury',
+      adaDka: 'DKA/HHS fluids, dextrose, potassium and insulin rates', katz: 'Glucose-adjusted sodium', kardalas: 'Hypokalaemia severity, deficit and IV potassium', espenIcu: 'Glucose infusion limits in ICU', sibicc: 'ICP/CPP thresholds, osmotherapy dose and limits', easl: 'Albumin in paracentesis, SBP, AKI/HRS; terlipressin and noradrenaline', sortSbp: 'Albumin in SBP trial', safeTbi: 'Albumin in traumatic brain injury', confirm: 'Terlipressin respiratory risk', sood: 'Desmopressin clamp with 3% saline', perianayagam: 'Desmopressin and 5% dextrose to re-lower sodium',
       usNaCl09: 'NSS values', usNaCl045: 'NSS/2 values, hyponatraemia warning', usNaCl3: '3% NaCl values, large-vein warning', usDex: '5% and 10% dextrose values, central vein at 900 mOsm/L or more, blood glucose', usDexNaCl: '5%D/NSS and 5%D/N/2 values, hyponatraemia warning', usKDexNaCl: '5%D/N/2 with KCl values',
-      usLR: "Lactated Ringer's values, citrated-blood warning", usPL: 'Plasma-Lyte A values', usAlb5: 'Albumin 5% values, iso-oncotic volume expansion', usAlb: 'Albumin 20% values, oncotic colloid warnings', usAlb25: 'Albumin 25% values, hyper-oncotic colloid shift warnings', usMan: 'Mannitol 20% values, osmotic diuresis alerts', thTopBal: 'TOP Balance values', thAcetRinger: "Ringer's acetate pH, calcium and ceftriaxone warning", euSterofundin: 'Sterofundin ISO values',
+      usLR: "Lactated Ringer's values, citrated-blood warning", usPL: 'Plasma-Lyte A values', usAlb5: 'Albumin 5%: sodium and oncotic effect', usAlb: 'Albumin 20%: sodium, oncotic effect, contraindications', usAlb25: 'Albumin 25%: sodium and oncotic effect', usMan: 'Mannitol 20% values, dosing and monitoring', thTopBal: 'TOP Balance values', thAcetRinger: "Ringer's acetate pH, calcium and ceftriaxone warning", euSterofundin: 'Sterofundin ISO values',
     },
     madeBy: 'Made by Warodom Phaenthong, M.D.',
     changelogTitle: 'Version history', changelogSub: 'What changed and when', latest: 'Latest', newFeatures: 'New', bugFixes: 'Fixes',
@@ -839,7 +851,7 @@ const translations = {
     noCountry: "เลือกอย่างน้อยหนึ่งประเทศ",
     registerNames: {"th":"ทะเบียนยา อย.","us":"Drugs@FDA","uk":"NHS dm+d","eu":"HPRA (ไอร์แลนด์)","jp":"PMDA"},
     regMatchNote: "ประเทศอื่น: ผลิตภัณฑ์สารน้ำชนิดและความแรงเดียวกันในรายการของประเทศนั้น สูตรตำรับอาจต่างกันเล็กน้อยตามผู้ผลิตและประเทศ (เช่น Hartmann's solution ในสหราชอาณาจักรและไอร์แลนด์) ตรวจฉลากในประเทศนั้น UK = ผลิตภัณฑ์ที่จัดส่งให้ NHS (dm+d) EU = รายการของไอร์แลนด์ (HPRA) และทะเบียนเนเธอร์แลนด์สำหรับ Sterofundin ISO",
-    regNotes: {"jpNoHalf":"ญี่ปุ่น: ไม่พบ 0.45% โซเดียมคลอไรด์ชนิดหยด","uk27":"สหราชอาณาจักร: มี 2.7% โซเดียมคลอไรด์แทน (Fresenius Kabi)","jp10":"ญี่ปุ่น: พบเฉพาะแอมพูล 10% โซเดียมคลอไรด์","jpNoDexSaline":"ญี่ปุ่น: ไม่พบเดกซ์โทรส-เกลือความแรงนี้","euNoKDexHalf":"ไอร์แลนด์: โพแทสเซียมคลอไรด์ผสมสำเร็จมีใน 5% กลูโคสหรือ 0.9% เกลือ ไม่มีใน 5% กลูโคสกับ 0.45% เกลือ","ukK40":"สหราชอาณาจักร: พบเฉพาะความแรง 0.15% (20 mmol/L) ใน 5% กลูโคสกับ 0.45% เกลือ","ukLowSaline":"สหราชอาณาจักร: เดกซ์โทรส-เกลือโซเดียมต่ำคือ 0.18% โซเดียมคลอไรด์ใน 4% กลูโคส","eu033":"ไอร์แลนด์: 0.3% โซเดียมคลอไรด์มากับ 3.3% กลูโคส ไม่ใช่ 5%","euLowSaline":"ไอร์แลนด์: เดกซ์โทรส-เกลือโซเดียมต่ำคือ 0.18% โซเดียมคลอไรด์ใน 4% กลูโคส","us02":"สหรัฐฯ: ความแรงโซเดียมต่ำคือ 0.2% โซเดียมคลอไรด์ใน 5% เดกซ์โทรส","hartmann":"จำหน่ายในชื่อ compound sodium lactate (Hartmann's solution) สูตรต่างจาก Lactated Ringer's ของสหรัฐฯ เล็กน้อย","sameAsPlaAbroad":"สูตรเดียวกันจำหน่ายในชื่อ Plasma-Lyte (ดูการ์ดของ Plasma-Lyte)","euNl":"ไม่อยู่ในรายการของไอร์แลนด์ ได้รับอนุญาตในเนเธอร์แลนด์ (CBG, RVG 27041)"},
+    regNotes: {"euMan1015":"ไอร์แลนด์: ปัจจุบันมีเฉพาะแมนนิทอล 10% และ 15% ผลิตภัณฑ์ 20% ถูกถอนแล้ว","jpNoHalf":"ญี่ปุ่น: ไม่พบ 0.45% โซเดียมคลอไรด์ชนิดหยด","uk27":"สหราชอาณาจักร: มี 2.7% โซเดียมคลอไรด์แทน (Fresenius Kabi)","jp10":"ญี่ปุ่น: พบเฉพาะแอมพูล 10% โซเดียมคลอไรด์","jpNoDexSaline":"ญี่ปุ่น: ไม่พบเดกซ์โทรส-เกลือความแรงนี้","euNoKDexHalf":"ไอร์แลนด์: โพแทสเซียมคลอไรด์ผสมสำเร็จมีใน 5% กลูโคสหรือ 0.9% เกลือ ไม่มีใน 5% กลูโคสกับ 0.45% เกลือ","ukK40":"สหราชอาณาจักร: พบเฉพาะความแรง 0.15% (20 mmol/L) ใน 5% กลูโคสกับ 0.45% เกลือ","ukLowSaline":"สหราชอาณาจักร: เดกซ์โทรส-เกลือโซเดียมต่ำคือ 0.18% โซเดียมคลอไรด์ใน 4% กลูโคส","eu033":"ไอร์แลนด์: 0.3% โซเดียมคลอไรด์มากับ 3.3% กลูโคส ไม่ใช่ 5%","euLowSaline":"ไอร์แลนด์: เดกซ์โทรส-เกลือโซเดียมต่ำคือ 0.18% โซเดียมคลอไรด์ใน 4% กลูโคส","us02":"สหรัฐฯ: ความแรงโซเดียมต่ำคือ 0.2% โซเดียมคลอไรด์ใน 5% เดกซ์โทรส","hartmann":"จำหน่ายในชื่อ compound sodium lactate (Hartmann's solution) สูตรต่างจาก Lactated Ringer's ของสหรัฐฯ เล็กน้อย","sameAsPlaAbroad":"สูตรเดียวกันจำหน่ายในชื่อ Plasma-Lyte (ดูการ์ดของ Plasma-Lyte)","euNl":"ไม่อยู่ในรายการของไอร์แลนด์ ได้รับอนุญาตในเนเธอร์แลนด์ (CBG, RVG 27041)"},
     chipsLabel: 'ตัวกรองที่ใช้อยู่', clearShort: 'ล้าง', clearFilters: 'ล้างตัวกรองทั้งหมด', chipRemove: (l) => `เอาตัวกรองออก: ${l}`,
     countShowing: 'แสดง', countOf: 'จาก', countFluids: 'ชนิด',
     legendBtn: 'คำอธิบาย', legendTitle: 'คำอธิบายสัญลักษณ์', legendSub: 'วิธีอ่านการ์ด',
@@ -869,8 +881,8 @@ const translations = {
       glu: 'ฉลากเดกซ์โทรสสหรัฐฯ: เดกซ์โทรสทำให้น้ำตาลในเลือดสูงขึ้นได้ ควรติดตามระดับน้ำตาลและให้อินซูลินตามความจำเป็น',
       cl: 'NICE CG174 1.2.5: หลังให้สารน้ำที่มีคลอไรด์เกิน 120 mmol/L ให้ตรวจคลอไรด์ในเลือดทุกวัน',
       resus: 'NICE CG174 1.3.1: ใช้คริสตัลลอยด์ที่มีโซเดียม 130–154 mmol/L สำหรับกู้ชีพ (bolus 500 mL ภายในไม่เกิน 15 นาที)',
-      colloid: 'คอลลอยด์คงอยู่ในหลอดเลือดเป็นหลักด้วยแรงดันออนโคติก ระวังภาวะสารน้ำเกินและการแพ้รุนแรง ห้ามใช้ในภาวะซีดรุนแรงหรือหัวใจล้มเหลวที่ไม่ขาดปริมาตร',
-      osmotic: 'แมนนิทอลดึงน้ำจากเซลล์เข้าสู่หลอดเลือด ทำให้ปัสสาวะออกมากอย่างรวดเร็ว ตรวจการทำงานของไต อิเล็กโทรไลต์ และออสโมลาลิตีในเลือด (< 320 mOsm/kg)',
+      colloid: 'ฉลาก Flexbumin: ห้ามใช้เมื่อเคยแพ้อัลบูมิน หรือมีภาวะซีดรุนแรงหรือหัวใจล้มเหลวที่ปริมาตรในหลอดเลือดปกติหรือเกิน การให้เร็วเกินไปทำให้สารน้ำเกินและน้ำท่วมปอดได้',
+      osmotic: 'ฉลาก Osmitrol: เป็นยาขับปัสสาวะออสโมติก ประเมินการทำงานของไต หัวใจ และปอดก่อนให้ ระหว่างและหลังให้ติดตามออสโมลาริตีในเลือด อิเล็กโทรไลต์ กรด-ด่าง osmol gap ภาวะสารน้ำ และปริมาณปัสสาวะ ใช้ชุดให้สารน้ำที่มีตัวกรอง (อาจตกผลึก) และห้ามให้ผ่านชุดสายเดียวกับเลือด',
     },
     detailComposition: 'ส่วนประกอบต่อลิตร', detailFormula: 'สูตรตำรับ (ต่อลิตร)', detailFlags: 'ข้อควรระวัง', detailThai: 'ทะเบียนตามประเทศ',
     detailNoThai: 'ไม่พบทะเบียนที่ยังคงอยู่ในประเทศไทย (ค้นหา 14 ต.ค. 2569)',
@@ -884,6 +896,7 @@ const translations = {
     phOther: (ph) => `ไม่มีในเอกสารของผลิตภัณฑ์นี้ Ringer's acetate สูตรเดียวกัน (Able Medical) ระบุ pH ${ph}`,
     sameAsPla: 'สูตรเดียวกับ Plasma-Lyte A (ฉลากสหรัฐฯ: 294 mOsm/L, 21 kcal/L, pH 7.4)',
     thNotes: {
+      man20Otsuka: 'ทะเบียนของไทยโอซูก้าอีกรายการ 20% Mannitol Intravenous Infusion (1C 164/55) มีสถานะ "รอตรวจสอบสถานะ" ในฐานข้อมูล อย. (19 ต.ค. 2569) จึงไม่ได้แสดง',
       sterofundinMg: 'ข้อมูลทะเบียนไทยระบุแมกนีเซียมคลอไรด์เฮกซะไฮเดรต 0.37 g/L แต่ SmPC ระบุ 0.20 g/L (1.0 mmol/L) ซึ่งใช้ในแอปนี้',
       acetar5Other: "มีผลิตภัณฑ์ 5% เดกซ์โทรสใน Ringer's acetate อีก 2 รายการที่ใช้เดกซ์โทรสโมโนไฮเดรตแทนแอนไฮดรัส (กลูโคสน้อยกว่าเล็กน้อย): ARI-5 (ไทยนครพัฒนา, 2A 604/31) และ 5% Dextrose in Acetated Ringer's (สตาร์แล็บ, 2C 21/51)",
     },
@@ -895,8 +908,8 @@ const translations = {
     keyUnknown: 'ไม่มีเอกสารของผลิตภัณฑ์นี้ที่ระบุค่า',
     keyNone: 'สารน้ำนี้ไม่มีส่วนประกอบนี้',
     keyCountries: 'ชิปประเทศ', keyChipCurrent: 'มีทะเบียน (สีของประเทศ) ข้างชิประบุผู้ผลิต', keyChipPast: 'ทะเบียนสิ้นสุดแล้ว (ถอนหรือเลิกจำหน่าย)', keyChipNever: 'ไม่มีทะเบียน: ไม่พบผลิตภัณฑ์ชนิดและความแรงนี้', keyBands: 'ช่วงโซเดียม', keyFlags: 'คำเตือนด้านล่างของแต่ละการ์ด', keyFamilies: 'ชนิด',
-    guides: { choose: 'เลือกสารน้ำ', maint: 'บำรุงรักษา', sodium: 'Na⁺ และ 3% bolus', kguide: 'คู่มือโพแทสเซียม', dka: 'โปรโตคอล DKA/HHS', water: 'การขาดน้ำ', drip: 'อัตราหยด', gir: 'เครื่องคำนวณ GIR', icp: 'ICP และ Osmotherapy', albumin: 'แนวทางใช้อัลบูมิน' },
-    guideShort: { choose: 'เลือก', maint: 'บำรุง', sodium: 'Na⁺', kguide: 'K⁺', dka: 'DKA', water: 'น้ำ', drip: 'หยด', gir: 'GIR', icp: 'ICP', albumin: 'อัลบูมิน' },
+    guides: { choose: 'เลือกสารน้ำ', maint: 'บำรุงรักษา', sodium: 'Na⁺ และ 3% bolus', relower: 'การลด Na กลับ (ODS)', kguide: 'คู่มือโพแทสเซียม', dka: 'โปรโตคอล DKA/HHS', water: 'การขาดน้ำ', drip: 'อัตราหยด', gir: 'เครื่องคำนวณ GIR', icp: 'ICP และ Osmotherapy', albumin: 'แนวทางใช้อัลบูมิน' },
+    guideShort: { choose: 'เลือก', maint: 'บำรุง', sodium: 'Na⁺', relower: 'ลด Na กลับ', kguide: 'K⁺', dka: 'DKA', water: 'น้ำ', drip: 'หยด', gir: 'GIR', icp: 'ICP', albumin: 'อัลบูมิน' },
     discTitle: 'ข้อควรทราบ',
     discPoints: [
       'คู่มือนี้ช่วยประกอบการตัดสินใจทางคลินิก ไม่ได้ใช้แทน ตรวจสอบฉลากของถุงที่ใช้จริงเสมอ เพราะผลิตภัณฑ์ต่างผู้ผลิตอาจแตกต่างกัน',
@@ -910,14 +923,9 @@ const translations = {
       nice: 'ช่วงโซเดียมสำหรับกู้ชีพ ปริมาณสารน้ำบำรุงรักษา การติดตามคลอไรด์ 5 Rs', ssc: 'การเลือกสารน้ำในภาวะติดเชื้อในกระแสเลือด', myburgh: 'ค่าพลาสมามนุษย์', adrogueHypo: 'สูตรการเปลี่ยนแปลงโซเดียมต่อลิตรและน้ำในร่างกาย', adrogueHyper: 'อัตราการแก้โซเดียมสูง',
       spasovski: 'ขีดจำกัดการแก้โซเดียมต่ำ', devine: 'น้ำหนักตัวในอุดมคติ', thfda: 'ทะเบียนไทย ผู้รับอนุญาต และสูตรตำรับ',
       szczech: 'สูตรการขาดน้ำอิสระและขีดจำกัดการแก้ไข', drugsfda: 'สถานะทะเบียนสหรัฐฯ', dmd: 'ผลิตภัณฑ์และสถานะในสหราชอาณาจักร', hpra: 'สถานะทะเบียน EU (ไอร์แลนด์)', pmda: 'ทะเบียนญี่ปุ่น',
-      adaDka: 'ขั้นตอนการให้สารน้ำ DKA/HHS เกณฑ์การเติมเดกซ์โทรส และความปลอดภัยของโพแทสเซียม', katz: 'สูตรคำนวณโซเดียมปรับค่าเมื่อน้ำตาลในเลือดสูง', sternsK: 'การประมาณการโพแทสเซียมที่ขาด อัตราการให้ทางหลอดเลือดดำส่วนปลายและส่วนกลาง และการตรวจแมกนีเซียม',
-      aspenGir: 'ขีดจำกัดอัตราการให้กลูโคส (GIR) อัตราเผาผลาญสูงสุด (4–7 mg/kg/นาที) และพลังงานเดกซ์โทรส',
-      btfIcp: 'เกณฑ์การใช้ Osmotherapy ลด ICP (โซเดียม 145–155, Osm < 320), ขนาดยา Mannitol เทียบกับ 3% NaCl และเป้าหมาย CPP (60–70 mmHg)',
-      aasldAlb: 'แนวทาง AASLD สำหรับการเจาะระบายน้ำในช่องท้องปริมาณมาก (6–8 g/L) และการทดสอบวินิจฉัย Hepatorenal syndrome (1 g/kg/วัน)',
-      sortSbp: 'Sort et al. ขนาดยาอัลบูมินในภาวะเยื่อบุช่องท้องอักเสบติดเชื้อ SBP (1.5 g/kg วันที่ 1 และ 1.0 g/kg วันที่ 3)',
-      safeAlb: 'การศึกษา SAFE กู้ชีพด้วยสารน้ำและข้อห้ามใช้อัลบูมินในผู้ป่วยบาดเจ็บที่ศีรษะ (SAFE-TBI)',
+      adaDka: 'สารน้ำ เดกซ์โทรส โพแทสเซียม และอินซูลินใน DKA/HHS', katz: 'โซเดียมปรับตามน้ำตาล', kardalas: 'ความรุนแรงของโพแทสเซียมต่ำ ปริมาณที่ขาด และการให้ทางหลอดเลือด', espenIcu: 'ขีดจำกัดการให้กลูโคสใน ICU', sibicc: 'เกณฑ์ ICP/CPP ขนาดและขีดจำกัดสารออสโมติก', easl: 'อัลบูมินในการเจาะน้ำในท้อง SBP AKI/HRS terlipressin และ noradrenaline', sortSbp: 'งานวิจัยอัลบูมินใน SBP', safeTbi: 'อัลบูมินในบาดเจ็บที่สมอง', confirm: 'ความเสี่ยงต่อระบบหายใจของ terlipressin', sood: 'Desmopressin clamp ร่วมกับ 3% saline', perianayagam: 'Desmopressin และ 5% dextrose เพื่อลดโซเดียมกลับ',
       usNaCl09: 'ค่าของ NSS', usNaCl045: 'ค่าของ NSS/2', usNaCl3: 'ค่าของ 3% NaCl คำเตือนให้ทางหลอดเลือดใหญ่', usDex: 'ค่าของ 5% และ 10% เดกซ์โทรส central vein เมื่อ 900 mOsm/L ขึ้นไป น้ำตาลในเลือด', usDexNaCl: 'ค่าของ 5%D/NSS และ 5%D/N/2 คำเตือนโซเดียมต่ำ', usKDexNaCl: 'ค่าของ 5%D/N/2 ผสม KCl',
-      usLR: "ค่าของ Lactated Ringer's คำเตือนเรื่องแคลเซียม", usPL: 'ค่าของ Plasma-Lyte A', usAlb5: 'ข้อมูลฉลาก Albumin 5% การขยายปริมาตรในหลอดเลือดแบบ Iso-oncotic', usAlb: 'ข้อมูล Human Albumin 20% และข้อควรระวังคอลลอยด์', usAlb25: 'ข้อมูลฉลาก Albumin 25% ข้อควรระวังการดึงน้ำแบบ Hyper-oncotic', usMan: 'ข้อมูล Mannitol 20% และข้อควรระวังการขับปัสสาวะออสโมติก', thTopBal: 'ค่าของ TOP Balance', thAcetRinger: "pH ของ Ringer's acetate คำเตือนแคลเซียมกับ ceftriaxone", euSterofundin: 'ค่าของ Sterofundin ISO',
+      usLR: "ค่าของ Lactated Ringer's คำเตือนเรื่องแคลเซียม", usPL: 'ค่าของ Plasma-Lyte A', usAlb5: 'อัลบูมิน 5%: โซเดียมและผลทางออนโคติก', usAlb: 'อัลบูมิน 20%: โซเดียม ผลทางออนโคติก ข้อห้ามใช้', usAlb25: 'อัลบูมิน 25%: โซเดียมและผลทางออนโคติก', usMan: 'ค่า ขนาดยา และการติดตามของแมนนิทอล 20%', thTopBal: 'ค่าของ TOP Balance', thAcetRinger: "pH ของ Ringer's acetate คำเตือนแคลเซียมกับ ceftriaxone", euSterofundin: 'ค่าของ Sterofundin ISO',
     },
     madeBy: 'Made by Warodom Phaenthong, M.D.',
     changelogTitle: 'ประวัติเวอร์ชัน', changelogSub: 'สิ่งที่เปลี่ยนแปลงและวันที่', latest: 'ล่าสุด', newFeatures: 'ใหม่', bugFixes: 'แก้ไข',
@@ -964,7 +972,7 @@ const FLAG_RULES = [
 ];
 const flagsOf = (f) => FLAG_RULES.filter(([, test]) => test(f));
 const srcItem = (key) => ({ label: (REFERENCES.find(r => r.key === key) || SOURCES[key] || {}).cite || key, url: refUrl(key) || (SOURCES[key] || {}).url });
-const SHORT_SRC = { szczech: 'Szczech 2025', nice: 'NICE CG174', ssc: 'SSC 2021', myburgh: 'Myburgh 2013', adrogueHypo: 'Adrogué 2000', adrogueHyper: 'Adrogué 2000', spasovski: 'Spasovski 2014', devine: 'Devine 1974', btfIcp: 'BTF / ENLS', aasldAlb: 'AASLD 2021', sortSbp: 'Sort 1999', safeAlb: 'SAFE 2004' };
+const SHORT_SRC = { szczech: 'Szczech 2025', nice: 'NICE CG174', ssc: 'SSC 2021', myburgh: 'Myburgh 2013', adrogueHypo: 'Adrogué 2000', adrogueHyper: 'Adrogué 2000', spasovski: 'Spasovski 2014', devine: 'Devine 1974', adaDka: 'ADA/EASD 2024', katz: 'Katz 1973', kardalas: 'Kardalas 2018', espenIcu: 'ESPEN ICU 2019', sibicc: 'SIBICC 2019', easl: 'EASL 2018', sortSbp: 'Sort 1999', safeTbi: 'SAFE-TBI 2007', confirm: 'CONFIRM 2021', sood: 'Sood 2013', perianayagam: 'Perianayagam 2008', usMan: 'Osmitrol label', usAlb5: 'Flexbumin 5% label', usAlb: 'Flexbumin 20% label', usAlb25: 'Flexbumin 25% label', usNaCl3: '3% NaCl label', usDex: 'Dextrose label' };
 
 // --- IV bag picture: bag tinted by type, liquid level, port ---
 const BagIcon = ({ family, className }) => {
@@ -1085,7 +1093,7 @@ const CountryDetail = ({ f, t, src }) => {
                   <li key={i} className="py-1 text-xs min-w-0" data-reg-item={r}>
                     <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
                       <span className="font-bold text-slate-800 break-words min-w-0">{p.name}</span>
-                      <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold text-indigo-600 hover:underline shrink-0" data-reg-link={r}>{p.code} ↗</a>
+                      <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold text-indigo-600 hover:underline shrink-0" data-reg-link={r}>{/^[0-9a-f]{8}-/.test(p.code) ? 'DailyMed' : p.code} ↗</a>
                     </div>
                     <p className="text-[11px] text-slate-500 break-words">{holderText(p.holder, lang)}</p>
                   </li>
@@ -1570,7 +1578,7 @@ const FluidDetailModal = ({ f, t, onClose, selected, onSelect }) => {
       </>}>
       <FlagList f={f} t={t} />
       <Section title={t.detailComposition} attrs={{ 'data-detail-comp': '' }}>
-        {row('na', t.rows.na, <Val f={f} k="na" t={t} />)}
+        {row('na', t.rows.na, <Val f={f} k="na" t={t} />, f.labelMEq && f.labelMEq.na ? t.labelMEq(f.labelMEq.na) : null)}
         {row('k', t.rows.k, <Val f={f} k="k" t={t} />)}
         {row('cl', t.rows.cl, <Val f={f} k="cl" t={t} />)}
         {row('ca', t.rows.ca, <Val f={f} k="ca" t={t} />, f.labelMEq && f.labelMEq.ca ? t.labelMEq(f.labelMEq.ca) : null)}
@@ -1810,219 +1818,8 @@ const GUIDE_TEXT = {
     fluidPlan: (x) => `Litres of each fluid to lower sodium by ${x} mmol/L (Adrogué–Madias)`, fluidPlanNote: 'Change in serum sodium per litre for each fluid with sodium below 130 mmol/L; the litres and mL/h are for the next 24 hours, before ongoing losses.',
     waterNotHigh: 'Serum sodium is not above the target: there is no free water deficit to replace.',
     waterCautions: [['If the patient is volume depleted, correct that first with an isotonic fluid.', 'szczech'], ['Lower sodium by no more than 10 mmol/L in the first 24 hours; about 10 mmol/L per day in chronic hypernatraemia, unless it developed over hours.', 'adrogueHyper'], ['The deficit leaves out ongoing urine, gut and skin losses: add them, and recheck sodium often.', 'szczech'], ['Weight-based totals are less reliable after a large recent gain or loss of weight.', 'szczech']],
-    // sodium change tabs and acute bolus
-    modeContinuous: 'Continuous (Adrogué–Madias)',
-    modeBolus: 'Acute 3% bolus (Emergency)',
-    bolusSub: '3% NaCl 100–150 mL IV bolus protocol for acute severe symptomatic hyponatraemia',
-    bolusIndicationsTitle: 'Indications for 3% NaCl Bolus',
-    bolusIndications: 'Severe symptoms: seizures, coma, respiratory arrest, acute brain herniation. Moderately severe: confusion, nausea, severe headache with acute fall.',
-    bolusRegimenTitle: 'Emergency Bolus Regimen (Spasovski 2014, Verbalis 2013)',
-    bolusDose: 'Bolus dose',
-    bolus100: '100 mL',
-    bolus150: '150 mL',
-    bolus2ml: '2 mL/kg',
-    bolusAcuteRise: (r) => `Estimated acute rise from this bolus: ≈ +${r} mmol/L`,
-    bolusStep1: 'Infuse 3% NaCl 100–150 mL (or 2 mL/kg) IV over 10–15 minutes.',
-    bolusStep2: 'Recheck serum Na⁺ and symptoms after 20 minutes. If severe symptoms persist: repeat 2nd bolus of 100–150 mL.',
-    bolusStep3: 'Can repeat a 3rd bolus if needed (maximum 3 boluses within 1–2 hours).',
-    bolusTargetStop: 'Stop 3% NaCl boluses immediately once symptoms resolve or target rise (+4 to +6 mmol/L) is reached.',
-    bolusODSTitle: 'Daily Limits & ODS Prevention',
-    bolusODSLimit: 'Max rise in 24 h: 8 mmol/L in standard patients; 4–6 mmol/L in patients with high risk of osmotic demyelination (cirrhosis, alcoholism, malnutrition, hypokalaemia).',
-    bolusRescueTitle: 'Overcorrection Rescue (Desmopressin / D5W)',
-    bolusRescue: 'If serum Na⁺ rises > 8 mmol/L in 24 h (or > 6 in high risk): immediately stop active fluids, give D5W (3 mL/kg/h) and consider Desmopressin (DDAVP 1–2 mcg IV/SC q6–8h) to re-lower or freeze sodium.',
-    // potassium guide
-    potassiumSub: 'Safe IV potassium repletion, total deficit estimation and administration rules',
-    serumK: 'Serum potassium',
-    kAccess: 'IV Access',
-    accessPeriph: 'Peripheral IV',
-    accessCentral: 'Central line (CVC)',
-    kDeficitTitle: 'Total Body Potassium Deficit',
-    kDeficitEst: (low, high) => `Estimated deficit: ≈ ${low}–${high} mmol`,
-    kDeficitNote: 'Serum K⁺ represents only ~2% of total body potassium (98% is intracellular). Each 0.3 mmol/L decrease below 4.0 ≈ 100 mmol deficit (Sterns / UpToDate).',
-    kNormalNote: 'Serum potassium is in normal or high range (≥ 3.5 mmol/L). Routine hypokalaemic loading is not indicated.',
-    kRateTitle: 'Safe Infusion Rate & Concentration Limits',
-    kRatePeriph: 'Peripheral IV: Maximum rate 10 mmol/h, maximum concentration 40 mmol/L (e.g. 20 mmol in 500 mL) to prevent severe chemical phlebitis and pain.',
-    kRateCent: 'Central line (CVC): Up to 20 mmol/h with continuous cardiac ECG monitoring in an ICU or monitored bed; maximum concentration 80 mmol/L.',
-    kVehicleTitle: 'Vehicle Solution Alert',
-    kVehicleAlert: 'Avoid Dextrose vehicle during initial repletion: Dextrose stimulates endogenous insulin release, driving K⁺ into cells and temporarily worsening hypokalaemia. Prefer 0.9% NaCl or 0.45% NaCl.',
-    kMgTitle: 'Serum Magnesium Check (Crucial)',
-    kMgAlert: 'Target serum Mg²⁺ ≥ 0.8 mmol/L (2.0 mg/dL). Hypomagnesaemia causes renal K⁺ wasting through open ROMK channels and makes hypokalaemia refractory to replacement.',
-    kPreMixTitle: 'Premixed fluids in the guide with potassium',
-    // DKA / HHS protocol
-    dkaSub: 'ADA 2024 & JBDS-IP guidelines: Corrected sodium, fluid transition, glucose rescue and potassium replenishment',
-    dkaType: 'Condition',
-    dkaTypeDka: 'DKA (Ketoacidosis)',
-    dkaTypeHhs: 'HHS (Hyperosmolar)',
-    measuredNa: 'Measured Na⁺',
-    bloodGlucose: 'Blood glucose',
-    gluUnit: 'Unit',
-    gluMgdl: 'mg/dL',
-    gluMmol: 'mmol/L',
-    correctedNaTitle: 'Katz Corrected Sodium',
-    correctedNaFormula: 'Corrected Na⁺ = Measured Na⁺ + 0.016 × (Glucose mg/dL − 100)',
-    corrNaStatus: (v, isHigh) => `Corrected Na⁺: ${v.toFixed(1)} mmol/L (${isHigh ? 'Normal / High ≥ 135' : 'Low < 135'})`,
-    dkaStep1Title: 'Phase 1: Initial Resuscitation (Hour 1)',
-    dkaStep1Desc: 'Infuse 0.9% NaCl 1000 mL/h (or 15–20 mL/kg/h) in the first hour to restore intravascular volume.',
-    dkaStep2Title: 'Phase 2: Hydration Fluid Selection',
-    dkaStep2High: 'Corrected Na⁺ ≥ 135 mmol/L: Switch to 0.45% NaCl (NSS/2) at 250–500 mL/h to address intracellular dehydration.',
-    dkaStep2Low: 'Corrected Na⁺ < 135 mmol/L: Continue 0.9% NaCl (NSS) at 250–500 mL/h.',
-    dkaStep3Title: 'Phase 3: Dextrose Addition Threshold',
-    dkaStep3Threshold: (t, th) => `${t}: When glucose reaches ≤ ${th} mg/dL, add 5% Dextrose (e.g. 5%D/N/2 or 5%D/NSS at 150–250 mL/h) to maintain glucose at 150–200 mg/dL (DKA) or 200–300 mg/dL (HHS) while insulin continues until acidosis resolves.`,
-    dkaStep3AddNow: (th) => `🚨 Current glucose is ≤ ${th} mg/dL: ADD 5% DEXTROSE NOW (e.g. 5%D/N/2 at 150–250 mL/h) to prevent hypoglycemia while insulin continues!`,
-    dkaStep3Wait: (th) => `Current glucose > ${th} mg/dL: Continue dextrose-free fluid. Add 5% dextrose once glucose drops below ${th} mg/dL.`,
-    dkaStep4Title: 'Phase 4: Potassium Management Algorithm',
-    dkaKHold: 'K⁺ < 3.3 mmol/L: 🚨 CRITICAL: HOLD INSULIN! Give IV KCl 20–40 mmol/h until K⁺ > 3.3. Starting insulin with severe hypokalaemia can precipitate fatal arrhythmias or respiratory arrest.',
-    dkaKSafe: 'K⁺ 3.3–5.2 mmol/L: ✅ Safe to start/continue insulin. Add 20–30 mmol KCl per litre of IV fluid to maintain serum K⁺ between 4.0–5.0 mmol/L.',
-    dkaKNoAdd: 'K⁺ > 5.2 mmol/L: ⚠️ Do NOT add potassium to IV fluids. Recheck serum K⁺ every 2 hours until < 5.2 mmol/L.',
-    // GIR calculator
-    girSub: 'Glucose Infusion Rate (GIR) bedside calculator & maximal oxidation capacity guidance',
-    girModeRate: 'Rate → GIR (Check existing rate)',
-    girModeTarget: 'Target GIR → Required Rate',
-    girFluid: 'IV Fluid / Dextrose solution',
-    girDexCustom: 'Custom dextrose %',
-    girTargetGIR: 'Target GIR (mg/kg/min)',
-    girResultGIR: 'Glucose Infusion Rate',
-    girResultRate: 'Required Infusion Rate',
-    girUnitMlh: 'mL/h',
-    girUnitMgKgMin: 'mg/kg/min',
-    girDailyDex: 'Daily dextrose',
-    girDailyKcal: 'Daily energy',
-    girGDay: 'g/day',
-    girKcalDay: 'kcal/day',
-    girRangeNormal: 'Normal physiological maintenance: 2–3 mg/kg/min',
-    girRangeCrit: 'Critically ill / stress: 3–4 mg/kg/min',
-    girRangeMax: 'Maximal oxidation capacity: 4–5 mg/kg/min (absolute max 7 mg/kg/min)',
-    girWarnHigh: '⚠️ Caution: GIR exceeds maximal hepatic glucose oxidation rate (≥ 5 mg/kg/min). Risk of hyperglycemia, hyperosmolarity, hepatic steatosis, and increased CO₂ production!',
-    girWarnLow: 'GIR is below basal hepatic glucose output (~2 mg/kg/min). Patient may develop hypoglycemia or catabolism if fasting without oral intake.',
-    girFormula: 'GIR (mg/kg/min) = [Rate (mL/h) × Dextrose (%) × 10] ÷ [Weight (kg) × 60]',
-    girFormulaTarget: 'Rate (mL/h) = [Target GIR (mg/kg/min) × Weight (kg) × 60] ÷ [Dextrose (%) × 10]',
-    girPedsNote: 'In neonates & infants, basal GIR requirement is higher (4–8 mg/kg/min due to larger brain-to-body ratio).',
-    // ICP & Osmotherapy guide
-    icpSub: 'Acute intracranial hypertension & cerebral edema: Mannitol 20% vs. 3% Hypertonic Saline, osmolality limits & CPP monitoring',
-    icpTabs: { mannitol: 'Mannitol 20%', nacl3: '3% Hypertonic Saline', decision: 'Decision Matrix', cpp: 'CPP & MAP' },
-    icpWeight: 'Weight',
-    icpManDoseLabel: 'Mannitol Dose (g/kg)',
-    icpManCalcGrams: 'Dose in Grams',
-    icpManCalcVol: '20% Volume to Infuse',
-    icpManAdminTime: 'Infuse IV bolus over 15–20 minutes using an in-line filter set (0.22–5 μm).',
-    icpManKinetics: 'Onset: 10–15 min | Peak: 20–60 min | Duration: 4–6 h',
-    icpManOsmLabel: 'Measured Serum Osmolality',
-    icpManOsmSafe: '✓ Measured Serum Osmolality is below 320 mOsm/kg cutoff.',
-    icpManOsmCaution: '⚠️ Serum Osmolality near threshold (310–320 mOsm/kg). Check renal function & recheck prior to further dosing.',
-    icpManOsmDanger: '🚨 HOLD MANNITOL! Measured Serum Osmolality ≥ 320 mOsm/kg. Extreme risk of acute kidney injury (acute tubular necrosis) and hyperosmolality syndrome. Switch to 3% NaCl or alternative measures.',
-    icpGapToggle: 'Osmolar Gap Calculator',
-    icpGapNa: 'Serum Na⁺',
-    icpGapGlu: 'Glucose',
-    icpGapBun: 'BUN',
-    icpGapCalcOsm: 'Calculated Osm',
-    icpGapVal: 'Osmolar Gap',
-    icpGapNormal: '✓ Osmolar gap ≤ 10 mOsm/kg: no evidence of significant mannitol accumulation.',
-    icpGapHigh: '⚠️ Osmolar gap > 10–20 mOsm/kg: Indicates unexcreted mannitol accumulation. Hold further doses until gap clears!',
-    icpManNotes: [
-      'Profound osmotic diuresis: Mannitol drives massive free water and electrolyte loss. Resultant hypovolemia and systemic hypotension critically reduce Cerebral Perfusion Pressure (CPP = MAP − ICP). Maintain euvolemia with isotonic crystalloids (NSS / balanced).',
-      'Rebound ICP increase: With repeated dosing or prolonged therapy, mannitol gradually crosses a disrupted blood-brain barrier (BBB), accumulating in brain parenchyma and reversing the osmotic gradient.',
-      'Crystallization: Mannitol may crystallize at cool temperatures. Inspect the bag/vial before use; warm and shake if crystals are visible; always use an in-line filter.',
-    ],
-    icpOpenMan: 'Open Mannitol 20% Card',
-    icpNacl3BolusLabel: '3% NaCl Bolus Dose',
-    icpNacl3Vol: 'Volume to Infuse',
-    icpNacl3Admin: 'Infuse IV bolus over 10–20 minutes. Emergency peripheral access (large-bore) acceptable for acute bolus; central line preferred for continuous infusions.',
-    icpNacl3NaCurrent: 'Current Serum Na⁺',
-    icpNacl3Rise: 'Anticipated Acute Na⁺ Rise',
-    icpNacl3PredictedNa: 'Predicted Post-Bolus Na⁺',
-    icpNacl3TargetNote: 'Target Serum Na⁺: 145–155 mmol/L (BTF / ENLS)',
-    icpNacl3HighAlert: '🚨 HOLD 3% NaCl! Current serum Na⁺ ≥ 155 mmol/L (or post-bolus > 155–160 mmol/L). Severe hypernatremia risks renal vasoconstriction, seizures, and hyperchloremic acidosis.',
-    icpNacl3Safe: '✓ Serum Na⁺ is within or approaching therapeutic target range (145–155 mmol/L).',
-    icpNacl3Notes: [
-      'Volume expansion: Unlike mannitol, 3% NaCl expands intravascular volume and elevates MAP, which actively supports Cerebral Perfusion Pressure (CPP). It is preferred in trauma patients with concomitant hypotension or hypovolemic shock.',
-      'Acid-base monitoring: Infusate chloride is 513 mmol/L. High volumes or continuous infusions cause hyperchloremic non-anion gap metabolic acidosis and renal vasoconstriction. Monitor serum chloride and blood gas.',
-      'Osmolality ceiling: Serum osmolality up to 360 mOsm/kg is generally tolerated with hypertonic saline (higher than mannitol cutoff of 320 mOsm/kg).',
-      'Chronic hyponatremia: If herniation occurs on chronic hyponatremia, aim for acute initial +4–6 mmol/L rise to stop herniation, then adhere strictly to the 8–10 mmol/L/24h ceiling to prevent Osmotic Demyelination Syndrome (ODS).',
-    ],
-    icpOpenNacl3: 'Open 3% NaCl Card',
-    icpDecisionTitle: 'Osmotherapy Agent Selection: Head-to-Head Comparison',
-    icpColCond: 'Clinical Presentation',
-    icpColAgent: 'Preferred Osmotherapy',
-    icpColReason: 'Mechanism & Evidence Rationale',
-    icpScenarios: [
-      { cond: 'Hypotension / Shock (MAP < 65 or SBP < 90 mmHg)', agent: '3% Hypertonic Saline', tone: 'emerald', text: '3% NaCl expands intravascular volume and raises MAP/CPP. Mannitol causes osmotic diuresis and worsens hypovolemic hypotension (drops CPP).' },
-      { cond: 'Heart Failure / Pulmonary Edema / Hypervolemia', agent: 'Mannitol 20%', tone: 'blue', text: 'Mannitol acts as an osmotic diuretic, promoting net fluid excretion. 3% NaCl increases intravascular volume and can precipitate pulmonary edema.' },
-      { cond: 'Renal Insufficiency / Oliguria (Osm > 320 mOsm/kg)', agent: '3% Hypertonic Saline', tone: 'emerald', text: 'Mannitol is nephrotoxic when serum Osm ≥ 320 mOsm/kg or in anuria. 3% NaCl can be titrated safely up to serum Osm 360 mOsm/kg and Na 155 mmol/L.' },
-      { cond: 'Baseline Hyponatremia (Na < 135 mmol/L)', agent: '3% Hypertonic Saline', tone: 'emerald', text: '3% NaCl corrects hyponatremia while reducing cerebral edema. Mannitol lowers serum sodium via free water mobilization and diuresis.' },
-      { cond: 'Baseline Hypernatremia (Na > 150 mmol/L)', agent: 'Mannitol 20%', tone: 'blue', text: 'Mannitol is preferred if serum Osm < 320 mOsm/kg. 3% NaCl is contraindicated if serum Na exceeds 155 mmol/L.' },
-    ],
-    icpCppTitle: 'Cerebral Perfusion Pressure (CPP) & MAP Calculator',
-    icpSbp: 'Systolic BP (SBP)',
-    icpDbp: 'Diastolic BP (DBP)',
-    icpMap: 'Mean Arterial Pressure (MAP)',
-    icpIcpVal: 'Intracranial Pressure (ICP)',
-    icpCppVal: 'Cerebral Perfusion Pressure (CPP)',
-    icpTargetCpp: 'Target CPP: 60–70 mmHg',
-    icpTargetIcp: 'Target ICP: < 20–22 mmHg (BTF Guidelines)',
-    icpCppLowAlert: '🚨 CPP < 60 mmHg: High risk of cerebral ischemia! Augment MAP (fluid resuscitation, vasopressors) and reduce ICP (elevate head 30°, osmotherapy, CSF drainage, sedation).',
-    icpCppHighAlert: '⚠️ CPP > 70 mmHg: Excessive cerebral perfusion pressure. Avoid inducing hypertension; risk of cerebral hyperperfusion injury and ARDS.',
-    icpIcpHighAlert: '🚨 ICP > 22 mmHg: Pathological intracranial hypertension! Escalate neurocritical care interventions immediately.',
-    icpCppNormal: '✓ CPP is within optimal target range (60–70 mmHg).',
-    icpCppFormula: 'MAP = DBP + (SBP − DBP) / 3 | CPP = MAP − ICP',
-    // Albumin Guide
-    albSub: 'Evidence-based albumin indications in cirrhosis & critical care: Paracentesis (LVP), SBP, HRS-AKI challenge & 5% vs 20%/25% selection',
-    albTabs: { lvp: 'Paracentesis (LVP)', sbp: 'SBP Dosing', hrs: 'HRS-AKI Protocol', compare: '5% vs 20% vs 25%' },
-    albLvpTitle: 'Large-Volume Paracentesis (LVP > 5 L) Albumin Calculator',
-    albLvpVolRemoved: 'Ascites Volume Removed',
-    albLvpDoseFactor: 'Albumin Ratio (g/L ascites)',
-    albLvpDoseGrams: 'Total Albumin Required',
-    albLvpVol20: '20% Albumin Volume',
-    albLvpVol25: '25% Albumin Volume',
-    albLvpVol5Compare: '5% Equivalent (Not Rec.)',
-    albLvpSafeAlert: '✓ LVP ≥ 5 L: Albumin replacement (6–8 g per litre removed) is strongly recommended by AASLD & EASL to prevent Paracentesis-Induced Circulatory Dysfunction (PICD), hyponatremia, and renal impairment.',
-    albLvpLowAlert: 'ℹ️ Paracentesis < 5 L: Routine albumin administration is generally not required (low risk of PICD). Consider only if patient is hypotensive, cirrhotic cardiomyopathy, or history of SBP.',
-    albLvpRateNote: 'Administration: Infuse IV over 30–60 minutes immediately upon completion of paracentesis (or infuse concurrently if volume > 8 L).',
-    albLvpNotes: [
-      'Paracentesis-Induced Circulatory Dysfunction (PICD): Rapid removal of ascites causes splanchnic vasodilation, marked reduction in effective arterial blood volume, severe activation of RAAS and SNS, leading to rapid re-accumulation of ascites, hyponatremia, and hepatorenal syndrome.',
-      'Dosing standard: 8 g albumin per litre of ascites removed is the standard trial-tested regimen; 6 g/L is accepted in European guidance for volumes between 5–8 L.',
-      'Avoid 5% albumin in LVP: 5% albumin provides excessive sodium and water volume (4–5x fluid volume compared to 20–25%), worsening sodium retention in cirrhosis.',
-    ],
-    albSbpTitle: 'Spontaneous Bacterial Peritonitis (SBP) Dosing Protocol',
-    albSbpWeight: 'Patient Weight',
-    albSbpDay1Dose: 'Day 1 Dose (within 6h)',
-    albSbpDay3Dose: 'Day 3 Dose (at 48h)',
-    albSbpTotalGrams: 'Total Course Albumin',
-    albSbpDay1Sub: '1.5 g/kg IV within 6 hours of diagnosis',
-    albSbpDay3Sub: '1.0 g/kg IV at 48 hours',
-    albSbpTrialAlert: '★ Sort et al. (NEJM 1999) Landmark Trial: Albumin (1.5 g/kg Day 1 + 1.0 g/kg Day 3) reduced hepatorenal syndrome from 33% to 10% and in-hospital mortality from 29% to 10% (P = 0.01).',
-    albSbpHighRiskNote: 'Greatest benefit seen in high-risk patients: Serum Bilirubin ≥ 4 mg/dL (≥ 68 μmol/L) or Serum Creatinine ≥ 1.0 mg/dL (≥ 88 μmol/L). However, current AASLD/EASL guidelines recommend albumin for ALL patients with SBP (ascitic PMN ≥ 250/mm³).',
-    albSbpNotes: [
-      'Timing is critical: The Day 1 dose of 1.5 g/kg must be initiated within 6 hours of paracentesis confirming SBP alongside broad-spectrum IV antibiotics (e.g. 3rd-gen cephalosporin).',
-      'Infusion rate: 20% or 25% albumin is typically infused over 2–4 hours. Monitor for acute pulmonary edema or fluid overload.',
-    ],
-    albHrsTitle: 'Hepatorenal Syndrome (HRS-AKI) Diagnostic & Treatment Protocol',
-    albHrsWeight: 'Patient Weight',
-    albHrsChallengeTitle: 'Phase 1: Diagnostic Volume Challenge (Rule out Pre-renal AKI)',
-    albHrsChallengeDose: 'Albumin 1 g/kg/day (Max 100 g/day) × 2 Consecutive Days',
-    albHrsChallengeGrams: 'Daily Challenge Dose',
-    albHrsChallengeVol20: '20% Daily Volume',
-    albHrsChallengeVol25: '25% Daily Volume',
-    albHrsChallengeAction: 'Action required: Complete withdrawal of all diuretics, antihypertensives, and vasodilators. Infuse albumin 1 g/kg/day for 48 hours.',
-    albHrsDiagnosisCriteria: 'HRS-AKI Diagnostic Criteria (AASLD / IAC): Cirrhosis with ascites; AKI per ICA criteria; No response after 2 consecutive days of diuretic withdrawal and albumin volume expansion; Absence of shock; No recent exposure to nephrotoxic drugs; Absence of structural kidney injury (proteinuria < 500 mg/d, microhematuria < 50 RBC/hpf, normal renal ultrasound).',
-    albHrsRxTitle: 'Phase 2: Confirmed HRS-AKI Pharmacotherapy',
-    albHrsRxAlbumin: 'Albumin: 20–40 g/day IV maintenance during vasoconstrictor therapy.',
-    albHrsRxVasoconstrictors: 'Vasoconstrictor of choice:',
-    albHrsRxTerli: '• Terlipressin: 0.85–1.0 mg IV bolus q4–6h OR continuous IV infusion 2 mg/day (titrate up to 12 mg/day if SCr doesn\'t decrease ≥ 25% after 48h). Most effective agent for reversal of HRS.',
-    albHrsRxNorepi: '• Norepinephrine: Continuous infusion 0.5–3.0 mg/h in ICU, titrated to raise MAP by ≥ 10 mmHg or MAP > 65–70 mmHg.',
-    albHrsRxMidOct: '• Midodrine (oral 7.5–15 mg TID) + Octreotide (SC 100–200 mcg TID): Secondary option if terlipressin/norepinephrine unavailable.',
-    albHrsRespAlert: '⚠️ Respiratory Warning (CONFIRM Trial): Terlipressin + Albumin carries substantial risk of acute pulmonary edema and respiratory failure. Monitor continuous pulse oximetry. Discontinue or reduce if SpO₂ drops or dyspnea develops.',
-    albCompareTitle: 'Albumin Concentration Selection (5% vs 20% vs 25%) & Safety Matrix',
-    albColConcentration: 'Concentration',
-    albColOncotic: 'Oncotic Pressure',
-    albColVolumeExpansion: 'Intravascular Expansion',
-    albColIndications: 'Primary Clinical Indications',
-    albContraTitle: 'Critical Black Box Warnings & Contraindications',
-    albTbiAlert: '🚨 STRICT CONTRAINDICATION in Traumatic Brain Injury (TBI): The SAFE-TBI study (NEJM 2007) demonstrated significantly higher 2-year mortality with albumin resuscitation in severe TBI (relative risk of death 1.88, P < 0.001) due to delayed BBB leakage and raised ICP. Use isotonic crystalloid (NSS / balanced) instead!',
-    albChfAlert: '⚠️ Fluid Overload & Heart Failure: Albumin (especially 20% & 25%) rapidly mobilizes interstitial water into the vascular tree. Contraindicated in severe circulatory failure or pulmonary edema. Monitor volume status meticulously.',
-    albSepsisNote: 'Sepsis Resuscitation (Surviving Sepsis Campaign 2021): Suggest using albumin (5% or 20%) in patients who received large volumes of crystalloids to maintain MAP and reduce cumulative fluid balance (weak recommendation, moderate-quality evidence).',
-    albOpenFluid5: 'Open 5% Albumin Card',
-    albOpenFluid20: 'Open 20% Albumin Card',
-    albOpenFluid25: 'Open 25% Albumin Card',
+    // sodium guide tabs (text of the bolus and re-lowering tabs is in GUIDE2)
+    modeContinuous: 'Change per litre', modeBolus: '3% bolus', modeRelowering: 'Re-lowering',
   },
   th: {
     chooseSub: 'NICE CG174 "5 Rs" และ Surviving Sepsis Campaign 2021',
@@ -2090,219 +1887,8 @@ const GUIDE_TEXT = {
     fluidPlan: (x) => `ปริมาณสารน้ำแต่ละชนิดเพื่อลดโซเดียม ${x} mmol/L (Adrogué–Madias)`, fluidPlanNote: 'การเปลี่ยนแปลงโซเดียมต่อลิตรของสารน้ำที่มีโซเดียมต่ำกว่า 130 mmol/L แต่ละชนิด ปริมาณและ mL/ชม. เป็นของ 24 ชั่วโมงข้างหน้า ยังไม่รวมการสูญเสียต่อเนื่อง',
     waterNotHigh: 'โซเดียมในเลือดไม่สูงกว่าเป้าหมาย จึงไม่มีน้ำอิสระที่ขาด',
     waterCautions: [['ถ้าผู้ป่วยขาดสารน้ำในหลอดเลือด ให้แก้ด้วยสารน้ำ isotonic ก่อน', 'szczech'], ['ลดโซเดียมไม่เกิน 10 mmol/L ใน 24 ชั่วโมงแรก และประมาณ 10 mmol/L ต่อวันในโซเดียมสูงเรื้อรัง ยกเว้นเกิดขึ้นภายในไม่กี่ชั่วโมง', 'adrogueHyper'], ['ค่าที่คำนวณไม่รวมการสูญเสียทางปัสสาวะ ทางเดินอาหาร และผิวหนังที่ยังเกิดอยู่ ให้บวกเพิ่มและตรวจโซเดียมซ้ำบ่อย ๆ', 'szczech'], ['ค่าที่คำนวณจากน้ำหนักเชื่อถือได้น้อยลงเมื่อน้ำหนักเปลี่ยนมากเมื่อเร็ว ๆ นี้', 'szczech']],
-    // sodium change tabs and acute bolus
-    modeContinuous: 'การให้แบบต่อเนื่อง (Adrogué–Madias)',
-    modeBolus: 'Bolus 3% NaCl ฉุกเฉิน',
-    bolusSub: 'แนวทางยุโรปและสหรัฐฯ: โปรโตคอล 3% NaCl bolus 100–150 mL สำหรับโซเดียมต่ำรุนแรงที่มีอาการ',
-    bolusIndicationsTitle: 'ข้อบ่งชี้สำหรับการให้ 3% NaCl Bolus',
-    bolusIndications: 'อาการรุนแรง: ชัก หมดสติ ซึม หยุดหายใจ อาการสมองเคลื่อนเฉียบพลัน อาการปานกลาง: สับสน คลื่นไส้ ปวดศีรษะรุนแรงร่วมกับ Na ลดลงเร็ว',
-    bolusRegimenTitle: 'วิธีให้แบบฉุกเฉิน (Spasovski 2014, Verbalis 2013)',
-    bolusDose: 'ขนาด Bolus',
-    bolus100: '100 mL',
-    bolus150: '150 mL',
-    bolus2ml: '2 mL/kg',
-    bolusAcuteRise: (r) => `ประมาณการ Na⁺ ที่เพิ่มขึ้นจาก bolus นี้: ≈ +${r} mmol/L`,
-    bolusStep1: 'ให้ 3% NaCl 100–150 mL (หรือ 2 mL/kg) IV bolus ในเวลา 10–15 นาที',
-    bolusStep2: 'ตรวจ Na⁺ ในเลือดและอาการซ้ำหลัง 20 นาที หากยังมีอาการรุนแรง ให้ bolus ซ้ำครั้งที่ 2 ขนาด 100–150 mL',
-    bolusStep3: 'สามารถให้ bolus ซ้ำครั้งที่ 3 ได้หากจำเป็น (สูงสุดไม่เกิน 3 ครั้งภายใน 1–2 ชั่วโมง)',
-    bolusTargetStop: 'หยุดให้ 3% NaCl bolus ทันทีเมื่ออาการรุนแรงดีขึ้น หรือระดับ Na⁺ เพิ่มขึ้นถึงเป้าหมาย (+4 ถึง +6 mmol/L)',
-    bolusODSTitle: 'ขีดจำกัดต่อวันและการป้องกัน Osmotic Demyelination (ODS)',
-    bolusODSLimit: 'เพิ่มขึ้นสูงสุดใน 24 ชม.: 8 mmol/L ในผู้ป่วยทั่วไป; 4–6 mmol/L ในผู้ป่วยที่มีความเสี่ยง ODS สูง (ตับแข็ง ติดสุรา ทุพโภชนาการ โพแทสเซียมต่ำ)',
-    bolusRescueTitle: 'การแก้ไขเมื่อแก้ไขเกิน (Desmopressin / D5W)',
-    bolusRescue: 'หาก Na⁺ ในเลือดเพิ่มขึ้น > 8 mmol/L ใน 24 ชม. (หรือ > 6 ในกลุ่มเสี่ยงสูง): หยุดสารน้ำเดิมทันที ให้ D5W (3 mL/kg/ชม.) และพิจารณาให้ Desmopressin (DDAVP 1–2 mcg IV/SC ทุก 6–8 ชม.) เพื่อลดระดับ Na หรือชะลอการเพิ่ม',
-    // potassium guide
-    potassiumSub: 'การให้โพแทสเซียมทางหลอดเลือดดำอย่างปลอดภัย ประมาณการภาวะขาด และข้อกำหนดการบริหารยา',
-    serumK: 'โพแทสเซียมในเลือด',
-    kAccess: 'ช่องทางให้สารน้ำ',
-    accessPeriph: 'หลอดเลือดดำส่วนปลาย (Peripheral)',
-    accessCentral: 'หลอดเลือดดำส่วนกลาง (Central line)',
-    kDeficitTitle: 'ประมาณการโพแทสเซียมที่ขาดในร่างกาย',
-    kDeficitEst: (low, high) => `ประมาณการที่ขาด: ≈ ${low}–${high} mmol`,
-    kDeficitNote: 'โพแทสเซียมในเลือดคิดเป็นเพียง ~2% ของโพแทสเซียมทั้งหมดในร่างกาย (98% อยู่ในเซลล์) K ลดลงทุก 0.3 mmol/L ต่ำกว่า 4.0 ≈ ขาดประมาณ 100 mmol (Sterns / UpToDate)',
-    kNormalNote: 'ระดับโพแทสเซียมในเลือดอยู่ในเกณฑ์ปกติหรือสูง (≥ 3.5 mmol/L) ไม่จำเป็นต้องให้แบบโหลดเสริมภาวะขาด',
-    kRateTitle: 'ขีดจำกัดอัตราและความเข้มข้นที่ปลอดภัย',
-    kRatePeriph: 'หลอดเลือดดำส่วนปลาย: อัตราสูงสุด 10 mmol/ชม. ความเข้มข้นสูงสุด 40 mmol/L (เช่น 20 mmol ใน 500 mL) เพื่อป้องกันหลอดเลือดดำอักเสบและปวดแสบ',
-    kRateCent: 'หลอดเลือดดำส่วนกลาง: สูงสุด 20 mmol/ชม. พร้อมติดตามคลื่นไฟฟ้าหัวใจ (ECG) ต่อเนื่องในหอผู้ป่วยวิกฤต ความเข้มข้นสูงสุด 80 mmol/L',
-    kVehicleTitle: 'ข้อควรระวังเรื่องสารน้ำพาหะ',
-    kVehicleAlert: 'หลีกเลี่ยงสารน้ำผสมเดกซ์โทรสในการแก้ไขระยะแรก: เดกซ์โทรสกระตุ้นการหลั่งอินซูลิน ดึง K⁺ เข้าเซลล์ ทำให้โพแทสเซียมในเลือดต่ำลงชั่วคราว ควรใช้ 0.9% NaCl หรือ 0.45% NaCl',
-    kMgTitle: 'ตรวจแมกนีเซียมในเลือด (สำคัญอย่างยิ่ง)',
-    kMgAlert: 'ตั้งเป้าหมาย Mg²⁺ ในเลือด ≥ 0.8 mmol/L (2.0 mg/dL) ภาวะแมกนีเซียมต่ำทำให้ไตขับ K⁺ ทิ้งทางช่อง ROMK และทำให้โพแทสเซียมต่ำไม่ตอบสนองต่อการรักษา',
-    kPreMixTitle: 'สารน้ำสำเร็จรูปในคู่มือที่มีโพแทสเซียม',
-    // DKA / HHS protocol
-    dkaSub: 'แนวทาง ADA 2024 และ JBDS: โซเดียมปรับค่า การเลือกสารน้ำ การเติมน้ำตาล และการจัดการโพแทสเซียม',
-    dkaType: 'กลุ่มอาการ',
-    dkaTypeDka: 'DKA (ภาวะกรดคีโตนคั่ง)',
-    dkaTypeHhs: 'HHS (ภาวะน้ำตาลในเลือดสูงออสโมลาริตีสูง)',
-    measuredNa: 'Na⁺ ที่วัดได้',
-    bloodGlucose: 'ระดับน้ำตาลในเลือด',
-    gluUnit: 'หน่วย',
-    gluMgdl: 'mg/dL',
-    gluMmol: 'mmol/L',
-    correctedNaTitle: 'โซเดียมปรับค่า (Katz Corrected Sodium)',
-    correctedNaFormula: 'Na⁺ ปรับค่า = Na⁺ ที่วัดได้ + 0.016 × (กลูโคส mg/dL − 100)',
-    corrNaStatus: (v, isHigh) => `Na⁺ ปรับค่า: ${v.toFixed(1)} mmol/L (${isHigh ? 'ปกติ/สูง ≥ 135' : 'ต่ำ < 135'})`,
-    dkaStep1Title: 'ระยะที่ 1: กู้ชีพชั่วโมงแรก (Initial Resuscitation)',
-    dkaStep1Desc: 'ให้ 0.9% NaCl 1000 mL/ชม. (หรือ 15–20 mL/kg/ชม.) ในชั่วโมงแรกเพื่อขยายปริมาตรในหลอดเลือด',
-    dkaStep2Title: 'ระยะที่ 2: การเลือกสารน้ำรักษาสมดุล (Hydration Fluid)',
-    dkaStep2High: 'Na⁺ ปรับค่า ≥ 135 mmol/L: เปลี่ยนเป็น 0.45% NaCl (NSS/2) ที่ 250–500 mL/ชม. เพื่อแก้ภาวะขาดน้ำในเซลล์',
-    dkaStep2Low: 'Na⁺ ปรับค่า < 135 mmol/L: ให้ 0.9% NaCl (NSS) ต่อเนื่องที่ 250–500 mL/ชม.',
-    dkaStep3Title: 'ระยะที่ 3: เกณฑ์การเติมเดกซ์โทรส (Dextrose Threshold)',
-    dkaStep3Threshold: (t, th) => `${t}: เมื่อน้ำตาลลดลงถึง ≤ ${th} mg/dL ให้เริ่มเติม 5% เดกซ์โทรส (เช่น 5%D/N/2 หรือ 5%D/NSS ที่ 150–250 mL/ชม.) เพื่อรักษาน้ำตาลที่ 150–200 mg/dL (DKA) หรือ 200–300 mg/dL (HHS) ขณะให้อินซูลินต่อเนื่องจนกระทั่งภาวะกรดคีโตนหาย`,
-    dkaStep3AddNow: (th) => `🚨 น้ำตาลปัจจุบัน ≤ ${th} mg/dL: ให้เริ่มเติม 5% เดกซ์โทรสทันที (เช่น 5%D/N/2 ที่ 150–250 mL/ชม.) เพื่อป้องกันน้ำตาลต่ำขณะให้อินซูลินต่อเนื่อง!`,
-    dkaStep3Wait: (th) => `น้ำตาลปัจจุบัน > ${th} mg/dL: ให้สารน้ำที่ไม่มีเดกซ์โทรสต่อไป เมื่อน้ำตาลลดลงต่ำกว่า ${th} mg/dL จึงเริ่มเติม 5% เดกซ์โทรส`,
-    dkaStep4Title: 'ระยะที่ 4: อัลกอริทึมจัดการโพแทสเซียมและความปลอดภัยอินซูลิน',
-    dkaKHold: 'K⁺ < 3.3 mmol/L: 🚨 วิกฤต: ระงับการให้อินซูลินทันที! ให้ IV KCl 20–40 mmol/ชม. จนกว่า K⁺ > 3.3 mmol/L การให้อินซูลินขณะโพแทสเซียมต่ำรุนแรงอาจทำให้หัวใจเต้นผิดจังหวะจนเสียชีวิตหรือหยุดหายใจ',
-    dkaKSafe: 'K⁺ 3.3–5.2 mmol/L: ✅ ปลอดภัยในการให้อินซูลิน เติม KCl 20–30 mmol ต่อลิตรของสารน้ำเพื่อรักษาระดับ K⁺ ในเลือดที่ 4.0–5.0 mmol/L',
-    dkaKNoAdd: 'K⁺ > 5.2 mmol/L: ⚠️ ห้ามเติมโพแทสเซียมลงในสารน้ำ ตรวจระดับ K⁺ ซ้ำทุก 2 ชั่วโมงจนกว่าจะ < 5.2 mmol/L',
-    // GIR calculator
-    girSub: 'เครื่องคำนวณอัตราการให้กลูโคส (GIR) ข้างเตียง และขีดจำกัดการเผาผลาญสูงสุด',
-    girModeRate: 'อัตราการให้ → GIR (ตรวจอัตราที่ให้อยู่)',
-    girModeTarget: 'เป้าหมาย GIR → คำนวณอัตราที่ต้องให้',
-    girFluid: 'สารน้ำเดกซ์โทรส',
-    girDexCustom: 'ความเข้มข้นเดกซ์โทรสกำหนดเอง (%)',
-    girTargetGIR: 'เป้าหมาย GIR (mg/kg/นาที)',
-    girResultGIR: 'อัตราการให้กลูโคส (GIR)',
-    girResultRate: 'อัตราการให้สารน้ำที่ต้องใช้',
-    girUnitMlh: 'mL/ชม.',
-    girUnitMgKgMin: 'mg/kg/นาที',
-    girDailyDex: 'เดกซ์โทรสต่อวัน',
-    girDailyKcal: 'พลังงานต่อวัน',
-    girGDay: 'g/วัน',
-    girKcalDay: 'kcal/วัน',
-    girRangeNormal: 'การรักษาระดับปกติ: 2–3 mg/kg/นาที',
-    girRangeCrit: 'ผู้ป่วยวิกฤต / ภาวะเครียด: 3–4 mg/kg/นาที',
-    girRangeMax: 'ขีดจำกัดการเผาผลาญสูงสุด: 4–5 mg/kg/นาที (ไม่เกิน 7 mg/kg/นาที)',
-    girWarnHigh: '⚠️ ข้อควรระวัง: GIR เกินอัตราการเผาผลาญกลูโคสสูงสุดของตับ (≥ 5 mg/kg/นาที) เสี่ยงน้ำตาลในเลือดสูง ตับคั่งไขมัน และ CO₂ สูงขึ้น!',
-    girWarnLow: 'GIR ต่ำกว่าอัตราการสร้างกลูโคสพื้นฐานของตับ (~2 mg/kg/นาที) อาจเสี่ยงน้ำตาลต่ำหรือสลายกล้ามเนื้อหากงดอาหาร',
-    girFormula: 'GIR (mg/kg/นาที) = [อัตรา (mL/ชม.) × เดกซ์โทรส (%) × 10] ÷ [น้ำหนัก (kg) × 60]',
-    girFormulaTarget: 'อัตรา (mL/ชม.) = [เป้าหมาย GIR (mg/kg/นาที) × น้ำหนัก (kg) × 60] ÷ [เดกซ์โทรส (%) × 10]',
-    girPedsNote: 'ในทารกแรกเกิดและเด็กเล็ก ความต้องการ GIR พื้นฐานจะสูงกว่าผู้ใหญ่ (4–8 mg/kg/นาที เนื่องจากสัดส่วนสมองต่อน้ำหนักตัวสูงกว่า)',
-    // ICP & Osmotherapy guide
-    icpSub: 'แนวทางการรักษาภาวะความดันในกะโหลกศีรษะสูงและสมองบวม: Mannitol 20% เทียบกับ 3% Hypertonic Saline, ขีดจำกัด Osmolality และการติดตาม CPP',
-    icpTabs: { mannitol: 'Mannitol 20%', nacl3: '3% Hypertonic Saline', decision: 'ตารางตัดสินใจ', cpp: 'คำนวณ CPP & MAP' },
-    icpWeight: 'น้ำหนักตัว',
-    icpManDoseLabel: 'ขนาดยา Mannitol (g/kg)',
-    icpManCalcGrams: 'ขนาดยาที่ต้องให้ (กรัม)',
-    icpManCalcVol: 'ปริมาตร 20% ที่ต้องให้ (mL)',
-    icpManAdminTime: 'หยดเข้าหลอดเลือดดำ (IV bolus) ในเวลา 15–20 นาที โดยใช้ชุดให้ยาที่มีตัวกรอง (in-line filter 0.22–5 μm)',
-    icpManKinetics: 'เริ่มออกฤทธิ์: 10–15 นาที | ออกฤทธิ์สูงสุด: 20–60 นาที | ระยะเวลาออกฤทธิ์: 4–6 ชม.',
-    icpManOsmLabel: 'ระดับ Serum Osmolality ที่ตรวจได้',
-    icpManOsmSafe: '✓ Serum Osmolality อยู่ต่ำกว่าเกณฑ์ความปลอดภัย 320 mOsm/kg',
-    icpManOsmCaution: '⚠️ ระดับ Osmolality ใกล้ขีดจำกัด (310–320 mOsm/kg) ควรตรวจการทำงานของไตและตรวจซ้ำก่อนให้ยาครั้งต่อไป',
-    icpManOsmDanger: '🚨 ระงับการให้ MANNITOL! ค่า Serum Osmolality ≥ 320 mOsm/kg เสี่ยงสูงมากต่อภาวะไตวายเฉียบพลัน (Acute Tubular Necrosis) พิจารณาเปลี่ยนเป็น 3% NaCl หรือวิธีอื่น',
-    icpGapToggle: 'เครื่องคำนวณ Osmolar Gap (ทางเลือก)',
-    icpGapNa: 'Serum Na⁺',
-    icpGapGlu: 'น้ำตาลในเลือด (Glucose)',
-    icpGapBun: 'BUN',
-    icpGapCalcOsm: 'Osmolality ที่คำนวณได้',
-    icpGapVal: 'Osmolar Gap',
-    icpGapNormal: '✓ Osmolar gap ≤ 10 mOsm/kg: ไม่พบการคั่งสะสมของ Mannitol ในร่างกายอย่างมีนัยสำคัญ',
-    icpGapHigh: '⚠️ Osmolar gap > 10–20 mOsm/kg: บ่งชี้ว่ามีการคั่งสะสมของ Mannitol ที่ยังไม่ถูกขับออก ระงับการให้ยาเพิ่มจนกว่าค่าจะลดลง',
-    icpManNotes: [
-      'การขับปัสสาวะออสโมติกอย่างรุนแรง: Mannitol ทำให้สูญเสียน้ำและเกลือแร่อย่างมาก ภาวะขาดน้ำและความดันโลหิตต่ำจะลด Cerebral Perfusion Pressure (CPP = MAP − ICP) อย่างรุนแรง ควรรักษาสมดุลน้ำในร่างกาย (euvolemia) ด้วยสารน้ำไอโซโทนิก (NSS / balanced)',
-      'ภาวะ Rebound ICP: การให้ยาซ้ำหลายครั้งหรือต่อเนื่อง Mannitol อาจซึมผ่าน blood-brain barrier ที่เสียหายเข้าไปในเนื้อสมอง ทำให้เกิดแรงดึงน้ำย้อนกลับและสมองบวมมากขึ้น',
-      'การตกผลึก: Mannitol อาจตกผลึกได้ในอุณหภูมิเย็น ตรวจดูขวด/ถุงก่อนใช้ อุ่นและเขย่าหากพบผลึก และต้องใช้ชุดให้ยาที่มีตัวกรองเสมอ',
-    ],
-    icpOpenMan: 'เปิดการ์ด Mannitol 20%',
-    icpNacl3BolusLabel: 'ขนาดยา 3% NaCl Bolus',
-    icpNacl3Vol: 'ปริมาตรที่ต้องให้',
-    icpNacl3Admin: 'หยดเข้าหลอดเลือดดำ (IV bolus) ในเวลา 10–20 นาที กรณีฉุกเฉินสามารถให้ทางหลอดเลือดดำส่วนปลายขนาดใหญ่ได้ แต่หากให้ต่อเนื่องควรให้ทาง central line',
-    icpNacl3NaCurrent: 'ระดับ Serum Na⁺ ปัจจุบัน',
-    icpNacl3Rise: 'การเพิ่มขึ้นของ Na⁺ ที่คาดการณ์',
-    icpNacl3PredictedNa: 'ระดับ Na⁺ หลังให้ยาที่คาดการณ์',
-    icpNacl3TargetNote: 'เป้าหมาย Serum Na⁺: 145–155 mmol/L (BTF / ENLS)',
-    icpNacl3HighAlert: '🚨 ระงับการให้ 3% NaCl! ระดับ Serum Na⁺ ≥ 155 mmol/L (หรือหลังให้จะเกิน 155–160 mmol/L) ภาวะโซเดียมสูงเกินเสี่ยงต่อหลอดเลือดไตหดเกร็ง อาการชัก และภาวะกรดจากคลอไรด์สูง',
-    icpNacl3Safe: '✓ ระดับ Serum Na⁺ อยู่ในหรือกำลังเข้าสู่ช่วงเป้าหมายการรักษา (145–155 mmol/L)',
-    icpNacl3Notes: [
-      'การขยายปริมาตรในหลอดเลือด: แตกต่างจาก Mannitol เพราะ 3% NaCl ช่วยเพิ่มปริมาตรในหลอดเลือดและเพิ่ม MAP ซึ่งช่วยพยุง Cerebral Perfusion Pressure (CPP) เหมาะอย่างยิ่งในผู้บาดเจ็บที่มีภาวะความดันโลหิตต่ำหรือช็อกร่วมด้วย',
-      'การติดตามสมดุลกรด-ด่าง: สารน้ำมีคลอไรด์สูงถึง 513 mmol/L การให้ปริมาณมากอาจทำให้เกิด Hyperchloremic non-anion gap metabolic acidosis และไตขาดเลือด ติดตามคลอไรด์และก๊าซในเลือดสม่ำเสมอ',
-      'เพดาน Osmolality: โดยทั่วไป 3% NaCl ยอมรับระดับ Serum Osmolality ได้สูงถึง 360 mOsm/kg (สูงกว่าเกณฑ์ของ Mannitol ที่ 320 mOsm/kg)',
-      'ข้อควรระวังในผู้ป่วยโซเดียมต่ำเรื้อรัง: หากเกิดภาวะสมองเลื่อนในผู้ป่วยที่มีโซเดียมต่ำเรื้อรัง ให้ตั้งเป้าเพิ่ม Na⁺ ระยะแรก +4–6 mmol/L เพื่อยับยั้งการเลื่อนของสมอง แล้วควบคุมการเพิ่มไม่ให้เกิน 8–10 mmol/L/24 ชม. เพื่อป้องกัน Osmotic Demyelination Syndrome (ODS)',
-    ],
-    icpOpenNacl3: 'เปิดการ์ด 3% NaCl',
-    icpDecisionTitle: 'การเลือกสารน้ำลดความดันในกะโหลกศีรษะ: ตารางเปรียบเทียบ',
-    icpColCond: 'สถานการณ์ทางคลินิก',
-    icpColAgent: 'สารน้ำที่แนะนำ',
-    icpColReason: 'เหตุผลและกลไกทางคลินิก',
-    icpScenarios: [
-      { cond: 'ความดันโลหิตต่ำ / ภาวะช็อก (MAP < 65 หรือ SBP < 90 mmHg)', agent: '3% Hypertonic Saline', tone: 'emerald', text: '3% NaCl เพิ่มปริมาตรสารน้ำในหลอดเลือดและเพิ่ม MAP/CPP ส่วน Mannitol ทำให้ปัสสาวะออกมากและทำให้ความดันตกแย่ลง (CPP ลด)' },
-      { cond: 'หัวใจวาย / น้ำท่วมปอด / สารน้ำเกิน (Hypervolemia)', agent: 'Mannitol 20%', tone: 'blue', text: 'Mannitol มีฤทธิ์ขับปัสสาวะออสโมติก ช่วยดึงน้ำส่วนเกินออกจากร่างกาย ส่วน 3% NaCl เพิ่มปริมาตรในหลอดเลือด อาจทำให้น้ำท่วมปอดกำเริบ' },
-      { cond: 'ไตทำงานบกพร่อง / ปัสสาวะออกน้อย (Osm > 320 mOsm/kg)', agent: '3% Hypertonic Saline', tone: 'emerald', text: 'Mannitol เป็นพิษต่อไตเมื่อ Serum Osm ≥ 320 mOsm/kg หรือไม่มีปัสสาวะ ส่วน 3% NaCl สามารถให้ได้อย่างปลอดภัยจนถึง Osm 360 mOsm/kg และ Na 155 mmol/L' },
-      { cond: 'โซเดียมในเลือดต่ำตั้งแต่แรก (Na < 135 mmol/L)', agent: '3% Hypertonic Saline', tone: 'emerald', text: '3% NaCl ช่วยแก้ไขภาวะโซเดียมต่ำไปพร้อมกับการลดสมองบวม ส่วน Mannitol ทำให้โซเดียมในเลือดลดลงจากการดึงน้ำเข้าหลอดเลือดและการขับปัสสาวะ' },
-      { cond: 'โซเดียมในเลือดสูงตั้งแต่แรก (Na > 150 mmol/L)', agent: 'Mannitol 20%', tone: 'blue', text: 'ควรเลือก Mannitol หาก Serum Osm < 320 mOsm/kg และห้ามให้ 3% NaCl หากระดับโซเดียมเกิน 155 mmol/L' },
-    ],
-    icpCppTitle: 'เครื่องคำนวณ Cerebral Perfusion Pressure (CPP) และ MAP',
-    icpSbp: 'ความดันซิสโตลิก (SBP)',
-    icpDbp: 'ความดันไดแอสโตลิก (DBP)',
-    icpMap: 'ความดันหลอดเลือดแดงเฉลี่ย (MAP)',
-    icpIcpVal: 'ความดันในกะโหลกศีรษะ (ICP)',
-    icpCppVal: 'แรงดันเลือดไปเลี้ยงสมอง (CPP)',
-    icpTargetCpp: 'เป้าหมาย CPP: 60–70 mmHg',
-    icpTargetIcp: 'เป้าหมาย ICP: < 20–22 mmHg (เกณฑ์มาตรฐาน BTF)',
-    icpCppLowAlert: '🚨 CPP < 60 mmHg: เสี่ยงสูงต่อภาวะสมองขาดเลือด (Cerebral Ischemia)! เพิ่ม MAP (ให้สารน้ำ/ยากระตุ้นความดัน) และลด ICP (ยกศีรษะ 30°, ให้ Osmotherapy, ระบายน้ำไขสันหลัง, ให้ยาระงับประสาท)',
-    icpCppHighAlert: '⚠️ CPP > 70 mmHg: แรงดันเลือดไปเลี้ยงสมองสูงเกินไป หลีกเลี่ยงความดันโลหิตสูงเกิน เสี่ยงต่อสมองบวมจากการไหลเวียนเกิน (Hyperperfusion) และปอดบาดเจ็บ (ARDS)',
-    icpIcpHighAlert: '🚨 ICP > 22 mmHg: ความดันในกะโหลกศีรษะสูงผิดปกติ! ให้การรักษาทางระบบประสาทวิกฤตทันที',
-    icpCppNormal: '✓ ค่า CPP อยู่ในช่วงเป้าหมายที่เหมาะสม (60–70 mmHg)',
-    icpCppFormula: 'MAP = DBP + (SBP − DBP) / 3 | CPP = MAP − ICP',
-    // Albumin Guide
-    albSub: 'แนวทางการใช้อัลบูมินตามหลักฐานเชิงประจักษ์: การเจาะท้อง (LVP), ภาวะเยื่อบุช่องท้องอักเสบ (SBP), ไตวายโรคตับ (HRS-AKI) และการเลือก 5% vs 20%/25%',
-    albTabs: { lvp: 'เจาะระบายน้ำในท้อง (LVP)', sbp: 'การให้ใน SBP', hrs: 'ภาวะ HRS-AKI', compare: 'เปรียบเทียบ 5% vs 20% vs 25%' },
-    albLvpTitle: 'เครื่องคำนวณอัลบูมินสำหรับการเจาะระบายน้ำในช่องท้องปริมาณมาก (LVP > 5 L)',
-    albLvpVolRemoved: 'ปริมาตรน้ำในช่องท้องที่เจาะออก',
-    albLvpDoseFactor: 'อัตราส่วนอัลบูมิน (g/L ของน้ำที่เจาะ)',
-    albLvpDoseGrams: 'ปริมาณอัลบูมินที่ต้องให้ทั้งหมด',
-    albLvpVol20: 'ปริมาตร Albumin 20%',
-    albLvpVol25: 'ปริมาตร Albumin 25%',
-    albLvpVol5Compare: 'เทียบเท่า 5% (ไม่แนะนำใน LVP)',
-    albLvpSafeAlert: '✓ เจาะระบายน้ำ ≥ 5 L: AASLD และ EASL แนะนำอย่างยิ่งให้ให้อัลบูมินชดเชย (6–8 g ต่อน้ำ 1 ลิตรที่เจาะออก) เพื่อป้องกันภาวะ Paracentesis-Induced Circulatory Dysfunction (PICD), โซเดียมในเลือดต่ำ และไตวายเฉียบพลัน',
-    albLvpLowAlert: 'ℹ️ เจาะระบายน้ำ < 5 L: โดยทั่วไปไม่จำเป็นต้องให้อัลบูมิน (ความเสี่ยง PICD ต่ำ) พิจารณาเฉพาะในผู้ป่วยที่มีความดันโลหิตต่ำ โรคกล้ามเนื้อหัวใจจากตับแข็ง หรือเคยมีประวัติ SBP',
-    albLvpRateNote: 'วิธีการให้: หยดเข้าหลอดเลือดดำในเวลา 30–60 นาทีทันทีหลังเจาะท้องเสร็จสิ้น (หรือให้ระหว่างการเจาะหากเจาะออกเกิน 8 ลิตร)',
-    albLvpNotes: [
-      'ภาวะ Paracentesis-Induced Circulatory Dysfunction (PICD): การเจาะน้ำออกปริมาณมากอย่างรวดเร็วทำให้หลอดเลือดในช่องท้องขยายตัว ปริมาตรเลือดที่ไปเลี้ยงอวัยวะสำคัญลดลง กระตุ้นระบบ RAAS และประสาทซิมพาเทติกอย่างรุนแรง ส่งผลให้น้ำในช่องท้องกลับมาคั่งอย่างรวดเร็ว โซเดียมในเลือดต่ำ และเกิดไตวายเฉียบพลัน',
-      'เกณฑ์ขนาดยามาตรฐาน: 8 g อัลบูมินต่อน้ำ 1 ลิตร เป็นขนาดมาตรฐานจากการวิจัยหลัก ส่วนขนาด 6 g/L ได้รับการยอมรับในแนวทางยุโรปสำหรับปริมาตรเจาะ 5–8 L',
-      'หลีกเลี่ยง Albumin 5% ในการเจาะท้อง: อัลบูมิน 5% มีปริมาตรน้ำและโซเดียมสูงกว่ามาก (ต้องให้สารน้ำมากกว่าชนิด 20–25% ถึง 4–5 เท่า) ซึ่งจะทำให้อาการบวมและคั่งน้ำคั่งเกลือในผู้ป่วยตับแข็งแย่ลง',
-    ],
-    albSbpTitle: 'แนวทางการให้อัลบูมินในภาวะเยื่อบุช่องท้องอักเสบติดเชื้อ (SBP)',
-    albSbpWeight: 'น้ำหนักตัวผู้ป่วย',
-    albSbpDay1Dose: 'ขนาดยาวันที่ 1 (ภายใน 6 ชม.)',
-    albSbpDay3Dose: 'ขนาดยาวันที่ 3 (ที่ 48 ชม.)',
-    albSbpTotalGrams: 'ปริมาณอัลบูมินรวมทั้งคอร์ส',
-    albSbpDay1Sub: '1.5 g/kg IV ภายใน 6 ชั่วโมงหลังวินิจฉัย',
-    albSbpDay3Sub: '1.0 g/kg IV ที่ 48 ชั่วโมง',
-    albSbpTrialAlert: '★ การศึกษาหมุดหมาย Sort et al. (NEJM 1999): การให้อัลบูมิน (1.5 g/kg วันที่ 1 + 1.0 g/kg วันที่ 3) ลดการเกิดไตวาย (HRS) จาก 33% เหลือ 10% และลดอัตราเสียชีวิตในโรงพยาบาลจาก 29% เหลือ 10% (P = 0.01)',
-    albSbpHighRiskNote: 'ประโยชน์สูงสุดพบในกลุ่มเสี่ยงสูง: ซีรัมบิลิรูบิน ≥ 4 mg/dL หรือ ครีเอตินิน ≥ 1.0 mg/dL อย่างไรก็ตาม แนวทาง AASLD/EASL ในปัจจุบันแนะนำให้อัลบูมินแก่ผู้ป่วย SBP ทุกราย (เมื่อน้ำในช่องท้องมี PMN ≥ 250/mm³)',
-    albSbpNotes: [
-      'เวลาเป็นสิ่งสำคัญยิ่ง: ขนาดยาวันที่ 1 (1.5 g/kg) ต้องเริ่มให้ภายใน 6 ชั่วโมงหลังเจาะตรวจพบ SBP ร่วมกับการให้ยาปฏิชีวนะทางหลอดเลือดดำทันที (เช่น 3rd-gen cephalosporin)',
-      'อัตราการให้ยา: สารละลาย 20% หรือ 25% มักหยดให้ในเวลา 2–4 ชั่วโมง ติดตามภาวะน้ำเกินหรือน้ำท่วมปอดอย่างใกล้ชิด',
-    ],
-    albHrsTitle: 'แนวทางการวินิจฉัยและรักษา Hepatorenal Syndrome (HRS-AKI)',
-    albHrsWeight: 'น้ำหนักตัวผู้ป่วย',
-    albHrsChallengeTitle: 'ระยะที่ 1: การทดสอบขยายปริมาตรเลือดเพื่อการวินิจฉัย (แยก Pre-renal AKI)',
-    albHrsChallengeDose: 'Albumin 1 g/kg/วัน (สูงสุด 100 g/วัน) เป็นเวลา 2 วันติดต่อกัน',
-    albHrsChallengeGrams: 'ขนาดยาที่ต้องให้ต่อวัน',
-    albHrsChallengeVol20: 'ปริมาตร 20% ต่อวัน',
-    albHrsChallengeVol25: 'ปริมาตร 25% ต่อวัน',
-    albHrsChallengeAction: 'สิ่งที่ต้องทำ: หยุดยาขับปัสสาวะ ยาลดความดัน และยาขยายหลอดเลือดทุกชนิดทันที และให้อัลบูมิน 1 g/kg/วัน ต่อเนื่อง 48 ชั่วโมง',
-    albHrsDiagnosisCriteria: 'เกณฑ์การวินิจฉัย HRS-AKI (AASLD / IAC): ผู้ป่วยตับแข็งที่มีน้ำในช่องท้อง; เกิดภาวะไตวายเฉียบพลันตามเกณฑ์ ICA; ค่าการทำงานของไตไม่ดีขึ้นหลังหยุดยาขับปัสสาวะและให้อัลบูมินครบ 2 วัน; ไม่มีภาวะช็อก; ไม่ได้รับยาที่เป็นพิษต่อไต; ไม่พบรอยโรคโครงสร้างไต (โปรตีนในปัสสาวะ < 500 mg/วัน, เม็ดเลือดแดงในปัสสาวะ < 50 เซลล์, อัลตราซาวด์ไตปกติ)',
-    albHrsRxTitle: 'ระยะที่ 2: การรักษาผู้ป่วยที่ได้รับการยืนยัน HRS-AKI',
-    albHrsRxAlbumin: 'Albumin: ให้ต่อเนื่อง 20–40 g/วัน ร่วมกับการให้ยาบีบหลอดเลือด',
-    albHrsRxVasoconstrictors: 'ยาบีบหลอดเลือด (Vasoconstrictor) ทางเลือก:',
-    albHrsRxTerli: '• Terlipressin: ยาทางเลือกแรก 0.85–1.0 mg IV bolus ทุก 4–6 ชม. หรือให้แบบ continuous infusion 2 mg/วัน (ปรับเพิ่มได้สูงสุด 12 mg/วัน หาก SCr ไม่ลดลง ≥ 25% หลัง 48 ชม.) เป็นยาที่มีประสิทธิภาพสูงสุดในการกู้การทำงานของไต',
-    albHrsRxNorepi: '• Norepinephrine: หยดต่อเนื่อง 0.5–3.0 mg/ชม. ในหอผู้ป่วยวิกฤต ปรับขนาดเพื่อเพิ่ม MAP ขึ้น ≥ 10 mmHg หรือให้ MAP > 65–70 mmHg',
-    albHrsRxMidOct: '• Midodrine (รับประทาน 7.5–15 mg วันละ 3 ครั้ง) + Octreotide (ฉีดใต้ผิวหนัง 100–200 mcg วันละ 3 ครั้ง): ทางเลือกรองหากไม่มี Terlipressin หรือ Norepinephrine',
-    albHrsRespAlert: '⚠️ คำเตือนด้านระบบหายใจ (การศึกษา CONFIRM): การใช้ Terlipressin ร่วมกับ Albumin มีความเสี่ยงสำคัญต่อภาวะน้ำท่วมปอดเฉียบพลันและระบบหายใจล้มเหลว ตรวจติดตามระดับออกซิเจนในเลือด (SpO₂) สม่ำเสมอ ระงับยาหรือปรับลดทันทีหากเริ่มมีอาการเหนื่อยหรือออกซิเจนลดลง',
-    albCompareTitle: 'การเลือกความเข้มข้นของอัลบูมิน (5% vs 20% vs 25%) และตารางความปลอดภัย',
-    albColConcentration: 'ความเข้มข้น',
-    albColOncotic: 'แรงดันออนโคติก (COP)',
-    albColVolumeExpansion: 'การขยายปริมาตรในหลอดเลือด',
-    albColIndications: 'ข้อบ่งชี้ทางคลินิกหลัก',
-    albContraTitle: 'ข้อห้ามใช้และคำเตือนสำคัญวิกฤต (Black Box Warnings)',
-    albTbiAlert: '🚨 ข้อห้ามใช้เด็ดขาดในผู้บาดเจ็บทางสมอง (TBI): การศึกษา SAFE-TBI (NEJM 2007) พบว่าการให้อัลบูมินกู้ชีพในผู้ป่วยบาดเจ็บที่ศีรษะรุนแรงเพิ่มอัตราการเสียชีวิตอย่างมีนัยสำคัญ (อัตราเสี่ยงเสียชีวิต 1.88, P < 0.001) เนื่องจากอัลบูมินรั่วซึมผ่าน blood-brain barrier ที่เสียหายและทำให้ความดันในกะโหลกศีรษะสูงขึ้น ให้ใช้ Isotonic Crystalloid (NSS / balanced) แทนเสมอ!',
-    albChfAlert: '⚠️ ภาวะสารน้ำเกินและหัวใจล้มเหลว: อัลบูมิน (โดยเฉพาะ 20% และ 25%) ดึงน้ำจากช่องว่างระหว่างเซลล์เข้าสู่หลอดเลือดอย่างรวดเร็ว ห้ามใช้ในภาวะหัวใจวายรุนแรงหรือน้ำท่วมปอด ติดตามภาวะสารน้ำอย่างเคร่งครัด',
-    albSepsisNote: 'การกู้ชีพในภาวะติดเชื้อในกระแสเลือด (Surviving Sepsis Campaign 2021): แนะนำให้พิจารณาใช้อัลบูมิน (5% หรือ 20%) ในผู้ป่วยที่ได้รับสารน้ำคริสตัลลอยด์ปริมาณมากแล้ว เพื่อช่วยพยุงความดันและลดปริมาณสารน้ำสะสมในร่างกาย (คำแนะนำอ่อน หลักฐานคุณภาพปานกลาง)',
-    albOpenFluid5: 'เปิดการ์ด Albumin 5%',
-    albOpenFluid20: 'เปิดการ์ด Albumin 20%',
-    albOpenFluid25: 'เปิดการ์ด Albumin 25%',
+    // sodium guide tabs (text of the bolus and re-lowering tabs is in GUIDE2)
+    modeContinuous: 'การเปลี่ยนต่อลิตร', modeBolus: '3% bolus', modeRelowering: 'ลดโซเดียมกลับ',
   },
 };
 
@@ -2348,6 +1934,799 @@ const FluidChip = ({ f, t, onOpen }) => (
 );
 
 // --- 1. Fluid choice (5 Rs) ---
+// =====================================================================
+// Clinical guides, rewritten 19 Oct 2026 from the sources named on each line (every number below is in its source).
+// 3% bolus and relowering: Spasovski 2014 (European guideline), Sood 2013, Perianayagam 2008.
+// Potassium: Kardalas 2018. DKA/HHS: Umpierrez 2024 (ADA/EASD consensus). GIR: ESPEN ICU 2019.
+// ICP: SIBICC 2019 and the Osmitrol / 3% NaCl labels. Albumin: EASL 2018, Sort 1999, SAFE-TBI 2007, CONFIRM 2021,
+// Surviving Sepsis 2021 and the Flexbumin labels.
+// =====================================================================
+// Mannitol and albumin are not crystalloids: the sodium, water-deficit and maintenance calculators leave them out
+const isCrystalloid = (f) => f.family !== 'colloid' && f.id !== 'man20';
+
+const GTabs = ({ tabs, value, onChange, tone = 'bg-slate-700 border-slate-700', attr }) => (
+  <div className="flex flex-wrap gap-1.5" role="tablist" {...{ [attr]: '' }}>
+    {tabs.map(([k, label]) => (
+      <button key={k} type="button" role="tab" aria-selected={value === k} onClick={() => onChange(k)} {...{ [attr.replace(/s$/, '')]: k }}
+        className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${value === k ? `${tone} text-white` : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>{label}</button>
+    ))}
+  </div>
+);
+const Bullets = ({ items, cls = 'text-slate-700' }) => (
+  <ul className="flex flex-col gap-1.5">
+    {items.map(([text, k, sec], i) => <li key={i} className={`text-xs leading-snug flex gap-2 ${cls}`}><span className="shrink-0 font-bold opacity-60">•</span><span className="min-w-0">{text}{k && <RefTag k={k} sec={sec} />}</span></li>)}
+  </ul>
+);
+const Stat = ({ label, value, sub, tone = 'border-slate-200 bg-slate-50 text-slate-900', attrs = {} }) => (
+  <div className={`rounded-xl border p-3 min-w-0 ${tone}`} {...attrs}>
+    <div className="text-[11px] font-bold opacity-80">{label}</div>
+    <div className="text-lg font-extrabold tabular-nums break-words" data-stat-value>{value}</div>
+    {sub && <div className="text-[11px] font-medium leading-snug">{sub}</div>}
+  </div>
+);
+const PatientInputs = ({ g, na, setNa, wt, setWt, sex, setSex, old, setOld, prefix, naLabel }) => (
+  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <NumInput label={naLabel || g.serumNa} unit="mmol/L" value={na} onChange={setNa} attrs={{ [`data-${prefix}-na`]: '' }} />
+    <NumInput label={g.weight} unit={g.kg} value={wt} onChange={setWt} attrs={{ [`data-${prefix}-weight`]: '' }} />
+    <div className="flex flex-col gap-1"><span className="text-[11px] font-bold text-slate-500">{g.sex}</span><Seg value={sex} onChange={setSex} options={[['m', g.male], ['f', g.female]]} attrs={{ [`data-${prefix}-sex`]: '' }} /></div>
+    <div className="flex flex-col gap-1 justify-end"><Toggle on={old} onClick={() => setOld(v => !v)} attrs={{ [`data-${prefix}-elderly`]: '' }}>{g.elderly}</Toggle></div>
+  </div>
+);
+// Adrogué–Madias: change in serum Na from V litres of an infusate
+const adrogueDelta = (infNaK, sNa, tbw, litres) => ((infNaK - sNa) / (tbw + 1)) * litres;
+
+const GUIDE2 = {
+  en: {
+    // 3% bolus (European guideline 2014, section 7.1–7.2)
+    bolusSub: '3% NaCl for hyponatraemia with severe or moderately severe symptoms (European guideline 2014)',
+    sympTitle: 'Symptom classification (Table 5)',
+    sympSevere: 'Severe: vomiting, cardiorespiratory distress, abnormal and deep somnolence, seizures, coma (GCS ≤ 8).',
+    sympModerate: 'Moderately severe: nausea without vomiting, confusion, headache.',
+    severeTitle: 'Severe symptoms: first hour',
+    severe: [
+      ['Infuse 150 mL of 3% saline over 20 minutes.', 'spasovski', '7.1.1.1'],
+      ['Check serum sodium after 20 minutes while repeating a second 150 mL over the next 20 minutes.', 'spasovski', '7.1.1.2'],
+      ['Repeat these steps twice, or until serum sodium has risen by 5 mmol/L.', 'spasovski', '7.1.1.3'],
+      ['Practical advice in the guideline: consider a weight-based 2 mL/kg instead of the fixed 150 mL.', 'spasovski', '7.1'],
+    ],
+    afterTitle: 'When symptoms improve',
+    after: [
+      ['Stop the hypertonic saline; keep the line open with the smallest feasible volume of 0.9% saline.', 'spasovski', '7.1.2'],
+      ['Limit the rise to 10 mmol/L in the first 24 hours and 8 mmol/L in every 24 hours after that, until sodium reaches 130 mmol/L.', 'spasovski', '7.1.2.4'],
+      ['Check serum sodium after 6 and 12 hours, then daily until stable.', 'spasovski', '7.1.2.5'],
+    ],
+    noImproveTitle: 'No improvement after a 5 mmol/L rise',
+    noImprove: [
+      ['Continue 3% saline aiming for a further 1 mmol/L per hour.', 'spasovski', '7.1.3.1'],
+      ['Stop when symptoms improve, sodium has risen 10 mmol/L in total, or sodium reaches 130 mmol/L, whichever comes first; check sodium every 4 hours meanwhile.', 'spasovski', '7.1.3'],
+    ],
+    moderateTitle: 'Moderately severe symptoms',
+    moderate: [
+      ['A single infusion of 150 mL 3% saline over 20 minutes.', 'spasovski', '7.2.1.4'],
+      ['Aim for a 5 mmol/L rise per 24 hours; limit 10 mmol/L in the first 24 hours and 8 mmol/L in every 24 hours after that, until 130 mmol/L.', 'spasovski', '7.2.1'],
+    ],
+    bolusVol: 'Bolus volume', bolus150: '150 mL', bolus2kg: (ml) => `2 mL/kg${ml ? ` (${ml} mL)` : ''}`,
+    bolusRise: 'Expected rise from one bolus', bolusAfter: 'Expected sodium afterwards',
+    bolusCalcNote: 'Estimate with the Adrogué–Madias formula (3% NaCl: Na 513 mmol/L); measure, do not rely on it.',
+    // Relowering (European guideline 7.5, Sood 2013, Perianayagam 2008)
+    relowerSub: 'Too-rapid correction of hyponatraemia: when and how to lower sodium again',
+    relowerTabs: { rescue: 'Re-lowering', clamp: 'dDAVP clamp', risk: 'Who is at risk' },
+    startNa: 'Sodium at start of treatment', nowNa: 'Sodium now',
+    period: 'Period', periodFirst: 'First 24 h', periodLater: 'Any later 24 h',
+    rise: 'Rise so far', limit: 'Limit for this period', excess: 'Above the limit', ceiling: 'Sodium ceiling',
+    overTitle: 'Correction is above the limit: re-lower', underTitle: 'Within the limit',
+    underText: 'The rise is within the limit for this period. A sudden increase in urine output can warn that overly rapid correction is coming.',
+    rescue: [
+      ['Intervene promptly if sodium rises more than 10 mmol/L in the first 24 hours or more than 8 mmol/L in any 24 hours after that.', 'spasovski', '7.5.1.1'],
+      ['Stop the ongoing active treatment.', 'spasovski', '7.5.1.2'],
+      ['With an expert, consider electrolyte-free water (for example glucose solution) 10 mL/kg over 1 hour, with strict monitoring of urine output and fluid balance.', 'spasovski', '7.5.1.3'],
+      ['With an expert, consider desmopressin 2 µg IV, not repeated more often than every 8 hours.', 'spasovski', '7.5.1.4'],
+      ['In a 6-year chart review, desmopressin with 5% dextrose lowered sodium again after overcorrection without serious adverse effects.', 'perianayagam', ''],
+    ],
+    waterDose: '10 mL/kg glucose solution over 1 h', d5wFor: (x) => `5% dextrose to lower ${x} mmol/L (estimate)`,
+    d5wNote: 'Adrogué–Madias estimate for the excess; ongoing urine output changes the result, so recheck sodium.',
+    clampTitle: 'Desmopressin with 3% saline (Sood 2013)',
+    clamp: [
+      ['25 patients with sodium below 120 mmol/L received desmopressin 1–2 µg parenterally every 6–8 hours together with weight-based 3% saline aimed at a 6 mmol/L rise.', 'sood', ''],
+      ['Mean rise was 5.8 mmol/L in the first 24 hours and 4.5 mmol/L in the second, with no correction over 12 mmol/L in 24 hours or 18 mmol/L in 48 hours.', 'sood', ''],
+      ['A quality-improvement report without concurrent controls: the authors call for comparative studies.', 'sood', ''],
+    ],
+    riskTitle: 'Osmotic demyelination: risk and warning signs (European guideline)',
+    risk: [
+      ['Risk factors named in the guideline: history of alcohol abuse, liver disease, hypokalaemia, use of thiazides or antidepressants.', 'spasovski', '7.1'],
+      ['In 54 published cases of osmotic demyelination, the starting sodium was below 120 mmol/L, and below 115 mmol/L in 85%.', 'spasovski', '7.1'],
+      ['Overly rapid correction is likely when treating the cause restores water excretion: volume repletion in hypovolaemia, treatment of glucocorticoid deficiency, stopping thiazides or other SIADH-causing drugs, less fluid intake in primary polydipsia.', 'spasovski', '7.5'],
+      ['A sudden increase in urine output can warn that overly rapid correction is imminent.', 'spasovski', '7.5'],
+    ],
+    // Potassium (Kardalas 2018)
+    potassiumSub: 'Hypokalaemia: severity, replacement and safe IV rates (Kardalas 2018)',
+    serumK: 'Serum potassium', targetK: 'Target potassium',
+    sevTitle: 'Severity and treatment (Table 3)',
+    sevMild: 'Mild (3.0–3.4 mmol/L): oral potassium about 72 mmol/day, or IV about 75 mmol/day; usually no symptoms; recheck daily.',
+    sevModerate: 'Moderate (2.5–2.9 mmol/L): oral potassium about 96 mmol/day, or IV about 100 mmol/day; recheck daily.',
+    sevSevere: 'Severe (below 2.5 mmol/L or symptoms): IV replacement with continuous ECG monitoring and serial potassium checks.',
+    sevNone: 'Serum potassium is 3.5 mmol/L or more.',
+    deficitTitle: 'Estimated body deficit',
+    deficit: (lo, hi) => `≈ ${lo}–${hi} mmol`,
+    deficitNote: 'Each 1 mmol/L fall in serum potassium represents roughly 200–400 mmol of body deficit; the estimate can be too high or too low.',
+    ivTitle: 'IV potassium',
+    iv: [
+      ['Severe hypokalaemia: 40 mmol KCl in 1 L of 0.9% NaCl; standard rate 10 mmol/h, maximum 20 mmol/h.', 'kardalas', 'Table 3'],
+      ['Prefer 0.9% sodium chloride as the carrier: 5% glucose may shift potassium into cells. Prefer premixed infusions.', 'kardalas', ''],
+      ['Check magnesium: hypokalaemia with magnesium deficiency is often refractory until magnesium is corrected.', 'kardalas', ''],
+      ['Renal impairment: replace very cautiously and involve the renal team.', 'kardalas', ''],
+    ],
+    hoursAt: (h, r) => `≈ ${h} h at ${r} mmol/h`,
+    premixTitle: 'Premixed potassium fluids in this guide',
+    // DKA / HHS (Umpierrez 2024)
+    dkaSub: 'Fluids, dextrose and potassium in adult DKA and HHS (ADA/EASD consensus 2024)',
+    dkaType: 'Condition', measuredNa: 'Measured sodium', bloodGlucose: 'Blood glucose', gluUnit: 'Glucose unit', gluMgdl: 'mg/dL', gluMmol: 'mmol/L',
+    corrTitle: 'Sodium adjusted for glucose',
+    corrValue: (v) => `${v} mmol/L`,
+    corrNote: 'Measured Na⁺ + 1.6 × (glucose − 100 mg/dL) ÷ 100. As glucose falls by 100 mg/dL, sodium rises by about 1.6 mmol/L; this rise alone is not a reason for hypotonic fluid.',
+    fluidTitle: 'Fluids',
+    fluids: [
+      ['Without renal or cardiac compromise: isotonic saline or a balanced crystalloid at 500–1000 mL/h for the first 2–4 hours.', 'adaDka', ''],
+      ['Older adults, pregnancy, heart or kidney disease or dialysis: smaller boluses (for example 250 mL) with frequent reassessment.', 'adaDka', ''],
+      ['Then choose fluid by hydration, blood pressure, heart rate, fluid balance and sodium; correct the estimated deficit within 24–48 hours.', 'adaDka', ''],
+      ['0.45% saline only if osmolality is not falling despite adequate positive fluid balance and insulin.', 'adaDka', ''],
+    ],
+    hhsTitle: 'HHS: rate limits',
+    hhs: [
+      ['Glucose should fall no faster than 90–120 mg/dL (5–6.7 mmol/L) per hour.', 'adaDka', ''],
+      ['Sodium should fall no more than 10 mmol/L in 24 hours; osmolality by no more than 3.0–8.0 mOsm/kg per hour. Correct a fall in osmolarity with 0.9% saline.', 'adaDka', ''],
+    ],
+    dexTitle: 'Dextrose',
+    dexNow: 'Glucose is below 250 mg/dL (13.9 mmol/L): add 5–10% dextrose to the 0.9% saline and reduce insulin to 0.05 units/kg/h.',
+    dexWait: 'Glucose is 250 mg/dL (13.9 mmol/L) or higher: no dextrose yet.',
+    dex: [
+      ['Once glucose is below 250 mg/dL (13.9 mmol/L), add 5–10% dextrose to the 0.9% saline and reduce insulin to 0.05 units/kg/h; keep glucose about 200 mg/dL (11.1 mmol/L) until ketoacidosis resolves.', 'adaDka', ''],
+      ['Euglycaemic DKA (glucose below 200 mg/dL, for example with SGLT2 inhibitors): start 5–10% dextrose with the 0.9% saline.', 'adaDka', ''],
+    ],
+    insulinTitle: 'Insulin', insulinRate: (u) => `${u} units/h (0.1 units/kg/h)`, insulinLow: (u) => `${u} units/h at 0.05 units/kg/h`,
+    insulinNote: 'Fixed-rate IV insulin 0.1 units/kg/h; a 0.1 units/kg bolus if IV access will be delayed.',
+    kTitle: 'Potassium',
+    kLow: 'Below 3.5 mmol/L: delay insulin; give potassium at 10 mmol/h until it is above 3.5 mmol/L.',
+    kMid: '3.5 to below 5.0 mmol/L: add 20–30 mmol potassium per litre of IV fluid; keep potassium 4–5 mmol/L.',
+    kHigh: '5.0 mmol/L or higher: no potassium yet; start once it falls below 5.0 mmol/L.',
+    // GIR (ESPEN ICU 2019)
+    girSub: 'Glucose infusion rate from dextrose fluids (mg/kg/min)',
+    girModeRate: 'Rate → GIR', girModeTarget: 'GIR → rate', girFluid: 'Dextrose fluid', girDexCustom: 'Other dextrose %',
+    girTarget: 'Target GIR', girResult: 'Glucose infusion rate', girRate: 'Infusion rate', girDaily: 'Dextrose per day', girKcal: 'Energy per day',
+    girFormula: 'GIR (mg/kg/min) = rate (mL/h) × dextrose (%) × 10 ÷ (weight (kg) × 60)',
+    girOver: 'Above 5 mg/kg/min: ESPEN advises that glucose given to ICU patients should not exceed 5 mg/kg/min.',
+    girHigh: 'Above 3 mg/kg/min: ESPEN notes that avoiding IV glucose above 3–4 mg/kg/min is probably advisable.',
+    girLimits: [
+      ['Glucose (parenteral) or carbohydrate (enteral) for ICU patients should not exceed 5 mg/kg/min.', 'espenIcu', 'Rec 23'],
+      ['Avoiding large IV glucose infusions (over 3–4 mg/kg/min) is probably advisable; the guideline calls these limits arbitrary.', 'espenIcu', ''],
+      ['Energy uses 3.4 kcal per gram of dextrose hydrous (US labels).', 'usDex', ''],
+    ],
+    // ICP (SIBICC 2019, labels)
+    icpSub: 'Osmotherapy and perfusion pressure in raised intracranial pressure (SIBICC 2019, product labels)',
+    icpTabs: { mannitol: 'Mannitol 20%', nacl3: '3% saline', choose: 'Choosing an agent', cpp: 'CPP' },
+    manDose: 'Dose', manGrams: 'Mannitol', manVol: '20% volume',
+    man: [
+      ['SIBICC tier 1: mannitol by intermittent bolus 0.25–1.0 g/kg; not by continuous infusion and not on a fixed schedule.', 'sibicc', ''],
+      ['Osmitrol label: 0.25 g/kg IV over 30 minutes, which may be repeated every 6–8 hours; preferably through a large central vein.', 'usMan', ''],
+      ['Use a set with an in-line filter (crystals); inspect for crystals; do not give through the same set as blood.', 'usMan', ''],
+      ['Monitor serum osmolarity, electrolytes, acid-base balance, the osmol gap, volume status and urine output; stop if renal, cardiac or pulmonary status worsens.', 'usMan', ''],
+    ],
+    measOsm: 'Measured serum osmolality', osmOver: 'At or above 320 mOsm/kg: SIBICC uses 320 mOsm/kg (and sodium 155 mmol/L) as the limit for giving mannitol or hypertonic saline.',
+    gapTitle: 'Osmol gap', gapNa: 'Sodium', gapGlu: 'Glucose', gapBun: 'BUN', gapCalc: 'Calculated osmolality', gapVal: 'Osmol gap',
+    gapNote: 'Calculated osmolality = 2 × Na + glucose ÷ 18 + BUN ÷ 2.8 (mg/dL). The Osmitrol label asks for the osmol gap to be monitored; it gives no cut-off.',
+    naclVol: 'Bolus volume', naclNa: 'Serum sodium now', naclRise: 'Expected rise', naclAfter: 'Expected sodium afterwards',
+    naclOver: 'At or above 155 mmol/L: SIBICC uses sodium 155 mmol/L (and osmolality 320 mOsm/kg) as the limit for hypertonic saline or mannitol.',
+    nacl: [
+      ['SIBICC tier 1: hypertonic saline by intermittent bolus; the consensus gives no dose and no preferred concentration.', 'sibicc', ''],
+      ['3% NaCl label: hypertonic solutions may damage veins; give through a large vein.', 'usNaCl3', ''],
+      ['The expected rise uses the Adrogué–Madias formula with total body water 0.6 × weight; measure sodium.', 'adrogueHypo', ''],
+    ],
+    choose: [
+      ['SIBICC recommends neither mannitol nor hypertonic saline over the other, and no dose levels for either.', 'sibicc', ''],
+      ['Use the same limits for both: sodium 155 mmol/L and osmolality 320 mOsm/kg.', 'sibicc', ''],
+      ['Not recommended: mannitol by continuous infusion, or scheduled hyperosmolar doses (for example every 4–6 hours).', 'sibicc', 'Table 1'],
+      ['Mannitol is an osmotic diuretic: watch volume status and urine output.', 'usMan', ''],
+    ],
+    sbp: 'Systolic BP', dbp: 'Diastolic BP', icpVal: 'ICP', map: 'Mean arterial pressure', cppVal: 'CPP',
+    cppFormula: 'MAP = DBP + (SBP − DBP) ÷ 3; CPP = MAP − ICP.',
+    cpp: [['SIBICC adopted the Brain Trauma Foundation thresholds: treat ICP above 22 mmHg; keep CPP 60–70 mmHg.', 'sibicc', '']],
+    cppLow: 'Below 60 mmHg', cppHigh: 'Above 70 mmHg', cppIn: 'Within 60–70 mmHg', icpHigh: 'Above 22 mmHg', icpOk: '22 mmHg or less',
+    // Albumin (EASL 2018 and others)
+    albSub: 'Albumin in cirrhosis and critical care (EASL 2018 and trials)',
+    albTabs: { lvp: 'Paracentesis', sbp: 'SBP', hrs: 'AKI / HRS', compare: '5% · 20% · 25%' },
+    removed: 'Ascites removed', albGrams: 'Albumin', vol20: '20% volume', vol25: '25% volume',
+    lvp: [
+      ['Paracentesis of more than 5 L: albumin 8 g per litre of ascites removed, given at the end of the paracentesis.', 'easl', ''],
+      ['Less than 5 L: the risk of post-paracentesis circulatory dysfunction is low, but albumin is still generally advised because of concerns about other plasma expanders.', 'easl', ''],
+    ],
+    lvpUnder5: 'Under 5 L removed: the dose below still uses 8 g/L.',
+    sbpDay1: 'At diagnosis (1.5 g/kg)', sbpDay3: 'Day 3 (1 g/kg)', sbpTotal: 'Total',
+    sbp: [
+      ['Give albumin 1.5 g/kg at diagnosis and 1 g/kg on day 3 to patients with SBP, to prevent AKI.', 'easl', ''],
+      ['Trial of 126 patients (cefotaxime with or without albumin): renal impairment 33% vs 10% and in-hospital death 29% vs 10%.', 'sortSbp', ''],
+    ],
+    hrsDose: 'Albumin per day', hrsCapped: 'capped at 100 g',
+    hrs: [
+      ['AKI with no obvious cause, stage above 1A, or infection-induced: 20% albumin 1 g/kg per day (maximum 100 g) for two consecutive days.', 'easl', ''],
+      ['HRS-AKI: terlipressin plus albumin is first-line. Terlipressin 1 mg IV every 4–6 hours, or a continuous infusion starting at 2 mg/day; if creatinine falls by less than 25% after two days, increase stepwise to at most 12 mg/day.', 'easl', ''],
+      ['Albumin 20%: 20–40 g/day with vasoconstrictors.', 'easl', ''],
+      ['Noradrenaline 0.5–3 mg/h is an alternative (central line, usually ICU). Midodrine plus octreotide only when neither is available; much less effective.', 'easl', ''],
+      ['CONFIRM trial: terlipressin improved renal function, but respiratory failure was more common; deaths from respiratory disorders within 90 days 11% vs 2% with placebo.', 'confirm', ''],
+    ],
+    cmpHead: ['', '5%', '20%', '25%'],
+    cmpRows: [
+      ['Albumin per 100 mL', '5 g', '20 g', '25 g'],
+      ['Sodium (label)', '145 ± 15 mEq/L', '145 ± 15 mEq/L', '145 ± 15 mEq/L'],
+      ['Oncotic effect (label)', 'Equal to the same volume of plasma; expands plasma volume by about the volume given', 'About 4 × its volume of plasma; draws about 3 × its volume into the circulation within 15 min', 'About 5 × its volume of plasma; draws about 3.5 × its volume within 15 min'],
+    ],
+    cmpNote: 'From the Flexbumin labels (Takeda); the extra fluid is drawn in unless the patient is markedly dehydrated.',
+    albSafety: [
+      ['Labels: contraindicated after hypersensitivity to albumin, and in severe anaemia or cardiac failure with normal or increased intravascular volume.', 'usAlb', ''],
+      ['Traumatic brain injury (SAFE-TBI, post hoc): 2-year mortality 33.2% with albumin vs 20.4% with saline (RR 1.63); in severe TBI 41.8% vs 22.2% (RR 1.88).', 'safeTbi', ''],
+      ['Sepsis or septic shock after large volumes of crystalloid: albumin is suggested over crystalloid alone (weak recommendation, moderate-quality evidence).', 'ssc', ''],
+    ],
+    openFluid: (n) => `Open ${n}`,
+  },
+  th: {
+    bolusSub: '3% NaCl สำหรับโซเดียมต่ำที่มีอาการรุนแรงหรือค่อนข้างรุนแรง (แนวทางยุโรป 2014)',
+    sympTitle: 'การจัดระดับอาการ (ตาราง 5)',
+    sympSevere: 'รุนแรง: อาเจียน หายใจลำบากหรือระบบไหลเวียนผิดปกติ ง่วงซึมลึกผิดปกติ ชัก โคม่า (GCS ≤ 8)',
+    sympModerate: 'ค่อนข้างรุนแรง: คลื่นไส้โดยไม่อาเจียน สับสน ปวดศีรษะ',
+    severeTitle: 'อาการรุนแรง: ชั่วโมงแรก',
+    severe: [
+      ['ให้ 3% saline 150 mL ใน 20 นาที', 'spasovski', '7.1.1.1'],
+      ['ตรวจโซเดียมหลัง 20 นาที ขณะให้ 150 mL ครั้งที่สองใน 20 นาทีถัดไป', 'spasovski', '7.1.1.2'],
+      ['ทำซ้ำสองครั้ง หรือจนโซเดียมเพิ่มขึ้น 5 mmol/L', 'spasovski', '7.1.1.3'],
+      ['คำแนะนำเชิงปฏิบัติในแนวทาง: อาจใช้ 2 mL/kg ตามน้ำหนักแทน 150 mL', 'spasovski', '7.1'],
+    ],
+    afterTitle: 'เมื่ออาการดีขึ้น',
+    after: [
+      ['หยุด hypertonic saline ให้ 0.9% saline ปริมาณน้อยที่สุดเพื่อเปิดหลอดเลือดไว้', 'spasovski', '7.1.2'],
+      ['ให้โซเดียมเพิ่มไม่เกิน 10 mmol/L ใน 24 ชั่วโมงแรก และไม่เกิน 8 mmol/L ในทุก 24 ชั่วโมงต่อมา จนถึง 130 mmol/L', 'spasovski', '7.1.2.4'],
+      ['ตรวจโซเดียมที่ 6 และ 12 ชั่วโมง แล้วทุกวันจนคงที่', 'spasovski', '7.1.2.5'],
+    ],
+    noImproveTitle: 'อาการไม่ดีขึ้นหลังโซเดียมเพิ่ม 5 mmol/L',
+    noImprove: [
+      ['ให้ 3% saline ต่อ โดยตั้งเป้าเพิ่มอีก 1 mmol/L ต่อชั่วโมง', 'spasovski', '7.1.3.1'],
+      ['หยุดเมื่ออาการดีขึ้น โซเดียมเพิ่มรวม 10 mmol/L หรือถึง 130 mmol/L แล้วแต่อย่างใดถึงก่อน ระหว่างนั้นตรวจโซเดียมทุก 4 ชั่วโมง', 'spasovski', '7.1.3'],
+    ],
+    moderateTitle: 'อาการค่อนข้างรุนแรง',
+    moderate: [
+      ['ให้ 3% saline 150 mL ใน 20 นาที ครั้งเดียว', 'spasovski', '7.2.1.4'],
+      ['ตั้งเป้าเพิ่ม 5 mmol/L ต่อ 24 ชั่วโมง ไม่เกิน 10 mmol/L ใน 24 ชั่วโมงแรก และ 8 mmol/L ในทุก 24 ชั่วโมงต่อมา จนถึง 130 mmol/L', 'spasovski', '7.2.1'],
+    ],
+    bolusVol: 'ปริมาณที่ให้', bolus150: '150 mL', bolus2kg: (ml) => `2 mL/kg${ml ? ` (${ml} mL)` : ''}`,
+    bolusRise: 'โซเดียมที่คาดว่าเพิ่มจากหนึ่งครั้ง', bolusAfter: 'โซเดียมที่คาดหลังให้',
+    bolusCalcNote: 'ค่าประมาณจากสูตร Adrogué–Madias (3% NaCl มีโซเดียม 513 mmol/L) ต้องตรวจวัดจริง',
+    relowerSub: 'แก้โซเดียมต่ำเร็วเกินไป: เมื่อไรและอย่างไรจึงลดโซเดียมกลับ',
+    relowerTabs: { rescue: 'ลดโซเดียมกลับ', clamp: 'dDAVP clamp', risk: 'ผู้มีความเสี่ยง' },
+    startNa: 'โซเดียมเมื่อเริ่มรักษา', nowNa: 'โซเดียมตอนนี้',
+    period: 'ช่วงเวลา', periodFirst: '24 ชม. แรก', periodLater: '24 ชม. ต่อมา',
+    rise: 'เพิ่มขึ้นแล้ว', limit: 'ขีดจำกัดของช่วงนี้', excess: 'เกินขีดจำกัด', ceiling: 'เพดานโซเดียม',
+    overTitle: 'แก้เร็วเกินขีดจำกัด: ลดโซเดียมกลับ', underTitle: 'อยู่ในขีดจำกัด',
+    underText: 'การเพิ่มของโซเดียมอยู่ในขีดจำกัดของช่วงนี้ ปัสสาวะที่ออกมากขึ้นอย่างกะทันหันอาจเตือนว่ากำลังจะแก้เร็วเกินไป',
+    rescue: [
+      ['ลงมือทันทีถ้าโซเดียมเพิ่มเกิน 10 mmol/L ใน 24 ชั่วโมงแรก หรือเกิน 8 mmol/L ใน 24 ชั่วโมงใดต่อมา', 'spasovski', '7.5.1.1'],
+      ['หยุดการรักษาที่กำลังให้อยู่', 'spasovski', '7.5.1.2'],
+      ['ปรึกษาผู้เชี่ยวชาญเพื่อพิจารณาให้น้ำที่ไม่มีอิเล็กโทรไลต์ (เช่น สารละลายกลูโคส) 10 mL/kg ใน 1 ชั่วโมง โดยติดตามปัสสาวะและสมดุลสารน้ำอย่างใกล้ชิด', 'spasovski', '7.5.1.3'],
+      ['ปรึกษาผู้เชี่ยวชาญเพื่อพิจารณา desmopressin 2 µg ทางหลอดเลือดดำ ให้ซ้ำไม่บ่อยกว่าทุก 8 ชั่วโมง', 'spasovski', '7.5.1.4'],
+      ['การทบทวนเวชระเบียน 6 ปี: desmopressin ร่วมกับ 5% dextrose ลดโซเดียมกลับหลังแก้เกินได้โดยไม่พบผลข้างเคียงร้ายแรง', 'perianayagam', ''],
+    ],
+    waterDose: 'สารละลายกลูโคส 10 mL/kg ใน 1 ชม.', d5wFor: (x) => `5% dextrose เพื่อลด ${x} mmol/L (ค่าประมาณ)`,
+    d5wNote: 'ค่าประมาณ Adrogué–Madias สำหรับส่วนที่เกิน ปัสสาวะที่ออกต่อเนื่องจะเปลี่ยนผล ควรตรวจโซเดียมซ้ำ',
+    clampTitle: 'Desmopressin ร่วมกับ 3% saline (Sood 2013)',
+    clamp: [
+      ['ผู้ป่วย 25 รายที่โซเดียมต่ำกว่า 120 mmol/L ได้ desmopressin 1–2 µg ฉีดทุก 6–8 ชั่วโมง ร่วมกับ 3% saline ตามน้ำหนักเพื่อเพิ่มโซเดียม 6 mmol/L', 'sood', ''],
+      ['โซเดียมเพิ่มเฉลี่ย 5.8 mmol/L ใน 24 ชั่วโมงแรก และ 4.5 mmol/L ใน 24 ชั่วโมงที่สอง ไม่มีรายใดเพิ่มเกิน 12 mmol/L ใน 24 ชั่วโมงหรือ 18 mmol/L ใน 48 ชั่วโมง', 'sood', ''],
+      ['เป็นรายงานพัฒนาคุณภาพที่ไม่มีกลุ่มควบคุม ผู้วิจัยเสนอให้มีการศึกษาเปรียบเทียบ', 'sood', ''],
+    ],
+    riskTitle: 'Osmotic demyelination: ความเสี่ยงและสัญญาณเตือน (แนวทางยุโรป)',
+    risk: [
+      ['ปัจจัยเสี่ยงที่ระบุในแนวทาง: ประวัติดื่มสุรา โรคตับ โพแทสเซียมต่ำ การใช้ยาขับปัสสาวะ thiazide หรือยาต้านซึมเศร้า', 'spasovski', '7.1'],
+      ['ใน 54 รายงานผู้ป่วย osmotic demyelination โซเดียมเริ่มต้นต่ำกว่า 120 mmol/L และต่ำกว่า 115 mmol/L ใน 85%', 'spasovski', '7.1'],
+      ['มักแก้เร็วเกินเมื่อการรักษาสาเหตุทำให้ขับน้ำได้อีก: ให้สารน้ำในภาวะขาดน้ำ รักษาภาวะขาดกลูโคคอร์ติคอยด์ หยุด thiazide หรือยาที่ทำให้เกิด SIADH ลดน้ำดื่มใน primary polydipsia', 'spasovski', '7.5'],
+      ['ปัสสาวะที่ออกมากขึ้นอย่างกะทันหันอาจเตือนว่ากำลังจะแก้เร็วเกินไป', 'spasovski', '7.5'],
+    ],
+    potassiumSub: 'โพแทสเซียมต่ำ: ความรุนแรง การทดแทน และอัตราให้ทางหลอดเลือดดำ (Kardalas 2018)',
+    serumK: 'โพแทสเซียมในเลือด', targetK: 'โพแทสเซียมเป้าหมาย',
+    sevTitle: 'ความรุนแรงและการรักษา (ตาราง 3)',
+    sevMild: 'เล็กน้อย (3.0–3.4 mmol/L): โพแทสเซียมกินประมาณ 72 mmol/วัน หรือทางหลอดเลือดดำประมาณ 75 mmol/วัน มักไม่มีอาการ ตรวจซ้ำทุกวัน',
+    sevModerate: 'ปานกลาง (2.5–2.9 mmol/L): โพแทสเซียมกินประมาณ 96 mmol/วัน หรือทางหลอดเลือดดำประมาณ 100 mmol/วัน ตรวจซ้ำทุกวัน',
+    sevSevere: 'รุนแรง (ต่ำกว่า 2.5 mmol/L หรือมีอาการ): ให้ทางหลอดเลือดดำ ติดตามคลื่นไฟฟ้าหัวใจต่อเนื่องและตรวจโพแทสเซียมเป็นระยะ',
+    sevNone: 'โพแทสเซียมในเลือด 3.5 mmol/L ขึ้นไป',
+    deficitTitle: 'ปริมาณที่ร่างกายขาดโดยประมาณ',
+    deficit: (lo, hi) => `≈ ${lo}–${hi} mmol`,
+    deficitNote: 'โพแทสเซียมในเลือดที่ลดลงทุก 1 mmol/L แสดงถึงการขาดประมาณ 200–400 mmol ค่านี้อาจสูงหรือต่ำกว่าความจริง',
+    ivTitle: 'โพแทสเซียมทางหลอดเลือดดำ',
+    iv: [
+      ['โพแทสเซียมต่ำรุนแรง: KCl 40 mmol ใน 0.9% NaCl 1 L อัตรามาตรฐาน 10 mmol/ชม. สูงสุด 20 mmol/ชม.', 'kardalas', 'Table 3'],
+      ['ควรใช้ 0.9% sodium chloride เป็นตัวพา เพราะ 5% กลูโคสอาจทำให้โพแทสเซียมเข้าเซลล์ ควรใช้สารน้ำผสมสำเร็จรูป', 'kardalas', ''],
+      ['ตรวจแมกนีเซียม: โพแทสเซียมต่ำที่มีแมกนีเซียมต่ำร่วมมักแก้ไม่ขึ้นจนกว่าจะแก้แมกนีเซียม', 'kardalas', ''],
+      ['ไตบกพร่อง: ให้อย่างระมัดระวังมากและปรึกษาทีมโรคไต', 'kardalas', ''],
+    ],
+    hoursAt: (h, r) => `≈ ${h} ชม. ที่ ${r} mmol/ชม.`,
+    premixTitle: 'สารน้ำผสมโพแทสเซียมสำเร็จรูปในคู่มือนี้',
+    dkaSub: 'สารน้ำ เดกซ์โทรส และโพแทสเซียมใน DKA และ HHS ผู้ใหญ่ (ADA/EASD 2024)',
+    dkaType: 'ภาวะ', measuredNa: 'โซเดียมที่วัดได้', bloodGlucose: 'น้ำตาลในเลือด', gluUnit: 'หน่วยน้ำตาล', gluMgdl: 'mg/dL', gluMmol: 'mmol/L',
+    corrTitle: 'โซเดียมปรับตามน้ำตาล',
+    corrValue: (v) => `${v} mmol/L`,
+    corrNote: 'Na⁺ ที่วัดได้ + 1.6 × (น้ำตาล − 100 mg/dL) ÷ 100 เมื่อน้ำตาลลดลง 100 mg/dL โซเดียมจะเพิ่มประมาณ 1.6 mmol/L การเพิ่มนี้อย่างเดียวไม่ใช่เหตุผลที่จะให้สารน้ำ hypotonic',
+    fluidTitle: 'สารน้ำ',
+    fluids: [
+      ['ถ้าไม่มีปัญหาไตหรือหัวใจ: isotonic saline หรือ balanced crystalloid 500–1000 mL/ชม. ใน 2–4 ชั่วโมงแรก', 'adaDka', ''],
+      ['ผู้สูงอายุ ตั้งครรภ์ โรคหัวใจหรือไต หรือฟอกไต: ให้ครั้งละน้อย (เช่น 250 mL) และประเมินซ้ำบ่อย', 'adaDka', ''],
+      ['จากนั้นเลือกสารน้ำตามภาวะน้ำ ความดัน ชีพจร สมดุลสารน้ำ และโซเดียม แก้การขาดน้ำโดยประมาณภายใน 24–48 ชั่วโมง', 'adaDka', ''],
+      ['ใช้ 0.45% saline เฉพาะเมื่อออสโมลาลิตีไม่ลดลงทั้งที่สมดุลสารน้ำเป็นบวกพอและได้อินซูลินเหมาะสม', 'adaDka', ''],
+    ],
+    hhsTitle: 'HHS: ขีดจำกัดอัตรา',
+    hhs: [
+      ['น้ำตาลควรลดไม่เร็วกว่า 90–120 mg/dL (5–6.7 mmol/L) ต่อชั่วโมง', 'adaDka', ''],
+      ['โซเดียมควรลดไม่เกิน 10 mmol/L ใน 24 ชั่วโมง ออสโมลาลิตีลดไม่เกิน 3.0–8.0 mOsm/kg ต่อชั่วโมง แก้การลดของออสโมลาริตีด้วย 0.9% saline', 'adaDka', ''],
+    ],
+    dexTitle: 'เดกซ์โทรส',
+    dexNow: 'น้ำตาลต่ำกว่า 250 mg/dL (13.9 mmol/L): เติม 5–10% dextrose ใน 0.9% saline และลดอินซูลินเป็น 0.05 unit/kg/ชม.',
+    dexWait: 'น้ำตาล 250 mg/dL (13.9 mmol/L) ขึ้นไป: ยังไม่ต้องให้เดกซ์โทรส',
+    dex: [
+      ['เมื่อน้ำตาลต่ำกว่า 250 mg/dL (13.9 mmol/L) เติม 5–10% dextrose ใน 0.9% saline และลดอินซูลินเป็น 0.05 unit/kg/ชม. รักษาน้ำตาลประมาณ 200 mg/dL (11.1 mmol/L) จนภาวะเลือดเป็นกรดจากคีโตนหาย', 'adaDka', ''],
+      ['Euglycaemic DKA (น้ำตาลต่ำกว่า 200 mg/dL เช่น จากยา SGLT2 inhibitor): เริ่ม 5–10% dextrose พร้อมกับ 0.9% saline', 'adaDka', ''],
+    ],
+    insulinTitle: 'อินซูลิน', insulinRate: (u) => `${u} unit/ชม. (0.1 unit/kg/ชม.)`, insulinLow: (u) => `${u} unit/ชม. ที่ 0.05 unit/kg/ชม.`,
+    insulinNote: 'อินซูลินทางหลอดเลือดดำอัตราคงที่ 0.1 unit/kg/ชม. ให้ bolus 0.1 unit/kg ถ้าจะเปิดหลอดเลือดได้ช้า',
+    kTitle: 'โพแทสเซียม',
+    kLow: 'ต่ำกว่า 3.5 mmol/L: เลื่อนอินซูลินออกไป ให้โพแทสเซียม 10 mmol/ชม. จนสูงกว่า 3.5 mmol/L',
+    kMid: '3.5 ถึงต่ำกว่า 5.0 mmol/L: เติมโพแทสเซียม 20–30 mmol ต่อสารน้ำ 1 ลิตร รักษาโพแทสเซียม 4–5 mmol/L',
+    kHigh: '5.0 mmol/L ขึ้นไป: ยังไม่ต้องให้โพแทสเซียม เริ่มเมื่อต่ำกว่า 5.0 mmol/L',
+    girSub: 'อัตราการให้กลูโคสจากสารน้ำเดกซ์โทรส (mg/kg/min)',
+    girModeRate: 'อัตรา → GIR', girModeTarget: 'GIR → อัตรา', girFluid: 'สารน้ำเดกซ์โทรส', girDexCustom: 'เดกซ์โทรส % อื่น',
+    girTarget: 'GIR เป้าหมาย', girResult: 'อัตราการให้กลูโคส', girRate: 'อัตราการให้', girDaily: 'เดกซ์โทรสต่อวัน', girKcal: 'พลังงานต่อวัน',
+    girFormula: 'GIR (mg/kg/min) = อัตรา (mL/ชม.) × เดกซ์โทรส (%) × 10 ÷ (น้ำหนัก (kg) × 60)',
+    girOver: 'เกิน 5 mg/kg/min: ESPEN แนะนำว่ากลูโคสที่ให้ผู้ป่วย ICU ไม่ควรเกิน 5 mg/kg/min',
+    girHigh: 'เกิน 3 mg/kg/min: ESPEN ระบุว่าการหลีกเลี่ยงกลูโคสทางหลอดเลือดดำเกิน 3–4 mg/kg/min น่าจะเหมาะสม',
+    girLimits: [
+      ['กลูโคส (ทางหลอดเลือด) หรือคาร์โบไฮเดรต (ทางสายให้อาหาร) สำหรับผู้ป่วย ICU ไม่ควรเกิน 5 mg/kg/min', 'espenIcu', 'Rec 23'],
+      ['การหลีกเลี่ยงกลูโคสทางหลอดเลือดดำปริมาณมาก (เกิน 3–4 mg/kg/min) น่าจะเหมาะสม แนวทางระบุว่าขีดจำกัดเหล่านี้กำหนดขึ้นเอง', 'espenIcu', ''],
+      ['พลังงานคิดที่ 3.4 kcal ต่อกรัมของเดกซ์โทรสโมโนไฮเดรต (ฉลากสหรัฐฯ)', 'usDex', ''],
+    ],
+    icpSub: 'การรักษาด้วยสารออสโมติกและความดันเลี้ยงสมองในภาวะความดันในกะโหลกสูง (SIBICC 2019 และฉลากผลิตภัณฑ์)',
+    icpTabs: { mannitol: 'Mannitol 20%', nacl3: '3% saline', choose: 'การเลือกยา', cpp: 'CPP' },
+    manDose: 'ขนาดยา', manGrams: 'แมนนิทอล', manVol: 'ปริมาตร 20%',
+    man: [
+      ['SIBICC ขั้นที่ 1: แมนนิทอลแบบ bolus เป็นครั้ง ๆ 0.25–1.0 g/kg ไม่ให้แบบหยดต่อเนื่องและไม่ให้ตามเวลาที่กำหนด', 'sibicc', ''],
+      ['ฉลาก Osmitrol: 0.25 g/kg ทางหลอดเลือดดำใน 30 นาที ให้ซ้ำได้ทุก 6–8 ชั่วโมง ควรให้ทางหลอดเลือดดำใหญ่ส่วนกลาง', 'usMan', ''],
+      ['ใช้ชุดให้สารน้ำที่มีตัวกรอง (อาจตกผลึก) ตรวจดูผลึกก่อนให้ ห้ามให้ผ่านชุดสายเดียวกับเลือด', 'usMan', ''],
+      ['ติดตามออสโมลาริตี อิเล็กโทรไลต์ กรด-ด่าง osmol gap ภาวะสารน้ำ และปัสสาวะ หยุดถ้าการทำงานของไต หัวใจ หรือปอดแย่ลง', 'usMan', ''],
+    ],
+    measOsm: 'ออสโมลาลิตีที่วัดได้', osmOver: '320 mOsm/kg ขึ้นไป: SIBICC ใช้ 320 mOsm/kg (และโซเดียม 155 mmol/L) เป็นขีดจำกัดของการให้แมนนิทอลหรือ hypertonic saline',
+    gapTitle: 'Osmol gap', gapNa: 'โซเดียม', gapGlu: 'น้ำตาล', gapBun: 'BUN', gapCalc: 'ออสโมลาลิตีคำนวณ', gapVal: 'Osmol gap',
+    gapNote: 'ออสโมลาลิตีคำนวณ = 2 × Na + น้ำตาล ÷ 18 + BUN ÷ 2.8 (mg/dL) ฉลาก Osmitrol ให้ติดตาม osmol gap แต่ไม่ได้ระบุค่าตัด',
+    naclVol: 'ปริมาณที่ให้', naclNa: 'โซเดียมตอนนี้', naclRise: 'ที่คาดว่าเพิ่ม', naclAfter: 'โซเดียมที่คาดหลังให้',
+    naclOver: '155 mmol/L ขึ้นไป: SIBICC ใช้โซเดียม 155 mmol/L (และออสโมลาลิตี 320 mOsm/kg) เป็นขีดจำกัดของ hypertonic saline หรือแมนนิทอล',
+    nacl: [
+      ['SIBICC ขั้นที่ 1: hypertonic saline แบบ bolus เป็นครั้ง ๆ ฉันทามติไม่ได้ระบุขนาดยาหรือความเข้มข้นที่แนะนำ', 'sibicc', ''],
+      ['ฉลาก 3% NaCl: สารละลาย hypertonic อาจทำลายหลอดเลือดดำ ควรให้ทางหลอดเลือดดำใหญ่', 'usNaCl3', ''],
+      ['ค่าที่คาดว่าเพิ่มใช้สูตร Adrogué–Madias โดยน้ำในร่างกาย 0.6 × น้ำหนัก ต้องตรวจโซเดียมจริง', 'adrogueHypo', ''],
+    ],
+    choose: [
+      ['SIBICC ไม่แนะนำแมนนิทอลหรือ hypertonic saline เหนืออีกตัว และไม่กำหนดระดับขนาดยาของทั้งคู่', 'sibicc', ''],
+      ['ใช้ขีดจำกัดเดียวกันทั้งสองตัว: โซเดียม 155 mmol/L และออสโมลาลิตี 320 mOsm/kg', 'sibicc', ''],
+      ['ไม่แนะนำ: แมนนิทอลแบบหยดต่อเนื่อง หรือสารออสโมติกตามเวลาที่กำหนด (เช่น ทุก 4–6 ชั่วโมง)', 'sibicc', 'Table 1'],
+      ['แมนนิทอลเป็นยาขับปัสสาวะออสโมติก: ติดตามภาวะสารน้ำและปัสสาวะ', 'usMan', ''],
+    ],
+    sbp: 'ความดันซิสโตลิก', dbp: 'ความดันไดแอสโตลิก', icpVal: 'ICP', map: 'ความดันเลือดแดงเฉลี่ย', cppVal: 'CPP',
+    cppFormula: 'MAP = DBP + (SBP − DBP) ÷ 3; CPP = MAP − ICP',
+    cpp: [['SIBICC ใช้เกณฑ์ของ Brain Trauma Foundation: รักษาเมื่อ ICP เกิน 22 mmHg และรักษา CPP 60–70 mmHg', 'sibicc', '']],
+    cppLow: 'ต่ำกว่า 60 mmHg', cppHigh: 'สูงกว่า 70 mmHg', cppIn: 'อยู่ใน 60–70 mmHg', icpHigh: 'เกิน 22 mmHg', icpOk: '22 mmHg หรือต่ำกว่า',
+    albSub: 'อัลบูมินในโรคตับแข็งและผู้ป่วยวิกฤต (EASL 2018 และงานวิจัย)',
+    albTabs: { lvp: 'เจาะน้ำในท้อง', sbp: 'SBP', hrs: 'AKI / HRS', compare: '5% · 20% · 25%' },
+    removed: 'น้ำในท้องที่เจาะออก', albGrams: 'อัลบูมิน', vol20: 'ปริมาตร 20%', vol25: 'ปริมาตร 25%',
+    lvp: [
+      ['เจาะน้ำในท้องมากกว่า 5 L: อัลบูมิน 8 g ต่อน้ำในท้องที่เจาะออก 1 ลิตร ให้เมื่อเจาะเสร็จ', 'easl', ''],
+      ['น้อยกว่า 5 L: ความเสี่ยงต่อระบบไหลเวียนผิดปกติหลังเจาะต่ำ แต่ยังแนะนำให้อัลบูมินโดยทั่วไป เพราะกังวลเรื่องสารขยายปริมาตรอื่น', 'easl', ''],
+    ],
+    lvpUnder5: 'เจาะออกน้อยกว่า 5 L: ขนาดยาด้านล่างยังคิดที่ 8 g/L',
+    sbpDay1: 'เมื่อวินิจฉัย (1.5 g/kg)', sbpDay3: 'วันที่ 3 (1 g/kg)', sbpTotal: 'รวม',
+    sbp: [
+      ['ให้อัลบูมิน 1.5 g/kg เมื่อวินิจฉัย และ 1 g/kg ในวันที่ 3 แก่ผู้ป่วย SBP เพื่อป้องกันไตวายเฉียบพลัน', 'easl', ''],
+      ['การศึกษาผู้ป่วย 126 ราย (cefotaxime ร่วมหรือไม่ร่วมกับอัลบูมิน): ไตบกพร่อง 33% เทียบ 10% และเสียชีวิตในโรงพยาบาล 29% เทียบ 10%', 'sortSbp', ''],
+    ],
+    hrsDose: 'อัลบูมินต่อวัน', hrsCapped: 'สูงสุด 100 g',
+    hrs: [
+      ['AKI ที่ไม่มีสาเหตุชัด ระยะเกิน 1A หรือจากการติดเชื้อ: อัลบูมิน 20% 1 g/kg ต่อวัน (สูงสุด 100 g) 2 วันติดกัน', 'easl', ''],
+      ['HRS-AKI: terlipressin ร่วมกับอัลบูมินเป็นทางเลือกแรก terlipressin 1 mg ทางหลอดเลือดดำทุก 4–6 ชั่วโมง หรือหยดต่อเนื่องเริ่ม 2 mg/วัน ถ้าครีเอตินินลดน้อยกว่า 25% หลัง 2 วัน เพิ่มทีละขั้นได้สูงสุด 12 mg/วัน', 'easl', ''],
+      ['อัลบูมิน 20%: 20–40 g/วัน ร่วมกับยาหดหลอดเลือด', 'easl', ''],
+      ['Noradrenaline 0.5–3 mg/ชม. เป็นทางเลือก (ต้องมีสายสวนหลอดเลือดดำส่วนกลาง มักอยู่ใน ICU) Midodrine ร่วมกับ octreotide ใช้เมื่อไม่มีทั้งสองอย่าง ได้ผลน้อยกว่ามาก', 'easl', ''],
+      ['การศึกษา CONFIRM: terlipressin ทำให้การทำงานของไตดีขึ้น แต่ภาวะหายใจล้มเหลวพบมากขึ้น เสียชีวิตจากโรคระบบหายใจใน 90 วัน 11% เทียบ 2% กับยาหลอก', 'confirm', ''],
+    ],
+    cmpHead: ['', '5%', '20%', '25%'],
+    cmpRows: [
+      ['อัลบูมินต่อ 100 mL', '5 g', '20 g', '25 g'],
+      ['โซเดียม (ฉลาก)', '145 ± 15 mEq/L', '145 ± 15 mEq/L', '145 ± 15 mEq/L'],
+      ['ผลทางออนโคติก (ฉลาก)', 'เท่ากับพลาสมาปริมาตรเดียวกัน เพิ่มปริมาตรพลาสมาประมาณเท่าที่ให้', 'ประมาณ 4 เท่าของปริมาตรพลาสมา ดึงน้ำเข้าหลอดเลือดประมาณ 3 เท่าของปริมาตรใน 15 นาที', 'ประมาณ 5 เท่าของปริมาตรพลาสมา ดึงน้ำประมาณ 3.5 เท่าใน 15 นาที'],
+    ],
+    cmpNote: 'จากฉลาก Flexbumin (Takeda) น้ำจะถูกดึงเข้าหลอดเลือดยกเว้นผู้ป่วยขาดน้ำมาก',
+    albSafety: [
+      ['ฉลาก: ห้ามใช้เมื่อเคยแพ้อัลบูมิน และในภาวะซีดรุนแรงหรือหัวใจล้มเหลวที่ปริมาตรในหลอดเลือดปกติหรือเกิน', 'usAlb', ''],
+      ['บาดเจ็บที่สมอง (SAFE-TBI วิเคราะห์ภายหลัง): อัตราตายที่ 2 ปี 33.2% เมื่อได้อัลบูมิน เทียบ 20.4% เมื่อได้ saline (RR 1.63) ในรายรุนแรง 41.8% เทียบ 22.2% (RR 1.88)', 'safeTbi', ''],
+      ['ภาวะติดเชื้อในกระแสเลือดหรือช็อกหลังได้คริสตัลลอยด์ปริมาณมาก: แนะนำอัลบูมินมากกว่าคริสตัลลอยด์อย่างเดียว (คำแนะนำอ่อน หลักฐานคุณภาพปานกลาง)', 'ssc', ''],
+    ],
+    openFluid: (n) => `เปิด ${n}`,
+  },
+};
+
+// --- Sodium guide: 3% bolus tab ---
+const BolusContent = ({ lang, t, onOpenFluid }) => {
+  const g = GUIDE_TEXT[lang], h = GUIDE2[lang];
+  const [na, setNa] = useState(''), [wt, setWt] = useState(''), [sex, setSex] = useState('m'), [old, setOld] = useState(false);
+  const [pick, setPick] = useState('150');
+  const sNa = toNum(na), w = toNum(wt);
+  const tbw = w ? w * TBW_FRACTION[sex][old ? 'old' : 'young'] : null;
+  const vol = pick === '2kg' ? (w ? Math.round(w * 2) : null) : 150;
+  const rise = sNa && tbw && vol ? adrogueDelta(513, sNa, tbw, vol / 1000) : null;
+  return (
+    <div className="flex flex-col gap-3" data-sodium-bolus-view>
+      <Section title={h.sympTitle} tone="bg-rose-50 border-rose-200" attrs={{ 'data-bolus-symptoms': '' }}>
+        <p className="text-xs text-rose-900 leading-snug font-bold">{h.sympSevere}</p>
+        <p className="text-xs text-rose-900 leading-snug mt-1">{h.sympModerate} <RefTag k="spasovski" sec="Table 5" /></p>
+      </Section>
+      <Section>
+        <PatientInputs g={g} na={na} setNa={setNa} wt={wt} setWt={setWt} sex={sex} setSex={setSex} old={old} setOld={setOld} prefix="bolus" />
+        <div className="flex flex-col gap-1 mt-3"><span className="text-[11px] font-bold text-slate-500">{h.bolusVol}</span>
+          <Seg value={pick} onChange={setPick} options={[['150', h.bolus150], ['2kg', h.bolus2kg(w ? Math.round(w * 2) : null)]]} attrs={{ 'data-bolus-pick': '' }} />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3">
+          <Stat label={h.bolusRise} value={rise != null ? `+${rise.toFixed(1)} mmol/L` : '—'} tone="border-violet-200 bg-violet-50 text-violet-900" attrs={{ 'data-bolus-rise': '' }} />
+          <Stat label={h.bolusAfter} value={rise != null ? `${(sNa + rise).toFixed(1)} mmol/L` : '—'} tone="border-sky-200 bg-sky-50 text-sky-900" attrs={{ 'data-bolus-after': '' }} />
+        </div>
+        <p className="text-[11px] text-slate-500 mt-2">{h.bolusCalcNote} <RefTag k="adrogueHypo" /></p>
+      </Section>
+      <Section title={h.severeTitle} attrs={{ 'data-bolus-severe': '' }}><Bullets items={h.severe} /></Section>
+      <Section title={h.afterTitle}><Bullets items={h.after} /></Section>
+      <Section title={h.noImproveTitle}><Bullets items={h.noImprove} /></Section>
+      <Section title={h.moderateTitle} attrs={{ 'data-bolus-moderate': '' }}><Bullets items={h.moderate} /></Section>
+      {(() => { const f = FLUIDS.find(x => x.id === 'nacl3'); return f ? <div className="self-start"><FluidChip f={f} t={t} onOpen={onOpenFluid} /></div> : null; })()}
+    </div>
+  );
+};
+
+// --- Sodium guide: re-lowering tab (also opened from the header button) ---
+const ReloweringContent = ({ lang, t, onOpenFluid }) => {
+  const g = GUIDE_TEXT[lang], h = GUIDE2[lang];
+  const [tab, setTab] = useState('rescue');
+  const [start, setStart] = useState(''), [now, setNow] = useState(''), [wt, setWt] = useState('');
+  const [sex, setSex] = useState('m'), [old, setOld] = useState(false), [period, setPeriod] = useState('first');
+  const s0 = toNum(start), s1 = toNum(now), w = toNum(wt);
+  const limit = period === 'first' ? 10 : 8;
+  const rise = s0 && s1 ? s1 - s0 : null;
+  const excess = rise != null ? rise - limit : null;
+  const tbw = w ? w * TBW_FRACTION[sex][old ? 'old' : 'young'] : null;
+  const d5wPerL = s1 && tbw ? adrogueDelta(0, s1, tbw, 1) : null; // negative
+  const d5wL = excess > 0 && d5wPerL ? excess / -d5wPerL : null;
+  return (
+    <div className="flex flex-col gap-3" data-relower-view>
+      <GTabs tabs={Object.entries(h.relowerTabs)} value={tab} onChange={setTab} tone="bg-amber-700 border-amber-700" attr="data-relower-tabs" />
+      {tab === 'rescue' && (
+        <>
+          <Section>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <NumInput label={h.startNa} unit="mmol/L" value={start} onChange={setStart} attrs={{ 'data-relower-start': '' }} />
+              <NumInput label={h.nowNa} unit="mmol/L" value={now} onChange={setNow} attrs={{ 'data-relower-now': '' }} />
+              <NumInput label={g.weight} unit={g.kg} value={wt} onChange={setWt} attrs={{ 'data-relower-weight': '' }} />
+              <div className="flex flex-col gap-1"><span className="text-[11px] font-bold text-slate-500">{h.period}</span><Seg value={period} onChange={setPeriod} options={[['first', h.periodFirst], ['later', h.periodLater]]} attrs={{ 'data-relower-period': '' }} /></div>
+            </div>
+            <div className="grid grid-cols-2 gap-3 mt-3">
+              <div className="flex flex-col gap-1"><span className="text-[11px] font-bold text-slate-500">{g.sex}</span><Seg value={sex} onChange={setSex} options={[['m', g.male], ['f', g.female]]} /></div>
+              <div className="flex flex-col gap-1 justify-end"><Toggle on={old} onClick={() => setOld(v => !v)}>{g.elderly}</Toggle></div>
+            </div>
+          </Section>
+          {rise != null && (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2" data-relower-result>
+              <Stat label={h.rise} value={`${rise > 0 ? '+' : ''}${fmt(+rise.toFixed(1))} mmol/L`} attrs={{ 'data-relower-rise': '' }} />
+              <Stat label={h.limit} value={`${limit} mmol/L`} />
+              <Stat label={h.excess} value={excess > 0 ? `${fmt(+excess.toFixed(1))} mmol/L` : '—'} tone={excess > 0 ? 'border-rose-300 bg-rose-50 text-rose-900' : 'border-emerald-200 bg-emerald-50 text-emerald-900'} attrs={{ 'data-relower-excess': '' }} />
+              <Stat label={h.ceiling} value={`${fmt(s0 + limit)} mmol/L`} attrs={{ 'data-relower-ceiling': '' }} />
+            </div>
+          )}
+          {excess > 0 ? (
+            <Section title={h.overTitle} tone="bg-rose-50 border-rose-300" attrs={{ 'data-relower-alert': 'over' }}>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-2">
+                <Stat label={h.waterDose} value={w ? `${Math.round(w * 10)} mL` : '—'} tone="border-sky-200 bg-white text-sky-900" attrs={{ 'data-relower-water': '' }} />
+                <Stat label="Desmopressin" value="2 µg IV" sub={lang === 'th' ? 'ไม่บ่อยกว่าทุก 8 ชม.' : 'not more often than every 8 h'} tone="border-violet-200 bg-white text-violet-900" />
+                <Stat label={h.d5wFor(fmt(+excess.toFixed(1)))} value={d5wL ? `${d5wL.toFixed(2)} L` : '—'} sub={h.d5wNote} tone="border-amber-200 bg-white text-amber-900" attrs={{ 'data-relower-d5w': '' }} />
+              </div>
+            </Section>
+          ) : rise != null ? (
+            <Section title={h.underTitle} tone="bg-emerald-50 border-emerald-200" attrs={{ 'data-relower-alert': 'within' }}><p className="text-xs text-emerald-900">{h.underText} <RefTag k="spasovski" sec="7.5" /></p></Section>
+          ) : null}
+          <Section><Bullets items={h.rescue} /></Section>
+          <div className="flex flex-wrap gap-2">{['d5w', 'nacl3'].map(id => { const f = FLUIDS.find(x => x.id === id); return f ? <FluidChip key={id} f={f} t={t} onOpen={onOpenFluid} /> : null; })}</div>
+        </>
+      )}
+      {tab === 'clamp' && <Section title={h.clampTitle} attrs={{ 'data-relower-clamp': '' }}><Bullets items={h.clamp} /></Section>}
+      {tab === 'risk' && <Section title={h.riskTitle} attrs={{ 'data-relower-risk': '' }}><Bullets items={h.risk} /></Section>}
+    </div>
+  );
+};
+const ReloweringGuide = ({ lang, t, onClose, onOpenFluid }) => (
+  <Modal title={t.guides.relower} sub={GUIDE2[lang].relowerSub} onClose={onClose} tone="bg-amber-50" wide attrs={{ 'data-guide-modal': 'relower' }} icon={<div className="p-2 bg-amber-100 text-amber-800 rounded-xl shrink-0"><ShieldAlertIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
+    <ReloweringContent lang={lang} t={t} onOpenFluid={onOpenFluid} />
+  </Modal>
+);
+
+// --- Potassium ---
+const PotassiumGuide = ({ lang, t, onClose, onOpenFluid }) => {
+  const h = GUIDE2[lang];
+  const [kVal, setKVal] = useState(''), [target, setTarget] = useState('4.0');
+  const k = toNum(kVal), tk = toNum(target);
+  const sev = !k ? null : k < 2.5 ? 'severe' : k < 3.0 ? 'moderate' : k < 3.5 ? 'mild' : 'none';
+  const drop = k && tk && tk > k ? tk - k : 0;
+  const lo = Math.round(drop * 200), hi = Math.round(drop * 400);
+  return (
+    <Modal title={t.guides.kguide} sub={h.potassiumSub} onClose={onClose} tone="bg-amber-50" wide attrs={{ 'data-guide-modal': 'kguide' }} icon={<div className="p-2 bg-amber-100 text-amber-700 rounded-xl shrink-0"><ZapIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
+      <Section>
+        <div className="grid grid-cols-2 gap-3">
+          <NumInput label={h.serumK} unit="mmol/L" value={kVal} onChange={setKVal} step="0.1" attrs={{ 'data-k-serum': '' }} />
+          <NumInput label={h.targetK} unit="mmol/L" value={target} onChange={setTarget} step="0.1" attrs={{ 'data-k-target': '' }} />
+        </div>
+      </Section>
+      <Section title={h.sevTitle} attrs={{ 'data-k-severity': sev || '' }}>
+        <ul className="flex flex-col gap-1.5">
+          {[['mild', h.sevMild], ['moderate', h.sevModerate], ['severe', h.sevSevere]].map(([key, text]) => (
+            <li key={key} className={`text-xs leading-snug rounded-lg px-2 py-1.5 ${sev === key ? 'bg-amber-100 text-amber-900 font-bold border border-amber-300' : 'text-slate-700'}`} data-k-band={key}>{text}</li>
+          ))}
+        </ul>
+        {sev === 'none' && <p className="text-xs text-slate-600 mt-2">{h.sevNone}</p>}
+        <p className="text-[11px] text-slate-500 mt-1"><RefTag k="kardalas" sec="Table 3" /></p>
+      </Section>
+      {drop > 0 && (
+        <Section title={h.deficitTitle} attrs={{ 'data-k-deficit': '' }}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <Stat label={h.deficitTitle} value={h.deficit(lo, hi)} tone="border-amber-200 bg-amber-50 text-amber-900" attrs={{ 'data-k-deficit-val': '' }} />
+            <Stat label="10 mmol/h" value={h.hoursAt(Math.round(lo / 10), 10)} />
+            <Stat label="20 mmol/h" value={h.hoursAt(Math.round(lo / 20), 20)} />
+          </div>
+          <p className="text-[11px] text-slate-500 mt-2">{h.deficitNote} <RefTag k="kardalas" /></p>
+        </Section>
+      )}
+      <Section title={h.ivTitle} tone="bg-blue-50 border-blue-200" attrs={{ 'data-k-iv': '' }}><Bullets items={h.iv} /></Section>
+      <Section title={h.premixTitle}><div className="flex flex-wrap gap-2">{['d5s2k20', 'd5s2k40'].map(id => { const f = FLUIDS.find(x => x.id === id); return f ? <FluidChip key={id} f={f} t={t} onOpen={onOpenFluid} /> : null; })}</div></Section>
+    </Modal>
+  );
+};
+
+// --- DKA / HHS (ADA/EASD 2024) ---
+const DkaGuide = ({ lang, t, onClose, onOpenFluid }) => {
+  const h = GUIDE2[lang];
+  const [type, setType] = useState('dka');
+  const [sNa, setSNa] = useState(''), [glu, setGlu] = useState(''), [unit, setUnit] = useState('mgdl'), [sK, setSK] = useState(''), [wt, setWt] = useState('');
+  const na = toNum(sNa), rawGlu = toNum(glu), k = toNum(sK), w = toNum(wt);
+  const gluMg = rawGlu ? (unit === 'mgdl' ? rawGlu : rawGlu * 18.016) : null;
+  const corr = na && gluMg ? na + 1.6 * (gluMg - 100) / 100 : null;
+  const dexNow = gluMg != null && gluMg < 250;
+  const kBand = !k ? null : k < 3.5 ? 'low' : k < 5.0 ? 'mid' : 'high';
+  const chips = (ids) => <div className="flex flex-wrap gap-2 mt-2">{ids.map(id => { const f = FLUIDS.find(x => x.id === id); return f ? <FluidChip key={id} f={f} t={t} onOpen={onOpenFluid} /> : null; })}</div>;
+  return (
+    <Modal title={t.guides.dka} sub={h.dkaSub} onClose={onClose} tone="bg-indigo-50" wide attrs={{ 'data-guide-modal': 'dka' }} icon={<div className="p-2 bg-indigo-100 text-indigo-700 rounded-xl shrink-0"><FlameIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
+      <Section>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="flex flex-col gap-1"><span className="text-[11px] font-bold text-slate-500">{h.dkaType}</span><Seg value={type} onChange={setType} options={[['dka', 'DKA'], ['hhs', 'HHS']]} attrs={{ 'data-dka-type': '' }} /></div>
+          <div className="flex flex-col gap-1"><span className="text-[11px] font-bold text-slate-500">{h.gluUnit}</span><Seg value={unit} onChange={setUnit} options={[['mgdl', h.gluMgdl], ['mmol', h.gluMmol]]} attrs={{ 'data-dka-glu-unit': '' }} /></div>
+          <NumInput label={h.bloodGlucose} unit={unit === 'mgdl' ? 'mg/dL' : 'mmol/L'} value={glu} onChange={setGlu} attrs={{ 'data-dka-glucose': '' }} />
+          <NumInput label={h.measuredNa} unit="mmol/L" value={sNa} onChange={setSNa} attrs={{ 'data-dka-na': '' }} />
+          <NumInput label="K⁺" unit="mmol/L" value={sK} onChange={setSK} step="0.1" attrs={{ 'data-dka-k': '' }} />
+          <NumInput label={GUIDE_TEXT[lang].weight} unit="kg" value={wt} onChange={setWt} attrs={{ 'data-dka-weight': '' }} />
+        </div>
+      </Section>
+      {corr != null && (
+        <Section title={h.corrTitle} attrs={{ 'data-dka-corr': '' }}>
+          <div className="text-xl font-extrabold tabular-nums text-indigo-900" data-dka-corr-val>{h.corrValue(corr.toFixed(1))}</div>
+          <p className="text-[11px] text-slate-500 mt-1">{h.corrNote} <RefTag k="adaDka" /> <RefTag k="katz" /></p>
+        </Section>
+      )}
+      <Section title={h.fluidTitle} attrs={{ 'data-dka-fluids': '' }}><Bullets items={h.fluids} />{chips(['nss', 'lrs', 'acetar', 'half'])}</Section>
+      {type === 'hhs' && <Section title={h.hhsTitle} tone="bg-amber-50 border-amber-200" attrs={{ 'data-dka-hhs': '' }}><Bullets items={h.hhs} cls="text-amber-900" /></Section>}
+      <Section title={h.dexTitle} tone={dexNow ? 'bg-emerald-50 border-emerald-300' : 'bg-slate-50 border-slate-200'} attrs={{ 'data-dka-dex': dexNow ? 'now' : 'wait' }}>
+        {gluMg != null && <p className="text-xs font-bold mb-2" data-dka-dex-alert>{dexNow ? h.dexNow : h.dexWait}</p>}
+        <Bullets items={h.dex} />{chips(['d5s', 'd10w'])}
+      </Section>
+      <Section title={h.insulinTitle} attrs={{ 'data-dka-insulin': '' }}>
+        {w ? <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2"><Stat label={h.insulinTitle} value={h.insulinRate(fmt(+(w * 0.1).toFixed(1)))} attrs={{ 'data-dka-insulin-rate': '' }} /><Stat label="< 250 mg/dL" value={h.insulinLow(fmt(+(w * 0.05).toFixed(1)))} /></div> : null}
+        <p className="text-xs text-slate-700">{h.insulinNote} <RefTag k="adaDka" /></p>
+      </Section>
+      <Section title={h.kTitle} tone={kBand === 'low' ? 'bg-rose-50 border-rose-300' : kBand === 'high' ? 'bg-amber-50 border-amber-300' : 'bg-slate-50 border-slate-200'} attrs={{ 'data-dka-k-band': kBand || '' }}>
+        <ul className="flex flex-col gap-1.5">
+          {[['low', h.kLow], ['mid', h.kMid], ['high', h.kHigh]].map(([key, text]) => <li key={key} className={`text-xs leading-snug rounded-lg px-2 py-1.5 ${kBand === key ? 'bg-white font-bold border border-current' : 'text-slate-700'}`} data-dka-k-row={key}>{text}</li>)}
+        </ul>
+        <p className="text-[11px] text-slate-500 mt-1"><RefTag k="adaDka" /></p>
+      </Section>
+    </Modal>
+  );
+};
+
+// --- GIR (ESPEN ICU 2019 limits) ---
+const GirGuide = ({ lang, t, onClose, onOpenFluid }) => {
+  const g = GUIDE_TEXT[lang], h = GUIDE2[lang];
+  const [mode, setMode] = useState('rate'), [weight, setWeight] = useState(''), [fluidKey, setFluidKey] = useState('d5w'), [customDex, setCustomDex] = useState('5'), [rate, setRate] = useState(''), [targetGir, setTargetGir] = useState('');
+  const dexFluids = useMemo(() => FLUIDS.filter(f => dexOf(f) > 0), []);
+  const sel = FLUIDS.find(f => f.id === fluidKey);
+  const pct = fluidKey === 'custom' ? (toNum(customDex) || 0) : (sel ? dexOf(sel) / 10 : 0);
+  const wt = toNum(weight) || 0, r = toNum(rate) || 0, tg = toNum(targetGir) || 0;
+  const gir = mode === 'rate' ? (wt && r && pct ? (r * pct * 10) / (wt * 60) : 0) : tg;
+  const mlh = mode === 'rate' ? r : (wt && tg && pct ? (tg * wt * 60) / (pct * 10) : 0);
+  const dayG = mlh && pct ? mlh * 24 * pct * 10 / 1000 : 0;
+  const band = gir > 5 ? 'over' : gir > 3 ? 'high' : gir ? 'ok' : null;
+  return (
+    <Modal title={t.guides.gir} sub={h.girSub} onClose={onClose} tone="bg-teal-50" wide attrs={{ 'data-guide-modal': 'gir' }} icon={<div className="p-2 bg-teal-100 text-teal-700 rounded-xl shrink-0"><TrendingUpIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
+      <Section>
+        <Seg value={mode} onChange={setMode} options={[['rate', h.girModeRate], ['target', h.girModeTarget]]} attrs={{ 'data-gir-mode': '' }} />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
+          <NumInput label={g.weight} unit={g.kg} value={weight} onChange={setWeight} attrs={{ 'data-gir-weight': '' }} />
+          <label className="flex flex-col gap-1 min-w-0"><span className="text-[11px] font-bold text-slate-500">{h.girFluid}</span>
+            <select value={fluidKey} onChange={(e) => setFluidKey(e.target.value)} data-gir-fluid className="w-full min-w-0 h-9 px-2 rounded-lg border border-slate-200 bg-white text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500">
+              {dexFluids.map(f => <option key={f.id} value={f.id}>{f.short} ({fmt(dexOf(f) / 10)}%)</option>)}
+              <option value="custom">{h.girDexCustom}</option>
+            </select></label>
+          {fluidKey === 'custom' ? <NumInput label={h.girDexCustom} unit="%" value={customDex} onChange={setCustomDex} attrs={{ 'data-gir-custom': '' }} /> : <div />}
+          {mode === 'rate' ? <NumInput label={h.girRate} unit="mL/h" value={rate} onChange={setRate} attrs={{ 'data-gir-rate': '' }} /> : <NumInput label={h.girTarget} unit="mg/kg/min" value={targetGir} onChange={setTargetGir} attrs={{ 'data-gir-target': '' }} />}
+        </div>
+        <p className="text-[11px] text-slate-500 mt-2">{h.girFormula}</p>
+      </Section>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-gir-result>
+        <Stat label={h.girResult} value={gir ? `${gir.toFixed(2)} mg/kg/min` : '—'} tone={band === 'over' ? 'border-rose-300 bg-rose-50 text-rose-900' : band === 'high' ? 'border-amber-300 bg-amber-50 text-amber-900' : 'border-teal-200 bg-teal-50 text-teal-900'} attrs={{ 'data-gir-val': band || '' }} />
+        <Stat label={h.girRate} value={mlh ? `${fmt(+mlh.toFixed(1))} mL/h` : '—'} tone="border-sky-200 bg-sky-50 text-sky-900" attrs={{ 'data-gir-mlh': '' }} />
+        <Stat label={`${h.girDaily} / ${h.girKcal}`} value={dayG ? `${Math.round(dayG)} g` : '—'} sub={dayG ? `≈ ${Math.round(dayG * KCAL_PER_G_HYDROUS)} kcal` : ''} tone="border-indigo-200 bg-indigo-50 text-indigo-900" attrs={{ 'data-gir-daily': '' }} />
+      </div>
+      {band === 'over' && <p className="text-xs font-bold text-rose-900 bg-rose-50 border border-rose-200 rounded-lg px-3 py-2" data-gir-alert="over">{h.girOver}</p>}
+      {band === 'high' && <p className="text-xs font-bold text-amber-900 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2" data-gir-alert="high">{h.girHigh}</p>}
+      <Section title={g.limitsTitle}><Bullets items={h.girLimits} /></Section>
+    </Modal>
+  );
+};
+
+// --- ICP & osmotherapy (SIBICC 2019, labels) ---
+const IcpGuide = ({ lang, t, onClose, onOpenFluid }) => {
+  const g = GUIDE_TEXT[lang], h = GUIDE2[lang];
+  const [tab, setTab] = useState('mannitol');
+  const [weight, setWeight] = useState(''), [manDose, setManDose] = useState(''), [osm, setOsm] = useState('');
+  const [gNa, setGNa] = useState(''), [gGlu, setGGlu] = useState(''), [gBun, setGBun] = useState('');
+  const [vol, setVol] = useState(''), [sNa, setSNa] = useState('');
+  const [sbp, setSbp] = useState(''), [dbp, setDbp] = useState(''), [icp, setIcp] = useState('');
+  const w = toNum(weight) || 0, d = toNum(manDose) || 0, mOsm = toNum(osm) || 0;
+  const grams = w && d ? w * d : 0;
+  const calcOsm = toNum(gNa) ? 2 * toNum(gNa) + (toNum(gGlu) || 0) / 18 + (toNum(gBun) || 0) / 2.8 : 0;
+  const gap = mOsm && calcOsm ? mOsm - calcOsm : null;
+  const v = toNum(vol) || 0, na = toNum(sNa) || 0;
+  const rise = w && v && na ? adrogueDelta(513, na, w * 0.6, v / 1000) : null;
+  const after = rise != null ? na + rise : null;
+  const S = toNum(sbp) || 0, D = toNum(dbp) || 0, I = toNum(icp);
+  const map = S && D ? D + (S - D) / 3 : 0;
+  const cpp = map && I != null ? map - I : null;
+  return (
+    <Modal title={t.guides.icp} sub={h.icpSub} onClose={onClose} tone="bg-purple-50" wide attrs={{ 'data-guide-modal': 'icp' }} icon={<div className="p-2 bg-purple-100 text-purple-700 rounded-xl shrink-0"><BrainIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
+      <GTabs tabs={Object.entries(h.icpTabs)} value={tab} onChange={setTab} tone="bg-purple-700 border-purple-700" attr="data-icp-tabs" />
+      {tab === 'mannitol' && (
+        <div className="flex flex-col gap-3" data-icp-mannitol-view>
+          <Section>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <NumInput label={g.weight} unit={g.kg} value={weight} onChange={setWeight} attrs={{ 'data-icp-weight': '' }} />
+              <NumInput label={h.manDose} unit="g/kg" value={manDose} onChange={setManDose} step="0.05" attrs={{ 'data-man-dose': '' }} />
+              <NumInput label={h.measOsm} unit="mOsm/kg" value={osm} onChange={setOsm} attrs={{ 'data-man-osm': '' }} />
+            </div>
+            <div className="flex flex-wrap gap-1.5 mt-2">{['0.25', '0.5', '1.0'].map(x => <button key={x} type="button" onClick={() => setManDose(x)} aria-pressed={manDose === x} data-man-preset={x} className={`px-2.5 py-1.5 rounded-lg border text-xs font-bold ${manDose === x ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600'}`}>{x} g/kg</button>)}</div>
+          </Section>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <Stat label={h.manGrams} value={grams ? `${fmt(+grams.toFixed(1))} g` : '—'} tone="border-purple-200 bg-purple-50 text-purple-900" attrs={{ 'data-man-grams': '' }} />
+            <Stat label={h.manVol} value={grams ? `${Math.round(grams * 5)} mL` : '—'} sub="200 g/L" tone="border-sky-200 bg-sky-50 text-sky-900" attrs={{ 'data-man-vol': '' }} />
+          </div>
+          {mOsm >= 320 && <p className="text-xs font-bold text-rose-900 bg-rose-50 border border-rose-300 rounded-lg px-3 py-2" data-man-osm-alert>{h.osmOver} <RefTag k="sibicc" /></p>}
+          <Section><Bullets items={h.man} /></Section>
+          <Section title={h.gapTitle} attrs={{ 'data-man-gap': '' }}>
+            <div className="grid grid-cols-3 gap-2">
+              <NumInput label={h.gapNa} unit="mmol/L" value={gNa} onChange={setGNa} attrs={{ 'data-gap-na': '' }} />
+              <NumInput label={h.gapGlu} unit="mg/dL" value={gGlu} onChange={setGGlu} attrs={{ 'data-gap-glu': '' }} />
+              <NumInput label={h.gapBun} unit="mg/dL" value={gBun} onChange={setGBun} attrs={{ 'data-gap-bun': '' }} />
+            </div>
+            <p className="text-xs font-bold text-slate-700 mt-2" data-gap-result>{h.gapCalc}: {calcOsm ? calcOsm.toFixed(1) : '—'} · {h.gapVal}: {gap != null ? `${gap >= 0 ? '+' : ''}${gap.toFixed(1)}` : '—'} mOsm/kg</p>
+            <p className="text-[11px] text-slate-500 mt-1">{h.gapNote} <RefTag k="usMan" /></p>
+          </Section>
+          {(() => { const f = FLUIDS.find(x => x.id === 'man20'); return f ? <div className="self-start"><FluidChip f={f} t={t} onOpen={onOpenFluid} /></div> : null; })()}
+        </div>
+      )}
+      {tab === 'nacl3' && (
+        <div className="flex flex-col gap-3" data-icp-nacl3-view>
+          <Section>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <NumInput label={g.weight} unit={g.kg} value={weight} onChange={setWeight} attrs={{ 'data-icp-weight': '' }} />
+              <NumInput label={h.naclVol} unit="mL" value={vol} onChange={setVol} attrs={{ 'data-nacl3-vol': '' }} />
+              <NumInput label={h.naclNa} unit="mmol/L" value={sNa} onChange={setSNa} attrs={{ 'data-nacl3-na': '' }} />
+            </div>
+          </Section>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <Stat label={h.naclRise} value={rise != null ? `+${rise.toFixed(1)} mmol/L` : '—'} tone="border-purple-200 bg-purple-50 text-purple-900" attrs={{ 'data-nacl3-rise': '' }} />
+            <Stat label={h.naclAfter} value={after != null ? `${after.toFixed(1)} mmol/L` : '—'} tone={after >= 155 || na >= 155 ? 'border-rose-300 bg-rose-50 text-rose-900' : 'border-sky-200 bg-sky-50 text-sky-900'} attrs={{ 'data-nacl3-after': '' }} />
+          </div>
+          {(na >= 155 || (after != null && after >= 155)) && <p className="text-xs font-bold text-rose-900 bg-rose-50 border border-rose-300 rounded-lg px-3 py-2" data-nacl3-alert>{h.naclOver} <RefTag k="sibicc" /></p>}
+          <Section><Bullets items={h.nacl} /></Section>
+          {(() => { const f = FLUIDS.find(x => x.id === 'nacl3'); return f ? <div className="self-start"><FluidChip f={f} t={t} onOpen={onOpenFluid} /></div> : null; })()}
+        </div>
+      )}
+      {tab === 'choose' && <Section attrs={{ 'data-icp-choose-view': '' }}><Bullets items={h.choose} /></Section>}
+      {tab === 'cpp' && (
+        <div className="flex flex-col gap-3" data-icp-cpp-view>
+          <Section>
+            <div className="grid grid-cols-3 gap-3">
+              <NumInput label={h.sbp} unit="mmHg" value={sbp} onChange={setSbp} attrs={{ 'data-cpp-sbp': '' }} />
+              <NumInput label={h.dbp} unit="mmHg" value={dbp} onChange={setDbp} attrs={{ 'data-cpp-dbp': '' }} />
+              <NumInput label={h.icpVal} unit="mmHg" value={icp} onChange={setIcp} attrs={{ 'data-cpp-icp': '' }} />
+            </div>
+            <p className="text-[11px] text-slate-500 mt-2">{h.cppFormula}</p>
+          </Section>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <Stat label={h.map} value={map ? `${map.toFixed(1)} mmHg` : '—'} attrs={{ 'data-cpp-map': '' }} />
+            <Stat label={h.icpVal} value={I != null ? `${fmt(I)} mmHg` : '—'} sub={I != null ? (I > 22 ? h.icpHigh : h.icpOk) : ''} tone={I > 22 ? 'border-rose-300 bg-rose-50 text-rose-900' : 'border-slate-200 bg-slate-50 text-slate-900'} attrs={{ 'data-cpp-icp-val': '' }} />
+            <Stat label={h.cppVal} value={cpp != null ? `${cpp.toFixed(1)} mmHg` : '—'} sub={cpp != null ? (cpp < 60 ? h.cppLow : cpp > 70 ? h.cppHigh : h.cppIn) : ''} tone={cpp != null && (cpp < 60 || cpp > 70) ? 'border-amber-300 bg-amber-50 text-amber-900' : 'border-emerald-200 bg-emerald-50 text-emerald-900'} attrs={{ 'data-cpp-val': '' }} />
+          </div>
+          <Section><Bullets items={h.cpp} /></Section>
+        </div>
+      )}
+    </Modal>
+  );
+};
+
+// --- Albumin (EASL 2018 and trials) ---
+const AlbuminGuide = ({ lang, t, onClose, onOpenFluid }) => {
+  const g = GUIDE_TEXT[lang], h = GUIDE2[lang];
+  const [tab, setTab] = useState('lvp');
+  const [litres, setLitres] = useState(''), [weight, setWeight] = useState('');
+  const L = toNum(litres) || 0, w = toNum(weight) || 0;
+  const lvpG = L * 8;
+  const sbp1 = w * 1.5, sbp3 = w * 1;
+  const hrsG = w ? Math.min(w, 100) : 0;
+  const vols = (gr) => [<Stat key="20" label={h.vol20} value={gr ? `${Math.round(gr * 5)} mL` : '—'} tone="border-sky-200 bg-sky-50 text-sky-900" />, <Stat key="25" label={h.vol25} value={gr ? `${Math.round(gr * 4)} mL` : '—'} tone="border-sky-200 bg-sky-50 text-sky-900" />];
+  const chips = <div className="flex flex-wrap gap-2">{['alb5', 'alb20', 'alb25'].map(id => { const f = FLUIDS.find(x => x.id === id); return f ? <FluidChip key={id} f={f} t={t} onOpen={onOpenFluid} /> : null; })}</div>;
+  return (
+    <Modal title={t.guides.albumin} sub={h.albSub} onClose={onClose} tone="bg-purple-50" wide attrs={{ 'data-guide-modal': 'albumin' }} icon={<div className="p-2 bg-purple-100 text-purple-700 rounded-xl shrink-0"><DropletIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
+      <GTabs tabs={Object.entries(h.albTabs)} value={tab} onChange={setTab} tone="bg-purple-700 border-purple-700" attr="data-alb-tabs" />
+      {tab === 'lvp' && (
+        <div className="flex flex-col gap-3" data-alb-lvp>
+          <Section><div className="w-full sm:w-56"><NumInput label={h.removed} unit="L" value={litres} onChange={setLitres} attrs={{ 'data-alb-litres': '' }} /></div></Section>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2"><Stat label={h.albGrams} value={lvpG ? `${fmt(lvpG)} g` : '—'} sub="8 g/L" tone="border-purple-200 bg-purple-50 text-purple-900" attrs={{ 'data-alb-lvp-g': '' }} />{vols(lvpG)}</div>
+          {L > 0 && L <= 5 && <p className="text-xs text-slate-600" data-alb-under5>{h.lvpUnder5}</p>}
+          <Section><Bullets items={h.lvp} /></Section>
+        </div>
+      )}
+      {tab === 'sbp' && (
+        <div className="flex flex-col gap-3" data-alb-sbp>
+          <Section><div className="w-full sm:w-56"><NumInput label={g.weight} unit={g.kg} value={weight} onChange={setWeight} attrs={{ 'data-alb-weight': '' }} /></div></Section>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <Stat label={h.sbpDay1} value={w ? `${fmt(+sbp1.toFixed(1))} g` : '—'} tone="border-purple-200 bg-purple-50 text-purple-900" attrs={{ 'data-alb-sbp1': '' }} />
+            <Stat label={h.sbpDay3} value={w ? `${fmt(+sbp3.toFixed(1))} g` : '—'} tone="border-purple-200 bg-purple-50 text-purple-900" attrs={{ 'data-alb-sbp3': '' }} />
+            <Stat label={h.sbpTotal} value={w ? `${fmt(+(sbp1 + sbp3).toFixed(1))} g` : '—'} />
+          </div>
+          <Section><Bullets items={h.sbp} /></Section>
+        </div>
+      )}
+      {tab === 'hrs' && (
+        <div className="flex flex-col gap-3" data-alb-hrs>
+          <Section><div className="w-full sm:w-56"><NumInput label={g.weight} unit={g.kg} value={weight} onChange={setWeight} attrs={{ 'data-alb-weight': '' }} /></div></Section>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2"><Stat label={h.hrsDose} value={hrsG ? `${fmt(hrsG)} g` : '—'} sub={w > 100 ? h.hrsCapped : '1 g/kg'} tone="border-purple-200 bg-purple-50 text-purple-900" attrs={{ 'data-alb-hrs-g': '' }} />{vols(hrsG)}</div>
+          <Section><Bullets items={h.hrs} /></Section>
+        </div>
+      )}
+      {tab === 'compare' && (
+        <div className="flex flex-col gap-3" data-alb-compare>
+          <div className="overflow-x-auto"><table className="w-full text-xs min-w-[420px]">
+            <thead><tr className="text-slate-500">{h.cmpHead.map((c, i) => <th key={i} className="text-left p-1.5 font-bold">{c}</th>)}</tr></thead>
+            <tbody>{h.cmpRows.map((row, i) => <tr key={i} className="border-t border-slate-200">{row.map((c, j) => <td key={j} className={`p-1.5 align-top ${j ? 'text-slate-800 font-medium' : 'text-slate-500 font-bold'}`}>{c}</td>)}</tr>)}</tbody>
+          </table></div>
+          <p className="text-[11px] text-slate-500">{h.cmpNote} <RefTag k="usAlb5" /> <RefTag k="usAlb" /> <RefTag k="usAlb25" /></p>
+          <Section tone="bg-rose-50 border-rose-200"><Bullets items={h.albSafety} cls="text-rose-900" /></Section>
+        </div>
+      )}
+      {chips}
+    </Modal>
+  );
+};
+
 const ChooseGuide = ({ lang, t, onClose, onOpenFluid, onOpenGuide }) => {
   const g = GUIDE_TEXT[lang];
   const [tab, setTab] = useState('resus');
@@ -2393,7 +2772,7 @@ const MaintGuide = ({ lang, t, onClose }) => {
   const autoVol = water ? Math.round((water[0] + water[1]) / 2 / 50) * 50 : null;
   const V = toNum(vol) || autoVol;
   const bmi = w && h ? (w / ((h / 100) ** 2)) : null;
-  const rows = FLUIDS.filter(f => f.family !== 'hypertonic');
+  const rows = FLUIDS.filter(f => f.family !== 'hypertonic' && isCrystalloid(f));
   return (
     <Modal title={t.guides.maint} sub={g.maintSub} onClose={onClose} tone="bg-emerald-50" wide attrs={{ 'data-guide-modal': 'maint' }} icon={<div className="p-2 bg-emerald-100 text-emerald-700 rounded-xl shrink-0"><Stethoscope className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
       <Section>
@@ -2450,88 +2829,39 @@ const MaintGuide = ({ lang, t, onClose }) => {
   );
 };
 
-// --- 3. Sodium change per litre (Adrogué–Madias 2000) & Acute 3% Bolus ---
+// --- 3. Relowering & Overcorrection of Hyponatremia (Sterns, Spasovski, Verbalis) ---
 const TBW_FRACTION = { m: { young: 0.6, old: 0.5 }, f: { young: 0.5, old: 0.45 } };
-const SodiumGuide = ({ lang, t, onClose, selectedIds = [], onOpenFluid }) => {
+
+// --- 4. Sodium change per litre (Adrogué–Madias 2000) & Acute 3% Bolus ---
+const SodiumGuide = ({ lang, t, onClose, selectedIds = [], onOpenFluid, initialMode = 'continuous' }) => {
   const g = GUIDE_TEXT[lang];
-  const [mode, setMode] = useState('continuous'); // 'continuous' | 'bolus'
+  const [mode, setMode] = useState(initialMode); // 'continuous' | 'bolus' | 'relowering'
   const [na, setNa] = useState('');
   const [wt, setWt] = useState('');
   const [sex, setSex] = useState('m');
   const [old, setOld] = useState(false);
   const [plan, setPlan] = useState('');
   const [dir, setDir] = useState(1); // 1 = raise (hyponatraemia), -1 = lower (hypernatraemia)
-  const [bolusPick, setBolusPick] = useState('100'); // '100' | '150' | '2ml'
 
   const sNa = toNum(na), w = toNum(wt), planned = parseFloat(plan);
   const frac = TBW_FRACTION[sex][old ? 'old' : 'young'];
   const tbw = w ? w * frac : null;
-  const rows = sNa && tbw ? FLUIDS.map(f => ({ f, d: (naK(f) - sNa) / (tbw + 1) }))
+  const rows = sNa && tbw ? FLUIDS.filter(isCrystalloid).map(f => ({ f, d: (naK(f) - sNa) / (tbw + 1) }))
     .sort((a, b) => (selectedIds.includes(b.f.id) - selectedIds.includes(a.f.id)) || b.d - a.d) : [];
 
-  const bolusVol = bolusPick === '2ml' ? (w ? Math.round(w * 2) : 100) : parseInt(bolusPick, 10);
-  const bolusRise = tbw && sNa ? ((513 - sNa) * (bolusVol / 1000)) / (tbw + (bolusVol / 1000)) : null;
 
   return (
-    <Modal title={t.guides.sodium} sub={mode === 'bolus' ? g.bolusSub : g.sodiumSub} onClose={onClose} tone={mode === 'bolus' ? 'bg-rose-50' : 'bg-violet-50'} wide attrs={{ 'data-guide-modal': 'sodium' }} icon={<div className={`p-2 ${mode === 'bolus' ? 'bg-rose-100 text-rose-700' : 'bg-violet-100 text-violet-700'} rounded-xl shrink-0`}><ScaleIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
+    <Modal title={t.guides.sodium} sub={mode === 'bolus' ? GUIDE2[lang].bolusSub : mode === 'relowering' ? GUIDE2[lang].relowerSub : g.sodiumSub} onClose={onClose} tone={mode === 'bolus' ? 'bg-rose-50' : mode === 'relowering' ? 'bg-amber-50' : 'bg-violet-50'} wide attrs={{ 'data-guide-modal': 'sodium' }} icon={<div className={`p-2 ${mode === 'bolus' ? 'bg-rose-100 text-rose-700' : mode === 'relowering' ? 'bg-amber-100 text-amber-800' : 'bg-violet-100 text-violet-700'} rounded-xl shrink-0`}>{mode === 'relowering' ? <ShieldAlertIcon className="w-5 h-5" /> : <ScaleIcon className="w-5 h-5" />}</div>} footer={<CloseBtn onClose={onClose} t={t} />}>
       <div className="flex flex-wrap gap-1.5 mb-3" role="tablist" data-sodium-tabs>
         <button type="button" role="tab" aria-selected={mode === 'continuous'} onClick={() => setMode('continuous')} data-sodium-tab="continuous" className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${mode === 'continuous' ? 'bg-violet-600 border-violet-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>{g.modeContinuous}</button>
         <button type="button" role="tab" aria-selected={mode === 'bolus'} onClick={() => setMode('bolus')} data-sodium-tab="bolus" className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${mode === 'bolus' ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>{g.modeBolus}</button>
+        <button type="button" role="tab" aria-selected={mode === 'relowering'} onClick={() => setMode('relowering')} data-sodium-tab="relowering" className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${mode === 'relowering' ? 'bg-amber-800 border-amber-800 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>{g.modeRelowering}</button>
       </div>
 
-      {mode === 'bolus' ? (
-        <div className="flex flex-col gap-3" data-sodium-bolus-view>
-          <Section tone="bg-rose-50 border-rose-200" title={g.bolusIndicationsTitle} attrs={{ 'data-bolus-indications': '' }}>
-            <p className="text-xs text-rose-900 leading-snug font-medium">{g.bolusIndications} <RefTag k="spasovski" /></p>
-          </Section>
-
-          <Section title={g.bolusRegimenTitle} attrs={{ 'data-bolus-regimen': '' }}>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
-              <NumInput label={g.serumNa} unit="mmol/L" value={na} onChange={setNa} attrs={{ 'data-bolus-na': '' }} />
-              <NumInput label={g.weight} unit={g.kg} value={wt} onChange={setWt} attrs={{ 'data-bolus-weight': '' }} />
-              <div className="flex flex-col gap-1"><span className="text-[11px] font-bold text-slate-500">{g.sex}</span><Seg value={sex} onChange={setSex} options={[['m', g.male], ['f', g.female]]} /></div>
-              <div className="flex flex-col gap-1 justify-end"><Toggle on={old} onClick={() => setOld(v => !v)}>{g.elderly}</Toggle></div>
-            </div>
-
-            <div className="flex flex-col gap-1.5 mb-3">
-              <span className="text-[11px] font-bold text-slate-500">{g.bolusDose}</span>
-              <div className="flex flex-wrap items-center gap-2" data-bolus-pick>
-                {[['100', g.bolus100], ['150', g.bolus150], ['2ml', `${g.bolus2ml}${w ? ` (${Math.round(w * 2)} mL)` : ''}`]].map(([k, label]) => (
-                  <button key={k} type="button" onClick={() => setBolusPick(k)} data-bolus-btn={k} aria-pressed={bolusPick === k} className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${bolusPick === k ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'}`}>{label}</button>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-xl border border-violet-200 bg-violet-50 p-3 text-violet-900 mb-3" data-bolus-calc-box>
-              <div className="text-xs font-bold mb-1">3% NaCl · {bolusVol} mL IV over 10–15 min</div>
-              {bolusRise ? (
-                <div className="text-sm font-extrabold text-violet-950 tabular-nums" data-bolus-rise-text>{g.bolusAcuteRise(bolusRise.toFixed(1))}</div>
-              ) : (
-                <div className="text-xs text-violet-700">{g.enterNa}</div>
-              )}
-            </div>
-
-            <ol className="flex flex-col gap-2 list-decimal list-inside text-xs text-slate-700">
-              <li className="leading-snug"><b className="text-slate-900">Bolus 1:</b> {g.bolusStep1}</li>
-              <li className="leading-snug"><b className="text-slate-900">20 min check:</b> {g.bolusStep2}</li>
-              <li className="leading-snug"><b className="text-slate-900">Bolus 3:</b> {g.bolusStep3}</li>
-              <li className="leading-snug font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 rounded p-1.5 mt-1">{g.bolusTargetStop}</li>
-            </ol>
-            <div className="mt-3">
-              <button type="button" onClick={() => onOpenFluid('nacl3')} className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700 hover:underline">
-                <BagIcon family="hypertonic" className="w-3.5 h-4" /> Open 3% NaCl details & warnings →
-              </button>
-            </div>
-          </Section>
-
-          <Section title={g.bolusODSTitle} tone="bg-amber-50 border-amber-200">
-            <p className="text-xs text-amber-900 leading-snug font-medium mb-2">{g.bolusODSLimit} <RefTag k="spasovski" /></p>
-            <div className="border-t border-amber-200 pt-2">
-              <div className="text-xs font-bold text-amber-950 mb-0.5">{g.bolusRescueTitle}</div>
-              <p className="text-xs text-amber-900 leading-snug">{g.bolusRescue}</p>
-            </div>
-          </Section>
-        </div>
+      {mode === 'relowering' ? (
+        <ReloweringContent lang={lang} t={t} onOpenFluid={onOpenFluid} />
+      ) : mode === 'bolus' ? (
+        <BolusContent lang={lang} t={t} onOpenFluid={onOpenFluid} />
       ) : (
         <>
           <Section>
@@ -2585,167 +2915,7 @@ const SodiumGuide = ({ lang, t, onClose, selectedIds = [], onOpenFluid }) => {
 };
 
 // --- 4. Potassium replacement & safe rate guide ---
-const PotassiumGuide = ({ lang, t, onClose, onOpenFluid }) => {
-  const g = GUIDE_TEXT[lang];
-  const [kVal, setKVal] = useState('2.8');
-  const [wt, setWt] = useState('60');
-  const [access, setAccess] = useState('periph'); // 'periph' | 'central'
-  const k = toNum(kVal), w = toNum(wt);
-
-  const deficit = k && k < 4.0 && w ? Math.round((4.0 - k) * (w / 70) * 333) : 0;
-  const defLow = Math.max(20, Math.round(deficit * 0.75));
-  const defHigh = Math.round(deficit * 1.25);
-
-  return (
-    <Modal title={t.guides.kguide} sub={g.potassiumSub} onClose={onClose} tone="bg-amber-50" wide attrs={{ 'data-guide-modal': 'kguide' }} icon={<div className="p-2 bg-amber-100 text-amber-700 rounded-xl shrink-0"><ZapIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
-      <Section>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <NumInput label={g.serumK} unit="mmol/L" value={kVal} onChange={setKVal} step="0.1" attrs={{ 'data-k-serum': '' }} />
-          <NumInput label={g.weight} unit={g.kg} value={wt} onChange={setWt} attrs={{ 'data-k-weight': '' }} />
-          <div className="flex flex-col gap-1">
-            <span className="text-[11px] font-bold text-slate-500">{g.kAccess}</span>
-            <Seg value={access} onChange={setAccess} options={[['periph', g.accessPeriph], ['central', g.accessCentral]]} attrs={{ 'data-k-access': '' }} />
-          </div>
-        </div>
-      </Section>
-
-      <Section title={g.kDeficitTitle} attrs={{ 'data-k-deficit-section': '' }}>
-        {k && k < 3.5 && w ? (
-          <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-amber-950 mb-2">
-            <div className="text-lg font-extrabold tabular-nums" data-k-deficit-val>{g.kDeficitEst(defLow, defHigh)}</div>
-            <p className="text-xs text-amber-900 mt-1 leading-snug">{g.kDeficitNote} <RefTag k="sternsK" /></p>
-          </div>
-        ) : (
-          <p className="text-xs text-slate-600 mb-2 leading-snug">{g.kNormalNote}</p>
-        )}
-      </Section>
-
-      <Section title={g.kRateTitle} tone="bg-blue-50 border-blue-200" attrs={{ 'data-k-rates-section': '' }}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-2">
-          <div className={`p-3 rounded-xl border ${access === 'periph' ? 'bg-white border-blue-400 shadow-sm' : 'bg-blue-50/50 border-blue-200 opacity-75'}`}>
-            <div className="text-xs font-bold text-blue-900 mb-1">{g.accessPeriph}</div>
-            <div className="text-xl font-extrabold text-blue-950 tabular-nums mb-1" data-k-rate-periph>Max 10 mmol/h</div>
-            <p className="text-xs text-slate-600 leading-snug">{g.kRatePeriph}</p>
-          </div>
-          <div className={`p-3 rounded-xl border ${access === 'central' ? 'bg-white border-blue-400 shadow-sm' : 'bg-blue-50/50 border-blue-200 opacity-75'}`}>
-            <div className="text-xs font-bold text-blue-900 mb-1">{g.accessCentral}</div>
-            <div className="text-xl font-extrabold text-blue-950 tabular-nums mb-1" data-k-rate-central>Up to 20 mmol/h</div>
-            <p className="text-xs text-slate-600 leading-snug">{g.kRateCent}</p>
-          </div>
-        </div>
-      </Section>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <Section title={g.kVehicleTitle} tone="bg-rose-50 border-rose-200" attrs={{ 'data-k-vehicle-alert': '' }}>
-          <p className="text-xs text-rose-900 leading-snug">{g.kVehicleAlert} <RefTag k="sternsK" /></p>
-        </Section>
-        <Section title={g.kMgTitle} tone="bg-emerald-50 border-emerald-200" attrs={{ 'data-k-mg-alert': '' }}>
-          <p className="text-xs text-emerald-900 leading-snug">{g.kMgAlert} <RefTag k="sternsK" /></p>
-        </Section>
-      </div>
-
-      <Section title={g.kPreMixTitle}>
-        <div className="flex flex-wrap gap-2">
-          {['d5s2k20', 'd5s2k40'].map(id => {
-            const f = FLUIDS.find(x => x.id === id);
-            return f ? <FluidChip key={f.id} f={f} t={t} onOpen={onOpenFluid} /> : null;
-          })}
-        </div>
-      </Section>
-    </Modal>
-  );
-};
-
 // --- 5. DKA / HHS Fluid & Electrolyte Protocol ---
-const DkaGuide = ({ lang, t, onClose, onOpenFluid }) => {
-  const g = GUIDE_TEXT[lang];
-  const [sNa, setSNa] = useState('132');
-  const [glu, setGlu] = useState('450');
-  const [unit, setUnit] = useState('mgdl'); // 'mgdl' | 'mmol'
-  const [sK, setSK] = useState('4.2');
-  const [type, setType] = useState('dka'); // 'dka' | 'hhs'
-
-  const na = toNum(sNa), rawGlu = toNum(glu), k = toNum(sK);
-  const gluMg = unit === 'mgdl' ? rawGlu : (rawGlu ? rawGlu * 18.016 : null);
-  const corrNa = na && gluMg && gluMg > 100 ? na + 0.016 * (gluMg - 100) : na;
-  const isNaHigh = corrNa && corrNa >= 135;
-
-  const dexThreshold = type === 'dka' ? 250 : 300;
-  const needsDex = gluMg && gluMg <= dexThreshold;
-
-  return (
-    <Modal title={t.guides.dka} sub={g.dkaSub} onClose={onClose} tone="bg-indigo-50" wide attrs={{ 'data-guide-modal': 'dka' }} icon={<div className="p-2 bg-indigo-100 text-indigo-700 rounded-xl shrink-0"><FlameIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
-      <Section>
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-2">
-          <div className="col-span-2 sm:col-span-1 flex flex-col gap-1">
-            <span className="text-[11px] font-bold text-slate-500">{g.dkaType}</span>
-            <Seg value={type} onChange={setType} options={[['dka', 'DKA'], ['hhs', 'HHS']]} attrs={{ 'data-dka-type': '' }} />
-          </div>
-          <NumInput label={g.measuredNa} unit="mmol/L" value={sNa} onChange={setSNa} attrs={{ 'data-dka-na': '' }} />
-          <div className="flex flex-col gap-1">
-            <span className="text-[11px] font-bold text-slate-500">{g.gluUnit}</span>
-            <Seg value={unit} onChange={setUnit} options={[['mgdl', g.gluMgdl], ['mmol', g.gluMmol]]} attrs={{ 'data-dka-glu-unit': '' }} />
-          </div>
-          <NumInput label={g.bloodGlucose} unit={unit === 'mgdl' ? 'mg/dL' : 'mmol/L'} value={glu} onChange={setGlu} attrs={{ 'data-dka-glucose': '' }} />
-          <NumInput label="K⁺" unit="mmol/L" value={sK} onChange={setSK} step="0.1" attrs={{ 'data-dka-k': '' }} />
-        </div>
-      </Section>
-
-      {corrNa && (
-        <Section title={g.correctedNaTitle} tone="bg-slate-100/70 border-slate-200" attrs={{ 'data-dka-corrna-card': '' }}>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <span className="text-xl font-extrabold text-indigo-950 tabular-nums" data-dka-corrna-val>{corrNa.toFixed(1)} mmol/L</span>
-              <span className={`ml-2 px-2 py-0.5 rounded text-xs font-bold ${isNaHigh ? 'bg-amber-100 text-amber-800' : 'bg-sky-100 text-sky-800'}`} data-dka-corrna-badge>
-                {isNaHigh ? '≥ 135 mmol/L' : '< 135 mmol/L'}
-              </span>
-            </div>
-            <p className="text-[11px] text-slate-500">{g.correctedNaFormula} <RefTag k="katz" /></p>
-          </div>
-        </Section>
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <Section title={g.dkaStep1Title} attrs={{ 'data-dka-step1': '' }}>
-          <p className="text-xs text-slate-700 leading-snug mb-2">{g.dkaStep1Desc} <RefTag k="adaDka" /></p>
-          <div className="inline-block">
-            {(() => { const f = FLUIDS.find(x => x.id === 'nss'); return f ? <FluidChip key={f.id} f={f} t={t} onOpen={onOpenFluid} /> : null; })()}
-          </div>
-        </Section>
-
-        <Section title={g.dkaStep2Title} attrs={{ 'data-dka-step2': '' }}>
-          <p className="text-xs text-slate-700 leading-snug mb-2">
-            {isNaHigh ? g.dkaStep2High : g.dkaStep2Low} <RefTag k="adaDka" />
-          </p>
-          <div className="inline-block">
-            {(() => { const f = FLUIDS.find(x => x.id === (isNaHigh ? 'half' : 'nss')); return f ? <FluidChip key={f.id} f={f} t={t} onOpen={onOpenFluid} /> : null; })()}
-          </div>
-        </Section>
-      </div>
-
-      <Section title={g.dkaStep3Title} tone={needsDex ? 'bg-emerald-50 border-emerald-300' : 'bg-slate-50 border-slate-200'} attrs={{ 'data-dka-step3': '' }}>
-        <div className="text-xs leading-snug font-bold mb-1.5" data-dka-dex-alert>
-          {needsDex ? g.dkaStep3AddNow(dexThreshold) : g.dkaStep3Wait(dexThreshold)}
-        </div>
-        <p className="text-[11px] text-slate-600 mb-2">{g.dkaStep3Threshold(type === 'dka' ? 'DKA' : 'HHS', dexThreshold)} <RefTag k="adaDka" /></p>
-        <div className="flex flex-wrap gap-2">
-          {['d5s2', 'd5s', 'd5s2k20'].map(id => {
-            const f = FLUIDS.find(x => x.id === id);
-            return f ? <FluidChip key={f.id} f={f} t={t} onOpen={onOpenFluid} /> : null;
-          })}
-        </div>
-      </Section>
-
-      <Section title={g.dkaStep4Title} tone={k && k < 3.3 ? 'bg-rose-50 border-rose-300' : k && k > 5.2 ? 'bg-amber-50 border-amber-300' : 'bg-emerald-50 border-emerald-300'} attrs={{ 'data-dka-step4': '' }}>
-        <div className="text-xs leading-snug font-bold" data-dka-k-alert>
-          {k && k < 3.3 ? g.dkaKHold : k && k > 5.2 ? g.dkaKNoAdd : g.dkaKSafe}
-        </div>
-      </Section>
-    </Modal>
-  );
-};
-
-
 // --- 5. Free water deficit (hypernatraemia) ---
 // Deficit (L) = total body water × (serum Na ÷ target Na − 1), target usually 140 (Szczech 2025, from Adrogué & Madias 2000).
 // Fluid plan: Adrogué–Madias change per litre for each sodium-poor fluid, sized to the planned fall over 24 hours.
@@ -2762,7 +2932,7 @@ const WaterGuide = ({ lang, t, onClose, onOpenFluid }) => {
   const tbw = w ? w * frac : null;
   const deficit = sNa && tbw ? tbw * (sNa / tNa - 1) : null;
   const hours = sNa && plan ? ((sNa - tNa) / plan) * 24 : null;
-  const rows = sNa && tbw ? FLUIDS.map(f => ({ f, d: (naK(f) - sNa) / (tbw + 1) })).filter(x => naBand(x.f) === 'low' && x.d < -0.05).sort((a, b) => a.d - b.d) : [];
+  const rows = sNa && tbw ? FLUIDS.filter(isCrystalloid).map(f => ({ f, d: (naK(f) - sNa) / (tbw + 1) })).filter(x => naBand(x.f) === 'low' && x.d < -0.05).sort((a, b) => a.d - b.d) : [];
   return (
     <Modal title={t.guides.water} sub={g.waterSub} onClose={onClose} tone="bg-cyan-50" wide attrs={{ 'data-guide-modal': 'water' }} icon={<div className="p-2 bg-cyan-100 text-cyan-700 rounded-xl shrink-0"><DropIcon className="w-5 h-5" /></div>} footer={<CloseBtn onClose={onClose} t={t} />}>
       <Section>
@@ -2844,983 +3014,9 @@ const DripGuide = ({ lang, t, onClose }) => {
 };
 
 // --- 6. Glucose Infusion Rate (GIR) Calculator ---
-const GirGuide = ({ lang, t, onClose, onOpenFluid }) => {
-  const g = GUIDE_TEXT[lang];
-  const [mode, setMode] = useState('rate'); // 'rate' = Rate -> GIR; 'target' = Target GIR -> Rate
-  const [weight, setWeight] = useState('70');
-  const [fluidKey, setFluidKey] = useState('d5w');
-  const [customDex, setCustomDex] = useState('5');
-  const [rate, setRate] = useState('100');
-  const [targetGir, setTargetGir] = useState('3.0');
-
-  const dexFluids = useMemo(() => FLUIDS.filter(f => dexOf(f) > 0), []);
-  const selectedFluid = FLUIDS.find(f => f.id === fluidKey);
-  const dexPercent = fluidKey === 'custom' ? (toNum(customDex) || 0) : (selectedFluid ? (dexOf(selectedFluid) / 10) : 5);
-
-  const wt = toNum(weight) || 0;
-  const r = toNum(rate) || 0;
-  const tg = toNum(targetGir) || 0;
-
-  // Rate -> GIR: GIR = (Rate mL/h * Dex % * 10) / (Weight kg * 60)
-  const calcGir = wt > 0 && r > 0 && dexPercent > 0 ? (r * dexPercent * 10) / (wt * 60) : 0;
-  // Target GIR -> Rate: Rate mL/h = (Target GIR * Weight kg * 60) / (Dex % * 10)
-  const calcRate = wt > 0 && tg > 0 && dexPercent > 0 ? (tg * wt * 60) / (dexPercent * 10) : 0;
-
-  const currentGir = mode === 'rate' ? calcGir : tg;
-  const activeRate = mode === 'rate' ? r : calcRate;
-
-  // Daily totals
-  const dailyDexG = activeRate > 0 && dexPercent > 0 ? (activeRate * 24 * (dexPercent * 10)) / 1000 : 0;
-  const dailyKcal = dailyDexG * 3.4;
-
-  const isExcess = currentGir >= 5.0;
-  const isCaution = currentGir >= 4.0 && currentGir < 5.0;
-  const isLow = currentGir > 0 && currentGir < 2.0;
-  const isNormal = currentGir >= 2.0 && currentGir < 4.0;
-
-  return (
-    <Modal title={t.guides.gir} sub={g.girSub} onClose={onClose} tone="bg-teal-50" wide attrs={{ 'data-guide-modal': 'gir' }}
-      icon={<div className="p-2 bg-teal-100 text-teal-700 rounded-xl shrink-0"><TrendingUpIcon className="w-5 h-5" /></div>}
-      footer={<CloseBtn onClose={onClose} t={t} />}>
-      <Section>
-        <Seg value={mode} onChange={setMode} options={[['rate', g.girModeRate], ['target', g.girModeTarget]]} attrs={{ 'data-gir-mode': '' }} />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3">
-          <NumInput label={g.weight} unit={g.kg} value={weight} onChange={setWeight} attrs={{ 'data-gir-weight': '' }} />
-          <div className="flex flex-col gap-1 min-w-0">
-            <span className="text-[11px] font-bold text-slate-500">{g.girFluid}</span>
-            <select value={fluidKey} onChange={(e) => setFluidKey(e.target.value)} data-gir-fluid
-              className="w-full min-w-0 h-9 px-2 rounded-lg border border-slate-200 bg-white text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer">
-              {dexFluids.map(f => (
-                <option key={f.id} value={f.id}>{f.short} ({f.name[lang] || f.name.en} - {dexOf(f) / 10}%)</option>
-              ))}
-              <option value="custom">{g.girDexCustom}</option>
-            </select>
-          </div>
-          {fluidKey === 'custom' ? (
-            <NumInput label={g.girDexCustom} unit="%" value={customDex} onChange={setCustomDex} attrs={{ 'data-gir-custom-dex': '' }} />
-          ) : (
-            <div className="flex flex-col justify-end">
-              <span className="text-xs font-bold text-teal-700 bg-teal-50 border border-teal-200 rounded-lg px-3 py-2">
-                {dexPercent}% {g.glucoseNeed} ({dexPercent * 10} g/L)
-              </span>
-            </div>
-          )}
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
-          {mode === 'rate' ? (
-            <NumInput label={g.rate} unit={g.girUnitMlh} value={rate} onChange={setRate} attrs={{ 'data-gir-rate-input': '' }} />
-          ) : (
-            <NumInput label={g.girTargetGIR} unit={g.girUnitMgKgMin} value={targetGir} onChange={setTargetGir} attrs={{ 'data-gir-target-input': '' }} />
-          )}
-          {mode === 'target' && (
-            <div className="flex flex-col gap-1">
-              <span className="text-[11px] font-bold text-slate-500">{g.planQuick} ({g.girUnitMgKgMin})</span>
-              <div className="flex flex-wrap gap-1.5" data-gir-presets>
-                {[2, 3, 4, 5].map(v => (
-                  <button key={v} type="button" onClick={() => setTargetGir(String(v))} aria-pressed={tg === v} data-gir-preset={v}
-                    className={`min-w-[2.5rem] px-2.5 py-1.5 rounded-lg border text-xs font-bold tabular-nums transition-colors ${tg === v ? 'bg-teal-600 border-teal-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-                    {v}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-        <p className="text-[11px] text-slate-500 mt-2 leading-snug">
-          {mode === 'rate' ? g.girFormula : g.girFormulaTarget} <RefTag k="aspenGir" />
-        </p>
-      </Section>
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-gir-result>
-        <div className={`rounded-xl border p-3 ${isExcess ? 'border-rose-300 bg-rose-50 text-rose-900' : isCaution ? 'border-amber-300 bg-amber-50 text-amber-900' : 'border-teal-200 bg-teal-50 text-teal-900'}`}>
-          <div className="text-[11px] font-bold opacity-80">{g.girResultGIR}</div>
-          <div className="text-xl font-extrabold tabular-nums" data-gir-val>
-            {currentGir ? currentGir.toFixed(2) : '—'} <span className="text-xs font-semibold">{g.girUnitMgKgMin}</span>
-          </div>
-          <div className="text-[11px] font-medium mt-0.5">
-            {isExcess ? '⚠️ > 5.0 (Max Oxidation)' : isCaution ? '4.0–5.0 (Near Max)' : isNormal ? '✓ 2.0–4.0 (Normal)' : isLow ? 'Low (< 2.0)' : ''}
-          </div>
-        </div>
-
-        <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
-          <div className="text-[11px] font-bold opacity-80">{mode === 'target' ? g.girResultRate : g.rate}</div>
-          <div className="text-xl font-extrabold tabular-nums" data-gir-rate-result>
-            {activeRate ? activeRate.toFixed(1) : '—'} <span className="text-xs font-semibold">{g.girUnitMlh}</span>
-          </div>
-          <div className="text-[11px] font-medium mt-0.5">
-            {activeRate ? `${Math.round(activeRate * 24)} mL/${g.perDay || 'day'}` : ''}
-          </div>
-        </div>
-
-        <div className="rounded-xl border border-indigo-200 bg-indigo-50 p-3 text-indigo-900">
-          <div className="text-[11px] font-bold opacity-80">{g.girDailyDex} / {g.girDailyKcal}</div>
-          <div className="text-xl font-extrabold tabular-nums" data-gir-daily>
-            {dailyDexG ? `${Math.round(dailyDexG)} ${g.girGDay}` : '—'}
-          </div>
-          <div className="text-[11px] font-medium mt-0.5" data-gir-kcal>
-            {dailyKcal ? `≈ ${Math.round(dailyKcal)} ${g.girKcalDay}` : ''}
-          </div>
-        </div>
-      </div>
-
-      {isExcess && (
-        <div className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-gir-alert="high">
-          {g.girWarnHigh}
-        </div>
-      )}
-
-      {isLow && (
-        <div className="rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-gir-alert="low">
-          {g.girWarnLow}
-        </div>
-      )}
-
-      <Section title={g.limitsTitle} tone="bg-slate-50 border-slate-200">
-        <ul className="text-xs text-slate-700 space-y-1.5 pl-4 list-disc">
-          <li><b>{g.girRangeNormal}</b></li>
-          <li><b>{g.girRangeCrit}</b></li>
-          <li><b>{g.girRangeMax}</b> <RefTag k="aspenGir" /></li>
-          <li className="text-slate-500">{g.girPedsNote}</li>
-        </ul>
-      </Section>
-    </Modal>
-  );
-};
-
-const IcpGuide = ({ lang, t, onClose, onOpenFluid }) => {
-  const g = GUIDE_TEXT[lang];
-  const [tab, setTab] = useState('mannitol'); // 'mannitol' | 'nacl3' | 'decision' | 'cpp'
-  const [weight, setWeight] = useState('70');
-
-  // Mannitol state
-  const [manDose, setManDose] = useState('0.5'); // g/kg
-  const [serumOsm, setSerumOsm] = useState('295'); // mOsm/kg
-  const [showGap, setShowGap] = useState(false);
-  const [gapNa, setGapNa] = useState('140');
-  const [gapGlu, setGapGlu] = useState('110');
-  const [gapBun, setGapBun] = useState('14');
-
-  // 3% NaCl state
-  const [naclRegimen, setNaclRegimen] = useState('250'); // '250' | '500' | '2' | '3' | '5' | 'custom'
-  const [customVol, setCustomVol] = useState('250');
-  const [serumNa, setSerumNa] = useState('138');
-
-  // CPP state
-  const [sbp, setSbp] = useState('130');
-  const [dbp, setDbp] = useState('80');
-  const [icp, setIcp] = useState('18');
-
-  const wt = toNum(weight) || 0;
-  const mDose = toNum(manDose) || 0;
-  const sOsm = toNum(serumOsm) || 0;
-  const sNa = toNum(serumNa) || 0;
-
-  // Mannitol calculations: 20% solution = 20 g / 100 mL = 0.20 g/mL (5 mL per gram)
-  const manGrams = wt > 0 && mDose > 0 ? wt * mDose : 0;
-  const manVolMl = manGrams > 0 ? manGrams * 5 : 0;
-
-  // Osmolar gap calculation: Calc Osm = 2*Na + Glu/18 + BUN/2.8
-  const gNa = toNum(gapNa) || 0;
-  const gGlu = toNum(gapGlu) || 0;
-  const gBun = toNum(gapBun) || 0;
-  const calcOsm = (2 * gNa) + (gGlu / 18) + (gBun / 2.8);
-  const osmGap = sOsm > 0 && calcOsm > 0 ? sOsm - calcOsm : null;
-
-  const isOsmDanger = sOsm >= 320;
-  const isOsmCaution = sOsm >= 310 && sOsm < 320;
-  const isOsmSafe = sOsm > 0 && sOsm < 310;
-  const isGapHigh = osmGap !== null && osmGap > 12;
-
-  // 3% NaCl calculations: 513 mmol/L Na and Cl
-  let naclVol = 0;
-  if (naclRegimen === '250') naclVol = 250;
-  else if (naclRegimen === '500') naclVol = 500;
-  else if (['2', '3', '5'].includes(naclRegimen)) naclVol = wt * toNum(naclRegimen);
-  else naclVol = toNum(customVol) || 0;
-
-  // Adrogué-Madias: acute change per L = (513 - sNa) / (TBW + 1)
-  const tbw = wt > 0 ? wt * 0.6 : 42;
-  const dNaPerLitre = (513 - sNa) / (tbw + 1);
-  const acuteRise = naclVol > 0 ? dNaPerLitre * (naclVol / 1000) : 0;
-  const predictedNa = sNa + acuteRise;
-
-  const isNaHighAlert = sNa >= 155 || predictedNa > 160;
-  const isNaCaution = predictedNa > 155 && !isNaHighAlert;
-  const isNaTherapeutic = predictedNa >= 145 && predictedNa <= 155;
-
-  // CPP calculations:
-  const nSbp = toNum(sbp) || 0;
-  const nDbp = toNum(dbp) || 0;
-  const nIcp = toNum(icp) || 0;
-  const calcMap = nDbp + (nSbp - nDbp) / 3;
-  const calcCpp = calcMap - nIcp;
-
-  const isCppLow = calcCpp > 0 && calcCpp < 60;
-  const isCppHigh = calcCpp > 70;
-  const isCppNormal = calcCpp >= 60 && calcCpp <= 70;
-  const isIcpHigh = nIcp > 22;
-
-  return (
-    <Modal title={t.guides.icp} sub={g.icpSub} onClose={onClose} tone="bg-purple-50" wide attrs={{ 'data-guide-modal': 'icp' }}
-      icon={<div className="p-2 bg-purple-100 text-purple-700 rounded-xl shrink-0"><BrainIcon className="w-5 h-5" /></div>}
-      footer={<CloseBtn onClose={onClose} t={t} />}>
-      <div className="flex flex-wrap gap-1.5 mb-3" role="tablist" data-icp-tabs>
-        <button type="button" role="tab" aria-selected={tab === 'mannitol'} onClick={() => setTab('mannitol')} data-icp-tab="mannitol"
-          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'mannitol' ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-          {g.icpTabs.mannitol}
-        </button>
-        <button type="button" role="tab" aria-selected={tab === 'nacl3'} onClick={() => setTab('nacl3')} data-icp-tab="nacl3"
-          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'nacl3' ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-          {g.icpTabs.nacl3}
-        </button>
-        <button type="button" role="tab" aria-selected={tab === 'decision'} onClick={() => setTab('decision')} data-icp-tab="decision"
-          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'decision' ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-          {g.icpTabs.decision}
-        </button>
-        <button type="button" role="tab" aria-selected={tab === 'cpp'} onClick={() => setTab('cpp')} data-icp-tab="cpp"
-          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'cpp' ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-          {g.icpTabs.cpp}
-        </button>
-      </div>
-
-      {tab === 'mannitol' && (
-        <div className="flex flex-col gap-3" data-icp-mannitol-view>
-          <Section title={g.icpManTitle} tone="bg-purple-50/60 border-purple-200">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <NumInput label={g.icpWeight} unit={g.kg} value={weight} onChange={setWeight} attrs={{ 'data-icp-weight': '' }} />
-              <NumInput label={g.icpManDoseLabel} unit="g/kg" value={manDose} onChange={setManDose} attrs={{ 'data-man-dose-input': '' }} />
-              <div className="flex flex-col gap-1">
-                <span className="text-[11px] font-bold text-slate-500">{g.planQuick} (g/kg)</span>
-                <div className="flex flex-wrap gap-1.5" data-man-presets>
-                  {['0.25', '0.5', '1.0'].map(v => (
-                    <button key={v} type="button" onClick={() => setManDose(v)} aria-pressed={manDose === v} data-man-preset={v}
-                      className={`min-w-[2.5rem] px-2.5 py-1.5 rounded-lg border text-xs font-bold tabular-nums transition-colors ${manDose === v ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-                      {v}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
-              {g.icpManAdminTime} | <span className="font-semibold text-slate-700">{g.icpManKinetics}</span>
-            </p>
-          </Section>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-man-results>
-            <div className="rounded-xl border border-purple-200 bg-purple-50 p-3 text-purple-900">
-              <div className="text-[11px] font-bold opacity-80">{g.icpManCalcGrams}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-man-dose-g>
-                {manGrams ? manGrams.toFixed(1) : '—'} <span className="text-xs font-semibold">g</span>
-              </div>
-              <div className="text-[11px] font-medium mt-0.5">20% = 0.20 g/mL</div>
-            </div>
-
-            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
-              <div className="text-[11px] font-bold opacity-80">{g.icpManCalcVol}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-man-vol-ml>
-                {manVolMl ? Math.round(manVolMl) : '—'} <span className="text-xs font-semibold">mL</span>
-              </div>
-              <div className="text-[11px] font-medium mt-0.5">15–20 min IV bolus</div>
-            </div>
-
-            <div className={`rounded-xl border p-3 ${isOsmDanger ? 'border-rose-300 bg-rose-50 text-rose-900' : isOsmCaution ? 'border-amber-300 bg-amber-50 text-amber-900' : 'border-emerald-200 bg-emerald-50 text-emerald-900'}`}>
-              <NumInput label={g.icpManOsmLabel} unit="mOsm/kg" value={serumOsm} onChange={setSerumOsm} attrs={{ 'data-man-osm-input': '' }} />
-              <div className="text-[11px] font-extrabold mt-1">
-                {isOsmDanger ? '⚠️ ≥ 320 (HOLD)' : isOsmCaution ? '⚠️ 310–319 (Caution)' : '✓ < 310 (Safe)'}
-              </div>
-            </div>
-          </div>
-
-          {isOsmDanger && (
-            <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-man-osm-alert="danger">
-              {g.icpManOsmDanger}
-            </div>
-          )}
-
-          {isOsmCaution && (
-            <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-man-osm-alert="caution">
-              {g.icpManOsmCaution}
-            </div>
-          )}
-
-          {isOsmSafe && (
-            <div className="rounded-xl border border-emerald-300 bg-emerald-50 p-2.5 text-xs text-emerald-900 leading-snug font-medium" data-man-osm-alert="safe">
-              {g.icpManOsmSafe}
-            </div>
-          )}
-
-          <div className="rounded-xl border border-slate-200 bg-slate-50/50 p-3">
-            <button type="button" onClick={() => setShowGap(!showGap)} data-man-gap-toggle
-              className="w-full flex items-center justify-between text-left text-xs font-bold text-slate-700 hover:text-purple-700 cursor-pointer">
-              <span className="flex items-center gap-1.5">
-                <InfoIcon className="w-3.5 h-3.5" /> {g.icpGapToggle}
-              </span>
-              <span className="text-[10px] text-purple-600 underline">{showGap ? '▲ Hide' : '▼ Calculate'}</span>
-            </button>
-            {showGap && (
-              <div className="mt-3 pt-3 border-t border-slate-200 flex flex-col gap-2.5" data-gap-panel>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                  <NumInput label={g.icpGapNa} unit="mmol/L" value={gapNa} onChange={setGapNa} attrs={{ 'data-gap-na': '' }} />
-                  <NumInput label={g.icpGapGlu} unit="mg/dL" value={gapGlu} onChange={setGapGlu} attrs={{ 'data-gap-glu': '' }} />
-                  <NumInput label={g.icpGapBun} unit="mg/dL" value={gapBun} onChange={setGapBun} attrs={{ 'data-gap-bun': '' }} />
-                </div>
-                <div className="flex flex-wrap items-center gap-4 text-xs font-bold text-slate-700">
-                  <span>{g.icpGapCalcOsm}: <span className="tabular-nums font-extrabold" data-gap-calc-osm>{calcOsm ? calcOsm.toFixed(1) : '—'}</span> mOsm/kg</span>
-                  <span>{g.icpGapVal}: <span className="tabular-nums font-extrabold text-purple-700" data-man-gap-val>{osmGap !== null ? (osmGap >= 0 ? '+' : '') + osmGap.toFixed(1) : '—'}</span> mOsm/kg</span>
-                </div>
-                {isGapHigh ? (
-                  <div className="rounded-lg border border-amber-300 bg-amber-50 p-2 text-xs text-amber-900 font-medium" data-man-gap-alert="high">
-                    {g.icpGapHigh}
-                  </div>
-                ) : (
-                  <div className="rounded-lg border border-slate-200 bg-slate-50 p-2 text-xs text-slate-700" data-man-gap-alert="normal">
-                    {g.icpGapNormal}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-
-          <Section title={t.detailFlags} tone="bg-slate-50 border-slate-200">
-            <ul className="text-xs text-slate-700 space-y-1.5 pl-4 list-disc">
-              {g.icpManNotes.map((note, idx) => <li key={idx}>{note}</li>)}
-            </ul>
-          </Section>
-
-          <div className="flex justify-end">
-            <button type="button" onClick={() => onOpenFluid('mannitol20')} data-open-mannitol-btn
-              className="px-3 py-2 rounded-lg bg-white border border-slate-200 shadow-sm text-xs font-bold text-purple-700 hover:bg-purple-50 transition-colors flex items-center gap-1.5 cursor-pointer">
-              <BoxIcon className="w-3.5 h-3.5" /> {g.icpOpenMan}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {tab === 'nacl3' && (
-        <div className="flex flex-col gap-3" data-icp-nacl3-view>
-          <Section title={g.icpNacl3Title} tone="bg-purple-50/60 border-purple-200">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <NumInput label={g.icpWeight} unit={g.kg} value={weight} onChange={setWeight} attrs={{ 'data-icp-weight': '' }} />
-              <div className="flex flex-col gap-1 sm:col-span-2">
-                <span className="text-[11px] font-bold text-slate-500">{g.icpNacl3BolusLabel}</span>
-                <div className="flex flex-wrap gap-1.5" data-nacl3-presets>
-                  {[
-                    ['250', '250 mL'],
-                    ['500', '500 mL'],
-                    ['2', '2 mL/kg'],
-                    ['3', '3 mL/kg'],
-                    ['5', '5 mL/kg'],
-                    ['custom', 'Custom'],
-                  ].map(([k, label]) => (
-                    <button key={k} type="button" onClick={() => setNaclRegimen(k)} aria-pressed={naclRegimen === k} data-nacl3-preset={k}
-                      className={`px-2.5 py-1.5 rounded-lg border text-xs font-bold transition-colors ${naclRegimen === k ? 'bg-purple-700 border-purple-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-                      {label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-            {naclRegimen === 'custom' && (
-              <div className="mt-3 max-w-xs">
-                <NumInput label={g.icpNacl3Vol} unit="mL" value={customVol} onChange={setCustomVol} attrs={{ 'data-nacl3-custom-vol': '' }} />
-              </div>
-            )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-3">
-              <NumInput label={g.icpNacl3NaCurrent} unit="mmol/L" value={serumNa} onChange={setSerumNa} attrs={{ 'data-nacl3-sna-input': '' }} />
-              <div className="flex flex-col justify-end">
-                <span className="text-xs font-bold text-purple-800 bg-purple-50 border border-purple-200 rounded-lg px-3 py-2">
-                  {g.icpNacl3TargetNote}
-                </span>
-              </div>
-            </div>
-            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
-              {g.icpNacl3Admin}
-            </p>
-          </Section>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-nacl3-results>
-            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
-              <div className="text-[11px] font-bold opacity-80">{g.icpNacl3Vol}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-nacl3-vol-ml>
-                {Math.round(naclVol)} <span className="text-xs font-semibold">mL</span>
-              </div>
-              <div className="text-[11px] font-medium mt-0.5">10–20 min IV bolus</div>
-            </div>
-
-            <div className="rounded-xl border border-purple-200 bg-purple-50 p-3 text-purple-900">
-              <div className="text-[11px] font-bold opacity-80">{g.icpNacl3Rise}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-nacl3-rise-val>
-                {acuteRise ? '+' + acuteRise.toFixed(1) : '—'} <span className="text-xs font-semibold">mmol/L</span>
-              </div>
-              <div className="text-[11px] font-medium mt-0.5">Adrogué–Madias</div>
-            </div>
-
-            <div className={`rounded-xl border p-3 ${isNaHighAlert ? 'border-rose-300 bg-rose-50 text-rose-900' : isNaCaution ? 'border-amber-300 bg-amber-50 text-amber-900' : 'border-emerald-200 bg-emerald-50 text-emerald-900'}`}>
-              <div className="text-[11px] font-bold opacity-80">{g.icpNacl3PredictedNa}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-nacl3-pred-val>
-                {predictedNa ? predictedNa.toFixed(1) : '—'} <span className="text-xs font-semibold">mmol/L</span>
-              </div>
-              <div className="text-[11px] font-extrabold mt-0.5">
-                {isNaHighAlert ? '⚠️ ≥ 155 (HOLD)' : isNaTherapeutic ? '✓ 145–155 (Target)' : '< 145'}
-              </div>
-            </div>
-          </div>
-
-          {isNaHighAlert && (
-            <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-nacl3-alert="high">
-              {g.icpNacl3HighAlert}
-            </div>
-          )}
-
-          {isNaCaution && (
-            <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-nacl3-alert="caution">
-              ⚠️ {g.icpNacl3PredictedNa} &gt; 155 mmol/L. Monitor electrolytes closely.
-            </div>
-          )}
-
-          {isNaTherapeutic && (
-            <div className="rounded-xl border border-emerald-300 bg-emerald-50 p-2.5 text-xs text-emerald-900 leading-snug font-medium" data-nacl3-alert="safe">
-              {g.icpNacl3Safe}
-            </div>
-          )}
-
-          <Section title={t.detailFlags} tone="bg-slate-50 border-slate-200">
-            <ul className="text-xs text-slate-700 space-y-1.5 pl-4 list-disc">
-              {g.icpNacl3Notes.map((note, idx) => <li key={idx}>{note}</li>)}
-            </ul>
-          </Section>
-
-          <div className="flex justify-end">
-            <button type="button" onClick={() => onOpenFluid('nacl3')} data-open-nacl3-btn
-              className="px-3 py-2 rounded-lg bg-white border border-slate-200 shadow-sm text-xs font-bold text-purple-700 hover:bg-purple-50 transition-colors flex items-center gap-1.5 cursor-pointer">
-              <BoxIcon className="w-3.5 h-3.5" /> {g.icpOpenNacl3}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {tab === 'decision' && (
-        <div className="flex flex-col gap-3" data-icp-decision-view>
-          <Section title={g.icpDecisionTitle} tone="bg-slate-50 border-slate-200">
-            <div className="flex flex-col gap-2" data-icp-scenario-list>
-              {g.icpScenarios.map((sc, idx) => (
-                <div key={idx} className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm flex flex-col gap-1.5" data-icp-scenario={idx}>
-                  <div className="flex flex-wrap items-center justify-between gap-1.5">
-                    <span className="font-bold text-xs text-slate-800">{sc.cond}</span>
-                    <span className={`px-2 py-0.5 rounded-full text-[11px] font-bold ${sc.tone === 'emerald' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'}`}>
-                      {sc.agent}
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-snug">{sc.text}</p>
-                </div>
-              ))}
-            </div>
-          </Section>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
-              <div className="text-[11px] font-bold text-slate-400 uppercase">Osmolality Cutoff</div>
-              <div className="text-xs font-bold text-slate-800 mt-1">Mannitol: &lt; 320 mOsm/kg</div>
-              <div className="text-xs font-bold text-purple-700 mt-0.5">3% NaCl: &lt; 360 mOsm/kg</div>
-              <div className="text-[10px] text-slate-500 mt-1">Mannitol risks acute tubular necrosis if &gt; 320.</div>
-            </div>
-            <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
-              <div className="text-[11px] font-bold text-slate-400 uppercase">Hemodynamics</div>
-              <div className="text-xs font-bold text-slate-800 mt-1">Mannitol: Diuresis ↓ BP</div>
-              <div className="text-xs font-bold text-emerald-700 mt-0.5">3% NaCl: Volume ↑ MAP/CPP</div>
-              <div className="text-[10px] text-slate-500 mt-1">Never use mannitol in hypovolemia/shock.</div>
-            </div>
-            <div className="rounded-xl border border-slate-200 bg-white p-3 shadow-sm">
-              <div className="text-[11px] font-bold text-slate-400 uppercase">Line Access</div>
-              <div className="text-xs font-bold text-slate-800 mt-1">Mannitol: In-line filter</div>
-              <div className="text-xs font-bold text-slate-800 mt-0.5">3% NaCl: Large-bore / Central</div>
-              <div className="text-[10px] text-slate-500 mt-1">Acute boluses allowed peripherally in emergency.</div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {tab === 'cpp' && (
-        <div className="flex flex-col gap-3" data-icp-cpp-view>
-          <Section title={g.icpCppTitle} tone="bg-purple-50/60 border-purple-200">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <NumInput label={g.icpSbp} unit="mmHg" value={sbp} onChange={setSbp} attrs={{ 'data-cpp-sbp': '' }} />
-              <NumInput label={g.icpDbp} unit="mmHg" value={dbp} onChange={setDbp} attrs={{ 'data-cpp-dbp': '' }} />
-              <NumInput label={g.icpIcpVal} unit="mmHg" value={icp} onChange={setIcp} attrs={{ 'data-cpp-icp-input': '' }} />
-            </div>
-            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
-              {g.icpCppFormula} <RefTag k="btfIcp" />
-            </p>
-          </Section>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-cpp-results>
-            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
-              <div className="text-[11px] font-bold opacity-80">{g.icpMap}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-cpp-map-val>
-                {calcMap ? calcMap.toFixed(1) : '—'} <span className="text-xs font-semibold">mmHg</span>
-              </div>
-              <div className="text-[11px] font-medium mt-0.5">DBP + ⅓(SBP − DBP)</div>
-            </div>
-
-            <div className={`rounded-xl border p-3 ${isIcpHigh ? 'border-rose-300 bg-rose-50 text-rose-900' : 'border-slate-200 bg-slate-50 text-slate-900'}`}>
-              <div className="text-[11px] font-bold opacity-80">{g.icpIcpVal}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-cpp-icp-val>
-                {nIcp ? nIcp.toFixed(0) : '—'} <span className="text-xs font-semibold">mmHg</span>
-              </div>
-              <div className="text-[11px] font-bold mt-0.5">
-                {isIcpHigh ? '⚠️ > 22 (High ICP)' : '✓ < 22 (Normal)'}
-              </div>
-            </div>
-
-            <div className={`rounded-xl border p-3 ${isCppLow ? 'border-rose-300 bg-rose-50 text-rose-900' : isCppHigh ? 'border-amber-300 bg-amber-50 text-amber-900' : 'border-emerald-200 bg-emerald-50 text-emerald-900'}`}>
-              <div className="text-[11px] font-bold opacity-80">{g.icpCppVal}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-cpp-val>
-                {calcCpp ? calcCpp.toFixed(1) : '—'} <span className="text-xs font-semibold">mmHg</span>
-              </div>
-              <div className="text-[11px] font-extrabold mt-0.5">
-                {isCppLow ? '⚠️ < 60 (Ischemia)' : isCppHigh ? '⚠️ > 70 (High CPP)' : '✓ 60–70 (Target)'}
-              </div>
-            </div>
-          </div>
-
-          {isCppLow && (
-            <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-cpp-alert="low">
-              {g.icpCppLowAlert}
-            </div>
-          )}
-
-          {isCppHigh && (
-            <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-cpp-alert="high">
-              {g.icpCppHighAlert}
-            </div>
-          )}
-
-          {isIcpHigh && !isCppLow && (
-            <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-cpp-alert="icp">
-              {g.icpIcpHighAlert}
-            </div>
-          )}
-
-          {isCppNormal && !isIcpHigh && (
-            <div className="rounded-xl border border-emerald-300 bg-emerald-50 p-2.5 text-xs text-emerald-900 leading-snug font-medium" data-cpp-alert="normal">
-              {g.icpCppNormal}
-            </div>
-          )}
-        </div>
-      )}
-    </Modal>
-  );
-};
-
 // =====================================================================
 // Albumin Indication Guide & Clinical Dosing Calculator
 // =====================================================================
-const AlbuminGuide = ({ lang, t, onClose, onOpenFluid }) => {
-  const g = GUIDE_TEXT[lang];
-  const [tab, setTab] = useState('lvp'); // 'lvp' | 'sbp' | 'hrs' | 'compare'
-
-  // LVP state
-  const [ascitesVol, setAscitesVol] = useState('6');
-  const [doseRatio, setDoseRatio] = useState('8'); // '6' or '8' g/L
-
-  // SBP state
-  const [sbpWeight, setSbpWeight] = useState('60');
-
-  // HRS state
-  const [hrsWeight, setHrsWeight] = useState('60');
-
-  // Calculations:
-  // LVP:
-  const nAscites = toNum(ascitesVol) || 0;
-  const nRatio = toNum(doseRatio) || 8;
-  const lvpGrams = nAscites > 0 ? nAscites * nRatio : 0;
-  // 20% = 20 g / 100 mL = 0.20 g/mL (5 mL per gram)
-  // 25% = 25 g / 100 mL = 0.25 g/mL (4 mL per gram)
-  const lvpVol20 = lvpGrams > 0 ? lvpGrams * 5 : 0;
-  const lvpVol25 = lvpGrams > 0 ? lvpGrams * 4 : 0;
-  const isLvpLarge = nAscites >= 5;
-
-  // SBP:
-  // Day 1: 1.5 g/kg; Day 3: 1.0 g/kg
-  const nSbpWt = toNum(sbpWeight) || 0;
-  const sbpDay1G = nSbpWt > 0 ? nSbpWt * 1.5 : 0;
-  const sbpDay1Vol20 = sbpDay1G > 0 ? sbpDay1G * 5 : 0;
-  const sbpDay1Vol25 = sbpDay1G > 0 ? sbpDay1G * 4 : 0;
-
-  const sbpDay3G = nSbpWt > 0 ? nSbpWt * 1.0 : 0;
-  const sbpDay3Vol20 = sbpDay3G > 0 ? sbpDay3G * 5 : 0;
-  const sbpDay3Vol25 = sbpDay3G > 0 ? sbpDay3G * 4 : 0;
-
-  const sbpTotalG = sbpDay1G + sbpDay3G;
-
-  // HRS:
-  // Diagnostic challenge: 1 g/kg/day (max 100 g/day) for 2 days
-  const nHrsWt = toNum(hrsWeight) || 0;
-  const hrsChallengeG = nHrsWt > 0 ? Math.min(100, nHrsWt * 1.0) : 0;
-  const hrsChallengeVol20 = hrsChallengeG > 0 ? hrsChallengeG * 5 : 0;
-  const hrsChallengeVol25 = hrsChallengeG > 0 ? hrsChallengeG * 4 : 0;
-
-  return (
-    <Modal title={t.guides.albumin} sub={g.albSub} onClose={onClose} tone="bg-fuchsia-50" wide attrs={{ 'data-guide-modal': 'albumin' }}
-      icon={<div className="p-2 bg-fuchsia-100 text-fuchsia-700 rounded-xl shrink-0"><DropletIcon className="w-5 h-5" /></div>}
-      footer={<CloseBtn onClose={onClose} t={t} />}>
-      <div className="flex flex-wrap gap-1.5 mb-3" role="tablist" data-alb-tabs>
-        <button type="button" role="tab" aria-selected={tab === 'lvp'} onClick={() => setTab('lvp')} data-alb-tab="lvp"
-          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'lvp' ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-          {g.albTabs.lvp}
-        </button>
-        <button type="button" role="tab" aria-selected={tab === 'sbp'} onClick={() => setTab('sbp')} data-alb-tab="sbp"
-          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'sbp' ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-          {g.albTabs.sbp}
-        </button>
-        <button type="button" role="tab" aria-selected={tab === 'hrs'} onClick={() => setTab('hrs')} data-alb-tab="hrs"
-          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'hrs' ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-          {g.albTabs.hrs}
-        </button>
-        <button type="button" role="tab" aria-selected={tab === 'compare'} onClick={() => setTab('compare')} data-alb-tab="compare"
-          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-colors ${tab === 'compare' ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-          {g.albTabs.compare}
-        </button>
-      </div>
-
-      {tab === 'lvp' && (
-        <div className="flex flex-col gap-3" data-alb-lvp-view>
-          <Section title={g.albLvpTitle} tone="bg-fuchsia-50/60 border-fuchsia-200">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <NumInput label={g.albLvpVolRemoved} unit="L" value={ascitesVol} onChange={setAscitesVol} attrs={{ 'data-lvp-vol-input': '' }} />
-              <div className="flex flex-col gap-1 min-w-0">
-                <span className="text-[11px] font-bold text-slate-500">{g.albLvpDoseFactor}</span>
-                <div className="flex gap-1.5 h-9" data-lvp-ratio-group>
-                  {['8', '6'].map(r => (
-                    <button key={r} type="button" onClick={() => setDoseRatio(r)} aria-pressed={doseRatio === r} data-lvp-ratio={r}
-                      className={`flex-1 rounded-lg border text-xs font-bold transition-colors ${doseRatio === r ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-                      {r} g/L {r === '8' ? '(AASLD)' : '(EASL)'}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-[11px] font-bold text-slate-500">{g.planQuick} (L)</span>
-                <div className="flex flex-wrap gap-1.5" data-lvp-presets>
-                  {['4', '5', '6', '8', '10'].map(v => (
-                    <button key={v} type="button" onClick={() => setAscitesVol(v)} aria-pressed={ascitesVol === v} data-lvp-preset={v}
-                      className={`min-w-[2.3rem] px-2 py-1.5 rounded-lg border text-xs font-bold tabular-nums transition-colors ${ascitesVol === v ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-                      {v} L
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
-              {g.albLvpRateNote} <RefTag k="aasldAlb" />
-            </p>
-          </Section>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-lvp-results>
-            <div className="rounded-xl border border-fuchsia-200 bg-fuchsia-50 p-3 text-fuchsia-900">
-              <div className="text-[11px] font-bold opacity-80">{g.albLvpDoseGrams}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-lvp-dose-g>
-                {lvpGrams ? lvpGrams.toFixed(0) : '—'} <span className="text-xs font-semibold">g</span>
-              </div>
-              <div className="text-[11px] font-medium mt-0.5">{nAscites} L × {nRatio} g/L</div>
-            </div>
-
-            <div className="rounded-xl border border-purple-200 bg-purple-50 p-3 text-purple-900">
-              <div className="text-[11px] font-bold opacity-80">{g.albLvpVol20}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-lvp-vol-20>
-                {lvpVol20 ? Math.round(lvpVol20) : '—'} <span className="text-xs font-semibold">mL</span>
-              </div>
-              <div className="text-[11px] font-medium mt-0.5">20% = 0.20 g/mL (× 5)</div>
-            </div>
-
-            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
-              <div className="text-[11px] font-bold opacity-80">{g.albLvpVol25}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-lvp-vol-25>
-                {lvpVol25 ? Math.round(lvpVol25) : '—'} <span className="text-xs font-semibold">mL</span>
-              </div>
-              <div className="text-[11px] font-medium mt-0.5">25% = 0.25 g/mL (× 4)</div>
-            </div>
-          </div>
-
-          {isLvpLarge ? (
-            <div className="rounded-xl border border-emerald-300 bg-emerald-50 p-3 text-xs text-emerald-900 leading-snug font-medium" data-lvp-alert="safe">
-              {g.albLvpSafeAlert}
-            </div>
-          ) : (
-            <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-lvp-alert="low">
-              {g.albLvpLowAlert}
-            </div>
-          )}
-
-          <Section title={t.detailFlags} tone="bg-slate-50 border-slate-200">
-            <ul className="text-xs text-slate-700 space-y-1.5 pl-4 list-disc">
-              {g.albLvpNotes.map((note, idx) => <li key={idx}>{note}</li>)}
-            </ul>
-          </Section>
-
-          <div className="flex flex-wrap justify-end gap-2">
-            <button type="button" onClick={() => onOpenFluid('alb20')} data-open-alb20-btn
-              className="px-3 py-2 rounded-lg bg-white border border-slate-200 shadow-sm text-xs font-bold text-fuchsia-700 hover:bg-fuchsia-50 transition-colors flex items-center gap-1.5 cursor-pointer">
-              <BoxIcon className="w-3.5 h-3.5" /> {g.albOpenFluid20}
-            </button>
-            <button type="button" onClick={() => onOpenFluid('alb25')} data-open-alb25-btn
-              className="px-3 py-2 rounded-lg bg-white border border-slate-200 shadow-sm text-xs font-bold text-fuchsia-700 hover:bg-fuchsia-50 transition-colors flex items-center gap-1.5 cursor-pointer">
-              <BoxIcon className="w-3.5 h-3.5" /> {g.albOpenFluid25}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {tab === 'sbp' && (
-        <div className="flex flex-col gap-3" data-alb-sbp-view>
-          <Section title={g.albSbpTitle} tone="bg-fuchsia-50/60 border-fuchsia-200">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <NumInput label={g.albSbpWeight} unit={g.kg} value={sbpWeight} onChange={setSbpWeight} attrs={{ 'data-sbp-weight': '' }} />
-              <div className="flex flex-col gap-1">
-                <span className="text-[11px] font-bold text-slate-500">{g.planQuick} (kg)</span>
-                <div className="flex flex-wrap gap-1.5" data-sbp-presets>
-                  {['50', '60', '70', '80'].map(v => (
-                    <button key={v} type="button" onClick={() => setSbpWeight(v)} aria-pressed={sbpWeight === v} data-sbp-preset={v}
-                      className={`min-w-[2.5rem] px-2.5 py-1.5 rounded-lg border text-xs font-bold tabular-nums transition-colors ${sbpWeight === v ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-                      {v} kg
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
-              {g.albSbpHighRiskNote} <RefTag k="sortSbp" />
-            </p>
-          </Section>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" data-sbp-results>
-            <div className="rounded-xl border border-fuchsia-200 bg-fuchsia-50 p-3.5 text-fuchsia-950 flex flex-col gap-1.5">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold uppercase tracking-wide text-fuchsia-800">{g.albSbpDay1Dose}</span>
-                <span className="text-[11px] font-bold bg-fuchsia-200 text-fuchsia-800 px-2 py-0.5 rounded-full">1.5 g/kg</span>
-              </div>
-              <div className="text-2xl font-black tabular-nums text-fuchsia-900" data-sbp-day1-g>
-                {sbpDay1G ? sbpDay1G.toFixed(1) : '—'} <span className="text-sm font-bold">g</span>
-              </div>
-              <div className="text-xs text-slate-600 font-medium">
-                {g.albSbpDay1Sub}
-              </div>
-              <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-fuchsia-200/60 text-xs">
-                <div>
-                  <div className="text-[10px] text-slate-600 font-bold">20% Volume</div>
-                  <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day1-vol20>{sbpDay1Vol20 ? Math.round(sbpDay1Vol20) : '—'} mL</div>
-                </div>
-                <div>
-                  <div className="text-[10px] text-slate-600 font-bold">25% Volume</div>
-                  <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day1-vol25>{sbpDay1Vol25 ? Math.round(sbpDay1Vol25) : '—'} mL</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3.5 text-sky-950 flex flex-col gap-1.5">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-extrabold uppercase tracking-wide text-sky-800">{g.albSbpDay3Dose}</span>
-                <span className="text-[11px] font-bold bg-sky-200 text-sky-800 px-2 py-0.5 rounded-full">1.0 g/kg</span>
-              </div>
-              <div className="text-2xl font-black tabular-nums text-sky-900" data-sbp-day3-g>
-                {sbpDay3G ? sbpDay3G.toFixed(1) : '—'} <span className="text-sm font-bold">g</span>
-              </div>
-              <div className="text-xs text-slate-600 font-medium">
-                {g.albSbpDay3Sub}
-              </div>
-              <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-sky-200/60 text-xs">
-                <div>
-                  <div className="text-[10px] text-slate-600 font-bold">20% Volume</div>
-                  <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day3-vol20>{sbpDay3Vol20 ? Math.round(sbpDay3Vol20) : '—'} mL</div>
-                </div>
-                <div>
-                  <div className="text-[10px] text-slate-600 font-bold">25% Volume</div>
-                  <div className="font-extrabold tabular-nums text-slate-800" data-sbp-day3-vol25>{sbpDay3Vol25 ? Math.round(sbpDay3Vol25) : '—'} mL</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-indigo-200 bg-indigo-50/70 p-3 text-xs text-indigo-900 leading-snug font-medium" data-sbp-alert="trial">
-            <span className="font-extrabold block mb-0.5">{g.albSbpTotalGrams}: {sbpTotalG ? sbpTotalG.toFixed(1) : '—'} g ({sbpTotalG ? Math.round(sbpTotalG * 5) : '—'} mL of 20% or {sbpTotalG ? Math.round(sbpTotalG * 4) : '—'} mL of 25%)</span>
-            {g.albSbpTrialAlert}
-          </div>
-
-          <Section title={t.detailFlags} tone="bg-slate-50 border-slate-200">
-            <ul className="text-xs text-slate-700 space-y-1.5 pl-4 list-disc">
-              {g.albSbpNotes.map((note, idx) => <li key={idx}>{note}</li>)}
-            </ul>
-          </Section>
-        </div>
-      )}
-
-      {tab === 'hrs' && (
-        <div className="flex flex-col gap-3" data-alb-hrs-view>
-          <Section title={g.albHrsChallengeTitle} tone="bg-fuchsia-50/60 border-fuchsia-200">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <NumInput label={g.albHrsWeight} unit={g.kg} value={hrsWeight} onChange={setHrsWeight} attrs={{ 'data-hrs-weight': '' }} />
-              <div className="flex flex-col gap-1">
-                <span className="text-[11px] font-bold text-slate-500">{g.planQuick} (kg)</span>
-                <div className="flex flex-wrap gap-1.5" data-hrs-presets>
-                  {['50', '60', '70', '80'].map(v => (
-                    <button key={v} type="button" onClick={() => setHrsWeight(v)} aria-pressed={hrsWeight === v} data-hrs-preset={v}
-                      className={`min-w-[2.5rem] px-2.5 py-1.5 rounded-lg border text-xs font-bold tabular-nums transition-colors ${hrsWeight === v ? 'bg-fuchsia-700 border-fuchsia-700 text-white' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'}`}>
-                      {v} kg
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <p className="text-[11px] text-slate-500 mt-2 leading-snug">
-              {g.albHrsChallengeAction} <RefTag k="aasldAlb" />
-            </p>
-          </Section>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2" data-hrs-results>
-            <div className="rounded-xl border border-fuchsia-200 bg-fuchsia-50 p-3 text-fuchsia-900">
-              <div className="text-[11px] font-bold opacity-80">{g.albHrsChallengeGrams}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-hrs-challenge-g>
-                {hrsChallengeG ? hrsChallengeG.toFixed(0) : '—'} <span className="text-xs font-semibold">g/day</span>
-              </div>
-              <div className="text-[11px] font-medium mt-0.5">1 g/kg/day (max 100 g)</div>
-            </div>
-
-            <div className="rounded-xl border border-purple-200 bg-purple-50 p-3 text-purple-900">
-              <div className="text-[11px] font-bold opacity-80">{g.albHrsChallengeVol20}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-hrs-challenge-vol20>
-                {hrsChallengeVol20 ? Math.round(hrsChallengeVol20) : '—'} <span className="text-xs font-semibold">mL/day</span>
-              </div>
-              <div className="text-[11px] font-medium mt-0.5">20% Albumin (× 5)</div>
-            </div>
-
-            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sky-900">
-              <div className="text-[11px] font-bold opacity-80">{g.albHrsChallengeVol25}</div>
-              <div className="text-xl font-extrabold tabular-nums" data-hrs-challenge-vol25>
-                {hrsChallengeVol25 ? Math.round(hrsChallengeVol25) : '—'} <span className="text-xs font-semibold">mL/day</span>
-              </div>
-              <div className="text-[11px] font-medium mt-0.5">25% Albumin (× 4)</div>
-            </div>
-          </div>
-
-          <Section title={g.albHrsRxTitle} tone="bg-slate-50 border-slate-200">
-            <div className="flex flex-col gap-2 text-xs text-slate-700">
-              <div className="font-bold text-slate-800">{g.albHrsRxAlbumin}</div>
-              <div className="font-semibold text-slate-600 mt-1">{g.albHrsRxVasoconstrictors}</div>
-              <div className="pl-2 space-y-1 text-slate-700">
-                <p>{g.albHrsRxTerli}</p>
-                <p>{g.albHrsRxNorepi}</p>
-                <p>{g.albHrsRxMidOct}</p>
-              </div>
-            </div>
-          </Section>
-
-          <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-hrs-alert="resp">
-            {g.albHrsRespAlert}
-          </div>
-
-          <Section title="IAC Diagnostic Criteria" tone="bg-slate-50 border-slate-200">
-            <p className="text-xs text-slate-600 leading-snug">{g.albHrsDiagnosisCriteria}</p>
-          </Section>
-        </div>
-      )}
-
-      {tab === 'compare' && (
-        <div className="flex flex-col gap-3" data-alb-compare-view>
-          <Section title={g.albCompareTitle} tone="bg-slate-50 border-slate-200">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5" data-alb-matrix-cards>
-              <div className="rounded-xl border border-blue-200 bg-white p-3.5 shadow-sm flex flex-col gap-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-extrabold text-sm text-blue-900">Albumin 5%</span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800">Iso-oncotic</span>
-                </div>
-                <div className="text-xs space-y-1 text-slate-600">
-                  <div><b>Concentration:</b> 50 g/L (5%)</div>
-                  <div><b>Oncotic Pressure:</b> ~20 mmHg</div>
-                  <div><b>Volume Effect:</b> ~100% (1:1 expander)</div>
-                  <div className="pt-1.5 border-t border-slate-100">
-                    <b className="text-slate-800">Primary Uses:</b>
-                    <ul className="list-disc pl-4 mt-0.5 space-y-0.5 text-[11px]">
-                      <li>Sepsis resuscitation</li>
-                      <li>Plasma exchange (TPE)</li>
-                      <li>Burns (> 24h)</li>
-                    </ul>
-                  </div>
-                </div>
-                <button type="button" onClick={() => onOpenFluid('alb5')} data-open-alb5-btn
-                  className="mt-auto pt-2 text-[11px] font-bold text-blue-700 hover:underline flex items-center gap-1 cursor-pointer">
-                  <BoxIcon className="w-3 h-3" /> {g.albOpenFluid5}
-                </button>
-              </div>
-
-              <div className="rounded-xl border border-purple-200 bg-white p-3.5 shadow-sm flex flex-col gap-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-extrabold text-sm text-purple-900">Albumin 20%</span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-800">Hyper-oncotic</span>
-                </div>
-                <div className="text-xs space-y-1 text-slate-600">
-                  <div><b>Concentration:</b> 200 g/L (20%)</div>
-                  <div><b>Oncotic Pressure:</b> ~70–80 mmHg (~4x)</div>
-                  <div><b>Volume Effect:</b> Expands ~4x infused vol</div>
-                  <div className="pt-1.5 border-t border-slate-100">
-                    <b className="text-slate-800">Primary Uses:</b>
-                    <ul className="list-disc pl-4 mt-0.5 space-y-0.5 text-[11px]">
-                      <li>Paracentesis (LVP > 5 L)</li>
-                      <li>Peritonitis (SBP)</li>
-                      <li>Hepatorenal syndrome (HRS)</li>
-                    </ul>
-                  </div>
-                </div>
-                <button type="button" onClick={() => onOpenFluid('alb20')} data-open-alb20-btn
-                  className="mt-auto pt-2 text-[11px] font-bold text-purple-700 hover:underline flex items-center gap-1 cursor-pointer">
-                  <BoxIcon className="w-3 h-3" /> {g.albOpenFluid20}
-                </button>
-              </div>
-
-              <div className="rounded-xl border border-fuchsia-200 bg-white p-3.5 shadow-sm flex flex-col gap-2">
-                <div className="flex items-center justify-between">
-                  <span className="font-extrabold text-sm text-fuchsia-900">Albumin 25%</span>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-fuchsia-100 text-fuchsia-800">Hyper-oncotic</span>
-                </div>
-                <div className="text-xs space-y-1 text-slate-600">
-                  <div><b>Concentration:</b> 250 g/L (25%)</div>
-                  <div><b>Oncotic Pressure:</b> ~100 mmHg (~5x)</div>
-                  <div><b>Volume Effect:</b> Expands 4–5x infused vol</div>
-                  <div className="pt-1.5 border-t border-slate-100">
-                    <b className="text-slate-800">Primary Uses:</b>
-                    <ul className="list-disc pl-4 mt-0.5 space-y-0.5 text-[11px]">
-                      <li>Cirrhosis (LVP > 5 L, SBP, HRS)</li>
-                      <li>Nephrotic syndrome edema</li>
-                      <li>Fluid-restricted volume pull</li>
-                    </ul>
-                  </div>
-                </div>
-                <button type="button" onClick={() => onOpenFluid('alb25')} data-open-alb25-btn
-                  className="mt-auto pt-2 text-[11px] font-bold text-fuchsia-700 hover:underline flex items-center gap-1 cursor-pointer">
-                  <BoxIcon className="w-3 h-3" /> {g.albOpenFluid25}
-                </button>
-              </div>
-            </div>
-          </Section>
-
-          <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-xs text-rose-900 leading-snug font-medium" data-alb-alert="tbi">
-            <div className="font-bold mb-1">{g.albContraTitle}</div>
-            <p>{g.albTbiAlert} <RefTag k="safeAlb" /></p>
-          </div>
-
-          <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs text-amber-900 leading-snug font-medium" data-alb-alert="chf">
-            {g.albChfAlert}
-          </div>
-
-          <div className="rounded-xl border border-slate-200 bg-white p-3 text-xs text-slate-700 leading-snug" data-alb-alert="sepsis">
-            <span className="font-bold text-slate-800 block mb-0.5">Surviving Sepsis Campaign 2021 Guidance</span>
-            {g.albSepsisNote} <RefTag k="ssc" />
-          </div>
-        </div>
-      )}
-    </Modal>
-  );
-};
-
 // =====================================================================
 // Search
 // =====================================================================
@@ -3933,6 +3129,7 @@ function App() {
     ['choose', 'bg-rose-600 hover:bg-rose-700 border-rose-700', ActivityIcon],
     ['maint', 'bg-emerald-700 hover:bg-emerald-800 border-emerald-800', Stethoscope],
     ['sodium', 'bg-violet-600 hover:bg-violet-700 border-violet-700', ScaleIcon],
+    ['relower', 'bg-amber-800 hover:bg-amber-900 border-amber-900', ShieldAlertIcon],
     ['kguide', 'bg-amber-700 hover:bg-amber-800 border-amber-800', ZapIcon],
     ['dka', 'bg-indigo-600 hover:bg-indigo-700 border-indigo-700', FlameIcon],
     ['water', 'bg-cyan-700 hover:bg-cyan-800 border-cyan-800', DropIcon],
@@ -3979,7 +3176,7 @@ function App() {
 
       {isChangelogOpen && (
         <Modal title={t.changelogTitle} sub={t.changelogSub} onClose={() => setIsChangelogOpen(false)} attrs={{ 'data-changelog': '' }} icon={<div className="p-2 bg-slate-200 text-slate-700 rounded-xl shrink-0"><HistoryIcon className="w-5 h-5" /></div>}>
-          {changelogData.map((log, idx) => { const lt = lang === 'th' ? CHANGELOG_TH[log.version] : null; const feats = lt ? lt.features : log.features; const fixes = lt ? lt.bugs : log.bugs; return (
+          {changelogData.map((log, idx) => { const lt = lang === 'th' ? CHANGELOG_TH[log.version] : null; const feats = (lt ? lt.features : log.features) || []; const fixes = (lt ? lt.bugs : log.bugs) || []; return (
             <div key={log.version} className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 shadow-sm relative">
               {idx === 0 && <div className="absolute top-0 right-0 bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded-bl-lg rounded-tr-xl uppercase tracking-widest">{t.latest}</div>}
               <div className="flex items-baseline justify-between mb-3 border-b border-slate-100 pb-3 pr-14">
@@ -4130,6 +3327,7 @@ function App() {
       {guide === 'choose' && <ChooseGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} onOpenGuide={setGuide} />}
       {guide === 'maint' && <MaintGuide lang={lang} t={t} onClose={() => setGuide(null)} />}
       {guide === 'sodium' && <SodiumGuide lang={lang} t={t} onClose={() => setGuide(null)} selectedIds={selected} onOpenFluid={openFluid} />}
+      {guide === 'relower' && <ReloweringGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
       {guide === 'kguide' && <PotassiumGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
       {guide === 'dka' && <DkaGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
       {guide === 'water' && <WaterGuide lang={lang} t={t} onClose={() => setGuide(null)} onOpenFluid={openFluid} />}
